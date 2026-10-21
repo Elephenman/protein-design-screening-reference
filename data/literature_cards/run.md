@@ -180,3 +180,39 @@ python scripts/litcards_inventory.py && --sync-map && python scripts/verify_lite
 - 同类但已自动改正的：K01 `文献类型` 由价目表改为论文（`work_type` 在 14 键内，改动已进 corrections 账）。
 - 另有 4 行（K40/K47/K48/K49）本地全文已入库且身份核验通过，`证据级别` 列仍写"摘要级"、M-K34 仍写"已核验DOI"。
   要么把 `证据级别` 加进 14 键（约 4 行会自动改正，需重跑 embed），要么按 K59 的处置一起人工批。
+
+## 8. 工作流文档与本地仓库（2026-10-21 同日续）
+
+用户要求：把整个库推到仓库、并给出蛋白设计工作流。执行结果与实测输出：
+
+```
+python scripts/build_workflow_evidence.py            → 台账 152 行 + 判据拆分 679 行 + summary，退出码 0
+python scripts/build_workflow_evidence.py --check    → PASS（0）
+   扰动自测：把判据台账末 3 行删掉 → 退出码 1，报 "行数 676 != 重算 679"；复原后回到 0
+python scripts/verify_workflow_doc.py                → PASS（45 个引用编号全部命中台账、0 断链）
+   扰动自测：把文档里一个 [B08] 改成 [B99] → 退出码 1；复原后 0
+python scripts/verify_literature_cards.py            → 152/152 PASS（文档与 README 写成后复跑，仍为 0）
+```
+
+产物：`deliverables/protein_design_workflow.md`（十阶段工作流 + 判据一览 + 成本三档 + 六个常见自欺）、
+`deliverables/protein_design_workflow_evidence.csv`、`..._criteria_ledger.csv`、`..._summary.txt`、根目录 `README.md`。
+summary 实测：FULLTEXT 87 / DEGRADED 65；声明用 MD 36 行、用 QM 18 行；给出可用命中率口径 76 行。
+
+### 8.1 写文档时按台账校正的四处（都是"我以为记得"改成"照单元格抄"）
+
+- ITC 5,300 元/对属于 **K14**（先前草稿挂在 K11/K12 下）；K14 同时给 100 元/h 机时档，卡里明写"元/小时与元/对不可换算"。
+- 同步辐射 200 元/颗晶体属 **K21**（K20 是晶体学实验室档，两行同页但分母不同）。
+- 电镜制样与耗材（C-clip/铜网/Vitrobot，280–460 元/样为本报告推算）属 **K19**；FACS 600–800 元/h 属 **K22**。
+- 草稿里写的 "Mosquito 分液 20 元/板" 在台账任何单元格都搜不到（`Mosquito` 0 命中），只存在于 `sources/cost-benchmarks.md`
+  的原始调研段——**已从工作流文档删除**，改为只引用 K20 里实际存在的 结晶板 60 元/板、Rigaku 320 元/h。
+
+### 8.2 仓库
+
+- 项目目录原本不在任何 git 仓库内（`git rev-parse` 在 `A:\Data\MD` 及各级都报 not a git repository）。
+- `git init -b main` + 一次性提交 `36448c4`，作者 `Elephenman`（无 AI 署名），445 个跟踪文件，对象库 10.98 MiB，工作树干净。
+- `.gitignore` 排 `tmp/`、`__pycache__/` 与 `data/interim/claim_lit/*.html`。三张网页快照（`rs.html`/`neom.html`/`tcr.html`）
+  经 `grep -rl` 实测 0 引用，且 `rs.html` 内含被截获站点自己的公开 storefront key 串（`data-api-key="ODA3NTl…"`，
+  base64 的第三方站键，不是我们的凭据）——提交它只会给仓库添噪音与误判风险，故排除；本地文件未删。
+- 全库凭据扫描（正则覆盖 password/api-key/token/BEGIN KEY/AKIA/ghp_）：除上述第三方页面外 **0 命中**。
+- **推送未执行**：`gh auth status` 实测 github.com 账号 Elephenman 的 keyring 令牌 **invalid**，
+  需用户本人 `gh auth login`（或指定已有远端）后才能推；公开发布还涉及全文缓存的再分发许可，见 README"公开前请读这段"。
