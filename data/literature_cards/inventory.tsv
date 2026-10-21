@@ -1,0 +1,153 @@
+id	has_fulltext	local_n	fetch_channel	title	evidence
+B01	yes	1	epmc_fulltext	De novo design of bioactive protein switches	全文级
+B02	yes	2	epmc_fulltext	Improving the Efficiency of Ligand-Binding Protein Design wi	摘要级
+B03	yes	2	epmc_fulltext	De novo protein design by deep network hallucination	摘要级
+B04	yes	2	epmc_fulltext	Protein sequence optimization with a pairwise decomposable p	全文级
+B05	yes	1	epmc_fulltext	Robust deep learning–based protein sequence design using Pro	全文级
+B06; C02	yes	1	epmc_fulltext	Design of protein-binding proteins from the target structure	全文级（本次独立复核 PMC9117152）
+B07	yes	1	epmc_fulltext	Sampling of structure and sequence space of small protein fo	全文级
+B08	yes	1	epmc_fulltext	De novo design of protein structure and function with RFdiff	全文级（本次独立复核 PMC10468394）
+B09	yes	3	epmc_fulltext	Improving de novo protein binder design with deep learning	全文级（本次独立复核 PMC10163288）
+B10; C08	yes	1	epmc_fulltext	De novo design of luciferases using deep learning	全文级
+B11	yes	1	epmc_fulltext	De novo design of small beta barrel proteins	全文级
+B12	yes	1	epmc_fulltext	De novo design of high-affinity binders of bioactive helical	全文级
+B13	no	0	epmc_search_then_fulltext	Generalized biomolecular modeling and design with RoseTTAFol	摘要级
+B14	yes	1	epmc_fulltext	Target-conditioned diffusion generates potent TNFR superfami	全文级
+B15	yes	2	epmc_fulltext	Accurate de novo design of high-affinity protein-binding mac	全文级
+B16	yes	1	epmc_fulltext	Massively parallel measurement of protein–protein interactio	全文级
+B17	yes	1	epmc_fulltext	Computational design of serine hydrolases	全文级（本次独立复核 PMC12288761）
+B18	yes	1	epmc_fulltext	Computational design of metallohydrolases	全文级
+B19	yes	1	epmc_fulltext	Modeling protein–small molecule conformational ensembles wit	全文级（本次独立复核 PMC12625923）
+B20	yes	1	epmc_fulltext	Atom-level enzyme active site scaffolding using RFdiffusion2	全文级（本次独立复核 PMC12791007）
+B21	yes	1	epmc_search_then_fulltext	Diffusing protein binders to intrinsically disordered protei	全文级
+B22	yes	2	epmc_fulltext	Atomically accurate de novo design of antibodies with RFdiff	全文级（本次独立复核 PMC12727541）
+B23	yes	2	epmc_fulltext	Improved protein binder design using β-pairing targeted RFdi	全文级
+B24	yes	1	epmc_fulltext	Accelerating protein design by scaling experimental characte	全文级
+B25	yes	1	epmc_fulltext	Hierarchical design of pseudosymmetric protein nanocages	全文级
+B26	yes	1	epmc_fulltext	Using experimental results of protein design to guide biomol	全文级
+B27	yes	1	epmc_fulltext	Computational design of sequence-specific DNA-binding protei	全文级
+B28	yes	2	epmc_fulltext	Atomic context-conditioned protein sequence design using Lig	摘要级
+B29	yes	1	epmc_fulltext	Computational design of soluble and functional membrane prot	全文级
+B30	yes	1	epmc_fulltext	Rapid and automated design of two-component protein nanomate	全文级
+B31	yes	2	epmc_fulltext	Small-molecule binding and sensing with a designed protein f	全文级
+B32; C14	yes	1	epmc_fulltext	Design of high-affinity binders to immune modulating recepto	全文级
+B33	yes	2	epmc_fulltext	De novo design of modular peptide-binding proteins by superh	未获正文
+B34	yes	1	epmc_fulltext	De novo design of buttressed loops for sculpting protein fun	全文级
+B35	no	0	epmc_search_then_fulltext	<i>De novo</i> Design of All-atom Biomolecular Interactions 	摘要级
+B36	no	0	epmc_search_then_fulltext	The past, present and future of de novo protein design	摘要级
+B37	yes	1	epmc_fulltext	Incorporation of sensing modalities into de novo designed fl	全文级
+B38	yes	1	epmc_fulltext	Local structural flexibility drives oligomorphism in computa	全文级
+B39	yes	1	epmc_fulltext	Exploiting conformational dynamics to modulate the function 	全文级
+B40	yes	1	epmc_fulltext	De novo design of proteins housing excitonically coupled chl	全文级
+B41	yes	1	epmc_fulltext	Four-component protein nanocages designed by programmed symm	全文级
+B42; C11	yes	1	epmc_fulltext	Designed endocytosis-inducing proteins degrade targets and a	全文级
+B43	yes	1	epmc_fulltext	De novo designed proteins neutralize lethal snake venom toxi	全文级
+B44	yes	1	epmc_fulltext	De novo design of highly selective miniprotein inhibitors of	全文级
+Z01	yes	1	epmc_fulltext	In silico design and validation of high-affinity RNA aptamer	全文级
+Z02	yes	1	epmc_fulltext	In silico design and validation of high-affinity RNA aptamer	摘要级
+Z03	yes	1	epmc_fulltext	Multi-strategy embedded framework for neoantigen vaccine mat	全文级
+Z04	yes	2	epmc_fulltext	A mutagenesis study of autoantigen optimization for potentia	全文级
+Z05	yes	1	epmc_fulltext	Mutagenesis-based optimal design of plant peptide phytosulfo	全文级
+Z06	no	0	epmc_search_then_fulltext	Physical insights guided rational design of anti-EGFR antibo	摘要级
+Z07	no	0	epmc_search_then_fulltext	ANUBI: A Platform for Affinity Optimization of Proteins and 	摘要级
+Z08	yes	1	epmc_search_then_fulltext	Assessing Computational Strategies for the Evaluation of Ant	摘要级
+Z09	yes	1	epmc_search_then_fulltext	A free energy perturbation-assisted machine learning strateg	摘要级
+Z10	no	0	epmc_search_then_fulltext	Integrating Physics-Based Simulations with Data-Driven Deep 	摘要级
+Z11	no	0	epmc_search_then_fulltext	<i>In Silico</i> Design of High-Affinity gp100 Antigenic Mim	摘要级
+Z12	no	0	epmc_search_then_fulltext	In silico design of high-affinity antigenic peptides for HLA	摘要级
+Z13	no	0	epmc_search_then_fulltext	Design of TCR-mimicking binders for pHLA with high potency	摘要级
+Z14	no	0	epmc_search_then_fulltext	De Novo Evolution of an Antibody‐Mimicking Multivalent Aptam	摘要级
+Z15	no	0	epmc_search_then_fulltext	Dynamics-Based Peptide–MHC Binding Optimization by a Convolu	摘要级
+Z16	no	0	epmc_search_then_fulltext	QM（量子力学）使用取证——汇总卡片（3 篇代表 + 结论）	摘要级
+C01	yes	2	epmc_fulltext	De novo design of picomolar SARS-CoV-2 miniprotein inhibitor	全文级（本次独立复核 PMC7857403）
+C03	yes	2	epmc_fulltext	De novo design of modular and tunable protein biosensors	全文级
+C04	yes	2	epmc_fulltext	Ultrapotent miniproteins targeting the SARS-CoV-2 receptor-b	全文级
+C05	yes	2	epmc_fulltext	Large-scale design and refinement of stable proteins using s	全文级
+C06	yes	2	epmc_fulltext	Multivalent designed proteins neutralize SARS-CoV-2 variants	全文级
+C07	no	0	epmc_search_then_fulltext	Isoform-specific inhibition of FGFR signaling achieved by a 	二级来源
+C09	no	0	epmc_search_then_fulltext	Top-down design of protein architectures with reinforcement 	摘要级
+C10	no	0	epmc_search_then_fulltext	Modulation of FGF pathway signaling and vascular differentia	全文级
+C12	no	0	epmc_search_then_fulltext	Targeting overexpressed antigens in glioblastoma via CAR T c	摘要级
+C13	yes	1	epmc_fulltext	Accurate de novo design of heterochiral protein–protein inte	全文级
+C15	no	0	epmc_search_then_fulltext	De novo design of light-responsive protein–protein interacti	摘要级
+C16	yes	1	epmc_fulltext	Proteus: Exploring Protein Structure Generation for Enhanced	摘要级
+C17	no	0	epmc_search_then_fulltext	De novo design of small molecule–regulated protein oligomers	二级来源
+C18	yes	1	epmc_fulltext	Design of miniprotein inhibitors targeting complement C9 to 	全文级
+C19	yes	1	epmc_fulltext	HalluDesign: Protein Optimization and de novo Design via Ite	全文级
+C20	yes	1	epmc_fulltext	HalluDesign-NA: Extending HalluDesign for De Novo Nucleic Ac	摘要级
+C21	yes	1	epmc_fulltext	De novo design of ligand binding and sensing with a physics 	全文级
+C22	yes	1	epmc_fulltext	De novo design of metalloproteases for targeted amyloid-β cl	全文级
+C23	yes	1	epmc_fulltext	Integrating Machine-learning and Ultra-high-throughput Scree	全文级
+C24	no	0	epmc_search_then_fulltext	Frontiers and challenges in the design of binders for intrin	未获正文
+C25	no	0	epmc_search_then_fulltext	应用/工具类与背景论文（合并卡片，均经 API 核验）	未标注
+K01	yes	2	epmc_search_then_fulltext	A cost-effective and scalable barcoded library construction 	全文级
+K02	no	0	no_id	Twist Bioscience Complex Gene Synthesis 公开挂价	二级来源
+K03	no	0	no_id	基因合成历史报价（Twist CEO 访谈口径，2023）	二级来源
+K04	no	0	no_id	GenScript oPools 引物/寡核苷酸池报价	二级来源
+K05	no	0	no_id	基因合成成本构成与 oligo 错误率的连锁影响（行业分析）	二级来源
+K06	yes	2	epmc_search_then_fulltext	Screening de novo designed protein binders in unpurified lys	全文级
+K07	no	0	epmc_search_then_fulltext	Protein production and purification	摘要级
+K08	no	0	no_id	展示筛选通量与每命中候选边际成本（常见口径，本次未核到一手原文）	未获正文
+K09	no	0	no_id	BLI 机时价目（Octet RED96）	二级来源
+K10	no	0	no_id	BLI 仪器通量（Octet R2/R4 型号对比）	二级来源
+K11	no	0	no_id	SPR 机时价目（多核心设施公开收费）	二级来源
+K12	no	0	no_id	SPR 芯片耗材价目（2010 年旧价）	二级来源
+K13	no	0	no_id	SPR 单芯片通量（厂商仪器页）	二级来源
+K14	no	0	no_id	ITC 价目（机时与委托服务）	二级来源
+K15	no	0	no_id	DLS 价目	二级来源
+K16	no	0	no_id	热稳定/聚集快速表征（nanoDSF）价目	二级来源
+K17	no	0	no_id	质谱类确证价目（DIA 蛋白组/磷酸化）	二级来源
+K18	no	0	no_id	冷冻电镜（300 kV）机时价目	二级来源
+K19	no	0	no_id	电镜耗材与制样价目	二级来源
+K20	no	0	no_id	X 射线晶体学（实验室）价目	二级来源
+K21	no	0	no_id	同步辐射机时/数据收费	二级来源
+K22	no	0	no_id	流式分选（FACS）机时价目	二级来源
+K23	no	0	no_id	FACS 速度上限（FACSAria III 标称规格）	二级来源
+K24	no	0	no_id	每候选合成+表达+纯化+一次单点结合的总边际成本（本报告推算）	二级来源
+K25	no	0	no_id	酵母表面展示 + FACS 的技术通量与每候选成本（技术汇总条目）	二级来源
+K26	no	0	no_id	单点 BLI/SPR 96/384 板筛（技术汇总条目）	二级来源
+K27	no	0	no_id	MD 预筛 N 个候选 vs 合成测试 N 个候选：谁贵（本报告推算）	二级来源
+K28	yes	1	epmc_search_then_fulltext	ColabFold: making protein folding accessible to all	全文级
+K29	yes	1	epmc_search_then_fulltext	GROMACS in the Cloud: A Global Supercomputer to Speed Up Alc	全文级
+K30	no	0	epmc_search_then_fulltext	Global analysis of protein folding using massively parallel 	摘要级（本次独立复核）
+K31	yes	2	epmc_search_then_fulltext	Benchmarking <scp>AlphaFold</scp> for protein complex modeli	全文级
+K32	yes	2	epmc_search_then_fulltext	Evaluation of <scp>AlphaFold</scp> antibody–antigen modeling	全文级
+K33	yes	2	epmc_search_then_fulltext	Correspondence between functional scores from deep mutationa	全文级（本次独立复核 PMC10273344）
+K34	yes	1	epmc_search_then_fulltext	The Last Mile Problem: A Critical Assessment of Physics-Base	全文级
+K35	yes	2	epmc_search_then_fulltext	Quantum mechanics in drug design: Progress, challenges, and 	摘要级
+K36	no	0	epmc_search_then_fulltext	Prospective Evaluation of Structure-Based Simulations Reveal	未获正文
+K37	no	0	epmc_search_then_fulltext	Large-Scale Collaborative Assessment of Binding Free Energy 	未获正文
+K38	yes	2	epmc_search_then_fulltext	Diffusion-Based Protein Structure Design: Geometric Modellin	全文级
+K39	yes	2	epmc_search_then_fulltext	AI-Driven <i>De Novo</i> Binder Design: From Structure Predi	全文级（本次独立复核 PMC13113996）
+K40	yes	2	epmc_search_then_fulltext	PPIscreenML is a method for structure-based screening of pro	摘要级
+K41	yes	2	epmc_search_then_fulltext	A Complementarity‐Based Approach to <i>De Novo</i> Binder De	全文级
+K42	yes	2	epmc_search_then_fulltext	Scaffold-Lab: Critical evaluation and ranking of protein bac	摘要级
+K43	yes	2	epmc_search_then_fulltext	A comprehensive benchmarking of the AlphaFold3 for predictin	摘要级
+K44	yes	2	epmc_search_then_fulltext	Quantification of the Impact of Structure Quality on Predict	未获正文
+K45	no	0	epmc_search_then_fulltext	Picomolar affinity antibodies from a fully synthetic naive l	摘要级
+K46	no	0	epmc_search_then_fulltext	Ultrahigh throughput screening for enzyme function in drople	摘要级
+K47	yes	2	epmc_search_then_fulltext	Sequence-based prediction of pH-dependent protein solubility	摘要级
+K48	yes	2	epmc_search_then_fulltext	Aggrescan4D: A comprehensive tool for pH‐dependent analysis 	摘要级
+K49	yes	2	epmc_search_then_fulltext	AGGRESCAN and its evolution: A two-decade perspective on pro	摘要级
+K50	no	0	epmc_search_then_fulltext	Computational Design of an Enzyme Catalyst for a Stereoselec	摘要级
+K51	no	0	epmc_search_then_fulltext	QM/MM Theoretical Studies of a de Novo Retro-Aldolase Design	摘要级
+K52	no	0	epmc_search_then_fulltext	QM/MM Methods for Biomolecular Systems	摘要级
+K53	no	0	epmc_search_then_fulltext	Accurate QM/MM Molecular Dynamics for Periodic Systems in GP	摘要级
+K54	no	0	epmc_search_then_fulltext	QM/MM Study of Substituent and Solvent Effects on the Excite	摘要级
+K55	no	0	epmc_search_then_fulltext	Estimation of Transition-Metal Empirical Parameters for Mole	摘要级
+K56	yes	2	epmc_search_then_fulltext	Non-bonded force field model with advanced restrained electr	摘要级
+K57	no	0	no_id	Profluent 公司自述：AI 设计基因编辑器与时间成本节省	二级来源
+K58	no	0	no_id	Xaira Therapeutics 公司自述：设计-测试闭环	二级来源
+K59	no	0	no_id	Generate:Biomedicines Flagship 融资记录	二级来源
+K60	no	0	epmc_search_then_fulltext	2148-LB: Noncanonical Insulin Receptor Activation Using De N	二级来源
+K61	no	0	no_id	Nabla Bio / Morphic 通量与成功率	未获正文
+K62	no	0	no_id	行业叙事锚点：一个蛋白结构约 10 万美元 + 数月到数年（AI 出现前）	二级来源
+K63	yes	1	epmc_fulltext	Complete computational design of high-efficiency Kemp elimin	全文级
+K64	yes	1	epmc_fulltext	Computational enzyme design by catalytic motif scaffolding	全文级
+K65	yes	2	epmc_fulltext	Rapid Sampling of Hydrogen Bond Networks for Computational P	摘要级
+K66	no	0	epmc_search_then_fulltext	De novo design of protein homo-oligomers with modular hydrog	摘要级
+K67b	yes	2	epmc_search_then_fulltext	Deep learning based design of buried hydrogen bond networks 	题录级（本次经 PubMed/Crossref 核对，未读正文）
+M-K27	no	0	epmc_search_then_fulltext	MMDesign: Robust De Novo Binder Discovery Across Diverse Tar	已核验DOI
+M-K28	no	0	epmc_search_then_fulltext	Practical De Novo Nanobody Discovery with Tens of Experiment	已核验DOI
+M-K29	yes	1	epmc_search_then_fulltext	Accurate single-domain scaffolding of three nonoverlapping p	已核验DOI
+M-K34	yes	2	epmc_search_then_fulltext	De Novo Design of Near-Infrared Fluorescence-Activating Prot	已核验DOI

@@ -1,0 +1,197 @@
+id	channel	url	http	bytes	sha16	status	note
+B02	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7532806/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+B35	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1101/2025.09.18.676967%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+B36	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:42056544&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+Z08	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12613313/fullTextXML	200	106662	ef8af3310b01c1c7	OK	ok
+Z10	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:40767530&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+Z12	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:38574928&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+Z13	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1101/2025.10.03.680404%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+Z14	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:37086150&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+Z15	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:34793168&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+Z16	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3963406/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+C07	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9636537/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+C12	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:39420062&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+C17	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:41477902&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+C19	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PPR1116408/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+C20	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PPR1251738/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+C21	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PPR1279910/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+C22	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PPR1219681/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+C23	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PPR1259026/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+C24	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:41887012&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+C25	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1016/j.jbc.2024.105699%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K01	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12923136/fullTextXML	200	277010	b1e3954ed088059b	OK	ok
+K06	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12432402/fullTextXML	200	96836	9a915af57398cd70	OK	ok
+K07	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3178102/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+K29	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9006219/fullTextXML	200	237738	23de3adbe73a5a66	OK	ok
+K31	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9278006/fullTextXML	200	182009	52b0f3a29efb5bd0	OK	ok
+K32	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10751731/fullTextXML	200	137079	0260486eeb6733a2	OK	ok
+K33	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10273344/fullTextXML	200	158559	b12d98f239095640	OK	ok
+K34	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13213910/fullTextXML	200	192098	be8d9e75d5a8af3b	OK	ok
+K35	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12721093/fullTextXML	200	134293	9144413c347064f3	OK	ok
+K36	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12038917/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+K37	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13555741/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+K38	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13513569/fullTextXML	200	228822	bfd0b2441a9e0477	OK	ok
+K39	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13113996/fullTextXML	200	185636	298d3625071e8fde	OK	ok
+K40	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13099138/fullTextXML	200	177867	763622c4800b864a	OK	ok
+K41	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12412469/fullTextXML	200	193994	6ddc7a6830b81138	OK	ok
+K42	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13225634/fullTextXML	200	267083	9ff68ef80dc57d6e	OK	ok
+K43	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12661943/fullTextXML	200	193626	506de28d4804adce	OK	ok
+K44	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12264970/fullTextXML	200	176972	544dea116f393f46	OK	ok
+K45	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1038/82407%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K46	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1016/bs.mie.2020.06.002%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K47	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10025429/fullTextXML	200	72555	ade29b1a7397f880	OK	ok
+K48	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11425640/fullTextXML	200	165071	6b31c59fb5f22d21	OK	ok
+K49	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13031676/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+K51	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1021/acscatal.8b04457%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	search 零命中
+K52	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1002/anie.200802019%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K53	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1021/acs.jctc.4c01698%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K54	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1021/acs.jctc.6b01069%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K55	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1021/acs.jctc.6b00416%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K56	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8204736/fullTextXML	200	193450	8a8ae8ee44934b54	OK	ok
+K60	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.2337/db25-2148-lb%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	search 零命中
+K67b	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.64898/2026.06.08.730848%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+M-K27	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.5281/zenodo.23321531%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	search 零命中
+M-K28	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.5281/zenodo.20526590%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	search 零命中
+B02	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7532806/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+B03	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9293396/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+B04	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7971855/fullTextXML	200	81545	0ba9a44cd7072026	OK	ok
+B13	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:38452047&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+B28	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11978504/fullTextXML	200	125708	7e33fb90a1f61701	OK	ok
+B33	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10115654/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+B35	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1101/2025.09.18.676967%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+B36	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:42056544&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+Z04	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10120010/fullTextXML	200	119442	ebebe28ab0416f41	OK	ok
+Z06	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:39986495&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+Z07	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:41401395&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+Z10	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:40767530&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+Z12	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:38574928&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+Z13	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1101/2025.10.03.680404%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+Z14	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:37086150&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+Z15	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:34793168&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+Z16	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3963406/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+C01	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7857403/fullTextXML	200	114954	2501cb26707489f4	OK	ok
+C03	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8074680/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+C04	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8221914/fullTextXML	200	143341	5b0ea8d8aa7cfa62	OK	ok
+C05	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8920274/fullTextXML	200	334329	b5443fa99d9d3e47	OK	ok
+C06	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9258422/fullTextXML	200	224670	f05b899868f4ac8f	OK	ok
+C07	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9636537/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+C09	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:37079676&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+C10	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11246234/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+C12	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:39420062&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+C15	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:40877575&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+C16	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PPR804303/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+C17	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:41477902&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+C19	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PPR1116408/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+C20	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PPR1251738/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+C21	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PPR1279910/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+C22	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PPR1219681/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+C23	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PPR1259026/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+C24	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:41887012&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+C25	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1016/j.jbc.2024.105699%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K07	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3178102/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+K28	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9184281/fullTextXML	200	110714	daf0a6d49ddf394f	OK	ok
+K30	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5568797/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+K36	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12038917/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+K37	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13555741/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+K40	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.7554/elife.98179%22&resultType=core&format=json	-	-	-	SKIP_LOCAL	本地已落盘
+K45	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1038/82407%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K46	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1016/bs.mie.2020.06.002%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K49	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13031676/fullTextXML	200	114849	1f634e1ee6ddf2a0	OK	ok
+K50	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3241958/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+K51	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1021/acscatal.8b04457%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	search 零命中
+K52	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1002/anie.200802019%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K53	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1021/acs.jctc.4c01698%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K54	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1021/acs.jctc.6b01069%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K55	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1021/acs.jctc.6b00416%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K60	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.2337/db25-2148-lb%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	search 零命中
+K65	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5940506/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+K66	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5497568/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500
+K67b	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.64898/2026.06.08.730848%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+M-K27	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.5281/zenodo.23321531%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	search 零命中
+M-K28	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.5281/zenodo.20526590%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	search 零命中
+B02	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7532806/fullTextXML	0	162372	152f6203c85c8f18	OK	fallback_ok[ncbi_efetch]  via https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db
+B03	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9293396/fullTextXML	0	140214	c997411200d3d732	OK	fallback_ok[ncbi_efetch]  via https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db
+B13	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13669634/fullTextXML	200	218930	33f6ae0286d6a859	OK	ok
+B33	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10115654/fullTextXML	500	171627	0f4774b49eb17d2a	OK	fallback_ok[ncbi_efetch]  via https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db
+B35	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1101/2025.09.18.676967%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+B36	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13660641/fullTextXML	200	98018	0ee577050b25c01d	OK	ok
+Z06	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:39986495&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N) | elink:200 
+Z07	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:41401395&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N) | elink:0 URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHIL
+Z10	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13111378/fullTextXML	200	193918	0f9a301af0833429	OK	ok
+Z12	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:38574928&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N) | elink:0 URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHIL
+Z13	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1101/2025.10.03.680404%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+Z14	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12886914/fullTextXML	200	80541	88c211600ad6b68b	OK	ok
+Z15	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12982372/fullTextXML	200	256213	f340a4f140d58166	OK	ok
+Z16	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3963406/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500 | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+C03	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8074680/fullTextXML	500	132839	b731293974fe58da	OK	fallback_ok[ncbi_efetch]  via https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db
+C07	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9636537/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500 | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+C09	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13419775/fullTextXML	200	201633	ce83b1966fec2baa	OK	ok
+C10	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11246234/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500 | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+C12	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13676076/fullTextXML	200	178710	3b0590994ff4b613	OK	ok
+C15	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13676841/fullTextXML	200	101410	c722c0cb4387389f	OK	ok
+C16	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PPR804303/fullTextXML	500	211399	6af631c7c35f32e7	OK	fallback_ok[biorxiv_full] via https://www.biorxiv.org/content/10.1101/2024.02.10.579791v1.full
+C17	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13294833/fullTextXML	200	113663	1e5d9274e3ecd6dd	OK	ok
+C19	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PPR1116408/fullTextXML	500	235602	815e8ee604006ee7	OK	fallback_ok[biorxiv_full] via https://www.biorxiv.org/content/10.1101/2025.11.08.686881v1.full
+C20	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PPR1251738/fullTextXML	500	90586	d38c8b84c20cd3be	OK	fallback_ok[biorxiv_full] via https://www.biorxiv.org/content/10.64898/2026.06.10.730767v1.full
+C21	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PPR1279910/fullTextXML	500	238377	f46ced33ddd22387	OK	fallback_ok[biorxiv_full] via https://www.biorxiv.org/content/10.64898/2026.07.13.738243v1.full
+C22	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PPR1219681/fullTextXML	500	232107	9e27602a13cba890	OK	fallback_ok[biorxiv_full] via https://www.biorxiv.org/content/10.64898/2026.01.06.697903v1.full
+C23	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PPR1259026/fullTextXML	500	326995	f0b2f09e598d1aa7	OK	fallback_ok[biorxiv_full] via https://www.biorxiv.org/content/10.64898/2026.06.23.733994v1.full
+C24	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:41887012&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N) | elink:200 
+C25	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1016/j.jbc.2024.105699%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K07	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3178102/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500 | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+K30	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5568797/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500 | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+K36	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12038917/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500 | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+K37	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13555741/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500 | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+K40	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.7554/elife.98179%22&resultType=core&format=json	-	-	-	SKIP_LOCAL	本地已落盘
+K45	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1038/82407%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	search 0 URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>
+K46	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1016/bs.mie.2020.06.002%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K50	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3241958/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500 | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+K51	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1021/acscatal.8b04457%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	search 零命中
+K52	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1002/anie.200802019%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K53	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1021/acs.jctc.4c01698%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K54	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1021/acs.jctc.6b01069%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K55	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1021/acs.jctc.6b00416%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K60	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.2337/db25-2148-lb%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	search 零命中
+K65	epmc_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5940506/fullTextXML	500	95945	c20610bf2083898d	OK	fallback_ok[ncbi_efetch]  via https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db
+K66	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5497568/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500 | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+K67b	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.64898/2026.06.08.730848%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+M-K27	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.5281/zenodo.23321531%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	search 零命中
+M-K28	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.5281/zenodo.20526590%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	search 零命中
+B13	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13669634/fullTextXML	200	218930	-	WRONG_PAPER_Fetched	身份块号冲突(pmc_conflict=False, doi_conflict=True: ['10.1093/nar/gkag999'] vs ['10.1126/science.adl2528'])，拒收
+B35	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1101/2025.09.18.676967%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+B36	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13660641/fullTextXML	200	98018	-	WRONG_PAPER_Fetched	身份块号冲突(pmc_conflict=False, doi_conflict=True: ['10.1016/j.mrl.2026.200309'] vs ['10.1038/s41586-026-10328-7'])，拒收
+Z06	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:39986495&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N) | elink:200 
+Z07	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:41401395&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N) | elink:200 
+Z10	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13111378/fullTextXML	200	193918	-	WRONG_PAPER_Fetched	身份块号冲突(pmc_conflict=False, doi_conflict=True: ['10.3389/fimmu.2026.1728474'] vs ['10.1021/acs.jcim.5c01307'])，拒收
+Z12	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12341582/fullTextXML	200	137516	-	WRONG_PAPER_Fetched	身份块号冲突(pmc_conflict=False, doi_conflict=True: ['10.1016/j.csbj.2025.07.052'] vs ['10.1016/j.ijbiomac.2024.131356'])，拒收
+Z13	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1101/2025.10.03.680404%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+Z14	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12886914/fullTextXML	200	80541	-	WRONG_PAPER_Fetched	身份块号冲突(pmc_conflict=False, doi_conflict=True: ['10.1038/s41598-025-34793-8'] vs ['10.1002/smtd.202300327'])，拒收
+Z15	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12982372/fullTextXML	200	256213	-	WRONG_PAPER_Fetched	身份块号冲突(pmc_conflict=False, doi_conflict=True: ['10.3389/fcell.2026.1774239'] vs ['10.1021/acs.jctc.1c00870'])，拒收
+Z16	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3963406/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500 | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+C07	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9636537/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500 | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+C09	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13419775/fullTextXML	0	0	-	FETCH_FAILED	URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+C10	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11246234/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500 | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+C12	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13676076/fullTextXML	200	178710	-	WRONG_PAPER_Fetched	身份块号冲突(pmc_conflict=False, doi_conflict=True: ['10.1016/j.neo.2026.101375'] vs ['10.1038/s41551-024-01258-8'])，拒收
+C15	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13676841/fullTextXML	200	101410	-	WRONG_PAPER_Fetched	身份块号冲突(pmc_conflict=False, doi_conflict=True: ['10.1002/smll.75187', '10.1002/smll.v22.58'] vs ['10.1038/s41557-025-01929-2'])，拒收
+C17	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13294833/fullTextXML	200	113663	-	WRONG_PAPER_Fetched	身份块号冲突(pmc_conflict=False, doi_conflict=True: ['10.1021/jacs.6c02343'] vs ['10.1126/science.ady6017'])，拒收
+C24	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:41887012&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N) | elink:200 
+C25	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1016/j.jbc.2024.105699%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K07	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3178102/fullTextXML	0	0	-	FETCH_FAILED	URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+K30	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5568797/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500 | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+K36	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12038917/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500 | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+K37	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13555741/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500 | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+K40	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.7554/elife.98179%22&resultType=core&format=json	-	-	-	SKIP_LOCAL	本地已落盘
+K45	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1038/82407%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K46	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1016/bs.mie.2020.06.002%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K50	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3241958/fullTextXML	500	0	-	FETCH_FAILED	HTTPError 500 | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+K51	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1021/acscatal.8b04457%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	search 零命中
+K52	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1002/anie.200802019%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K53	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1021/acs.jctc.4c01698%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K54	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1021/acs.jctc.6b01069%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K55	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1021/acs.jctc.6b00416%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+K60	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.2337/db25-2148-lb%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	search 零命中
+K66	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1126/science.aad8865%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	search 0 URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>
+K67b	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.64898/2026.06.08.730848%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	记录存在但无 PMCID (isOpenAccess=N)
+M-K27	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.5281/zenodo.23321531%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	search 零命中
+M-K28	epmc_search_then_fulltext	https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.5281/zenodo.20526590%22&resultType=core&format=json	-	-	-	NO_OA_FULLTEXT	search 零命中
+K67b	epmc_pmcid_direct	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13277954/fullTextXML	200	190,606	2d6e165854ad958c	OK	手工补抓：按 PMID 42327288 在 EPMC 解析出 PMCID PMC13277954（isOpenAccess=Y），先前 DOI 直查漏判为 NO_OA_FULLTEXT；身份块核对一致 2026-10-20 16:18

@@ -1,0 +1,51 @@
+待抓 48 行（已有落盘的 29 个编号会跳过）
+  B02 OK PMC7532806 162,372 B 152f6203c85c8f18 fallback_ok[ncbi_efetch]  via https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db
+  B03 OK PMC9293396 140,214 B c997411200d3d732 fallback_ok[ncbi_efetch]  via https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db
+  B13 OK PMC13669634 218,930 B 33f6ae0286d6a859 ok
+  B33 OK PMC10115654 171,627 B 0f4774b49eb17d2a fallback_ok[ncbi_efetch]  via https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db
+  B35 NO_OA_FULLTEXT 记录存在但无 PMCID (isOpenAccess=N)
+  B36 OK PMC13660641 98,018 B 0ee577050b25c01d ok
+  Z06 NO_OA_FULLTEXT 记录存在但无 PMCID (isOpenAccess=N) | elink:200 
+  Z07 NO_OA_FULLTEXT 记录存在但无 PMCID (isOpenAccess=N) | elink:0 URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHIL
+  Z10 OK PMC13111378 193,918 B 0f9a301af0833429 ok
+  Z12 NO_OA_FULLTEXT 记录存在但无 PMCID (isOpenAccess=N) | elink:0 URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHIL
+  Z13 NO_OA_FULLTEXT 记录存在但无 PMCID (isOpenAccess=N)
+  Z14 OK PMC12886914 80,541 B 88c211600ad6b68b ok
+  Z15 OK PMC12982372 256,213 B f340a4f140d58166 ok
+  Z16 FETCH_FAILED 500 HTTPError 500 | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+  C03 OK PMC8074680 132,839 B b731293974fe58da fallback_ok[ncbi_efetch]  via https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db
+  C07 FETCH_FAILED 500 HTTPError 500 | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+  C09 OK PMC13419775 201,633 B ce83b1966fec2baa ok
+  C10 FETCH_FAILED 500 HTTPError 500 | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+  C12 OK PMC13676076 178,710 B 3b0590994ff4b613 ok
+  C15 OK PMC13676841 101,410 B c722c0cb4387389f ok
+  C16 OK PPR804303 211,399 B 6af631c7c35f32e7 fallback_ok[biorxiv_full] via https://www.biorxiv.org/content/10.1101/2024.02.10.579791v1.full
+  C17 OK PMC13294833 113,663 B 1e5d9274e3ecd6dd ok
+  C19 OK PPR1116408 235,602 B 815e8ee604006ee7 fallback_ok[biorxiv_full] via https://www.biorxiv.org/content/10.1101/2025.11.08.686881v1.full
+  C20 OK PPR1251738 90,586 B d38c8b84c20cd3be fallback_ok[biorxiv_full] via https://www.biorxiv.org/content/10.64898/2026.06.10.730767v1.full
+  C21 OK PPR1279910 238,377 B f46ced33ddd22387 fallback_ok[biorxiv_full] via https://www.biorxiv.org/content/10.64898/2026.07.13.738243v1.full
+  C22 OK PPR1219681 232,107 B 9e27602a13cba890 fallback_ok[biorxiv_full] via https://www.biorxiv.org/content/10.64898/2026.01.06.697903v1.full
+  C23 OK PPR1259026 326,995 B f0b2f09e598d1aa7 fallback_ok[biorxiv_full] via https://www.biorxiv.org/content/10.64898/2026.06.23.733994v1.full
+  C24 NO_OA_FULLTEXT 记录存在但无 PMCID (isOpenAccess=N) | elink:200 
+  C25 NO_OA_FULLTEXT 记录存在但无 PMCID (isOpenAccess=N)
+  K07 FETCH_FAILED 500 HTTPError 500 | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+  K30 FETCH_FAILED 500 HTTPError 500 | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+  K36 FETCH_FAILED 500 HTTPError 500 | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+  K37 FETCH_FAILED 500 HTTPError 500 | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+  K45 NO_OA_FULLTEXT search 0 URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>
+  K46 NO_OA_FULLTEXT 记录存在但无 PMCID (isOpenAccess=N)
+  K50 FETCH_FAILED 500 HTTPError 500 | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+  K51 NO_OA_FULLTEXT search 零命中
+  K52 NO_OA_FULLTEXT 记录存在但无 PMCID (isOpenAccess=N)
+  K53 NO_OA_FULLTEXT 记录存在但无 PMCID (isOpenAccess=N)
+  K54 NO_OA_FULLTEXT 记录存在但无 PMCID (isOpenAccess=N)
+  K55 NO_OA_FULLTEXT 记录存在但无 PMCID (isOpenAccess=N)
+  K60 NO_OA_FULLTEXT search 零命中
+  K65 OK PMC5940506 95,945 B c20610bf2083898d fallback_ok[ncbi_efetch]  via https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db
+  K66 FETCH_FAILED 500 HTTPError 500 | ncbi_efetch:0 无 PMCID 可走 NCBI | biorxiv_full:0 非预印本
+  K67b NO_OA_FULLTEXT 记录存在但无 PMCID (isOpenAccess=N)
+  M-K27 NO_OA_FULLTEXT search 零命中
+  M-K28 NO_OA_FULLTEXT search 零命中
+判定标准: 每行要么落盘 >4KB 全文, 要么显式记 NO_OA_FULLTEXT / FETCH_FAILED
+判定结果: OK 20 · SKIP 1 · 未拿到 27 · 合计 48/48
+找出来没有: 本步骤只补正文, 不做任何判定

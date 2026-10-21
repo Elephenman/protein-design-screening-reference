@@ -1,0 +1,25 @@
+=== 门禁自检 ===
+总行数: 148
+--- 各 group 行数(group 列原值) ---
+  通用方法学                          67
+  Baker组                         28
+  曹龙兴组                           21
+  周如鸿组                           16
+  Baker组; 通用方法学                  12
+  Baker组; 曹龙兴组                   3
+  Baker组; 曹龙兴组; 通用方法学            1
+--- 按主组归并 ---
+  通用方法学        67
+  Baker组       44
+  曹龙兴组         21
+  周如鸿组         16
+--- 完整性核对: 源文件卡片标题数 vs CSV 覆盖 ---
+  baker.md   (Baker组) 源卡片 44 张 / CSV 覆盖 44 张 / 缺失 无
+  zhou.md    (周如鸿组) 源卡片 16 张 / CSV 覆盖 16 张 / 缺失 无
+  cao.md     (曹龙兴组) 源卡片 25 张 / CSV 覆盖 25 张 / 缺失 无
+  源卡片合计 85 张; 跨组同 DOI 合并 4 组(B06→C02, B10→C08, B42→C11, B32→C14) -> 卡片行 81 行
+  cost-benchmarks.md 无 ### [Xnn] 卡片，按证据条目抽 67 行(K01…)
+--- DOI 非空且格式合法(^10\.\d{4,}/ 或 arXiv:): 119 / 148 行 ---
+--- 实验命中率非『未记录』行数: 77 ---
+--- 附: cost_or_stat_note 非未记录 66 行; md_used=是* 30 行; qm_used=是* 19 行 ---
+CSV: A:\Data\MD\projects\protein-design-screening-20261016\data\protein_design_literature.csv

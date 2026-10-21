@@ -1,0 +1,83 @@
+OK   10.1093/nar/gkg847 | Enzyme-specific profiles for genome annotation: PRIAM
+OK   10.1093/nar/gkh028 | The Catalytic Site Atlas: a resource of catalytic sites and residues identified 
+OK   10.1093/nar/gkt1243 | The Catalytic Site Atlas 2.0: cataloging catalytic sites and residues identified
+OK   10.1093/nar/gkx1012 | Mechanism and Catalytic Site Atlas (M-CSA): a database of enzyme reaction mechan
+OK   10.1093/bioinformatics/btaa485 | UniRule: a unified rule resource for automatic annotation in the UniProt Knowled
+OK   10.1093/nar/gky940 | RetroRules: a database of reaction rules for engineering biology
+OK   10.1093/nar/gkaf1261 | RetroRules 2026: an expanded database combining biochemical and organic reaction
+OK   10.1073/pnas.1821905116 | Deep learning enables high-quality and high-throughput prediction of enzyme comm
+OK   10.1038/s41467-023-43216-z | Functional annotation of enzyme-encoding genes using deep learning with transfor
+OK   10.1371/journal.pcbi.1014034 | Fast structural search for classification of gut bacterial mucin O-glycan degrad
+OK   10.1038/s41467-024-52533-w | Accurately predicting enzyme functions through geometric graph learning on ESMFo
+OK   10.1093/bib/bbae225 | ifDEEPre: large protein language-based deep learning enables interpretable and f
+OK   10.1038/s41467-026-68727-3 | Trustworthy prediction of enzyme commission numbers using a hierarchical interpr
+OK   10.1101/2025.02.01.635810 | HIT-EC: Trustworthy prediction of enzyme commission numbers using a hierarchical
+OK   10.1101/2025.06.25.661207 | EC-Bench: A Benchmark for Enzyme Commission Number Prediction
+OK   10.1186/s12859-025-06081-9 | Comparative Assessment of Protein Large Language Models for Enzyme Commission Nu
+OK   10.1038/s41467-021-23303-9 | Structure-based protein function prediction using graph convolutional networks
+OK   10.1186/s13059-016-1037-6 | An expanded evaluation of protein function prediction methods shows an improveme
+OK   10.64898/2026.05.06.722942 | On the state of protein function prediction: a report on the fourth CAFA challen
+OK   10.64898/2026.04.27.716980 | Advances in Protein Function Prediction from the Fifth CAFA Challenge
+OK   10.1093/bioadv/vbae043 | CAFA-evaluator: a Python tool for benchmarking ontological classification method
+FAIL 10.1073/pnas.2427161122 | URLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occur
+OK   10.1126/science.adu2454 | Computational design of serine hydrolases
+OK   10.1038/nbt.3769 | Mutation effects predicted from sequence co-variation
+OK   10.1038/s41586-021-04043-8 | Disease variant prediction with deep generative models of evolutionary data
+OK   10.1007/s00439-021-02411-y | Embeddings from protein language models predict conservation and variant effects
+OK   10.64898/2026.09.17.752359 | A moving target: non-stationary selection governs unsupervised prediction of vir
+OK   10.21203/rs.3.rs-11236060/v1 | AminoGrapes: Structure-Weighted Evolutionary Scoring for Viral Protein Fitness P
+OK   10.1093/bioinformatics/btag525 | Evolutionary profiles for protein fitness prediction
+OK   10.1093/bioinformatics/btag168 | MZSGO: multimodal zero-shot protein function annotation via evolutionary signals
+OK   10.64898/2026.03.19.712954 | BioReason-Pro: Advancing Protein Function Prediction with Multimodal Biological 
+OK   10.1073/pnas.90.14.6498 | A general two-metal-ion mechanism for catalytic RNA.
+OK   10.1016/j.dnarep.2019.03.006 | The invariant glutamate of human PrimPol DxE motif is critical for its Mn2+-depe
+OK   10.1074/jbc.m116.726596 | Design of a Genetically Stable High Fidelity Coxsackievirus B3 Polymerase That A
+OK   10.1016/j.jmb.2013.07.009 | Structures of Intermediates along the Catalytic Cycle of Terminal Deoxynucleotid
+OK   10.1021/acs.biochem.5c00162 | Metal Ion Requirement
+for Catalysis by 3′-5′
+RNA Polymerases
+OK   10.1101/2025.03.21.644660 | Metal ion requirement for catalysis by 3′-5′ RNA polymerases
+OK   10.1016/j.bbrc.2017.06.054 | Crystal structure of tRNA His guanylyltransferase from Saccharomyces cerevisiae
+OK   10.1021/bi201397f | Kinetic Analysis of 3′–5′ Nucleotide Addition Catalyzed by Eukaryotic tRNA<sup>H
+OK   10.1261/rna.080156.124 | Thg1 family 3′–5′ RNA polymerases as tools for targeted RNA synthesis
+OK   10.1093/nar/gkag864 | Primer- and template-independent RNA polymerization by terminal nucleotidyltrans
+OK   10.3389/fgene.2014.00036 | Molecular mechanisms of template-independent RNA polymerization by tRNA nucleoti
+OK   10.1038/s41467-023-40787-9 | Crystal structure and functional implications of cyclic di-pyrimidine-synthesizi
+OK   10.1042/bcj20260457 | Inhibition by ATP regulates the activity of a CBASS anti-phage nucleotide cyclas
+OK   10.1021/ja0340331 | In Vitro Evolution of an RNA-Cleaving DNA Enzyme into an RNA Ligase Switches the
+OK   10.1073/pnas.75.1.256 | pppA2'p5'A2'p5'A: an inhibitor of protein synthesis synthesized with an enzyme f
+OK   10.1016/j.dnarep.2017.02.016 | The role of RNase H2 in processing ribonucleotides incorporated during DNA repli
+OK   10.1093/nar/gkt027 | RNase H2 roles in genome integrity revealed by unlinking its activities
+OK   10.1371/journal.pgen.1010164 | Production of 3′,3′-cGAMP by a Bdellovibrio bacteriovorus promiscuous GGDEF enzy
+OK   10.1016/j.jbc.2026.113163 | Molecular mechanism of 2′,3′-cGAMP degradation by monkeypox virus poxin-schlafen
+OK   10.1021/ar500314j | Catalytic Metal Ions and Enzymatic Processing of DNA and RNA
+OK   10.1038/gim.2017.210 | Modeling the ACMG/AMP variant classification guidelines as a Bayesian classifica
+OK   10.1016/j.ajhg.2025.07.011 | When two plus four does not equal six: Combining computational and functional ev
+OK   10.1186/s13073-025-01536-3 | A quantitative, Bayesian-informed approach to gene-specific variant classificati
+OK   10.64898/2026.09.07.26362456 | Empirically calibrated allele frequency thresholds for ACMG BA1, BS1 and PM2 evi
+OK   10.1021/acs.jcim.5c00556 | Uncertainty Quantification and Temperature Scaling Calibration for Protein-RNA B
+FAIL 10.1175/1520-0493(1950)078<0001:vofeit>2.0.co | <HTTPError 404: 'Not Found'>
+OK   10.1111/j.2517-6161.1995.tb02031.x | Controlling the False Discovery Rate: A Practical and Powerful Approach to Multi
+OK   10.1371/journal.pcbi.1009446 | Experimental and computational investigation of enzyme functional annotations un
+OK   10.1371/journal.pcbi.1000605 | Annotation Error in Public Databases: Misannotation of Molecular Function in Enz
+OK   10.1136/bmj.311.7003.485 | Statistics notes: Absence of evidence is not evidence of absence
+OK   10.1002/anie.200802019 | QM/MM Methods for Biomolecular Systems
+OK   10.1016/j.cbpa.2007.01.684 | QM/MM studies of enzymes
+OK   10.1016/0022-2836(76)90311-9 | Theoretical studies of enzymic reactions: Dielectric, electrostatic and steric s
+OK   10.1063/1.456010 | An improved algorithm for reaction path following
+OK   10.1021/acs.jcim.3c00772 | Prediction of Enzyme Catalysis by Computing Reaction Energy Barriers via Steered
+OK   10.1073/pnas.0509234102 | The proficiency of a thermophilic chorismate mutase enzyme is solely through an 
+OK   10.1017/S0033583512000157 | Why nature really chose phosphate
+OK   10.64898/2026.09.09.750330 | Evolution promotes transition-state-like conformations with enhanced basicity an
+OK   10.1073/pnas.1111252108 | Catalysis by dihydrofolate reductase and other enzymes arises from electrostatic
+OK   10.1021/ct050252w | QM/MM Free-Energy Perturbation Compared to Thermodynamic Integration and Umbrell
+OK   10.1038/s41557-026-02125-6 | Emergence of specific binding and catalysis from a designed generalist binding p
+OK   10.1038/s41592-025-02635-0 | The need to implement FAIR principles in biomolecular simulations
+OK   10.64898/2026.09.14.751485 | Machine learned potentials with electrostatic embedding accurately capture Kemp 
+ceut.6b00852 | UGT1A10 Is a High Activity and Important Extrahepatic Enzyme: Why Has Its Role i
+OK   10.1007/s12291-013-0318-z | Determination of Acid β-Galactosidase Activity: Methodology and Perspectives
+OK   10.1002/pro.70286 | Screening de novo designed protein binders in unpurified lysate using flow induc
+OK   10.1002/bit.28112 | Holistic analytical characterization and risk assessment of residual host cell p
+OK   10.1126/science.aeg3949 | Phage proteases activate CBASS antiphage immunity
+OK   10.1002/mlf2.70052 | Structures and mechanism of E2‐CBASS anti‐phage system
+SUMMARY OK=78 / 80

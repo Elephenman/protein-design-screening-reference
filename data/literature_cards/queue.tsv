@@ -1,0 +1,102 @@
+id,state,group,title,fulltexts,records
+B02,FULLTEXT,Baker组,Improving the Efficiency of Ligand-Binding Protein Design with Molecul,data/literature_cards/fulltext/B02_PMC7532806_text.txt,sources/baker.md
+B13,FULLTEXT,Baker组,Generalized biomolecular modeling and design with RoseTTAFold All-Atom,data/literature_cards/fulltext/B13_PMC13669634_text.txt,sources/baker.md
+B29,FULLTEXT,Baker组,Computational design of soluble and functional membrane protein analog,data/interim/baker_lit/ft/memprot_analogue2024.txt,sources/baker.md
+B32; C14,FULLTEXT,Baker组; 曹龙兴组,Design of high-affinity binders to immune modulating receptors for can,data/interim/baker_lit/ft/immune_receptor_binder2025.txt,sources/baker.md;sources/cao.md
+B33,FULLTEXT,Baker组,De novo design of modular peptide-binding proteins by superhelical mat,data/literature_cards/fulltext/B33_PMC10115654_text.txt,sources/baker.md
+B34,FULLTEXT,Baker组,De novo design of buttressed loops for sculpting protein functions,data/interim/baker_lit/ft/buttressedloops2024.txt,sources/baker.md
+B36,FULLTEXT,Baker组,"The past, present and future of de novo protein design",data/literature_cards/fulltext/B36_PMC13660641_text.txt,sources/baker.md
+B38,FULLTEXT,Baker组,Local structural flexibility drives oligomorphism in computationally d,data/interim/baker_lit/ft/oligomorph2025.txt,sources/baker.md
+B39,FULLTEXT,Baker组,Exploiting conformational dynamics to modulate the function of designe,data/interim/baker_lit/ft/confdyn2023.txt,sources/baker.md
+B40,FULLTEXT,Baker组,De novo design of proteins housing excitonically coupled chlorophyll s,data/interim/baker_lit/ft/chlorophyll2024.txt,sources/baker.md
+B41,FULLTEXT,Baker组,Four-component protein nanocages designed by programmed symmetry break,data/interim/baker_lit/ft/fourcomp_cages2025.txt,sources/baker.md
+B42; C11,FULLTEXT,Baker组; 曹龙兴组,Designed endocytosis-inducing proteins degrade targets and amplify sig,data/interim/baker_lit/ft/endocytosis2025.txt,sources/baker.md;sources/cao.md
+B43,FULLTEXT,Baker组,De novo designed proteins neutralize lethal snake venom toxins,data/interim/baker_lit/ft/snakvenom2025.txt,sources/baker.md
+B44,FULLTEXT,Baker组,De novo design of highly selective miniprotein inhibitors of integrins,data/interim/baker_lit/ft/integrin_miniprot2023.txt,sources/baker.md
+C12,FULLTEXT,曹龙兴组,Targeting overexpressed antigens in glioblastoma via CAR T cells with ,data/literature_cards/fulltext/C12_PMC13676076_text.txt,sources/cao.md
+C15,FULLTEXT,曹龙兴组,De novo design of light-responsive protein–protein interactions enable,data/literature_cards/fulltext/C15_PMC13676841_text.txt,sources/cao.md
+C16,FULLTEXT,曹龙兴组,Proteus: Exploring Protein Structure Generation for Enhanced Designabi,data/literature_cards/fulltext/C16_PPR804303_text.txt,sources/cao.md
+C20,FULLTEXT,曹龙兴组,HalluDesign-NA: Extending HalluDesign for De Novo Nucleic Acid Design,data/literature_cards/fulltext/C20_PPR1251738_text.txt,sources/cao.md
+Z10,FULLTEXT,周如鸿组,Integrating Physics-Based Simulations with Data-Driven Deep Learning R,data/literature_cards/fulltext/Z10_PMC13111378_text.txt,sources/zhou.md
+Z14,FULLTEXT,周如鸿组,De Novo Evolution of an Antibody‐Mimicking Multivalent Aptamer via a D,data/literature_cards/fulltext/Z14_PMC12886914_text.txt,sources/zhou.md
+Z15,FULLTEXT,周如鸿组,Dynamics-Based Peptide–MHC Binding Optimization by a Convolutional Var,data/literature_cards/fulltext/Z15_PMC12982372_text.txt,sources/zhou.md
+K01,FULLTEXT,通用方法学; 口径对照,A cost-effective and scalable barcoded library construction method for,data/literature_cards/fulltext/K01_PMC12923136_text.txt,sources/cost-benchmarks.md
+K06,FULLTEXT,通用方法学; 口径对照,Screening de novo designed protein binders in unpurified lysate using ,data/literature_cards/fulltext/K06_PMC12432402_text.txt,sources/cost-benchmarks.md
+K28,FULLTEXT,通用方法学; 口径对照,ColabFold: making protein folding accessible to all,data/literature_cards/fulltext/K28_PMC9184281_text.txt,sources/cost-benchmarks.md
+K29,FULLTEXT,通用方法学; 口径对照,GROMACS in the Cloud: A Global Supercomputer to Speed Up Alchemical Dr,data/literature_cards/fulltext/K29_PMC9006219_text.txt,sources/cost-benchmarks.md
+K31,FULLTEXT,通用方法学; 口径对照,Benchmarking <scp>AlphaFold</scp> for protein complex modeling reveals,data/literature_cards/fulltext/K31_PMC9278006_text.txt,sources/cost-benchmarks.md
+K32,FULLTEXT,通用方法学; 口径对照,Evaluation of <scp>AlphaFold</scp> antibody–antigen modeling with impl,data/literature_cards/fulltext/K32_PMC10751731_text.txt,sources/cost-benchmarks.md
+K33,FULLTEXT,通用方法学; 口径对照,Correspondence between functional scores from deep mutational scans an,data/literature_cards/fulltext/K33_PMC10273344_text.txt,sources/cost-benchmarks.md
+K38,FULLTEXT,通用方法学; 口径对照,"Diffusion-Based Protein Structure Design: Geometric Modelling, Validat",data/literature_cards/fulltext/K38_PMC13513569_text.txt,sources/cost-benchmarks.md
+K39,FULLTEXT,通用方法学; 口径对照,AI-Driven <i>De Novo</i> Binder Design: From Structure Prediction to C,data/literature_cards/fulltext/K39_PMC13113996_text.txt,sources/cost-benchmarks.md
+K41,FULLTEXT,通用方法学; 口径对照,A Complementarity‐Based Approach to <i>De Novo</i> Binder Design,data/literature_cards/fulltext/K41_PMC12412469_text.txt,sources/cost-benchmarks.md
+K43,FULLTEXT,通用方法学,A comprehensive benchmarking of the AlphaFold3 for predicting biomacro,data/literature_cards/fulltext/K43_PMC12661943_text.txt,sources/cost-benchmarks.md
+K47,FULLTEXT,通用方法学; 口径对照,Sequence-based prediction of pH-dependent protein solubility using Cam,data/literature_cards/fulltext/K47_PMC10025429_text.txt,sources/cost-benchmarks.md
+K48,FULLTEXT,通用方法学,Aggrescan4D: A comprehensive tool for pH‐dependent analysis and engine,data/literature_cards/fulltext/K48_PMC11425640_text.txt,sources/cost-benchmarks.md
+K49,FULLTEXT,通用方法学,AGGRESCAN and its evolution: A two-decade perspective on protein aggre,data/literature_cards/fulltext/K49_PMC13031676_text.txt,sources/cost-benchmarks.md
+M-K34,FULLTEXT,口径对照与独立复核,De Novo Design of Near-Infrared Fluorescence-Activating Proteins,data/interim/baker_lit/ft/nirFAP2026.txt,sources/claim-90pct.md
+B35,DEGRADED,Baker组,<i>De novo</i> Design of All-atom Biomolecular Interactions with RFdif,-,sources/baker.md
+C07,DEGRADED,曹龙兴组,Isoform-specific inhibition of FGFR signaling achieved by a de-novo-de,-,sources/cao.md
+C10,DEGRADED,曹龙兴组,Modulation of FGF pathway signaling and vascular differentiation using,-,sources/cao.md
+C13,DEGRADED,曹龙兴组,Accurate de novo design of heterochiral protein–protein interactions,-,sources/cao.md
+C18,DEGRADED,曹龙兴组; 口径对照,Design of miniprotein inhibitors targeting complement C9 to block memb,-,sources/cao.md
+C24,DEGRADED,曹龙兴组,Frontiers and challenges in the design of binders for intrinsically di,-,sources/cao.md
+C25,DEGRADED,曹龙兴组,应用/工具类与背景论文（合并卡片，均经 API 核验）,-,sources/cao.md
+Z01,DEGRADED,周如鸿组,In silico design and validation of high-affinity RNA aptamers for SARS,-,sources/zhou.md
+Z02,DEGRADED,周如鸿组,In silico design and validation of high-affinity RNA aptamers targetin,-,sources/zhou.md
+Z03,DEGRADED,周如鸿组,Multi-strategy embedded framework for neoantigen vaccine maturation,-,sources/zhou.md
+Z05,DEGRADED,周如鸿组,Mutagenesis-based optimal design of plant peptide phytosulfokine for e,-,sources/zhou.md
+Z06,DEGRADED,周如鸿组,Physical insights guided rational design of anti-EGFR antibody to reve,-,sources/zhou.md
+Z07,DEGRADED,周如鸿组,ANUBI: A Platform for Affinity Optimization of Proteins and Peptides i,-,sources/zhou.md
+Z09,DEGRADED,周如鸿组,A free energy perturbation-assisted machine learning strategy for mimo,-,sources/zhou.md
+Z11,DEGRADED,周如鸿组,<i>In Silico</i> Design of High-Affinity gp100 Antigenic Mimotopes for,-,sources/zhou.md
+Z12,DEGRADED,周如鸿组,In silico design of high-affinity antigenic peptides for HLA-B44,-,sources/zhou.md
+Z13,DEGRADED,周如鸿组; 口径对照,Design of TCR-mimicking binders for pHLA with high potency,-,sources/zhou.md
+Z16,DEGRADED,周如鸿组,QM（量子力学）使用取证——汇总卡片（3 篇代表 + 结论）,-,sources/zhou.md
+K02,DEGRADED,通用方法学,Twist Bioscience Complex Gene Synthesis 公开挂价,-,sources/cost-benchmarks.md
+K03,DEGRADED,通用方法学,基因合成历史报价（Twist CEO 访谈口径，2023）,-,sources/cost-benchmarks.md
+K04,DEGRADED,通用方法学,GenScript oPools 引物/寡核苷酸池报价,-,sources/cost-benchmarks.md
+K05,DEGRADED,通用方法学,基因合成成本构成与 oligo 错误率的连锁影响（行业分析）,-,sources/cost-benchmarks.md
+K07,DEGRADED,通用方法学,Protein production and purification,-,sources/cost-benchmarks.md
+K08,DEGRADED,通用方法学,展示筛选通量与每命中候选边际成本（常见口径，本次未核到一手原文）,-,sources/cost-benchmarks.md
+K09,DEGRADED,通用方法学,BLI 机时价目（Octet RED96）,-,sources/cost-benchmarks.md
+K10,DEGRADED,通用方法学,BLI 仪器通量（Octet R2/R4 型号对比）,-,sources/cost-benchmarks.md
+K11,DEGRADED,通用方法学,SPR 机时价目（多核心设施公开收费）,-,sources/cost-benchmarks.md
+K12,DEGRADED,通用方法学,SPR 芯片耗材价目（2010 年旧价）,-,sources/cost-benchmarks.md
+K13,DEGRADED,通用方法学,SPR 单芯片通量（厂商仪器页）,-,sources/cost-benchmarks.md
+K14,DEGRADED,通用方法学,ITC 价目（机时与委托服务）,-,sources/cost-benchmarks.md
+K15,DEGRADED,通用方法学,DLS 价目,-,sources/cost-benchmarks.md
+K16,DEGRADED,通用方法学,热稳定/聚集快速表征（nanoDSF）价目,-,sources/cost-benchmarks.md
+K17,DEGRADED,通用方法学,质谱类确证价目（DIA 蛋白组/磷酸化）,-,sources/cost-benchmarks.md
+K18,DEGRADED,通用方法学,冷冻电镜（300 kV）机时价目,-,sources/cost-benchmarks.md
+K19,DEGRADED,通用方法学,电镜耗材与制样价目,-,sources/cost-benchmarks.md
+K20,DEGRADED,通用方法学,X 射线晶体学（实验室）价目,-,sources/cost-benchmarks.md
+K21,DEGRADED,通用方法学,同步辐射机时/数据收费,-,sources/cost-benchmarks.md
+K22,DEGRADED,通用方法学,流式分选（FACS）机时价目,-,sources/cost-benchmarks.md
+K23,DEGRADED,通用方法学,FACS 速度上限（FACSAria III 标称规格）,-,sources/cost-benchmarks.md
+K24,DEGRADED,通用方法学,每候选合成+表达+纯化+一次单点结合的总边际成本（本报告推算）,-,sources/cost-benchmarks.md
+K25,DEGRADED,通用方法学,酵母表面展示 + FACS 的技术通量与每候选成本（技术汇总条目）,-,sources/cost-benchmarks.md
+K26,DEGRADED,通用方法学,单点 BLI/SPR 96/384 板筛（技术汇总条目）,-,sources/cost-benchmarks.md
+K27,DEGRADED,通用方法学,MD 预筛 N 个候选 vs 合成测试 N 个候选：谁贵（本报告推算）,-,sources/cost-benchmarks.md
+K30,DEGRADED,通用方法学; 口径对照,"Global analysis of protein folding using massively parallel design, sy",-,sources/cost-benchmarks.md
+K36,DEGRADED,通用方法学,Prospective Evaluation of Structure-Based Simulations Reveal Their Abi,-,sources/cost-benchmarks.md
+K37,DEGRADED,通用方法学,Large-Scale Collaborative Assessment of Binding Free Energy Calculatio,-,sources/cost-benchmarks.md
+K45,DEGRADED,通用方法学,Picomolar affinity antibodies from a fully synthetic naive library sel,-,sources/cost-benchmarks.md
+K46,DEGRADED,通用方法学,Ultrahigh throughput screening for enzyme function in droplets,-,sources/cost-benchmarks.md
+K50,DEGRADED,通用方法学; 口径对照,Computational Design of an Enzyme Catalyst for a Stereoselective Bimol,-,sources/baker.md;sources/cost-benchmarks.md
+K51,DEGRADED,通用方法学; 口径对照,QM/MM Theoretical Studies of a de Novo Retro-Aldolase Design,-,sources/cost-benchmarks.md
+K52,DEGRADED,通用方法学,QM/MM Methods for Biomolecular Systems,-,sources/cost-benchmarks.md
+K53,DEGRADED,通用方法学,Accurate QM/MM Molecular Dynamics for Periodic Systems in GPU4P<scp>y<,-,sources/cost-benchmarks.md
+K54,DEGRADED,通用方法学,QM/MM Study of Substituent and Solvent Effects on the Excited State Dy,-,sources/cost-benchmarks.md
+K55,DEGRADED,通用方法学,Estimation of Transition-Metal Empirical Parameters for Molecular Mech,-,sources/cost-benchmarks.md
+K57,DEGRADED,通用方法学,Profluent 公司自述：AI 设计基因编辑器与时间成本节省,-,sources/cost-benchmarks.md
+K58,DEGRADED,通用方法学,Xaira Therapeutics 公司自述：设计-测试闭环,-,sources/cost-benchmarks.md
+K59,DEGRADED,通用方法学,Generate:Biomedicines Flagship 融资记录,-,sources/cost-benchmarks.md
+K60,DEGRADED,通用方法学,2148-LB: Noncanonical Insulin Receptor Activation Using De Novo Agonis,-,sources/cost-benchmarks.md
+K61,DEGRADED,通用方法学,Nabla Bio / Morphic 通量与成功率,-,sources/cost-benchmarks.md
+K62,DEGRADED,通用方法学,行业叙事锚点：一个蛋白结构约 10 万美元 + 数月到数年（AI 出现前）,-,sources/cost-benchmarks.md
+K66,DEGRADED,通用方法学,De novo design of protein homo-oligomers with modular hydrogen-bond ne,-,sources/baker.md
+K67b,DEGRADED,通用方法学,Deep learning based design of buried hydrogen bond networks with HBDes,-,-
+M-K27,DEGRADED,口径对照与独立复核,MMDesign: Robust De Novo Binder Discovery Across Diverse Targets and M,-,sources/claim-90pct.md
+M-K28,DEGRADED,口径对照与独立复核,Practical De Novo Nanobody Discovery with Tens of Experimental Candida,-,sources/claim-90pct.md
+M-K29,DEGRADED,口径对照与独立复核,Accurate single-domain scaffolding of three nonoverlapping protein epi,-,sources/claim-90pct.md

@@ -1,0 +1,589 @@
+{
+ "B01": [
+  "data/interim/baker_lit/ft/switches2019.txt",
+  "sources/baker.md"
+ ],
+ "B02": [
+  "data/literature_cards/fulltext/B02_PMC7532806_fullTextXML.xml",
+  "data/literature_cards/fulltext/B02_PMC7532806_text.txt",
+  "sources/baker.md"
+ ],
+ "B03": [
+  "data/literature_cards/fulltext/B03_PMC9293396_fullTextXML.xml",
+  "data/literature_cards/fulltext/B03_PMC9293396_text.txt",
+  "sources/baker.md"
+ ],
+ "B04": [
+  "data/literature_cards/fulltext/B04_PMC7971855_fullTextXML.xml",
+  "data/literature_cards/fulltext/B04_PMC7971855_text.txt",
+  "sources/baker.md"
+ ],
+ "B05": [
+  "data/interim/baker_lit/ft/proteinmpnn2022.txt",
+  "sources/baker.md"
+ ],
+ "B06; C02": [
+  "data/interim/baker_lit/ft/cao2022.txt",
+  "sources/baker.md",
+  "sources/cao.md"
+ ],
+ "B07": [
+  "data/interim/baker_lit/ft/smallfolds2022.txt",
+  "sources/baker.md"
+ ],
+ "B08": [
+  "data/interim/baker_lit/ft/rfdiffusion2023.txt",
+  "sources/baker.md"
+ ],
+ "B09": [
+  "data/interim/baker_lit/ft/binderDL2023.txt",
+  "data/literature_cards/fulltext/B09_PMC10163288_fullTextXML.xml",
+  "data/literature_cards/fulltext/B09_PMC10163288_text.txt",
+  "sources/baker.md"
+ ],
+ "B10; C08": [
+  "data/interim/baker_lit/ft/luciferase2023.txt",
+  "sources/baker.md",
+  "sources/cao.md"
+ ],
+ "B11": [
+  "data/interim/baker_lit/ft/betaBarrel2023.txt",
+  "sources/baker.md"
+ ],
+ "B12": [
+  "data/interim/baker_lit/ft/helicalpeptide2024.txt",
+  "sources/baker.md"
+ ],
+ "B13": [
+  "sources/baker.md"
+ ],
+ "B14": [
+  "data/interim/baker_lit/ft/tnfr2024.txt",
+  "sources/baker.md"
+ ],
+ "B15": [
+  "data/interim/baker_lit/ft/macrocyle2025.txt",
+  "data/interim/claim_lit/PMC12643943.xml",
+  "sources/baker.md"
+ ],
+ "B16": [
+  "data/interim/baker_lit/ft/mp3seq2024.txt",
+  "sources/baker.md"
+ ],
+ "B17": [
+  "data/interim/baker_lit/ft/serinehydrolase2025.txt",
+  "sources/baker.md"
+ ],
+ "B18": [
+  "data/interim/baker_lit/ft/metallohydrolase2026.txt",
+  "sources/baker.md"
+ ],
+ "B19": [
+  "data/interim/baker_lit/ft/placer2025.txt",
+  "sources/baker.md"
+ ],
+ "B20": [
+  "data/interim/baker_lit/ft/rfdiff2_natmeth.txt",
+  "sources/baker.md"
+ ],
+ "B21": [
+  "data/interim/baker_lit/ft/idp_binder2025.txt",
+  "sources/baker.md"
+ ],
+ "B22": [
+  "data/interim/baker_lit/ft/antibodyRFdiff.txt",
+  "data/interim/claim_lit/PMC12727541.xml",
+  "sources/baker.md"
+ ],
+ "B23": [
+  "data/interim/baker_lit/ft/beta_pairing2026.txt",
+  "data/interim/claim_lit/PMC12852815.xml",
+  "sources/baker.md"
+ ],
+ "B24": [
+  "data/interim/baker_lit/ft/accelscaling2026.txt",
+  "sources/baker.md"
+ ],
+ "B25": [
+  "data/interim/baker_lit/ft/nanocage_hier2025.txt",
+  "sources/baker.md"
+ ],
+ "B26": [
+  "data/interim/baker_lit/ft/energyfunc2026.txt",
+  "sources/baker.md"
+ ],
+ "B27": [
+  "data/interim/baker_lit/ft/dnabinding2025.txt",
+  "sources/baker.md"
+ ],
+ "B28": [
+  "data/literature_cards/fulltext/B28_PMC11978504_fullTextXML.xml",
+  "data/literature_cards/fulltext/B28_PMC11978504_text.txt",
+  "sources/baker.md"
+ ],
+ "B29": [
+  "data/interim/baker_lit/ft/memprot_analogue2024.txt",
+  "sources/baker.md"
+ ],
+ "B30": [
+  "data/interim/baker_lit/ft/autotwo_comp2024.txt",
+  "sources/baker.md"
+ ],
+ "B31": [
+  "data/interim/baker_lit/ft/smallmol_family2026.txt",
+  "data/interim/claim_lit/PMC13194776.xml",
+  "sources/baker.md"
+ ],
+ "B32; C14": [
+  "data/interim/baker_lit/ft/immune_receptor_binder2025.txt",
+  "sources/baker.md",
+  "sources/cao.md"
+ ],
+ "B33": [
+  "data/literature_cards/fulltext/B33_PMC10115654_fullTextXML.xml",
+  "data/literature_cards/fulltext/B33_PMC10115654_text.txt",
+  "sources/baker.md"
+ ],
+ "B34": [
+  "data/interim/baker_lit/ft/buttressedloops2024.txt",
+  "sources/baker.md"
+ ],
+ "B35": [
+  "sources/baker.md"
+ ],
+ "B36": [
+  "sources/baker.md"
+ ],
+ "B37": [
+  "data/interim/baker_lit/ft/fap2021.txt",
+  "sources/baker.md"
+ ],
+ "B38": [
+  "data/interim/baker_lit/ft/oligomorph2025.txt",
+  "sources/baker.md"
+ ],
+ "B39": [
+  "data/interim/baker_lit/ft/confdyn2023.txt",
+  "sources/baker.md"
+ ],
+ "B40": [
+  "data/interim/baker_lit/ft/chlorophyll2024.txt",
+  "sources/baker.md"
+ ],
+ "B41": [
+  "data/interim/baker_lit/ft/fourcomp_cages2025.txt",
+  "sources/baker.md"
+ ],
+ "B42; C11": [
+  "data/interim/baker_lit/ft/endocytosis2025.txt",
+  "sources/baker.md",
+  "sources/cao.md"
+ ],
+ "B43": [
+  "data/interim/baker_lit/ft/snakvenom2025.txt",
+  "sources/baker.md"
+ ],
+ "B44": [
+  "data/interim/baker_lit/ft/integrin_miniprot2023.txt",
+  "sources/baker.md"
+ ],
+ "Z01": [
+  "data/interim/claim_lit/PMC13368180.xml",
+  "sources/zhou.md"
+ ],
+ "Z02": [
+  "data/interim/claim_lit/epcam.xml",
+  "sources/zhou.md"
+ ],
+ "Z03": [
+  "data/interim/claim_lit/PMC12865018.xml",
+  "sources/zhou.md"
+ ],
+ "Z04": [
+  "data/literature_cards/fulltext/Z04_PMC10120010_fullTextXML.xml",
+  "data/literature_cards/fulltext/Z04_PMC10120010_text.txt",
+  "sources/zhou.md"
+ ],
+ "Z05": [
+  "data/interim/claim_lit/PMC11994915.xml",
+  "sources/zhou.md"
+ ],
+ "Z06": [
+  "sources/zhou.md"
+ ],
+ "Z07": [
+  "sources/zhou.md"
+ ],
+ "Z08": [
+  "data/literature_cards/fulltext/Z08_PMC12613313_text.txt",
+  "sources/zhou.md"
+ ],
+ "Z09": [
+  "data/interim/claim_lit/PMC12240735.xml",
+  "sources/zhou.md"
+ ],
+ "Z10": [
+  "sources/zhou.md"
+ ],
+ "Z11": [
+  "data/interim/claim_lit/abs.txt",
+  "data/interim/claim_lit/abs2.txt",
+  "sources/zhou.md"
+ ],
+ "Z12": [
+  "sources/zhou.md"
+ ],
+ "Z13": [
+  "sources/zhou.md"
+ ],
+ "Z14": [
+  "sources/zhou.md"
+ ],
+ "Z15": [
+  "sources/zhou.md"
+ ],
+ "Z16": [
+  "sources/zhou.md"
+ ],
+ "C01": [
+  "data/literature_cards/fulltext/C01_PMC7857403_fullTextXML.xml",
+  "data/literature_cards/fulltext/C01_PMC7857403_text.txt",
+  "sources/cao.md"
+ ],
+ "C03": [
+  "data/literature_cards/fulltext/C03_PMC8074680_fullTextXML.xml",
+  "data/literature_cards/fulltext/C03_PMC8074680_text.txt",
+  "sources/cao.md"
+ ],
+ "C04": [
+  "data/literature_cards/fulltext/C04_PMC8221914_fullTextXML.xml",
+  "data/literature_cards/fulltext/C04_PMC8221914_text.txt",
+  "sources/cao.md"
+ ],
+ "C05": [
+  "data/literature_cards/fulltext/C05_PMC8920274_fullTextXML.xml",
+  "data/literature_cards/fulltext/C05_PMC8920274_text.txt",
+  "sources/cao.md"
+ ],
+ "C06": [
+  "data/literature_cards/fulltext/C06_PMC9258422_fullTextXML.xml",
+  "data/literature_cards/fulltext/C06_PMC9258422_text.txt",
+  "sources/cao.md"
+ ],
+ "C07": [
+  "sources/cao.md"
+ ],
+ "C09": [
+  "sources/cao.md"
+ ],
+ "C10": [
+  "sources/cao.md"
+ ],
+ "C12": [
+  "sources/cao.md"
+ ],
+ "C13": [
+  "data/interim/claim_lit/PMC11614891.xml",
+  "sources/cao.md"
+ ],
+ "C15": [
+  "sources/cao.md"
+ ],
+ "C16": [
+  "data/literature_cards/fulltext/C16_PPR804303_text.txt",
+  "sources/cao.md"
+ ],
+ "C17": [
+  "sources/cao.md"
+ ],
+ "C18": [
+  "data/interim/claim_lit/PMC13121834.xml",
+  "sources/cao.md"
+ ],
+ "C19": [
+  "data/literature_cards/fulltext/C19_PPR1116408_text.txt",
+  "sources/cao.md"
+ ],
+ "C20": [
+  "data/literature_cards/fulltext/C20_PPR1251738_text.txt",
+  "sources/cao.md"
+ ],
+ "C21": [
+  "data/literature_cards/fulltext/C21_PPR1279910_text.txt",
+  "sources/cao.md"
+ ],
+ "C22": [
+  "data/literature_cards/fulltext/C22_PPR1219681_text.txt",
+  "sources/cao.md"
+ ],
+ "C23": [
+  "data/literature_cards/fulltext/C23_PPR1259026_text.txt",
+  "sources/cao.md"
+ ],
+ "C24": [
+  "sources/cao.md"
+ ],
+ "C25": [
+  "sources/cao.md"
+ ],
+ "K01": [
+  "data/literature_cards/fulltext/K01_PMC12923136_fullTextXML.xml",
+  "data/literature_cards/fulltext/K01_PMC12923136_text.txt",
+  "sources/cost-benchmarks.md"
+ ],
+ "K02": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K03": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K04": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K05": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K06": [
+  "data/literature_cards/fulltext/K06_PMC12432402_fullTextXML.xml",
+  "data/literature_cards/fulltext/K06_PMC12432402_text.txt"
+ ],
+ "K07": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K08": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K09": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K10": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K11": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K12": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K13": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K14": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K15": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K16": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K17": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K18": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K19": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K20": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K21": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K22": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K23": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K24": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K25": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K26": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K27": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K28": [
+  "data/literature_cards/fulltext/K28_PMC9184281_text.txt",
+  "sources/cost-benchmarks.md"
+ ],
+ "K29": [
+  "data/literature_cards/fulltext/K29_PMC9006219_text.txt",
+  "sources/cost-benchmarks.md"
+ ],
+ "K30": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K31": [
+  "data/literature_cards/fulltext/K31_PMC9278006_fullTextXML.xml",
+  "data/literature_cards/fulltext/K31_PMC9278006_text.txt",
+  "sources/cost-benchmarks.md"
+ ],
+ "K32": [
+  "data/literature_cards/fulltext/K32_PMC10751731_fullTextXML.xml",
+  "data/literature_cards/fulltext/K32_PMC10751731_text.txt",
+  "sources/cost-benchmarks.md"
+ ],
+ "K33": [
+  "data/literature_cards/fulltext/K33_PMC10273344_fullTextXML.xml",
+  "data/literature_cards/fulltext/K33_PMC10273344_text.txt",
+  "sources/cost-benchmarks.md"
+ ],
+ "K34": [
+  "data/literature_cards/fulltext/K34_PMC13213910_text.txt",
+  "sources/cost-benchmarks.md"
+ ],
+ "K35": [
+  "data/literature_cards/fulltext/K35_PMC12721093_fullTextXML.xml",
+  "data/literature_cards/fulltext/K35_PMC12721093_text.txt",
+  "sources/cost-benchmarks.md"
+ ],
+ "K36": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K37": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K38": [
+  "data/literature_cards/fulltext/K38_PMC13513569_fullTextXML.xml",
+  "data/literature_cards/fulltext/K38_PMC13513569_text.txt",
+  "sources/cost-benchmarks.md"
+ ],
+ "K39": [
+  "data/literature_cards/fulltext/K39_PMC13113996_fullTextXML.xml",
+  "data/literature_cards/fulltext/K39_PMC13113996_text.txt",
+  "sources/cost-benchmarks.md"
+ ],
+ "K40": [
+  "data/literature_cards/fulltext/K40_PMC13099138_fullTextXML.xml",
+  "data/literature_cards/fulltext/K40_PMC13099138_text.txt",
+  "sources/cost-benchmarks.md"
+ ],
+ "K41": [
+  "data/literature_cards/fulltext/K41_PMC12412469_fullTextXML.xml",
+  "data/literature_cards/fulltext/K41_PMC12412469_text.txt",
+  "sources/cost-benchmarks.md"
+ ],
+ "K42": [
+  "data/literature_cards/fulltext/K42_PMC13225634_fullTextXML.xml",
+  "data/literature_cards/fulltext/K42_PMC13225634_text.txt",
+  "sources/cost-benchmarks.md"
+ ],
+ "K43": [
+  "data/literature_cards/fulltext/K43_PMC12661943_fullTextXML.xml",
+  "data/literature_cards/fulltext/K43_PMC12661943_text.txt",
+  "sources/cost-benchmarks.md"
+ ],
+ "K44": [
+  "data/literature_cards/fulltext/K44_PMC12264970_fullTextXML.xml",
+  "data/literature_cards/fulltext/K44_PMC12264970_text.txt",
+  "sources/cost-benchmarks.md"
+ ],
+ "K45": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K46": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K47": [
+  "data/literature_cards/fulltext/K47_PMC10025429_fullTextXML.xml",
+  "data/literature_cards/fulltext/K47_PMC10025429_text.txt",
+  "sources/cost-benchmarks.md"
+ ],
+ "K48": [
+  "data/literature_cards/fulltext/K48_PMC11425640_fullTextXML.xml",
+  "data/literature_cards/fulltext/K48_PMC11425640_text.txt",
+  "sources/cost-benchmarks.md"
+ ],
+ "K49": [
+  "data/literature_cards/fulltext/K49_PMC13031676_fullTextXML.xml",
+  "data/literature_cards/fulltext/K49_PMC13031676_text.txt",
+  "sources/cost-benchmarks.md"
+ ],
+ "K50": [
+  "sources/baker.md",
+  "sources/cost-benchmarks.md"
+ ],
+ "K51": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K52": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K53": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K54": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K55": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K56": [
+  "data/literature_cards/fulltext/K56_PMC8204736_fullTextXML.xml",
+  "data/literature_cards/fulltext/K56_PMC8204736_text.txt",
+  "sources/cost-benchmarks.md"
+ ],
+ "K57": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K58": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K59": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K60": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K61": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K62": [
+  "sources/cost-benchmarks.md"
+ ],
+ "K63": [
+  "data/interim/baker_lit/ft/kemp2025.txt",
+  "sources/baker.md",
+  "sources/function-assignment-workflows.md"
+ ],
+ "K64": [
+  "data/interim/baker_lit/ft/motifscaffold2026.txt",
+  "sources/baker.md",
+  "sources/cost-benchmarks.md"
+ ],
+ "K65": [
+  "data/literature_cards/fulltext/K65_PMC5940506_fullTextXML.xml",
+  "data/literature_cards/fulltext/K65_PMC5940506_text.txt",
+  "sources/baker.md"
+ ],
+ "K66": [
+  "sources/baker.md"
+ ],
+ "K67b": [
+  "data/literature_cards/fulltext/K67b_PMC13277954_fullTextXML.xml",
+  "data/literature_cards/fulltext/K67b_PMC13277954_text.txt"
+ ],
+ "M-K27": [
+  "sources/claim-90pct.md"
+ ],
+ "M-K28": [
+  "sources/claim-90pct.md"
+ ],
+ "M-K29": [
+  "data/interim/claim_lit/PMC13038408.xml",
+  "sources/claim-90pct.md"
+ ],
+ "M-K34": [
+  "data/interim/baker_lit/ft/nirFAP2026.txt",
+  "data/interim/claim_lit/PMC13560888.xml",
+  "sources/claim-90pct.md"
+ ]
+}

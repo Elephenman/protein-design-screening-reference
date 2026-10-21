@@ -1,0 +1,4077 @@
+[
+ {
+  "id": "B01",
+  "group": "Baker组",
+  "title": "De novo design of bioactive protein switches",
+  "year": "2019",
+  "venue": "Nature, 2019, 572:205-210",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC6733528"
+   ],
+   "ppr": [],
+   "pmid": [
+    "31341284"
+   ],
+   "doi": [
+    "10.1038/s41586-019-1432-8"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6733528/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/switches2019.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC6733528/fullTextXML"
+ },
+ {
+  "id": "B02",
+  "group": "Baker组",
+  "title": "Improving the Efficiency of Ligand-Binding Protein Design with Molecular Dynamics Simulations",
+  "year": "2019",
+  "venue": "J. Chem. Theory Comput., 2019, 15:5703-5715",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [
+    "PMC7532806"
+   ],
+   "ppr": [],
+   "pmid": [
+    "31442033"
+   ],
+   "doi": [
+    "10.1021/acs.jctc.9b00483"
+   ],
+   "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7532806/"
+  },
+  "local": [
+   "data/literature_cards/fulltext/B02_PMC7532806_fullTextXML.xml",
+   "data/literature_cards/fulltext/B02_PMC7532806_text.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7532806/fullTextXML"
+ },
+ {
+  "id": "B03",
+  "group": "Baker组",
+  "title": "De novo protein design by deep network hallucination",
+  "year": "2021",
+  "venue": "Nature, 2021, 600:547-552",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [
+    "PMC9293396"
+   ],
+   "ppr": [],
+   "pmid": [
+    "34853475"
+   ],
+   "doi": [
+    "10.1038/s41586-021-04184-w"
+   ],
+   "url": "https://pubmed.ncbi.nlm.nih.gov/34853475/"
+  },
+  "local": [
+   "data/literature_cards/fulltext/B03_PMC9293396_fullTextXML.xml",
+   "data/literature_cards/fulltext/B03_PMC9293396_text.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9293396/fullTextXML"
+ },
+ {
+  "id": "B04",
+  "group": "Baker组",
+  "title": "Protein sequence optimization with a pairwise decomposable penalty for buried unsatisfied hydrogen bonds",
+  "year": "2021",
+  "venue": "PLOS Computational Biology, 2021, 17(3): e1008061",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC7971855"
+   ],
+   "ppr": [],
+   "pmid": [
+    "33684097"
+   ],
+   "doi": [
+    "10.1371/journal.pcbi.1008061"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7971855/"
+  },
+  "local": [
+   "data/literature_cards/fulltext/B04_PMC7971855_fullTextXML.xml",
+   "data/literature_cards/fulltext/B04_PMC7971855_text.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7971855/fullTextXML"
+ },
+ {
+  "id": "B05",
+  "group": "Baker组; 通用方法学",
+  "title": "Robust deep learning–based protein sequence design using ProteinMPNN",
+  "year": "2022",
+  "venue": "Science, 2022, 378:49-56",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC9997061"
+   ],
+   "ppr": [],
+   "pmid": [
+    "36108050"
+   ],
+   "doi": [
+    "10.1126/science.add2187"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9997061/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/proteinmpnn2022.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9997061/fullTextXML"
+ },
+ {
+  "id": "B06; C02",
+  "group": "Baker组; 曹龙兴组; 通用方法学; 口径对照",
+  "title": "Design of protein-binding proteins from the target structure alone",
+  "year": "2022",
+  "venue": "Nature, 2022, 605:551-560",
+  "evidence": "全文级（本次独立复核 PMC9117152）",
+  "ids": {
+   "pmc": [
+    "PMC9117152"
+   ],
+   "ppr": [],
+   "pmid": [
+    "35332283"
+   ],
+   "doi": [
+    "10.1038/s41586-022-04654-9"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9117152/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/cao2022.txt"
+  ],
+  "records": [
+   "sources/baker.md",
+   "sources/cao.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9117152/fullTextXML"
+ },
+ {
+  "id": "B07",
+  "group": "Baker组",
+  "title": "Sampling of structure and sequence space of small protein folds",
+  "year": "2022",
+  "venue": "Nature Communications, 2022, 13:7151",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC9684540"
+   ],
+   "ppr": [],
+   "pmid": [
+    "36418330"
+   ],
+   "doi": [
+    "10.1038/s41467-022-34937-8"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9684540/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/smallfolds2022.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9684540/fullTextXML"
+ },
+ {
+  "id": "B08",
+  "group": "Baker组; 通用方法学; 口径对照",
+  "title": "De novo design of protein structure and function with RFdiffusion",
+  "year": "2023",
+  "venue": "Nature, 2023, 620:1089-1100",
+  "evidence": "全文级（本次独立复核 PMC10468394）",
+  "ids": {
+   "pmc": [
+    "PMC10468394"
+   ],
+   "ppr": [],
+   "pmid": [
+    "37433327"
+   ],
+   "doi": [
+    "10.1038/s41586-023-06415-8"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10468394/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/rfdiffusion2023.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10468394/fullTextXML"
+ },
+ {
+  "id": "B09",
+  "group": "Baker组; 通用方法学; 口径对照",
+  "title": "Improving de novo protein binder design with deep learning",
+  "year": "2023",
+  "venue": "Nature Communications, 2023, 14:2625",
+  "evidence": "全文级（本次独立复核 PMC10163288）",
+  "ids": {
+   "pmc": [
+    "PMC10163288"
+   ],
+   "ppr": [],
+   "pmid": [
+    "37149653"
+   ],
+   "doi": [
+    "10.1038/s41467-023-38328-5"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10163288/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/binderDL2023.txt",
+   "data/literature_cards/fulltext/B09_PMC10163288_fullTextXML.xml",
+   "data/literature_cards/fulltext/B09_PMC10163288_text.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10163288/fullTextXML"
+ },
+ {
+  "id": "B10; C08",
+  "group": "Baker组; 曹龙兴组",
+  "title": "De novo design of luciferases using deep learning",
+  "year": "2023",
+  "venue": "Nature, 2023, 614:774-780",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC9946828"
+   ],
+   "ppr": [],
+   "pmid": [
+    "36813896"
+   ],
+   "doi": [
+    "10.1038/s41586-023-05696-3"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9946828/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/luciferase2023.txt"
+  ],
+  "records": [
+   "sources/baker.md",
+   "sources/cao.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9946828/fullTextXML"
+ },
+ {
+  "id": "B11",
+  "group": "Baker组; 通用方法学",
+  "title": "De novo design of small beta barrel proteins",
+  "year": "2023",
+  "venue": "PNAS, 2023, 120: e2207974120",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC10089152"
+   ],
+   "ppr": [],
+   "pmid": [
+    "36897987"
+   ],
+   "doi": [
+    "10.1073/pnas.2207974120"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10089152/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/betaBarrel2023.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10089152/fullTextXML"
+ },
+ {
+  "id": "B12",
+  "group": "Baker组",
+  "title": "De novo design of high-affinity binders of bioactive helical peptides",
+  "year": "2023",
+  "venue": "Nature, 2024, 626:435-442（Crossref 年标 2023 在线/2024 刊期）",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC10849960"
+   ],
+   "ppr": [],
+   "pmid": [
+    "38109936"
+   ],
+   "doi": [
+    "10.1038/s41586-023-06953-1"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10849960/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/helicalpeptide2024.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10849960/fullTextXML"
+ },
+ {
+  "id": "B13",
+  "group": "Baker组",
+  "title": "Generalized biomolecular modeling and design with RoseTTAFold All-Atom",
+  "year": "2024",
+  "venue": "Science, 2024, 384: eadl2528",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [
+    "38452047"
+   ],
+   "doi": [
+    "10.1126/science.adl2528"
+   ],
+   "url": "https://www.science.org/doi/10.1126/science.adl2528"
+  },
+  "local": [],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:38452047&resultType=core&format=json"
+ },
+ {
+  "id": "B14",
+  "group": "Baker组; 通用方法学",
+  "title": "Target-conditioned diffusion generates potent TNFR superfamily antagonists and agonists",
+  "year": "2024",
+  "venue": "Science, 2024, 386:1154-1161",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC12416549"
+   ],
+   "ppr": [],
+   "pmid": [
+    "39636970"
+   ],
+   "doi": [
+    "10.1126/science.adp1779"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12416549/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/tnfr2024.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12416549/fullTextXML"
+ },
+ {
+  "id": "B15",
+  "group": "Baker组; 口径对照",
+  "title": "Accurate de novo design of high-affinity protein-binding macrocycles using deep learning",
+  "year": "2025",
+  "venue": "Nature Chemical Biology, 2025, 21:1948-1956",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC12643943"
+   ],
+   "ppr": [],
+   "pmid": [
+    "40542165"
+   ],
+   "doi": [
+    "10.1038/s41589-025-01929-w"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12643943/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/macrocyle2025.txt",
+   "data/interim/claim_lit/PMC12643943.xml"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12643943/fullTextXML"
+ },
+ {
+  "id": "B16",
+  "group": "Baker组; 通用方法学; 口径对照",
+  "title": "Massively parallel measurement of protein–protein interactions by sequencing using MP3-seq",
+  "year": "2024",
+  "venue": "Nature Chemical Biology, 2024, 20:1514-1523",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC11511666"
+   ],
+   "ppr": [],
+   "pmid": [
+    "39192093"
+   ],
+   "doi": [
+    "10.1038/s41589-024-01718-x"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11511666/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/mp3seq2024.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11511666/fullTextXML"
+ },
+ {
+  "id": "B17",
+  "group": "Baker组; 通用方法学; 口径对照",
+  "title": "Computational design of serine hydrolases",
+  "year": "2025",
+  "venue": "Science, 2025, 388: eadu2454",
+  "evidence": "全文级（本次独立复核 PMC12288761）",
+  "ids": {
+   "pmc": [
+    "PMC12288761"
+   ],
+   "ppr": [],
+   "pmid": [
+    "39946508"
+   ],
+   "doi": [
+    "10.1126/science.adu2454"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12288761/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/serinehydrolase2025.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12288761/fullTextXML"
+ },
+ {
+  "id": "B18",
+  "group": "Baker组",
+  "title": "Computational design of metallohydrolases",
+  "year": "2025",
+  "venue": "Nature, 649:246-253（Crossref issued=2025，EPMC pubYear=2026）",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC12727532"
+   ],
+   "ppr": [],
+   "pmid": [
+    "41339547"
+   ],
+   "doi": [
+    "10.1038/s41586-025-09746-w"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12727532/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/metallohydrolase2026.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12727532/fullTextXML"
+ },
+ {
+  "id": "B19",
+  "group": "Baker组; 通用方法学; 口径对照",
+  "title": "Modeling protein–small molecule conformational ensembles with PLACER",
+  "year": "2025",
+  "venue": "PNAS, 2025, 122: e2427161122",
+  "evidence": "全文级（本次独立复核 PMC12625923）",
+  "ids": {
+   "pmc": [
+    "PMC12625923"
+   ],
+   "ppr": [],
+   "pmid": [
+    "41187076"
+   ],
+   "doi": [
+    "10.1073/pnas.2427161122"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12625923/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/placer2025.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12625923/fullTextXML"
+ },
+ {
+  "id": "B20",
+  "group": "Baker组; 通用方法学; 口径对照",
+  "title": "Atom-level enzyme active site scaffolding using RFdiffusion2",
+  "year": "2025",
+  "venue": "Nature Methods, 23:96-105（Crossref issued=2025，EPMC 归入 2026 卷期）",
+  "evidence": "全文级（本次独立复核 PMC12791007）",
+  "ids": {
+   "pmc": [
+    "PMC12791007"
+   ],
+   "ppr": [],
+   "pmid": [
+    "41339749"
+   ],
+   "doi": [
+    "10.1038/s41592-025-02975-x"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12791007/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/rfdiff2_natmeth.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12791007/fullTextXML"
+ },
+ {
+  "id": "B21",
+  "group": "Baker组",
+  "title": "Diffusing protein binders to intrinsically disordered proteins",
+  "year": "2025",
+  "venue": "Nature, 2025, 644:809-817",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [
+    "40739343"
+   ],
+   "doi": [
+    "10.1038/s41586-025-09248-9"
+   ],
+   "url": "https://doi.org/10.1038/s41586-025-09248-9"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/idp_binder2025.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:40739343&resultType=core&format=json"
+ },
+ {
+  "id": "B22",
+  "group": "Baker组; 通用方法学; 口径对照",
+  "title": "Atomically accurate de novo design of antibodies with RFdiffusion",
+  "year": "2025",
+  "venue": "Nature, 649:183-193（Crossref issued=2025，EPMC pubYear=2026）",
+  "evidence": "全文级（本次独立复核 PMC12727541）",
+  "ids": {
+   "pmc": [
+    "PMC12727541"
+   ],
+   "ppr": [],
+   "pmid": [
+    "41193805"
+   ],
+   "doi": [
+    "10.1038/s41586-025-09721-5"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12727541/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/antibodyRFdiff.txt",
+   "data/interim/claim_lit/PMC12727541.xml"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12727541/fullTextXML"
+ },
+ {
+  "id": "B23",
+  "group": "Baker组; 通用方法学; 口径对照",
+  "title": "Improved protein binder design using β-pairing targeted RFdiffusion",
+  "year": "2026",
+  "venue": "Nature Communications, 2026, 17:1101",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC12852815"
+   ],
+   "ppr": [],
+   "pmid": [
+    "41519838"
+   ],
+   "doi": [
+    "10.1038/s41467-025-67866-3"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12852815/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/beta_pairing2026.txt",
+   "data/interim/claim_lit/PMC12852815.xml"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12852815/fullTextXML"
+ },
+ {
+  "id": "B24",
+  "group": "Baker组; 通用方法学; 口径对照",
+  "title": "Accelerating protein design by scaling experimental characterization",
+  "year": "2026",
+  "venue": "Nature Communications, 2026, 17:9945",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC13586242"
+   ],
+   "ppr": [],
+   "pmid": [
+    "42754580"
+   ],
+   "doi": [
+    "10.1038/s41467-026-76740-9"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13586242/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/accelscaling2026.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13586242/fullTextXML"
+ },
+ {
+  "id": "B25",
+  "group": "Baker组",
+  "title": "Hierarchical design of pseudosymmetric protein nanocages",
+  "year": "2024",
+  "venue": "Nature, 638:553-561（Crossref issued=2024，EPMC pubYear=2025）",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC11821544"
+   ],
+   "ppr": [],
+   "pmid": [
+    "39695230"
+   ],
+   "doi": [
+    "10.1038/s41586-024-08360-6"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11821544/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/nanocage_hier2025.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11821544/fullTextXML"
+ },
+ {
+  "id": "B26",
+  "group": "Baker组",
+  "title": "Using experimental results of protein design to guide biomolecular energy-function development",
+  "year": "2026",
+  "venue": "PLOS Computational Biology, 2026, 22: e1014215",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC13124059"
+   ],
+   "ppr": [],
+   "pmid": [
+    "42018576"
+   ],
+   "doi": [
+    "10.1371/journal.pcbi.1014215"
+   ],
+   "url": "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1014215"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/energyfunc2026.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13124059/fullTextXML"
+ },
+ {
+  "id": "B27",
+  "group": "Baker组",
+  "title": "Computational design of sequence-specific DNA-binding proteins",
+  "year": "2025",
+  "venue": "Nature Structural & Molecular Biology, 2025, 32:2252-2261",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC12618268"
+   ],
+   "ppr": [],
+   "pmid": [
+    "40940539"
+   ],
+   "doi": [
+    "10.1038/s41594-025-01669-4"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12618268/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/dnabinding2025.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12618268/fullTextXML"
+ },
+ {
+  "id": "B28",
+  "group": "Baker组",
+  "title": "Atomic context-conditioned protein sequence design using LigandMPNN",
+  "year": "2025",
+  "venue": "Nature Methods, 2025, 22:717-723",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [
+    "PMC11978504"
+   ],
+   "ppr": [],
+   "pmid": [
+    "40155723"
+   ],
+   "doi": [
+    "10.1038/s41592-025-02626-1"
+   ],
+   "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11978504/"
+  },
+  "local": [
+   "data/literature_cards/fulltext/B28_PMC11978504_fullTextXML.xml",
+   "data/literature_cards/fulltext/B28_PMC11978504_text.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11978504/fullTextXML"
+ },
+ {
+  "id": "B29",
+  "group": "Baker组",
+  "title": "Computational design of soluble and functional membrane protein analogues",
+  "year": "2024",
+  "venue": "Nature, 2024, 631:449-458",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC11236705"
+   ],
+   "ppr": [],
+   "pmid": [
+    "38898281"
+   ],
+   "doi": [
+    "10.1038/s41586-024-07601-y"
+   ],
+   "url": "https://doi.org/10.1038/s41586-024-07601-y"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/memprot_analogue2024.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11236705/fullTextXML"
+ },
+ {
+  "id": "B30",
+  "group": "Baker组",
+  "title": "Rapid and automated design of two-component protein nanomaterials using ProteinMPNN",
+  "year": "2024",
+  "venue": "PNAS, 2024, 121: e2314646121",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC10990136"
+   ],
+   "ppr": [],
+   "pmid": [
+    "38502697"
+   ],
+   "doi": [
+    "10.1073/pnas.2314646121"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10990136/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/autotwo_comp2024.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10990136/fullTextXML"
+ },
+ {
+  "id": "B31",
+  "group": "Baker组",
+  "title": "Small-molecule binding and sensing with a designed protein family",
+  "year": "2026",
+  "venue": "Nature Communications, 2026, 17",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC13194776"
+   ],
+   "ppr": [],
+   "pmid": [
+    "41904144"
+   ],
+   "doi": [
+    "10.1038/s41467-026-70953-8"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13194776/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/smallmol_family2026.txt",
+   "data/interim/claim_lit/PMC13194776.xml"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13194776/fullTextXML"
+ },
+ {
+  "id": "B32; C14",
+  "group": "Baker组; 曹龙兴组",
+  "title": "Design of high-affinity binders to immune modulating receptors for cancer immunotherapy",
+  "year": "2025",
+  "venue": "Nature Communications, 2025, 16(1):2001",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC11865580"
+   ],
+   "ppr": [],
+   "pmid": [
+    "40011465"
+   ],
+   "doi": [
+    "10.1038/s41467-025-57192-z"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11865580/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/immune_receptor_binder2025.txt"
+  ],
+  "records": [
+   "sources/baker.md",
+   "sources/cao.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11865580/fullTextXML"
+ },
+ {
+  "id": "B33",
+  "group": "Baker组",
+  "title": "De novo design of modular peptide-binding proteins by superhelical matching",
+  "year": "2023",
+  "venue": "Nature, 2023, 616:581-589",
+  "evidence": "未获正文",
+  "ids": {
+   "pmc": [
+    "PMC10115654"
+   ],
+   "ppr": [],
+   "pmid": [
+    "37020023"
+   ],
+   "doi": [
+    "10.1038/s41586-023-05909-9"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10115654/"
+  },
+  "local": [
+   "data/literature_cards/fulltext/B33_PMC10115654_fullTextXML.xml",
+   "data/literature_cards/fulltext/B33_PMC10115654_text.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10115654/fullTextXML"
+ },
+ {
+  "id": "B34",
+  "group": "Baker组",
+  "title": "De novo design of buttressed loops for sculpting protein functions",
+  "year": "2024",
+  "venue": "Nature Chemical Biology, 2024, 20:974-980",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC11288887"
+   ],
+   "ppr": [],
+   "pmid": [
+    "38816644"
+   ],
+   "doi": [
+    "10.1038/s41589-024-01632-2"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11288887/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/buttressedloops2024.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11288887/fullTextXML"
+ },
+ {
+  "id": "B35",
+  "group": "Baker组",
+  "title": "<i>De novo</i> Design of All-atom Biomolecular Interactions with RFdiffusion3",
+  "year": "2025",
+  "venue": "bioRxiv 预印本, 2025-09-18（未见刊期记录）",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1101/2025.09.18.676967"
+   ],
+   "url": "https://www.biorxiv.org/content/10.1101/2025.09.18.676967v1"
+  },
+  "local": [],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1101/2025.09.18.676967%22&resultType=core&format=json"
+ },
+ {
+  "id": "B36",
+  "group": "Baker组",
+  "title": "The past, present and future of de novo protein design",
+  "year": "2026",
+  "venue": "Nature, 2026, 652:1139-1152",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [
+    "42056544"
+   ],
+   "doi": [
+    "10.1038/s41586-026-10328-7"
+   ],
+   "url": "https://pubmed.ncbi.nlm.nih.gov/42056544/"
+  },
+  "local": [],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:42056544&resultType=core&format=json"
+ },
+ {
+  "id": "B37",
+  "group": "Baker组",
+  "title": "Incorporation of sensing modalities into de novo designed fluorescence-activating proteins",
+  "year": "2021",
+  "venue": "Nature Communications, 2021, 12:856",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC7870846"
+   ],
+   "ppr": [],
+   "pmid": [
+    "33558528"
+   ],
+   "doi": [
+    "10.1038/s41467-020-18911-w"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7870846/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/fap2021.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7870846/fullTextXML"
+ },
+ {
+  "id": "B38",
+  "group": "Baker组",
+  "title": "Local structural flexibility drives oligomorphism in computationally designed protein assemblies",
+  "year": "2025",
+  "venue": "Nature Structural & Molecular Biology, 2025, 32:1050-1060",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC12170342"
+   ],
+   "ppr": [],
+   "pmid": [
+    "40011747"
+   ],
+   "doi": [
+    "10.1038/s41594-025-01490-z"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12170342/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/oligomorph2025.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12170342/fullTextXML"
+ },
+ {
+  "id": "B39",
+  "group": "Baker组",
+  "title": "Exploiting conformational dynamics to modulate the function of designed proteins",
+  "year": "2023",
+  "venue": "PNAS, 2023, 120: e2303149120",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC10161014"
+   ],
+   "ppr": [],
+   "pmid": [
+    "37094170"
+   ],
+   "doi": [
+    "10.1073/pnas.2303149120"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10161014/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/confdyn2023.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10161014/fullTextXML"
+ },
+ {
+  "id": "B40",
+  "group": "Baker组",
+  "title": "De novo design of proteins housing excitonically coupled chlorophyll special pairs",
+  "year": "2024",
+  "venue": "Nature Chemical Biology, 2024, 20:906-915",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC11213709"
+   ],
+   "ppr": [],
+   "pmid": [
+    "38831036"
+   ],
+   "doi": [
+    "10.1038/s41589-024-01626-0"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11213709/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/chlorophyll2024.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11213709/fullTextXML"
+ },
+ {
+  "id": "B41",
+  "group": "Baker组",
+  "title": "Four-component protein nanocages designed by programmed symmetry breaking",
+  "year": "2024",
+  "venue": "Nature, 638:546-552（Crossref issued=2024，EPMC pubYear=2025）",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC11821509"
+   ],
+   "ppr": [],
+   "pmid": [
+    "39695226"
+   ],
+   "doi": [
+    "10.1038/s41586-024-07814-1"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11821509/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/fourcomp_cages2025.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11821509/fullTextXML"
+ },
+ {
+  "id": "B42; C11",
+  "group": "Baker组; 曹龙兴组",
+  "title": "Designed endocytosis-inducing proteins degrade targets and amplify signals",
+  "year": "2024",
+  "venue": "Nature, 638:796-804（Crossref issued=2024，EPMC pubYear=2025）",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC11839401"
+   ],
+   "ppr": [],
+   "pmid": [
+    "39322662"
+   ],
+   "doi": [
+    "10.1038/s41586-024-07948-2"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11839401/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/endocytosis2025.txt"
+  ],
+  "records": [
+   "sources/baker.md",
+   "sources/cao.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11839401/fullTextXML"
+ },
+ {
+  "id": "B43",
+  "group": "Baker组",
+  "title": "De novo designed proteins neutralize lethal snake venom toxins",
+  "year": "2025",
+  "venue": "Nature, 2025, 639:225-231",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC11882462"
+   ],
+   "ppr": [],
+   "pmid": [
+    "39814879"
+   ],
+   "doi": [
+    "10.1038/s41586-024-08393-x"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11882462/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/snakvenom2025.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11882462/fullTextXML"
+ },
+ {
+  "id": "B44",
+  "group": "Baker组",
+  "title": "De novo design of highly selective miniprotein inhibitors of integrins αvβ6 and αvβ8",
+  "year": "2023",
+  "venue": "Nature Communications, 2023, 14:5660",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC10500007"
+   ],
+   "ppr": [],
+   "pmid": [
+    "37704610"
+   ],
+   "doi": [
+    "10.1038/s41467-023-41272-z"
+   ],
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10500007/"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/integrin_miniprot2023.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10500007/fullTextXML"
+ },
+ {
+  "id": "Z01",
+  "group": "周如鸿组",
+  "title": "In silico design and validation of high-affinity RNA aptamers for SARS-CoV-2 comparable to neutralizing antibodies",
+  "year": "2026",
+  "venue": "eLife, 2026（在线 2026）",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC13368180"
+   ],
+   "ppr": [],
+   "pmid": [
+    "42446520"
+   ],
+   "doi": [
+    "10.7554/eLife.107785"
+   ],
+   "url": "https://doi.org/10.7554/eLife.107785"
+  },
+  "local": [
+   "data/interim/claim_lit/PMC13368180.xml"
+  ],
+  "records": [
+   "sources/zhou.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13368180/fullTextXML"
+ },
+ {
+  "id": "Z02",
+  "group": "周如鸿组",
+  "title": "In silico design and validation of high-affinity RNA aptamers targeting epithelial cellular adhesion molecule dimers",
+  "year": "2020",
+  "venue": "PNAS, 2020, 117(15)",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [
+    "PMC7165443"
+   ],
+   "ppr": [],
+   "pmid": [
+    "32234785"
+   ],
+   "doi": [
+    "10.1073/pnas.1913242117"
+   ],
+   "url": "https://doi.org/10.1073/pnas.1913242117"
+  },
+  "local": [
+   "data/interim/claim_lit/epcam.xml"
+  ],
+  "records": [
+   "sources/zhou.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7165443/fullTextXML"
+ },
+ {
+  "id": "Z03",
+  "group": "周如鸿组",
+  "title": "Multi-strategy embedded framework for neoantigen vaccine maturation",
+  "year": "2026",
+  "venue": "Scientific Reports, 2026, 16",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC12865018"
+   ],
+   "ppr": [],
+   "pmid": [
+    "41554915"
+   ],
+   "doi": [
+    "10.1038/s41598-025-34618-8"
+   ],
+   "url": "https://doi.org/10.1038/s41598-025-34618-8"
+  },
+  "local": [
+   "data/interim/claim_lit/PMC12865018.xml"
+  ],
+  "records": [
+   "sources/zhou.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12865018/fullTextXML"
+ },
+ {
+  "id": "Z04",
+  "group": "周如鸿组",
+  "title": "A mutagenesis study of autoantigen optimization for potential T1D vaccine design",
+  "year": "2023",
+  "venue": "PNAS, 2023, 120(15)",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC10120010"
+   ],
+   "ppr": [],
+   "pmid": [
+    "37040399"
+   ],
+   "doi": [
+    "10.1073/pnas.2214430120"
+   ],
+   "url": "https://doi.org/10.1073/pnas.2214430120"
+  },
+  "local": [
+   "data/literature_cards/fulltext/Z04_PMC10120010_fullTextXML.xml",
+   "data/literature_cards/fulltext/Z04_PMC10120010_text.txt"
+  ],
+  "records": [
+   "sources/zhou.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10120010/fullTextXML"
+ },
+ {
+  "id": "Z05",
+  "group": "周如鸿组",
+  "title": "Mutagenesis-based optimal design of plant peptide phytosulfokine for enhanced biological activity",
+  "year": "2025",
+  "venue": "Comput Struct Biotechnol J, 2025, 27:1869-…（卷页未逐字核验，以 DOI 为准）",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC11994915"
+   ],
+   "ppr": [],
+   "pmid": [
+    "40230409"
+   ],
+   "doi": [
+    "10.1016/j.csbj.2025.03.029"
+   ],
+   "url": "https://doi.org/10.1016/j.csbj.2025.03.029"
+  },
+  "local": [
+   "data/interim/claim_lit/PMC11994915.xml"
+  ],
+  "records": [
+   "sources/zhou.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11994915/fullTextXML"
+ },
+ {
+  "id": "Z06",
+  "group": "周如鸿组",
+  "title": "Physical insights guided rational design of anti-EGFR antibody to reverse the acquired resistance",
+  "year": "2025",
+  "venue": "Int J Biol Macromol, 2025",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [
+    "39986495"
+   ],
+   "doi": [
+    "10.1016/j.ijbiomac.2025.141304"
+   ],
+   "url": "https://doi.org/10.1016/j.ijbiomac.2025.141304"
+  },
+  "local": [],
+  "records": [
+   "sources/zhou.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:39986495&resultType=core&format=json"
+ },
+ {
+  "id": "Z07",
+  "group": "周如鸿组",
+  "title": "ANUBI: A Platform for Affinity Optimization of Proteins and Peptides in Drug Design",
+  "year": "2026",
+  "venue": "J Chem Theory Comput, 2026（预印本 bioRxiv 2025.10.20.683353）",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [
+    "41401395"
+   ],
+   "doi": [
+    "10.1021/acs.jctc.5c01640"
+   ],
+   "url": "https://doi.org/10.1021/acs.jctc.5c01640"
+  },
+  "local": [],
+  "records": [
+   "sources/zhou.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:41401395&resultType=core&format=json"
+ },
+ {
+  "id": "Z08",
+  "group": "周如鸿组",
+  "title": "Assessing Computational Strategies for the Evaluation of Antibody Binding Affinities",
+  "year": "2025",
+  "venue": "J Chem Theory Comput, 2025",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [
+    "41129205"
+   ],
+   "doi": [
+    "10.1021/acs.jctc.5c01231"
+   ],
+   "url": "https://doi.org/10.1021/acs.jctc.5c01231"
+  },
+  "local": [
+   "data/literature_cards/fulltext/Z08_PMC12613313_text.txt"
+  ],
+  "records": [
+   "sources/zhou.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:41129205&resultType=core&format=json"
+ },
+ {
+  "id": "Z09",
+  "group": "周如鸿组",
+  "title": "A free energy perturbation-assisted machine learning strategy for mimotope screening in neoantigen-based vaccine design",
+  "year": "2025",
+  "venue": "Brief Bioinform, 2025",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [
+    "40635188"
+   ],
+   "doi": [
+    "10.1093/bib/bbaf254"
+   ],
+   "url": "https://doi.org/10.1093/bib/bbaf254"
+  },
+  "local": [
+   "data/interim/claim_lit/PMC12240735.xml"
+  ],
+  "records": [
+   "sources/zhou.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:40635188&resultType=core&format=json"
+ },
+ {
+  "id": "Z10",
+  "group": "周如鸿组",
+  "title": "Integrating Physics-Based Simulations with Data-Driven Deep Learning Represents a Robust Strategy for Developing Inhibitors Targeting the Main Protease",
+  "year": "2025",
+  "venue": "J Chem Inf Model, 2025",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [
+    "40767530"
+   ],
+   "doi": [
+    "10.1021/acs.jcim.5c01307"
+   ],
+   "url": "https://doi.org/10.1021/acs.jcim.5c01307"
+  },
+  "local": [],
+  "records": [
+   "sources/zhou.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:40767530&resultType=core&format=json"
+ },
+ {
+  "id": "Z11",
+  "group": "周如鸿组",
+  "title": "<i>In Silico</i> Design of High-Affinity gp100 Antigenic Mimotopes for Targeting Melanoma",
+  "year": "2025",
+  "venue": "J Phys Chem B, 2025",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [
+    "40692510"
+   ],
+   "doi": [
+    "10.1021/acs.jpcb.5c01507"
+   ],
+   "url": "https://doi.org/10.1021/acs.jpcb.5c01507"
+  },
+  "local": [],
+  "records": [
+   "sources/zhou.md",
+   "data/interim/claim_lit/abs.txt",
+   "data/interim/claim_lit/abs2.txt"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:40692510&resultType=core&format=json"
+ },
+ {
+  "id": "Z12",
+  "group": "周如鸿组",
+  "title": "In silico design of high-affinity antigenic peptides for HLA-B44",
+  "year": "2024",
+  "venue": "Int J Biol Macromol, 2024",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [
+    "38574928"
+   ],
+   "doi": [
+    "10.1016/j.ijbiomac.2024.131356"
+   ],
+   "url": "https://doi.org/10.1016/j.ijbiomac.2024.131356"
+  },
+  "local": [],
+  "records": [
+   "sources/zhou.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:38574928&resultType=core&format=json"
+ },
+ {
+  "id": "Z13",
+  "group": "周如鸿组; 口径对照",
+  "title": "Design of TCR-mimicking binders for pHLA with high potency",
+  "year": "2025",
+  "venue": "bioRxiv 2025.10.03.680404（截至调研未见期刊接收记录）",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1101/2025.10.03.680404"
+   ],
+   "url": "https://doi.org/10.1101/2025.10.03.680404"
+  },
+  "local": [],
+  "records": [
+   "sources/zhou.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1101/2025.10.03.680404%22&resultType=core&format=json"
+ },
+ {
+  "id": "Z14",
+  "group": "周如鸿组",
+  "title": "De Novo Evolution of an Antibody‐Mimicking Multivalent Aptamer via a DNA Framework",
+  "year": "2023",
+  "venue": "Small Methods, 2023",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [
+    "37086150"
+   ],
+   "doi": [
+    "10.1002/smtd.202300327"
+   ],
+   "url": "https://doi.org/10.1002/smtd.202300327"
+  },
+  "local": [],
+  "records": [
+   "sources/zhou.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:37086150&resultType=core&format=json"
+ },
+ {
+  "id": "Z15",
+  "group": "周如鸿组",
+  "title": "Dynamics-Based Peptide–MHC Binding Optimization by a Convolutional Variational Autoencoder: A Use-Case Model for CASTELO",
+  "year": "2021",
+  "venue": "J Chem Theory Comput, 2021",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [
+    "34793168"
+   ],
+   "doi": [
+    "10.1021/acs.jctc.1c00870"
+   ],
+   "url": "https://doi.org/10.1021/acs.jctc.1c00870"
+  },
+  "local": [],
+  "records": [
+   "sources/zhou.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:34793168&resultType=core&format=json"
+ },
+ {
+  "id": "Z16",
+  "group": "周如鸿组",
+  "title": "QM（量子力学）使用取证——汇总卡片（3 篇代表 + 结论）",
+  "year": "2002",
+  "venue": "J Comput Chem 2002 / J Chem Phys 2012 / J Chem Phys 2014（合并卡片，一行代表 3 篇）",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1002/jcc.10125"
+   ],
+   "url": "https://doi.org/10.1002/jcc.10125"
+  },
+  "local": [],
+  "records": [
+   "sources/zhou.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1002/jcc.10125%22&resultType=core&format=json"
+ },
+ {
+  "id": "C01",
+  "group": "曹龙兴组",
+  "title": "De novo design of picomolar SARS-CoV-2 miniprotein inhibitors",
+  "year": "2020",
+  "venue": "Science, 2020, 370:426–431",
+  "evidence": "全文级（本次独立复核 PMC7857403）",
+  "ids": {
+   "pmc": [
+    "PMC7857403"
+   ],
+   "ppr": [],
+   "pmid": [
+    "32907861"
+   ],
+   "doi": [
+    "10.1126/science.abd9909"
+   ],
+   "url": "https://www.science.org/doi/10.1126/science.abd9909"
+  },
+  "local": [
+   "data/literature_cards/fulltext/C01_PMC7857403_fullTextXML.xml",
+   "data/literature_cards/fulltext/C01_PMC7857403_text.txt"
+  ],
+  "records": [
+   "sources/cao.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7857403/fullTextXML"
+ },
+ {
+  "id": "C03",
+  "group": "曹龙兴组",
+  "title": "De novo design of modular and tunable protein biosensors",
+  "year": "2021",
+  "venue": "Nature, 2021, 591(7850):482–487",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC8074680"
+   ],
+   "ppr": [],
+   "pmid": [
+    "33503651"
+   ],
+   "doi": [
+    "10.1038/s41586-021-03258-z"
+   ],
+   "url": "https://doi.org/10.1038/s41586-021-03258-z"
+  },
+  "local": [
+   "data/literature_cards/fulltext/C03_PMC8074680_fullTextXML.xml",
+   "data/literature_cards/fulltext/C03_PMC8074680_text.txt"
+  ],
+  "records": [
+   "sources/cao.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8074680/fullTextXML"
+ },
+ {
+  "id": "C04",
+  "group": "曹龙兴组",
+  "title": "Ultrapotent miniproteins targeting the SARS-CoV-2 receptor-binding domain protect against infection and disease",
+  "year": "2021",
+  "venue": "Cell Host & Microbe, 2021, 29(7):1151–1161.e5",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC8221914"
+   ],
+   "ppr": [],
+   "pmid": [
+    "34192518"
+   ],
+   "doi": [
+    "10.1016/j.chom.2021.06.008"
+   ],
+   "url": "https://doi.org/10.1016/j.chom.2021.06.008"
+  },
+  "local": [
+   "data/literature_cards/fulltext/C04_PMC8221914_fullTextXML.xml",
+   "data/literature_cards/fulltext/C04_PMC8221914_text.txt"
+  ],
+  "records": [
+   "sources/cao.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8221914/fullTextXML"
+ },
+ {
+  "id": "C05",
+  "group": "曹龙兴组",
+  "title": "Large-scale design and refinement of stable proteins using sequence-only models",
+  "year": "2022",
+  "venue": "PLOS ONE, 2022, 17(3):e0265020",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC8920274"
+   ],
+   "ppr": [],
+   "pmid": [
+    "35286324"
+   ],
+   "doi": [
+    "10.1371/journal.pone.0265020"
+   ],
+   "url": "https://doi.org/10.1371/journal.pone.0265020"
+  },
+  "local": [
+   "data/literature_cards/fulltext/C05_PMC8920274_fullTextXML.xml",
+   "data/literature_cards/fulltext/C05_PMC8920274_text.txt"
+  ],
+  "records": [
+   "sources/cao.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8920274/fullTextXML"
+ },
+ {
+  "id": "C06",
+  "group": "曹龙兴组",
+  "title": "Multivalent designed proteins neutralize SARS-CoV-2 variants of concern and confer protection against infection in mice",
+  "year": "2022",
+  "venue": "Science Translational Medicine, 2022, 14(646):eabn1252",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC9258422"
+   ],
+   "ppr": [],
+   "pmid": [
+    "35412328"
+   ],
+   "doi": [
+    "10.1126/scitranslmed.abn1252"
+   ],
+   "url": "https://doi.org/10.1126/scitranslmed.abn1252"
+  },
+  "local": [
+   "data/literature_cards/fulltext/C06_PMC9258422_fullTextXML.xml",
+   "data/literature_cards/fulltext/C06_PMC9258422_text.txt"
+  ],
+  "records": [
+   "sources/cao.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9258422/fullTextXML"
+ },
+ {
+  "id": "C07",
+  "group": "曹龙兴组",
+  "title": "Isoform-specific inhibition of FGFR signaling achieved by a de-novo-designed mini-protein",
+  "year": "2022",
+  "venue": "Cell Reports, 2022, 41(4):111545",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [
+    "36288716"
+   ],
+   "doi": [
+    "10.1016/j.celrep.2022.111545"
+   ],
+   "url": "https://doi.org/10.1016/j.celrep.2022.111545"
+  },
+  "local": [],
+  "records": [
+   "sources/cao.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:36288716&resultType=core&format=json"
+ },
+ {
+  "id": "C09",
+  "group": "曹龙兴组",
+  "title": "Top-down design of protein architectures with reinforcement learning",
+  "year": "2023",
+  "venue": "Science, 2023, 380(6642):266–273",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [
+    "37079676"
+   ],
+   "doi": [
+    "10.1126/science.adf6591"
+   ],
+   "url": "https://doi.org/10.1126/science.adf6591"
+  },
+  "local": [],
+  "records": [
+   "sources/cao.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:37079676&resultType=core&format=json"
+ },
+ {
+  "id": "C10",
+  "group": "曹龙兴组",
+  "title": "Modulation of FGF pathway signaling and vascular differentiation using designed oligomeric assemblies",
+  "year": "2024",
+  "venue": "Cell, 2024, 187(14):3726–3740.e43",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [
+    "38861993"
+   ],
+   "doi": [
+    "10.1016/j.cell.2024.05.025"
+   ],
+   "url": "https://doi.org/10.1016/j.cell.2024.05.025"
+  },
+  "local": [],
+  "records": [
+   "sources/cao.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:38861993&resultType=core&format=json"
+ },
+ {
+  "id": "C12",
+  "group": "曹龙兴组",
+  "title": "Targeting overexpressed antigens in glioblastoma via CAR T cells with computationally designed high-affinity protein binders",
+  "year": "2024",
+  "venue": "Nature Biomedical Engineering, 2024, 8(12):1634–1650",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [
+    "39420062",
+    "39663402"
+   ],
+   "doi": [
+    "10.1038/s41551-024-01258-8"
+   ],
+   "url": "https://doi.org/10.1038/s41551-024-01258-8"
+  },
+  "local": [],
+  "records": [
+   "sources/cao.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:39420062&resultType=core&format=json"
+ },
+ {
+  "id": "C13",
+  "group": "曹龙兴组",
+  "title": "Accurate de novo design of heterochiral protein–protein interactions",
+  "year": "2024",
+  "venue": "Cell Research, 2024, 34(12):846–858",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC11614891"
+   ],
+   "ppr": [],
+   "pmid": [
+    "39143121"
+   ],
+   "doi": [
+    "10.1038/s41422-024-01014-2"
+   ],
+   "url": "https://doi.org/10.1038/s41422-024-01014-2"
+  },
+  "local": [
+   "data/interim/claim_lit/PMC11614891.xml"
+  ],
+  "records": [
+   "sources/cao.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11614891/fullTextXML"
+ },
+ {
+  "id": "C15",
+  "group": "曹龙兴组",
+  "title": "De novo design of light-responsive protein–protein interactions enables reversible formation of protein assemblies",
+  "year": "2025",
+  "venue": "Nature Chemistry, 2025, 17(12):1910–1919（在线 2025-08-28）",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [
+    "40877575"
+   ],
+   "doi": [
+    "10.1038/s41557-025-01929-2"
+   ],
+   "url": "https://doi.org/10.1038/s41557-025-01929-2"
+  },
+  "local": [],
+  "records": [
+   "sources/cao.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:40877575&resultType=core&format=json"
+ },
+ {
+  "id": "C16",
+  "group": "曹龙兴组",
+  "title": "Proteus: Exploring Protein Structure Generation for Enhanced Designability and Efficiency",
+  "year": "2024",
+  "venue": "bioRxiv, 2024-02-10",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [
+    "PPR804303"
+   ],
+   "pmid": [],
+   "doi": [
+    "10.1101/2024.02.10.579791"
+   ],
+   "url": "https://doi.org/10.1101/2024.02.10.579791"
+  },
+  "local": [
+   "data/literature_cards/fulltext/C16_PPR804303_text.txt"
+  ],
+  "records": [
+   "sources/cao.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PPR804303/fullTextXML"
+ },
+ {
+  "id": "C17",
+  "group": "曹龙兴组",
+  "title": "De novo design of small molecule–regulated protein oligomers",
+  "year": "2026",
+  "venue": "Science, 2026, 391(6780):eady6017（2026-01-01 在线）",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [
+    "41477902"
+   ],
+   "doi": [
+    "10.1126/science.ady6017"
+   ],
+   "url": "https://doi.org/10.1126/science.ady6017"
+  },
+  "local": [],
+  "records": [
+   "sources/cao.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:41477902&resultType=core&format=json"
+ },
+ {
+  "id": "C18",
+  "group": "曹龙兴组; 口径对照",
+  "title": "Design of miniprotein inhibitors targeting complement C9 to block membrane attack complex assembly",
+  "year": "2026",
+  "venue": "Nature Communications, 2026, 17(1):3827（2026-03-12）",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC13121834"
+   ],
+   "ppr": [],
+   "pmid": [
+    "41813685"
+   ],
+   "doi": [
+    "10.1038/s41467-026-70667-x"
+   ],
+   "url": "https://doi.org/10.1038/s41467-026-70667-x"
+  },
+  "local": [
+   "data/interim/claim_lit/PMC13121834.xml"
+  ],
+  "records": [
+   "sources/cao.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13121834/fullTextXML"
+ },
+ {
+  "id": "C19",
+  "group": "曹龙兴组",
+  "title": "HalluDesign: Protein Optimization and de novo Design via Iterative Structure Hallucination and Sequence Design",
+  "year": "2025",
+  "venue": "bioRxiv, 2025",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [],
+   "ppr": [
+    "PPR1116408"
+   ],
+   "pmid": [],
+   "doi": [
+    "10.1101/2025.11.08.686881"
+   ],
+   "url": "https://www.biorxiv.org/content/10.1101/2025.11.08.686881v1"
+  },
+  "local": [
+   "data/literature_cards/fulltext/C19_PPR1116408_text.txt"
+  ],
+  "records": [
+   "sources/cao.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PPR1116408/fullTextXML"
+ },
+ {
+  "id": "C20",
+  "group": "曹龙兴组",
+  "title": "HalluDesign-NA: Extending HalluDesign for De Novo Nucleic Acid Design",
+  "year": "2026",
+  "venue": "preprint",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [
+    "PPR1251738"
+   ],
+   "pmid": [],
+   "doi": [
+    "10.64898/2026.06.10.730767"
+   ],
+   "url": "https://doi.org/10.64898/2026.06.10.730767"
+  },
+  "local": [
+   "data/literature_cards/fulltext/C20_PPR1251738_text.txt"
+  ],
+  "records": [
+   "sources/cao.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PPR1251738/fullTextXML"
+ },
+ {
+  "id": "C21",
+  "group": "曹龙兴组",
+  "title": "De novo design of ligand binding and sensing with a physics based generative approach",
+  "year": "2026",
+  "venue": "preprint",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [],
+   "ppr": [
+    "PPR1279910"
+   ],
+   "pmid": [],
+   "doi": [
+    "10.64898/2026.07.13.738243"
+   ],
+   "url": "https://www.biorxiv.org/content/10.64898/2026.07.13.738243v1"
+  },
+  "local": [
+   "data/literature_cards/fulltext/C21_PPR1279910_text.txt"
+  ],
+  "records": [
+   "sources/cao.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PPR1279910/fullTextXML"
+ },
+ {
+  "id": "C22",
+  "group": "曹龙兴组",
+  "title": "De novo design of metalloproteases for targeted amyloid-β cleavage",
+  "year": "2026",
+  "venue": "preprint",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [],
+   "ppr": [
+    "PPR1219681"
+   ],
+   "pmid": [],
+   "doi": [
+    "10.64898/2026.01.06.697903"
+   ],
+   "url": "https://doi.org/10.64898/2026.01.06.697903"
+  },
+  "local": [
+   "data/literature_cards/fulltext/C22_PPR1219681_text.txt"
+  ],
+  "records": [
+   "sources/cao.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PPR1219681/fullTextXML"
+ },
+ {
+  "id": "C23",
+  "group": "曹龙兴组",
+  "title": "Integrating Machine-learning and Ultra-high-throughput Screening for Enzyme spaces exploration",
+  "year": "2026",
+  "venue": "preprint",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [],
+   "ppr": [
+    "PPR1259026"
+   ],
+   "pmid": [],
+   "doi": [
+    "10.64898/2026.06.23.733994"
+   ],
+   "url": "https://www.biorxiv.org/content/10.64898/2026.06.23.733994v1"
+  },
+  "local": [
+   "data/literature_cards/fulltext/C23_PPR1259026_text.txt"
+  ],
+  "records": [
+   "sources/cao.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PPR1259026/fullTextXML"
+ },
+ {
+  "id": "C24",
+  "group": "曹龙兴组",
+  "title": "Frontiers and challenges in the design of binders for intrinsically disordered proteins",
+  "year": "2026",
+  "venue": "Current Opinion in Structural Biology, 2026-06",
+  "evidence": "未获正文",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [
+    "41887012"
+   ],
+   "doi": [
+    "10.1016/j.sbi.2026.103256"
+   ],
+   "url": "https://doi.org/10.1016/j.sbi.2026.103256"
+  },
+  "local": [],
+  "records": [
+   "sources/cao.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:41887012&resultType=core&format=json"
+ },
+ {
+  "id": "C25",
+  "group": "曹龙兴组",
+  "title": "应用/工具类与背景论文（合并卡片，均经 API 核验）",
+  "year": "2024",
+  "venue": "多刊合并卡片（J Biol Chem / eLife / J Control Release / Adv Sci / bioRxiv / PLoS Pathog / J Mol Biol / Cell Rep / STTT）",
+  "evidence": "未标注",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1016/j.jbc.2024.105699"
+   ],
+   "url": "https://doi.org/10.1016/j.jbc.2024.105699"
+  },
+  "local": [],
+  "records": [
+   "sources/cao.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1016/j.jbc.2024.105699%22&resultType=core&format=json"
+ },
+ {
+  "id": "K01",
+  "group": "通用方法学; 口径对照",
+  "title": "A cost-effective and scalable barcoded library construction method for deep mutational scanning studies",
+  "year": "2026",
+  "venue": "PLoS Biology",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1371/journal.pbio.3003645"
+   ],
+   "url": "https://doi.org/10.1371/journal.pbio.3003645"
+  },
+  "local": [
+   "data/literature_cards/fulltext/K01_PMC12923136_fullTextXML.xml",
+   "data/literature_cards/fulltext/K01_PMC12923136_text.txt"
+  ],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1371/journal.pbio.3003645%22&resultType=core&format=json"
+ },
+ {
+  "id": "K02",
+  "group": "通用方法学",
+  "title": "Twist Bioscience Complex Gene Synthesis 公开挂价",
+  "year": "2026",
+  "venue": "twistbioscience.com 产品页（2026-10 抓取）",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K03",
+  "group": "通用方法学",
+  "title": "基因合成历史报价（Twist CEO 访谈口径，2023）",
+  "year": "2023",
+  "venue": "二手转引",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K04",
+  "group": "通用方法学",
+  "title": "GenScript oPools 引物/寡核苷酸池报价",
+  "year": "2026",
+  "venue": "genscript.com/gentitan-oligo-pools.html（2026-05 抓取）",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K05",
+  "group": "通用方法学",
+  "title": "基因合成成本构成与 oligo 错误率的连锁影响（行业分析）",
+  "year": "2024",
+  "venue": "行业分析（非一手价目）",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K06",
+  "group": "通用方法学; 口径对照",
+  "title": "Screening de novo designed protein binders in unpurified lysate using flow induced dispersion analysis",
+  "year": "2025",
+  "venue": "Protein Science",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1002/pro.70286"
+   ],
+   "url": "https://doi.org/10.1002/pro.70286"
+  },
+  "local": [
+   "data/literature_cards/fulltext/K06_PMC12432402_fullTextXML.xml",
+   "data/literature_cards/fulltext/K06_PMC12432402_text.txt"
+  ],
+  "records": [],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1002/pro.70286%22&resultType=core&format=json"
+ },
+ {
+  "id": "K07",
+  "group": "通用方法学",
+  "title": "Protein production and purification",
+  "year": "2008",
+  "venue": "Nature Methods",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1038/nmeth.f.202"
+   ],
+   "url": "https://doi.org/10.1038/nmeth.f.202"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1038/nmeth.f.202%22&resultType=core&format=json"
+ },
+ {
+  "id": "K08",
+  "group": "通用方法学",
+  "title": "展示筛选通量与每命中候选边际成本（常见口径，本次未核到一手原文）",
+  "year": "未记录",
+  "venue": "未指定",
+  "evidence": "未获正文",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K09",
+  "group": "通用方法学",
+  "title": "BLI 机时价目（Octet RED96）",
+  "year": "2026",
+  "venue": "im.cas.cn 收费页（2026-03 抓取）",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K10",
+  "group": "通用方法学",
+  "title": "BLI 仪器通量（Octet R2/R4 型号对比）",
+  "year": "2026",
+  "venue": "sartorius.com.cn（2026-07 抓取）",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K11",
+  "group": "通用方法学",
+  "title": "SPR 机时价目（多核心设施公开收费）",
+  "year": "2026",
+  "venue": "skl.bjmu.edu.cn、cszx.scau.edu.cn、im.cas.cn、sklnmggpt.cpu.edu.cn",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K12",
+  "group": "通用方法学",
+  "title": "SPR 芯片耗材价目（2010 年旧价）",
+  "year": "2010",
+  "venue": "ibp.cas.cn",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K13",
+  "group": "通用方法学",
+  "title": "SPR 单芯片通量（厂商仪器页）",
+  "year": "2026",
+  "venue": "antpedia 仪器页",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K14",
+  "group": "通用方法学",
+  "title": "ITC 价目（机时与委托服务）",
+  "year": "2026",
+  "venue": "im.cas.cn；cxq.stcsm.sh.gov.cn（2025 抓取）",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K15",
+  "group": "通用方法学",
+  "title": "DLS 价目",
+  "year": "2026",
+  "venue": "im.cas.cn",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K16",
+  "group": "通用方法学",
+  "title": "热稳定/聚集快速表征（nanoDSF）价目",
+  "year": "2026",
+  "venue": "im.cas.cn",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K17",
+  "group": "通用方法学",
+  "title": "质谱类确证价目（DIA 蛋白组/磷酸化）",
+  "year": "2023",
+  "venue": "二手转引",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K18",
+  "group": "通用方法学",
+  "title": "冷冻电镜（300 kV）机时价目",
+  "year": "2026",
+  "venue": "多机构公开收费页",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K19",
+  "group": "通用方法学",
+  "title": "电镜耗材与制样价目",
+  "year": "2021",
+  "venue": "sjzx.genetics.ac.cn；cryoem.pku.edu.cn",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K20",
+  "group": "通用方法学",
+  "title": "X 射线晶体学（实验室）价目",
+  "year": "2019",
+  "venue": "phoenix.tsinghua.edu.cn",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K21",
+  "group": "通用方法学",
+  "title": "同步辐射机时/数据收费",
+  "year": "2026",
+  "venue": "清华收费页；cxq.stcsm.sh.gov.cn",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K22",
+  "group": "通用方法学",
+  "title": "流式分选（FACS）机时价目",
+  "year": "2026",
+  "venue": "公开收费页",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K23",
+  "group": "通用方法学",
+  "title": "FACS 速度上限（FACSAria III 标称规格）",
+  "year": "2026",
+  "venue": "厂商标称",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K24",
+  "group": "通用方法学",
+  "title": "每候选合成+表达+纯化+一次单点结合的总边际成本（本报告推算）",
+  "year": "2026",
+  "venue": "cost-benchmarks.md §一末",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K25",
+  "group": "通用方法学",
+  "title": "酵母表面展示 + FACS 的技术通量与每候选成本（技术汇总条目）",
+  "year": "2026",
+  "venue": "跨条目汇总",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K26",
+  "group": "通用方法学",
+  "title": "单点 BLI/SPR 96/384 板筛（技术汇总条目）",
+  "year": "2026",
+  "venue": "跨条目汇总",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K27",
+  "group": "通用方法学",
+  "title": "MD 预筛 N 个候选 vs 合成测试 N 个候选：谁贵（本报告推算）",
+  "year": "2026",
+  "venue": "cost-benchmarks.md §二推算表",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K28",
+  "group": "通用方法学; 口径对照",
+  "title": "ColabFold: making protein folding accessible to all",
+  "year": "2022",
+  "venue": "Nature Methods",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1038/s41592-022-01488-1"
+   ],
+   "url": "https://doi.org/10.1038/s41592-022-01488-1"
+  },
+  "local": [
+   "data/literature_cards/fulltext/K28_PMC9184281_text.txt"
+  ],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1038/s41592-022-01488-1%22&resultType=core&format=json"
+ },
+ {
+  "id": "K29",
+  "group": "通用方法学; 口径对照",
+  "title": "GROMACS in the Cloud: A Global Supercomputer to Speed Up Alchemical Drug Design",
+  "year": "2022",
+  "venue": "J Chem Inf Model",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1021/acs.jcim.2c00044"
+   ],
+   "url": "https://doi.org/10.1021/acs.jcim.2c00044"
+  },
+  "local": [
+   "data/literature_cards/fulltext/K29_PMC9006219_text.txt"
+  ],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1021/acs.jcim.2c00044%22&resultType=core&format=json"
+ },
+ {
+  "id": "K30",
+  "group": "通用方法学; 口径对照",
+  "title": "Global analysis of protein folding using massively parallel design, synthesis, and testing",
+  "year": "2017",
+  "venue": "Science",
+  "evidence": "摘要级（本次独立复核）",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1126/science.aan0693"
+   ],
+   "url": "https://doi.org/10.1126/science.aan0693"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1126/science.aan0693%22&resultType=core&format=json"
+ },
+ {
+  "id": "K31",
+  "group": "通用方法学; 口径对照",
+  "title": "Benchmarking <scp>AlphaFold</scp> for protein complex modeling reveals accuracy determinants",
+  "year": "2022",
+  "venue": "Protein Science",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1002/pro.4379"
+   ],
+   "url": "https://doi.org/10.1002/pro.4379"
+  },
+  "local": [
+   "data/literature_cards/fulltext/K31_PMC9278006_fullTextXML.xml",
+   "data/literature_cards/fulltext/K31_PMC9278006_text.txt"
+  ],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1002/pro.4379%22&resultType=core&format=json"
+ },
+ {
+  "id": "K32",
+  "group": "通用方法学; 口径对照",
+  "title": "Evaluation of <scp>AlphaFold</scp> antibody–antigen modeling with implications for improving predictive accuracy",
+  "year": "2024",
+  "venue": "Protein Science",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1002/pro.4865"
+   ],
+   "url": "https://doi.org/10.1002/pro.4865"
+  },
+  "local": [
+   "data/literature_cards/fulltext/K32_PMC10751731_fullTextXML.xml",
+   "data/literature_cards/fulltext/K32_PMC10751731_text.txt"
+  ],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1002/pro.4865%22&resultType=core&format=json"
+ },
+ {
+  "id": "K33",
+  "group": "通用方法学; 口径对照",
+  "title": "Correspondence between functional scores from deep mutational scans and predicted effects on protein stability",
+  "year": "2023",
+  "venue": "Protein Science",
+  "evidence": "全文级（本次独立复核 PMC10273344）",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1002/pro.4688"
+   ],
+   "url": "https://doi.org/10.1002/pro.4688"
+  },
+  "local": [
+   "data/literature_cards/fulltext/K33_PMC10273344_fullTextXML.xml",
+   "data/literature_cards/fulltext/K33_PMC10273344_text.txt"
+  ],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1002/pro.4688%22&resultType=core&format=json"
+ },
+ {
+  "id": "K34",
+  "group": "通用方法学; 口径对照",
+  "title": "The Last Mile Problem: A Critical Assessment of Physics-Based and AI Tools for Small Molecule Binding Prediction in Virtual Screening",
+  "year": "2026",
+  "venue": "J Chem Inf Model",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1021/acs.jcim.6c00942"
+   ],
+   "url": "https://doi.org/10.1021/acs.jcim.6c00942"
+  },
+  "local": [
+   "data/literature_cards/fulltext/K34_PMC13213910_text.txt"
+  ],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1021/acs.jcim.6c00942%22&resultType=core&format=json"
+ },
+ {
+  "id": "K35",
+  "group": "通用方法学; 口径对照",
+  "title": "Quantum mechanics in drug design: Progress, challenges, and future frontiers",
+  "year": "2026",
+  "venue": "Communicative & Integrative Biology",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1080/19420889.2025.2603140"
+   ],
+   "url": "https://doi.org/10.1080/19420889.2025.2603140"
+  },
+  "local": [
+   "data/literature_cards/fulltext/K35_PMC12721093_fullTextXML.xml",
+   "data/literature_cards/fulltext/K35_PMC12721093_text.txt"
+  ],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1080/19420889.2025.2603140%22&resultType=core&format=json"
+ },
+ {
+  "id": "K36",
+  "group": "通用方法学",
+  "title": "Prospective Evaluation of Structure-Based Simulations Reveal Their Ability to Predict the Impact of Kinase Mutations on Inhibitor Binding",
+  "year": "2025",
+  "venue": "J Phys Chem B",
+  "evidence": "未获正文",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1021/acs.jpcb.4c07794"
+   ],
+   "url": "https://doi.org/10.1021/acs.jpcb.4c07794"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1021/acs.jpcb.4c07794%22&resultType=core&format=json"
+ },
+ {
+  "id": "K37",
+  "group": "通用方法学",
+  "title": "Large-Scale Collaborative Assessment of Binding Free Energy Calculations for Drug Discovery Using OpenFE",
+  "year": "2026",
+  "venue": "J Chem Inf Model",
+  "evidence": "未获正文",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1021/acs.jcim.6c00089"
+   ],
+   "url": "https://doi.org/10.1021/acs.jcim.6c00089"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1021/acs.jcim.6c00089%22&resultType=core&format=json"
+ },
+ {
+  "id": "K38",
+  "group": "通用方法学; 口径对照",
+  "title": "Diffusion-Based Protein Structure Design: Geometric Modelling, Validation Strategies, and Thermodynamic Challenges",
+  "year": "2026",
+  "venue": "Int J Mol Sci",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.3390/ijms27167151"
+   ],
+   "url": "https://doi.org/10.3390/ijms27167151"
+  },
+  "local": [
+   "data/literature_cards/fulltext/K38_PMC13513569_fullTextXML.xml",
+   "data/literature_cards/fulltext/K38_PMC13513569_text.txt"
+  ],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.3390/ijms27167151%22&resultType=core&format=json"
+ },
+ {
+  "id": "K39",
+  "group": "通用方法学; 口径对照",
+  "title": "AI-Driven <i>De Novo</i> Binder Design: From Structure Prediction to Closed-Loop Optimization",
+  "year": "2026",
+  "venue": "Comput Struct Biotechnol J",
+  "evidence": "全文级（本次独立复核 PMC13113996）",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.34133/csbj.0070"
+   ],
+   "url": "https://doi.org/10.34133/csbj.0070"
+  },
+  "local": [
+   "data/literature_cards/fulltext/K39_PMC13113996_fullTextXML.xml",
+   "data/literature_cards/fulltext/K39_PMC13113996_text.txt"
+  ],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.34133/csbj.0070%22&resultType=core&format=json"
+ },
+ {
+  "id": "K40",
+  "group": "通用方法学; 口径对照",
+  "title": "PPIscreenML is a method for structure-based screening of protein-protein interactions using AlphaFold",
+  "year": "2026",
+  "venue": "eLife",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.7554/elife.98179"
+   ],
+   "url": "https://doi.org/10.7554/elife.98179"
+  },
+  "local": [
+   "data/literature_cards/fulltext/K40_PMC13099138_fullTextXML.xml",
+   "data/literature_cards/fulltext/K40_PMC13099138_text.txt"
+  ],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.7554/elife.98179%22&resultType=core&format=json"
+ },
+ {
+  "id": "K41",
+  "group": "通用方法学; 口径对照",
+  "title": "A Complementarity‐Based Approach to <i>De Novo</i> Binder Design",
+  "year": "2025",
+  "venue": "Advanced Science",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1002/advs.202502015"
+   ],
+   "url": "https://doi.org/10.1002/advs.202502015"
+  },
+  "local": [
+   "data/literature_cards/fulltext/K41_PMC12412469_fullTextXML.xml",
+   "data/literature_cards/fulltext/K41_PMC12412469_text.txt"
+  ],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1002/advs.202502015%22&resultType=core&format=json"
+ },
+ {
+  "id": "K42",
+  "group": "通用方法学",
+  "title": "Scaffold-Lab: Critical evaluation and ranking of protein backbone generation methods in a unified framework",
+  "year": "2026",
+  "venue": "PLoS Computational Biology",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1371/journal.pcbi.1014290"
+   ],
+   "url": "https://doi.org/10.1371/journal.pcbi.1014290"
+  },
+  "local": [
+   "data/literature_cards/fulltext/K42_PMC13225634_fullTextXML.xml",
+   "data/literature_cards/fulltext/K42_PMC13225634_text.txt"
+  ],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1371/journal.pcbi.1014290%22&resultType=core&format=json"
+ },
+ {
+  "id": "K43",
+  "group": "通用方法学",
+  "title": "A comprehensive benchmarking of the AlphaFold3 for predicting biomacromolecules and their interactions",
+  "year": "2025",
+  "venue": "Brief Bioinform",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1093/bib/bbaf616"
+   ],
+   "url": "https://doi.org/10.1093/bib/bbaf616"
+  },
+  "local": [
+   "data/literature_cards/fulltext/K43_PMC12661943_fullTextXML.xml",
+   "data/literature_cards/fulltext/K43_PMC12661943_text.txt"
+  ],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1093/bib/bbaf616%22&resultType=core&format=json"
+ },
+ {
+  "id": "K44",
+  "group": "通用方法学",
+  "title": "Quantification of the Impact of Structure Quality on Predicted Binding Free Energy Accuracy",
+  "year": "2025",
+  "venue": "J Chem Inf Model",
+  "evidence": "未获正文",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1021/acs.jcim.5c00947"
+   ],
+   "url": "https://doi.org/10.1021/acs.jcim.5c00947"
+  },
+  "local": [
+   "data/literature_cards/fulltext/K44_PMC12264970_fullTextXML.xml",
+   "data/literature_cards/fulltext/K44_PMC12264970_text.txt"
+  ],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1021/acs.jcim.5c00947%22&resultType=core&format=json"
+ },
+ {
+  "id": "K45",
+  "group": "通用方法学",
+  "title": "Picomolar affinity antibodies from a fully synthetic naive library selected and evolved by ribosome display",
+  "year": "2000",
+  "venue": "Nature Biotechnology",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1038/82407"
+   ],
+   "url": "https://doi.org/10.1038/82407"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1038/82407%22&resultType=core&format=json"
+ },
+ {
+  "id": "K46",
+  "group": "通用方法学",
+  "title": "Ultrahigh throughput screening for enzyme function in droplets",
+  "year": "2020",
+  "venue": "Methods Enzymol / JACS / Anal Chem",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1016/bs.mie.2020.06.002"
+   ],
+   "url": "https://doi.org/10.1016/bs.mie.2020.06.002"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1016/bs.mie.2020.06.002%22&resultType=core&format=json"
+ },
+ {
+  "id": "K47",
+  "group": "通用方法学; 口径对照",
+  "title": "Sequence-based prediction of pH-dependent protein solubility using CamSol",
+  "year": "2023",
+  "venue": "Brief Bioinform",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1093/bib/bbad004"
+   ],
+   "url": "https://doi.org/10.1093/bib/bbad004"
+  },
+  "local": [
+   "data/literature_cards/fulltext/K47_PMC10025429_fullTextXML.xml",
+   "data/literature_cards/fulltext/K47_PMC10025429_text.txt"
+  ],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1093/bib/bbad004%22&resultType=core&format=json"
+ },
+ {
+  "id": "K48",
+  "group": "通用方法学",
+  "title": "Aggrescan4D: A comprehensive tool for pH‐dependent analysis and engineering of protein aggregation propensity",
+  "year": "2025",
+  "venue": "Protein Science",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1002/pro.5180"
+   ],
+   "url": "https://doi.org/10.1002/pro.5180"
+  },
+  "local": [
+   "data/literature_cards/fulltext/K48_PMC11425640_fullTextXML.xml",
+   "data/literature_cards/fulltext/K48_PMC11425640_text.txt"
+  ],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1002/pro.5180%22&resultType=core&format=json"
+ },
+ {
+  "id": "K49",
+  "group": "通用方法学",
+  "title": "AGGRESCAN and its evolution: A two-decade perspective on protein aggregation prediction",
+  "year": "2025",
+  "venue": "Amino Acids",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1007/s12551-025-01404-9"
+   ],
+   "url": "https://doi.org/10.1007/s12551-025-01404-9"
+  },
+  "local": [
+   "data/literature_cards/fulltext/K49_PMC13031676_fullTextXML.xml",
+   "data/literature_cards/fulltext/K49_PMC13031676_text.txt"
+  ],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1007/s12551-025-01404-9%22&resultType=core&format=json"
+ },
+ {
+  "id": "K50",
+  "group": "通用方法学; 口径对照",
+  "title": "Computational Design of an Enzyme Catalyst for a Stereoselective Bimolecular Diels-Alder Reaction",
+  "year": "2010",
+  "venue": "Science",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1126/science.1190239"
+   ],
+   "url": "https://doi.org/10.1126/science.1190239"
+  },
+  "local": [],
+  "records": [
+   "sources/baker.md",
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1126/science.1190239%22&resultType=core&format=json"
+ },
+ {
+  "id": "K51",
+  "group": "通用方法学; 口径对照",
+  "title": "QM/MM Theoretical Studies of a de Novo Retro-Aldolase Design",
+  "year": "2019",
+  "venue": "ACS Catalysis",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1021/acscatal.8b04457"
+   ],
+   "url": "https://doi.org/10.1021/acscatal.8b04457"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1021/acscatal.8b04457%22&resultType=core&format=json"
+ },
+ {
+  "id": "K52",
+  "group": "通用方法学",
+  "title": "QM/MM Methods for Biomolecular Systems",
+  "year": "2009",
+  "venue": "Angew Chem Int Ed",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1002/anie.200802019"
+   ],
+   "url": "https://doi.org/10.1002/anie.200802019"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1002/anie.200802019%22&resultType=core&format=json"
+ },
+ {
+  "id": "K53",
+  "group": "通用方法学",
+  "title": "Accurate QM/MM Molecular Dynamics for Periodic Systems in GPU4P<scp>y</scp>SCF with Applications to Enzyme Catalysis",
+  "year": "2025",
+  "venue": "J Chem Theory Comput",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1021/acs.jctc.4c01698"
+   ],
+   "url": "https://doi.org/10.1021/acs.jctc.4c01698"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1021/acs.jctc.4c01698%22&resultType=core&format=json"
+ },
+ {
+  "id": "K54",
+  "group": "通用方法学",
+  "title": "QM/MM Study of Substituent and Solvent Effects on the Excited State Dynamics of the Photoactive Yellow Protein Chromophore",
+  "year": "2017",
+  "venue": "J Chem Theory Comput; Biochemistry",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1021/acs.jctc.6b01069"
+   ],
+   "url": "https://doi.org/10.1021/acs.jctc.6b01069"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1021/acs.jctc.6b01069%22&resultType=core&format=json"
+ },
+ {
+  "id": "K55",
+  "group": "通用方法学",
+  "title": "Estimation of Transition-Metal Empirical Parameters for Molecular Mechanical Force Fields",
+  "year": "2016",
+  "venue": "J Chem Theory Comput; Methods Mol Biol; Theor Chem Acc",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1021/acs.jctc.6b00416"
+   ],
+   "url": "https://doi.org/10.1021/acs.jctc.6b00416"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1021/acs.jctc.6b00416%22&resultType=core&format=json"
+ },
+ {
+  "id": "K56",
+  "group": "通用方法学",
+  "title": "Non-bonded force field model with advanced restrained electrostatic potential charges (RESP2)",
+  "year": "2020",
+  "venue": "Commun Chem; J Chem Theory Comput; J Comput Chem",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1038/s42004-020-0291-4"
+   ],
+   "url": "https://doi.org/10.1038/s42004-020-0291-4"
+  },
+  "local": [
+   "data/literature_cards/fulltext/K56_PMC8204736_fullTextXML.xml",
+   "data/literature_cards/fulltext/K56_PMC8204736_text.txt"
+  ],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1038/s42004-020-0291-4%22&resultType=core&format=json"
+ },
+ {
+  "id": "K57",
+  "group": "通用方法学",
+  "title": "Profluent 公司自述：AI 设计基因编辑器与时间成本节省",
+  "year": "2025",
+  "venue": "公司自述/媒体",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K58",
+  "group": "通用方法学",
+  "title": "Xaira Therapeutics 公司自述：设计-测试闭环",
+  "year": "2026",
+  "venue": "公司自述/媒体",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K59",
+  "group": "通用方法学",
+  "title": "Generate:Biomedicines Flagship 融资记录",
+  "year": "2026",
+  "venue": "chemical & engineering news（DOI 10.47287/cen-09942-buscon15）",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K60",
+  "group": "通用方法学",
+  "title": "2148-LB: Noncanonical Insulin Receptor Activation Using De Novo Agonists",
+  "year": "2025",
+  "venue": "PDB / ADA 会议摘要",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.2337/db25-2148-lb"
+   ],
+   "url": "https://doi.org/10.2337/db25-2148-lb"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.2337/db25-2148-lb%22&resultType=core&format=json"
+ },
+ {
+  "id": "K61",
+  "group": "通用方法学",
+  "title": "Nabla Bio / Morphic 通量与成功率",
+  "year": "未记录",
+  "venue": "未记录",
+  "evidence": "未获正文",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K62",
+  "group": "通用方法学",
+  "title": "行业叙事锚点：一个蛋白结构约 10 万美元 + 数月到数年（AI 出现前）",
+  "year": "2025",
+  "venue": "二手转述",
+  "evidence": "二级来源",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [],
+   "url": "未记录"
+  },
+  "local": [],
+  "records": [
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "no_id",
+  "fetch_url": ""
+ },
+ {
+  "id": "K63",
+  "group": "通用方法学",
+  "title": "Complete computational design of high-efficiency Kemp elimination enzymes",
+  "year": "2025",
+  "venue": "Nature",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC12310539"
+   ],
+   "ppr": [],
+   "pmid": [
+    "40533551"
+   ],
+   "doi": [
+    "10.1038/s41586-025-09136-2"
+   ],
+   "url": "https://doi.org/10.1038/s41586-025-09136-2"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/kemp2025.txt"
+  ],
+  "records": [
+   "sources/baker.md",
+   "sources/function-assignment-workflows.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12310539/fullTextXML"
+ },
+ {
+  "id": "K64",
+  "group": "通用方法学",
+  "title": "Computational enzyme design by catalytic motif scaffolding",
+  "year": "2025",
+  "venue": "Nature",
+  "evidence": "全文级",
+  "ids": {
+   "pmc": [
+    "PMC12727513"
+   ],
+   "ppr": [],
+   "pmid": [
+    "41339546"
+   ],
+   "doi": [
+    "10.1038/s41586-025-09747-9"
+   ],
+   "url": "https://doi.org/10.1038/s41586-025-09747-9"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/motifscaffold2026.txt"
+  ],
+  "records": [
+   "sources/baker.md",
+   "sources/cost-benchmarks.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12727513/fullTextXML"
+ },
+ {
+  "id": "K65",
+  "group": "通用方法学",
+  "title": "Rapid Sampling of Hydrogen Bond Networks for Computational Protein Design",
+  "year": "2018",
+  "venue": "J Chem Theory Comput",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [
+    "PMC5940506"
+   ],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1021/acs.jctc.8b00033"
+   ],
+   "url": "https://doi.org/10.1021/acs.jctc.8b00033"
+  },
+  "local": [
+   "data/literature_cards/fulltext/K65_PMC5940506_fullTextXML.xml",
+   "data/literature_cards/fulltext/K65_PMC5940506_text.txt"
+  ],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5940506/fullTextXML"
+ },
+ {
+  "id": "K66",
+  "group": "通用方法学",
+  "title": "De novo design of protein homo-oligomers with modular hydrogen-bond network–mediated specificity",
+  "year": "2016",
+  "venue": "Science",
+  "evidence": "摘要级",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1126/science.aad8865"
+   ],
+   "url": "https://doi.org/10.1126/science.aad8865"
+  },
+  "local": [],
+  "records": [
+   "sources/baker.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1126/science.aad8865%22&resultType=core&format=json"
+ },
+ {
+  "id": "K67b",
+  "group": "通用方法学",
+  "title": "Deep learning based design of buried hydrogen bond networks with HBDesigner",
+  "year": "2026",
+  "venue": "bioRxiv（预印本）",
+  "evidence": "题录级（本次经 PubMed/Crossref 核对，未读正文）",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.64898/2026.06.08.730848"
+   ],
+   "url": "https://doi.org/10.64898/2026.06.08.730848"
+  },
+  "local": [
+   "data/literature_cards/fulltext/K67b_PMC13277954_fullTextXML.xml",
+   "data/literature_cards/fulltext/K67b_PMC13277954_text.txt"
+  ],
+  "records": [],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.64898/2026.06.08.730848%22&resultType=core&format=json"
+ },
+ {
+  "id": "M-K27",
+  "group": "口径对照与独立复核",
+  "title": "MMDesign: Robust De Novo Binder Discovery Across Diverse Targets and Modalities",
+  "year": "2026",
+  "venue": "Zenodo 技术报告（非同行评议）",
+  "evidence": "已核验DOI",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.5281/zenodo.23321531"
+   ],
+   "url": "https://doi.org/10.5281/zenodo.23321531"
+  },
+  "local": [],
+  "records": [
+   "sources/claim-90pct.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.5281/zenodo.23321531%22&resultType=core&format=json"
+ },
+ {
+  "id": "M-K28",
+  "group": "口径对照与独立复核",
+  "title": "Practical De Novo Nanobody Discovery with Tens of Experimental Candidates",
+  "year": "2026",
+  "venue": "Zenodo 技术报告（非同行评议）",
+  "evidence": "已核验DOI",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.5281/zenodo.20526590"
+   ],
+   "url": "https://doi.org/10.5281/zenodo.20526590"
+  },
+  "local": [],
+  "records": [
+   "sources/claim-90pct.md"
+  ],
+  "has_fulltext": false,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.5281/zenodo.20526590%22&resultType=core&format=json"
+ },
+ {
+  "id": "M-K29",
+  "group": "口径对照与独立复核",
+  "title": "Accurate single-domain scaffolding of three nonoverlapping protein epitopes using deep learning",
+  "year": "2026",
+  "venue": "Nat Chem Biol",
+  "evidence": "已核验DOI",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1038/s41589-025-02083-z"
+   ],
+   "url": "https://doi.org/10.1038/s41589-025-02083-z"
+  },
+  "local": [
+   "data/interim/claim_lit/PMC13038408.xml"
+  ],
+  "records": [
+   "sources/claim-90pct.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1038/s41589-025-02083-z%22&resultType=core&format=json"
+ },
+ {
+  "id": "M-K34",
+  "group": "口径对照与独立复核",
+  "title": "De Novo Design of Near-Infrared Fluorescence-Activating Proteins",
+  "year": "2026",
+  "venue": "JACS",
+  "evidence": "已核验DOI",
+  "ids": {
+   "pmc": [],
+   "ppr": [],
+   "pmid": [],
+   "doi": [
+    "10.1021/jacs.5c19594"
+   ],
+   "url": "https://doi.org/10.1021/jacs.5c19594"
+  },
+  "local": [
+   "data/interim/baker_lit/ft/nirFAP2026.txt",
+   "data/interim/claim_lit/PMC13560888.xml"
+  ],
+  "records": [
+   "sources/claim-90pct.md"
+  ],
+  "has_fulltext": true,
+  "fetch_channel": "epmc_search_then_fulltext",
+  "fetch_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1021/jacs.5c19594%22&resultType=core&format=json"
+ }
+]

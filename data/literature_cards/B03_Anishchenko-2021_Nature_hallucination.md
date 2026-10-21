@@ -1,0 +1,222 @@
+# [B03] 用深度网络"幻觉"从头造出自然界没有的蛋白折叠——把"筛子"从物理能量函数换成结构预测网络本身
+
+Anishchenko I, Pellock S, … Baker D（华盛顿大学 IPD）
+Nature 2021, 600:547-552 · DOI 10.1038/s41586-021-04184-w · PMID 34853475 · PMCID PMC9293396
+（CSV 里 B03 行的 `期刊` 与 `年份` 字段为 Nature 2021；任务描述写作"Nature 2020"指同一篇，正式页码 2021-12 出版。）
+
+---
+
+## 0. 元信息与核验状态
+
+| 项 | 值 |
+|---|---|
+| CSV 行 | `data/protein_design_literature.csv` 编号 **B03**（组：Baker组） |
+| 本文取回方式 | Europe PMC `fullTextXML` 首两次 HTTP 500（`fetch_log.tsv` 第 56 行），第三次走 NCBI `efetch` 回退成功（同表第 113 行，140,214 B，sha16 `c997411200d3d732`），落盘同名 `..._fullTextXML.xml` |
+| 本地全文（本卡唯一比对底稿） | `data/literature_cards/fulltext/B03_PMC9293396_text.txt`（68,260 B，标签剥离+实体解码后的纯文本，sha256 前 16 位 `71b4f4c28141d997`） |
+| 全文是哪一版 | **NIHMS 作者接收稿**（`nihpa 0410462 … NIHMS1822786 … PMC9293396.1`，文内日期 `12 2021`），不是 Nature 排版终稿；正文数字与本卡台账一致，但排版页码/图位可能与期刊版略有差异 |
+| 对照底稿 | `sources/baker.md:41-52`（原卡，摘要级）。本卡在其基础上补：目标函数与退火参数、设计与送测的漏斗数字（2,000→95 簇→297→129）、Rosetta 正交复核口径、三个结构解析的 RMSD 与解析条件（分子置换 TFZ、Ramachandran、R work/R free）、寡聚与构象异质性两条失败线 |
+| 证据级别 | **全文级**（本卡全部英文引句均可在 `B03_PMC9293396_text.txt` 里逐字命中，见第 9 节） |
+| 未取到的部分 | Supplementary Figures 1–7 与 Supplementary discussion、Extended Data Figure 1–8 的原图、PDB 条目本身（7K3H / 7M0Q / 7M5T）、以及任何机时/花费数字——**全文未给出 GPU/CPU 时长**，凡涉及处本卡写"原文未给阈值/未记录" |
+
+## 1. 这篇到底解决什么（一句话与大白话）
+
+**一句话**：把一个只会"读序列猜结构"的网络反过来用——从随机氨基酸序列出发，专门去改序列，直到网络对它的预测变得又锐又自信，于是网络"以为"这是一个理想蛋白，而它确实折出来了。
+
+大白话：以前从头造蛋白，是靠人先画好骨架蓝图（哪几段螺旋、哪几股折叠片、怎么排布），再用物理能量函数（Rosetta）往里填序列，还要用同一个物理函数判断"填得好不好"。这篇提出一个不同的路子：trRosetta 这类网络在几万个天然蛋白上训练过，它脑子里其实存着"什么样的序列会给出什么样的距离图"这套知识；那能不能不问蓝图、不问能量，只要求"**网络对这条序列的预测结果，和它对一片模糊的熔球态的预测结果相比，反差最大**"，然后拿蒙特卡洛在序列空间里一步步改氨基酸去最大化这个反差？改到最后，网络会给出一条它自己极其自信的序列和一张锐利的距离图，把距离图直接最小化成三维结构，就同时得到了骨架和序列——这正是过去十年"从头设计"想同时解决的两个东西，作者的原话是："**However, none of these methods described to date address the classical de novo protein design problem of simultaneously generating both a new backbone structure and an amino acid sequence which encodes it.**"
+
+产出规模：2,000 条这样的"幻觉"设计，序列与天然蛋白几乎无关（BLAST 最好 E-value 只有 ~0.1），折叠类型覆盖全 α、全 β、αβ 混合；挑 129 条下单做实验，27 条拿到单分散且 CD 与目标一致的蛋白（≈21%），其中 3 条解出真实三维结构，和幻觉模型最像的部分做到 1.3 Å 级。
+
+它在方法链条上的意义：这是"**筛子的权威从物理能量函数转到结构预测网络的自洽度**"的第一步。后来所有 binder/酶设计论文里那个"用预测网络的置信度当闸口"的做法（pLDDT/pAE 型判据），思路源头就在这篇。
+
+## 2. 遇到的难点，以及遇到问题时他们做了什么（作者自述，不是我们的推测）
+
+1. **全新设计序列没有共进化信息，网络到底还能不能用？**
+   现象/证据：trRosetta 这类模型的精度主要来自 MSA 里残基对的共进化信号，而随机序列既没有同源家族也没有共进化。作者用的支点是 CA13 盲测里的那个意外观察——"**we found that the trRosetta deep neural network trained using multiple sequence information could consistently predict structure quite accurately for de novo designed proteins from just a single sequence**"，即完全不给共进化信息时照样能预测设计蛋白。
+   他们做了什么：把网络输入换成单序列（Methods："**a 2D residual-convolutional neural network which takes 1- and 2-site features derived from a multiple sequence alignment or a single sequence as an input**"），并直接拿随机序列去试探网络，确认它确实不能凭空给随机序列编出结构——"the distance distributions were diffuse and much less featured than those obtained with actual protein sequences"。
+   仍留下的代价：这条"单序列也准"的证据来自**已知的 de novo 设计蛋白**（本身是理想化的），对天然无序或训练分布外的序列并不成立；本卡的整个方法因此隐含一个前提：只造理想化的规则二级结构蛋白。
+
+2. **"锐"没有参照物，怎么定义网络已经自信？**
+   现象/证据：随机序列的距离图"**which as expected are quite featureless**"，而天然蛋白的很尖锐；需要一个可优化的标量。
+   他们做了什么：**造一个专门代表"模糊态"的对手网络**——"we trained a background network similar in architecture to trRosetta and on the same training set" 但 "**but not providing amino acid sequence identity information**"（作者自注这可以粗略看成通用熔球态），然后把目标定成两者之间的 KL 散度："**We then carry out Monte Carlo sampling in amino acid sequence space, optimizing the contrast (KL-divergence) between the distance distributions predicted by the network and the background distribution.**" 再加一项氨基酸组成约束防止序列跑偏——"**To capture general sequence constraints, we used the negative KL-divergence of the amino acid composition of a sequence from that of the PDB as a whole**"。
+   仍留下的代价：这个目标是"**和网络自己的看法一致**"，不是"和物理最低自由能一致"；网络错的地方会被放大而不是纠正（下文第 6 条的寡聚偏好就是这个漏洞的实证）。
+
+3. **优化怎么落地：会不会一步就跳进局部坑？**
+   他们做了什么：不做起始结构枚举，直接在**序列空间**做模拟退火——"**each step consists of substituting a randomly selected amino acid at a randomly selected position in the sequence, predicting the distance and orientation maps of the mutated sequence using the network, and accepting the move based on the change in the KL-divergence to the background distribution according to the standard Metropolis criterion**"。参数是原文的：每条轨迹 "**Each trajectory consisted of 40,000 attempted moves; the temperature T is 0.1 at the beginning of the trajectory and reduced by half every 5,000 steps.**"，序列长度固定 "**starting from a random amino acid sequence of length L ( L = 100 throughout this study**"。
+   代价：作者自己在结论里承认这条路慢且笨——"**On the sampling side, the Monte Carlo approach could perhaps be made more efficient by direct gradient-based minimization by tracing the gradients back to the inputs**"；且 **L=100 全篇未变**，更长/更复杂的体系本文没做（本文未解决）。
+
+4. **优化到什么时候算收敛？没有解析解可对照。**
+   他们做了什么：换成"和网络对天然蛋白的预测一样锐"这个可观测拐点——"**in almost all cases after ~20,000 Monte Carlo steps the resulting distance maps were at least as featured (non-uniform) as those predicted for naturally occurring sequences and structurally confirmed de novo proteins designed using Rosetta.**"（图注同调：Annealing trajectories averaged over 2,000 runs 单调上升。）
+   代价：~20,000 是"至少一样锐"的经验点，不是收敛证明；轨迹平均 40,000 步意味着后半程在低温下几乎不动，但没有报告残留自由度。
+
+5. **最要害的问题：网络说它自信，凭什么是真的？（无物理知识 vs 需要物理）**
+   现象/证据：整个生成过程完全不知道侧链，也不知道能量。
+   他们做了什么：**加一道与网络毫无共享参数的正交复核**。用 Rosetta ab initio 折叠模拟扫能量景观——"**This is a completely orthogonal test as the network was trained exclusively on native protein structures, and has no access to the Rosetta energy function.**"，结果"**For 82 out of 129, the lowest energy structures found in the simulations were close to the corresponding hallucinated structures with Cα-RMSDs <3.0 Å**"，并且"**and for all 129 the lowest energy structure sampled starting from the design model was lower in energy than any other structure obtained starting from an extended chain**"。同时明确声明 Rosetta 没参与下单选择："**we did not use Rosetta in any way for either sequence generation or selection for experimental characterization**"。
+   代价：82/129 说明约三分之一的设计在物理复核里并不落在目标构象；而"从设计模型出发的最低能量永远更低"这一条接近恒真（起点就是目标构象，搜索空间又不可能走遍全部构象），**它证明的是"有一个能到目标构象的低能通道"，不是"会折到目标构象"**。
+
+6. **很多设计在溶液里自己抱团（寡聚），而网络从头到尾把它们当单体建模。**
+   现象/证据："**As noted above, many of the hallucinated proteins form oligomers in solution.**"；0217 在晶体里是二聚体，且模型"**Sequences generated by the network were modeled as monomers, but the 0217 model displays clear amphipathic sequence patterning across the 3-helix topology, with numerous solvent-exposed hydrophobic residues**"。
+   他们做了什么：①先诊断根因——"**The network appears to incorporate sequence features associated with the protein-protein interfaces of the native oligomeric proteins included in the PDB training set, likely explaining why many of the network hallucinated proteins self associate.**"；②再做定点改：把表面疏水换成极性——"**we found that substitution of surface hydrophobic residues with polar residues in a subset of the hallucinations that formed oligomers resulted in monomeric species by SEC**"，改出来的 0738_mod 还真结晶了。
+   代价：改完的结构和原模型差了 "**Structural superposition of the 0738 model and 0738_mod crystal structure revealed a 3.68 Å Ca RMSD over 96 residues**"（整链 3.68 Å，但分半段能到 1.32/2.17 Å）——即"修寡聚"这件事本身没有可靠协议，靠单点经验。
+
+7. **只造单体造不出功能；且 backbone-only 会留下构象异质性。**
+   现象/证据：0738_mod 虽单体，但 NMR 显示"**For design 0738_mod the solution data indicate multiple monomeric conformations in solution in slow conformational exchange; incorporation of an explicit sidechain representation in the hallucination method could reduce such structural heterogeneity.**"（图注补充：它比预期多出一倍以上峰数。）
+   他们做了什么：本文只给了**方向**，没给结果——把功能化写成后续工作："**The loss function can be generalized to include specific structural features, for example binding motifs**" / "**around which the network can hallucinate new protein inhibitors or enzyme catalysts.**"
+   本文未解决：①没有任何结合/催化活性的实测；②侧链显式表示没有实现；③序列长度可扩展性没有测。
+
+8. **一个新拓扑能不能被晶体学承认？（解析结构时的实际卡点）**
+   现象/证据：预测模型 ensemble 内部差异大——"**While both sets of predictions yielded converged ensembles on a single topology, the classical ab initio models had significant diversity within that ensemble.**"
+   他们做了什么：暴力过分子置换：把 2,000 个模型（1,000 trRosetta + 1,000 ab initio）侧链截到 γ 碳全跑 Phaser——"**Each of the 2000 models (1000 trRosetta and 1000 ab initio ) had all side chains removed past the gamma carbon, and was run through Phaser**"，结果"**A single solution was found in I 2 3 from one of the ab initio models with two copies in the asymmetric unit and a TFZ score of 13.3 (no other model yielded a TFZ score >8).**"
+   代价：0217 的结构解析几乎靠一个幸运模型；若那一步没成，本文的实验证据就只剩 NMR 一条。
+
+## 3. 方法与工作流程（可复现顺序；每步：输入 → 操作 → 判据 → 输出规模）
+
+### 用了哪些方法（工具箱，以及为什么选它）
+
+- **判别网络被逆用**：trRosetta（2D 残差卷积网络，输出每对残基的 Cβ-Cβ 距离 + 5 个取向角的概率分布）。选它是因为它被证明**在没有共进化信息时仍能预测设计蛋白结构**，说明参数里存了序列-结构的普适关系。
+- **背景网络（本文自造的参照物）**：与 trRosetta 同架构、同训练集，但不输入氨基酸身份，用来代表"什么都不知道"的熔球态分布；两者之差 = 可优化的"反差"。
+- **序列空间 MCMC 模拟退火**：不做结构采样、不做能量最小化，只在序列空间改残基。这是和 Rosetta 路线最本质的差别。
+- **物理侧只做复核，不参与生成或挑选**：Rosetta ab initio 大尺度折叠模拟（能量景观/漏斗），作者明确划清界限。
+- **实验侧三段**：E. coli 可溶表达 + IMAC → SEC（+SEC-MALS）看单分散 → CD 看二级结构相符与热稳定性 → 只对少数几个做 NMR/晶体学拿真正的三维对照。
+- **没有用的方法**：没有 MD 轨迹、没有 QM、没有自由能微扰、没有酵母/噬菌体展示筛选、没有亲和力测定。全文没有分子动力学模拟；Rosetta 的动作是 ab initio 蒙特卡洛折叠模拟与能量打分，不是 MD。
+
+### 工作流程表（严格按 Methods 与 Results 的先后）
+
+| # | 输入 | 操作 | 判据 / 阈值（原文数字） | 输出与规模 |
+|---|---|---|---|---|
+| 1 | 随机生成的 100 aa 序列（**"starting from a random amino acid sequence of length L ( L = 100 throughout this study"**；且 **"Cysteines were excluded to avoid complications from oxidation since we planned to produce the proteins in the reducing environment of the E coli cytoplasm.**"） | 直接喂进 trRosetta 预测距离/取向图 | 无（此步只确认随机序列的图是糊的） | 弥散的 2D 分布；共 2,000 条独立轨迹起点 |
+| 2 | 与 trRosetta 同架构同训练集、但不给序列身份的对照网络 | 训一个背景网络 Q，作为"熔球态"参照 | bins：距离 37 个、两个角各 25 个、φ 13 个（原文以 N_d/N_ω,θ/N_φ 给出） | 得到可比对的两套分布 P、Q |
+| 3 | P、Q 与序列组成 | 定义目标函数（原文 Eq. 6）：网络预测分布相对背景分布的平均 KL 对比度，减去序列氨基酸组成相对 PDB 整体组成的 KL 偏离；判据就是让这一个标量最大化 | **"To capture general sequence constraints, we used the negative KL-divergence of the amino acid composition of a sequence from that of the PDB as a whole"**；对照 **"Random sequences give diffuse predictions, while existing de novo designs produce peaked distributions with low variance"** | 一个纯序列可算的标量，无需任何三维结构 |
+| 4 | 单条随机序列 | **"each step consists of substituting a randomly selected amino acid at a randomly selected position in the sequence, predicting the distance and orientation maps of the mutated sequence using the network, and accepting the move based on the change in the KL-divergence to the background distribution according to the standard Metropolis criterion"** | **"Each trajectory consisted of 40,000 attempted moves; the temperature T is 0.1 at the beginning of the trajectory and reduced by half every 5,000 steps."** | 每条轨迹一条最终序列 |
+| 5 | 全部轨迹 | 看距离图是否已经追平天然蛋白 | **"in almost all cases after ~20,000 Monte Carlo steps the resulting distance maps were at least as featured (non-uniform) as those predicted for naturally occurring sequences and structurally confirmed de novo proteins designed using Rosetta."** | 2,000 条锐化后的距离/取向图；**"Annealing trajectories averaged over 2,000 runs show a monotonic increase in the KL-divergence (contrast of the distance maps) with increasing Monte Carlo optimization."** |
+| 6 | 最终锐化的距离/取向图 | 用 trRosetta 自带的 constrained minimization 把 2D 分布直接落成三维结构（这一步同时给出骨架，无需蓝图） | **"We used this approach to generate two thousand new proteins with sequences predicted by the trRosetta network to fold into well-defined structures"**； **"Distance maps become progressively sharper along the Monte Carlo trajectories as exemplified by five hallucinated sequences with different protein structure topologies."** | 2,000 个"序列 + 骨架"配对 |
+| 7 | 2,000 设计 | 与天然库比"是不是只是背下来" | **"median BLAST E-value of the closest hit is 0.17"**； **"the predicted structures resemble but are not identical to native structures in the PDB, with TM-align scores of 0.6-0.9"**；图注 **"average TM-scores to the closest match of 0.78"**；对照集为 **"1,110 proteins of similar length from the trRosetta training set"** | 结论：序列空间与天然 100±10 aa 子空间分离，**"the network is not simply recapitulating native proteins of the same length."** |
+| 8 | 2,000 结构 | 结构相似性聚类去冗余 + 簇内二次打分 | **"Average-linkage hierarchical clustering yielded 95 clusters with an average inter-cluster similarity of TM-score = 0.75."**；只对 **"the 30 most populous clusters (which had 7 or more members)"** 打分；打分式（原文 Eq. 8）= KL 对比度 + 交叉熵差值 CE(Q,Y) 减 CE(P,Y)，第二项 **"assesses how well the hallucinated structure fits the trRosetta predicted structure distributions"** | 每簇 **"top 50% or top 20 (whichever was smaller)"** → 297 个候选 |
+| 9 | 297 候选 | 人工目检剔坏模型 | **"inspected these structures manually to filter out those with internal cavities or voids, extended surface hydrophobic patches, and misformed secondary structure elements; three clusters were completely eliminated due to poor model quality."** | **"One-hundred twenty-nine hallucinated sequences from the remaining 27 structural clusters (no more than 10 designs per cluster) were selected for experimental testing."** |
+| 10 | 129 设计 | Rosetta ab initio 大尺度折叠模拟（从伸展链起）做**正交**物理复核 | **"This is a completely orthogonal test as the network was trained exclusively on native protein structures, and has no access to the Rosetta energy function."**；判据是 Cα-RMSD <3.0 Å（原文 **"with Cα-RMSDs <3.0 Å"**）与"设计模型起点的最低能低于伸展链起点最低能" | **"For 82 out of 129"** 达标；129/129 满足后者；图注口径 **"The energy landscapes funnel into the energy minimum corresponding to the designed structure, providing independent, albeit in silico , evidence that the hallucinated sequences encode the hallucinated structures."** |
+| 11 | 129 序列 | 合成基因、E. coli 表达、IMAC 纯化 | **"Genes coding for the selected 129 designs were synthesized and cloned into pET28b(+) expression vector with an additional 21-residue N-terminal sequence containing a His-tag and thrombin cleavage site to aid purification"**；**"expressed in E. coli BL21(DE3) cells"** | 129 个蛋白（原文未给"可表达"阈值，只有实测数） |
+| 12 | 129 纯化产物 | Superdex 75 SEC 逐一样品看峰形（后加 SEC-MALS），收单体或最小寡聚峰 | **"The monomeric or smallest oligomeric fractions of each run (eluting at approximately 14 mL) were collected"**；**"The resulting samples were generally >95% homogeneous on SDS-PAGE gels."** | **"Of these, 27 yielded size exclusion chromatography (SEC) peaks corresponding to monomeric or small oligomeric species"** |
+| 13 | 27 个单分散样品 | 远紫外 CD 谱 + 变温熔解 | **"260 to 195 nm wavelength scans were measured at every 10"** °C、25-95 °C；**"Temperature melts monitored dichroism signal at 220 nm in steps of 2"** °C/min；**"Wavelength scans and temperature melts were performed using 0.35 mg/ml protein in PBS buffer with a 1-mm path-length cuvette."**；判据：谱型与目标二级结构一致 | **"In all cases, the CD spectra were consistent with the target structures"**；**"Twenty-one of the proteins were highly thermostable with apparent melting temperatures above 70"** °C；且 **"the alpha-beta designs in Fig. 4 are particularly stable as none undergo unfolding transitions up to 95"** °C |
+| 14 | 挑中的少数设计 | 溶液 NMR（0515）与 X 射线晶体学（0217、0738_mod）拿真结构 | **"the ensemble of 20 structures had a Ca root mean square deviation (RMSD) to the hallucinated model of ~1.84"**；**"the backbone RMSD between model and crystal structure is 2.53"** Å over all 100 residues；**"A single solution was found in I 2 3 from one of the ab initio models with two copies in the asymmetric unit and a TFZ score of 13.3 (no other model yielded a TFZ score >8)."** | **"We determined the structures of three of the hallucinated proteins, two by x-ray crystallography and one by NMR, and these closely matched the hallucinated models."**（PDB 7M5T / 7K3H / 7M0Q） |
+| 15 | 三个已测设计 | 动力学回查"是不是只有一个构象" | hetNOE 分布与峰数；**"it has more than double the expected number of peaks, indicating at least two folded conformations"** | **"The solution data for designs 0515 and 0217 (dimer) suggest well-ordered structures in solution, with internal dynamics typical of small natural proteins."**；0738_mod 为慢交换多构象 |
+| 16 | 需要单体的分支 | 把表面疏水残基改极性后重测 | **"we found that substitution of surface hydrophobic residues with polar residues in a subset of the hallucinations that formed oligomers resulted in monomeric species by SEC"** | 得到 0738_mod，**"Structural superposition of the 0738 model and 0738_mod crystal structure revealed a 3.68 Å Ca RMSD over 96 residues"**（半段 **"with backbone RMSDs of 1.32 Å over 57 residues, and 2.17 Å over 43 residues for the N-terminal and C-terminal half, respectively"**） |
+
+**漏斗逐级**：2,000 条幻觉 → 95 个 TM-score 簇 → 30 个最大簇内 297 个高分 → 人工目检去掉 3 个簇 → 27 簇里的 129 个下单 → 27 个单分散+CD 相符（21 个 Tm>70 °C）→ 3 个结构级验证 → 1 个（0738_mod）在溶液里还是多构象。
+
+## 4. 关键数字台账（全部来自本地全文，第 9 节逐条命中）
+
+| 数值 | 含义 | 出处（原句片段） |
+|---|---|---|
+| L = 100 aa | 全篇固定序列长度，未测更长 | "starting from a random amino acid sequence of length L ( L = 100 throughout this study" |
+| 40,000 步/轨迹；T=0.1 每 5,000 步减半 | MCMC 模拟退火参数 | "Each trajectory consisted of 40,000 attempted moves; the temperature T is 0.1 at the beginning of the trajectory and reduced by half every 5,000 steps." |
+| ~20,000 MC 步 | 距离图锐度追平天然蛋白的经验点 | "in almost all cases after ~20,000 Monte Carlo steps the resulting distance maps were at least as featured" |
+| 2,000 条 | 幻觉设计总数（=轨迹数） | "We used this approach to generate two thousand new proteins" |
+| 37 / 25 / 13 | 距离与三个取向角的离散 bin 数 N_d、N_ω,θ、N_φ（原文以公式给出） | "with ( N d = 37, N ω , θ = 25, N φ = 13 )" |
+| 0.17（median BLAST E-value）；~0.1（best） | 与 UniRef90 天然序列的无关程度 | "median BLAST E-value of the closest hit is 0.17" |
+| 0.6-0.9；0.78 | 幻觉结构与 PDB 最近邻的 TM-align/TM-score | "with TM-align scores of 0.6-0.9"；"average TM-scores to the closest match of 0.78" |
+| 1,110 条（100±10 aa） | 用来做空间对照的训练集天然蛋白数 | "1,110 proteins of similar length from the trRosetta training set" |
+| 95 簇 @ TM-score 0.75 | 结构去冗余的聚类阈值与结果 | "Average-linkage hierarchical clustering yielded 95 clusters with an average inter-cluster similarity of TM-score = 0.75." |
+| 30 个最大簇（成员 ≥7） | 打分范围 | "the 30 most populous clusters (which had 7 or more members)" |
+| 297 个 | 每簇 top 50% 或 top 20 之后的候选数 | "the highest scores (297 designs in total)" |
+| 3 个簇整簇删除；剩 27 簇；每簇 ≤10 | 人工目检后的最终下单池 | "three clusters were completely eliminated due to poor model quality."；"One-hundred twenty-nine hallucinated sequences from the remaining 27 structural clusters (no more than 10 designs per cluster)" |
+| 129 | 合成基因并下单实验的设计数 | "We obtained synthetic genes encoding 129 network hallucinated sequences" |
+| **27/129 ≈ 21%** | SEC 单分散（单体或小寡聚）且 CD 与目标一致 | "Of these, 27 yielded size exclusion chromatography (SEC) peaks corresponding to monomeric or small oligomeric species" |
+| 21 个（Tm > 70 °C） | 高热稳定子集 | "Twenty-one of the proteins were highly thermostable with apparent melting temperatures above 70" °C |
+| 95 °C 无转变 | 图 4 那批 αβ 设计的熔解上限 | "none undergo unfolding transitions up to 95" °C |
+| 82/129（Cα-RMSD <3.0 Å） | Rosetta ab initio 独立折叠模拟回到目标构象 | "For 82 out of 129, the lowest energy structures found in the simulations were close to the corresponding hallucinated structures with Cα-RMSDs <3.0 Å" |
+| 129/129 | 从设计模型起点的最低能低于从伸展链起点的最低能 | "for all 129 the lowest energy structure sampled starting from the design model was lower in energy than any other structure obtained starting from an extended chain" |
+| 3/129 | 拿到真实三维结构（2 晶体 + 1 NMR） | "We determined the structures of three of the hallucinated proteins, two by x-ray crystallography and one by NMR" |
+| ~1.84 Å（正文）/ 1.85 Å（附图） | 0515 的 20 结构 NMR 系综对幻觉模型的 Ca RMSD | "the ensemble of 20 structures had a Ca root mean square deviation (RMSD) to the hallucinated model of ~1.84" |
+| 2.9 Å（正文）/ 47.8-3.0 Å（附表） | 0217 晶体衍射分辨率，两个口径不一致 | "We also succeeded in determining a 2.9" Å resolution crystal structure of design 0217 |
+| 2.53 Å over 100 residues | 0217 模型-晶体骨架 RMSD | "the backbone RMSD between model and crystal structure is 2.53" |
+| 3.68 Å over 96 residues；1.32 Å/57 + 2.17 Å/43 | 0738_mod 整链与分半段的模型-晶体 RMSD | "revealed a 3.68 Å Ca RMSD over 96 residues" |
+| 0.021；0.29 与 0.63 | 三个已测设计的 BLAST E-value 上限；0738 两半段各自最近 PDB 命中 E-value | "all have E-values worse than 0.021"；"the closest BLAST hits in the PDB for the N and C terminal halves have E-values of 0.29 and 0.63, respectively." |
+| 42 个 all-alpha 设计 | 图 3  dendrogram 里被聚类的 α 组规模 | "Dendrogram showing 42 all-alpha designs clustered by structural similarity (TM-score)" |
+| TFZ 13.3（其余模型 <8）；2,000 个 MR 模型 | 0217 分子置换只靠一个 ab initio 模型命中 | "A single solution was found in I 2 3 from one of the ab initio models with two copies in the asymmetric unit and a TFZ score of 13.3 (no other model yielded a TFZ score >8)." |
+| 99% / 0%；96% / 0% | 0217 与 0738_mod 的 Ramachandran favored / outliers | "For 0217 final Ramachandran favored and outliers were 99% and 0%, respectively." |
+| 21 aa 前导（His-tag + thrombin）；~14 mL SEC 峰；>95% SDS-PAGE；0.35 mg/ml CD；1 mM IPTG 诱导 | 湿实验条件（可复现参数） | "an additional 21-residue N-terminal sequence containing a His-tag and thrombin cleavage site to aid purification" |
+| 机时/费用：**未记录** | 全文没有 GPU/CPU 时长或成本数字 | 全文检索无 cost/GPU-hours/CPU-hours 表述（本文口径：只有轨迹数 × 步数） |
+
+## 5. 结论——作者说了什么（只写他们的原话口径）
+
+1. **核心命题**：只学过天然结构的网络可以被反过来用作生成器——"**Thus deep networks trained to predict native protein structures from their sequences can be inverted to design new proteins**"（摘要最后一句的前半），该句后半是"**should contribute, alongside traditional physically-based models, to the de novo design of proteins with new functions**"。
+2. **实验层面他们声明到的程度**："**Our results demonstrate that a deep neural network trained exclusively on native sequences and structures can generalize to create new proteins, with sequences unrelated to those of native proteins, that fold into stable structures.**"
+3. **物理独立性声明**："**Many of the hallucinated proteins are monomeric, stable, have the expected secondary structure, and are strongly predicted to fold to the target structure by Rosetta in completely orthogonal calculations**"，并在括号里补 "**we did not use Rosetta in any way for either sequence generation or selection for experimental characterization**"。
+4. **结构级证据的口径**："**The high similarity of the NMR and crystal structures to the hallucinated structure models demonstrate that the hallucination process solves the classic de novo protein design problem, despite having no explicit knowledge of the physics of protein folding.**"（注意：这里的"三个"仅指 129 个里解出结构的 3 个。）
+5. **最有概念冲击的一句**：网络从一堆不规则的天然结构里学到的，恰好是理想蛋白的特征，和资深设计者用传统方法得到的东西殊途同归——"**the deep neural network evidently learned to encode ideal protein structure properties very similar to expert protein designers using more traditional scientific approaches**"，且 0738_mod 在 PDB 里最像的结构居然是一个 Rosetta 时代的设计体 Top7（"**Indeed, the most similar structure in the PDB to the 0738_mod structure is the de novo designed protein Top7**"）。
+6. **作者自己列出的下一步（不是成果）**：改用梯度反传来加速采样；把损失函数推广到结合 motif 与催化位点周围；换成精度更高的预测网络（AF2/RF 那一代）——"**which should increase the precision with which new proteins can be hallucinated.**"
+7. **作者自认的缺陷**：方法在 backbone 层面运作、不含侧链显式表示，作者明写这条会留下构象异质性（"**incorporation of an explicit sidechain representation in the hallucination method could reduce such structural heterogeneity**"）。
+
+## 6. 结论——我们读出了什么（以下为推断，非作者原文）
+
+1. **这篇真正的新东西不是"造出了蛋白"，而是"把判据的所有权换了人"**。过去判断"这个设计靠不靠谱"由物理能量函数说了算，这里改由"网络对自己的预测有多反差鲜明"说了算。→ 对我们：任何"自洽度型"判据（pLDDT、Foldseek 命中、反折叠一致）在概念上都属这一族；它们的合法性来自"网络确实学到了序列-结构关系"，它们的失效边界也在这里——**判据与生成器共享同一个网络时，判据只能证明"网络自己满意"**。这篇至少用 Rosetta 正交复核（82/129）把这条鸿沟补了一次，这是我们漏斗里缺的动作。
+2. **21% 这个命中率的分母是人工挑剩下的 129，不是 2,000**。把漏斗全链摊开：2,000 → 297 → 129 → 27 → 3。按"每条轨迹最终拿到一个 CD 相符的可溶蛋白"算，端到端只有 27/2,000 ≈ 1.4%；结构级验证 3/2,000。所以引用这篇时，**"~21%" 与"从头设计成功率"不是同一件事**。→ 对我们：任何命中率必须绑定漏斗层级写明分母，否则会被下游当成端到端概率。
+3. **他们的成功判据是"形状对不对"，不是"事情做没做成"**。SEC 单分散 + CD 谱型相符 = 二级结构层面的自洽；只有 3 个上升到三维。→ 对我们：UAA 合成酶的成功是三个化学事件（S0 游离 UTP 起始、S1 pppUA、S2 第二枚 ATP/环化竞争）与副产物抑制，**结构自洽既不必要也不充分**；这篇不能给任何"折叠对了 ≈ 有活性"的乐观加成。
+4. **"网络只会造它见过的 fold"是硬边界**。TM-align 0.6-0.9、最近邻平均 TM-score 0.78，说明幻觉是在天然折叠空间邻域里的插值，不是外推；作者还把"不像天然、只像理想蛋白"当成优点。→ 对我们：想让活性位点带非天然侧链/金属中心，不能指望同一个只在天然 20 种氨基酸上训练的网络在分布外给出可信置信度——**这篇的 Cys 都被人为排除**，可以看出它对非常规化学根本没有概念。
+5. **最像"我们的失败分型"的一条**：他们把失败拆成"糊（没锐化）/ 抱团（寡聚）/ 多构象（慢交换）"三类，且每类都对应一个具体处置（继续退火 / 表面疏水改极性 / 需要显式侧链）。→ 我们应当把候选按"卡在哪个化学事件 + 是否可测"分类标注，允许 UNKNOWN 与 METHOD_FAIL 两个状态，而不是给一个笼统的低分。
+6. **"人工目检"是他们漏斗里唯一不可复现的一环**（cavities/voids、疏水补丁、二级结构错形，全部没有量化阈值）。→ 我们：漏斗最后一道闸必须写成能算的规则或至少能贴图的判据，不然结果无法解释也无法复现。
+
+## 7. 局限与失败（作者自述的 + 我们读出的）
+
+**作者自己写进正文的局限**
+
+1. 只有三维级验证的样本极少：129 下单里只解出 3 个结构，其余 24 个"成功"仅到 SEC 单分散 + CD 谱型层面；而 CD 只能证二级结构含量相符，不能证拓扑与界面。
+2. backbone-only、无侧链：作者直接承认这会导致 alternative packed states 与构象异质性（"**For design 0738_mod the solution data indicate multiple monomeric conformations in solution in slow conformational exchange**"）。
+3. 长度固定 100 aa，全文没有第二条长度；作者没有声称可扩展，也没给失败案例。
+4. 只造"会不会折"，完全不涉及功能：无结合、无催化、无配体；作者把功能化明确留在 future work（"**around which the network can hallucinate new protein inhibitors or enzyme catalysts.**"）。
+5. 采样效率低：MCMC 每条 40,000 步、每步一次网络前向，作者自己说可以更 efficient 地用梯度反传。
+
+**我们读出的、作者没写的局限**
+
+6. **"27/129 ≈ 21%" 是被两级人工削减之后的数字**（2,000 → 30 簇打分 → 297 → 目检 129），端到端通过率低一个数量级；论文没有报告被目检淘汰的 168 个的失败原因分布。
+7. **"设计模型起点最低能 < 伸展链起点最低能" 这条 129/129 的复核几乎不构成证据**：起点本身就在目标构象的吸引域内，ab initio 从伸展链出发又只采样有限的漏斗，这条更接近"搜索过程的一部分"而非独立检验。真正有信息量的是 82/129 那个 <3.0 Å 口径，也就是说**约 36% 的设计在物理复核里没回到目标构象**。
+8. **文内有两处口径要对齐才能引用**，本卡如实记下：0515 的模型-实验偏差正文给 "the ensemble of 20 structures had a Ca root mean square deviation (RMSD) to the hallucinated model of ~1.84"，附图给的是 medoid 口径 **"reveal 1.85 Å backbone RMSD over 100 residues"**，两者不是同一个统计量，引用时必须指定系综还是 medoid；0217 的分辨率正文说 **"We also succeeded in determining a 2.9"** Å，而附表写 Resolution (Å) 47.8-3.0，两处上限差 0.1 Å。表里 R work/R free 为 0.24/0.27（0217）与 0.21/0.25（0738_mod），在 2.4-3.0 Å 这种中低分辨下，backbone RMSD 2.53 Å 与作者说的 "closely matched" 之间的解释余量不小。
+9. **"与天然序列无关" 的对照口径偏旧**：BLAST 对 UniRef90 v2017_12、结构比对对 2020-03-11 版 PDB；作者用 E-value 0.1 级来主张无关，但 E-value ~0.1 只说明没有显著序列同源性，不排除短模体层面的复用（作者自己做了 gappless threading 片段检查，图注称 **"There is no apparent tendency"** 后面的 "copy over" 用了引号，故本卡不把它当逐字引句核验）。
+10. **成本完全没量化**：全文无机时、无每条设计的花费、无成功率随算力预算的曲线；对后来所有想复用这条路的人，这是最难抄走的一块。
+11. 本卡未核验的部分：补充材料（Suppl. Figs 1-7 与 Supplementary discussion、Suppl. Table 1）只有引用没有正文，本地全文不含其完整内容；Extended Data 图的原图未取。
+
+## 8. 对 UAA 筛选的迁移判断
+
+**可迁移（怎么用）**
+
+1. **"自洽度可以当生成目标"这条思路**（不是它的阈值）。若要把某个结构预测器/嵌入模型的置信度当作候选生成的引导项，可以照这篇的形式化：准备一个"什么都不懂"的背景分布（本文用不给序列身份的同架构网络当熔球态参照），把目标写成两个分布的 KL 反差，并在同一目标里加一条**防止分布跑偏的组成项**。我们如果要在序列空间里引导"活性位点几何"，可套用这套"目标 = 反差 − 偏离"的两段式，而不是只用一个越大越好的分数。
+2. **正交复核的组织方式（最有价值的一条）**："**we did not use Rosetta in any way for either sequence generation or selection for experimental characterization**"——凡是自洽度型判据，都要配一个与生成器不共享参数/训练数据的第二意见（对我们会是 xTB/半经验或 Rosetta 侧链打包一类的独立打分），并把两个口径同时报出来（本文 82/129 就是这个格式）。
+3. **把失败分类成可处置的三态**：本文的"糊 / 抱团 / 多构象"对应三种处置。我们每个候选标注为"卡在 S0（游离 UTP 起始）/ S1（pppUA）/ S2（第二枚 ATP 与环化竞争）"，并允许 UNKNOWN 与 METHOD_FAIL；分类不是打分，分类是为了决定下一步动哪一手。
+4. **"定点改表面性质以纠正一个明确缺陷"的模板**：识别出根因（网络带进了天然寡聚界面特征）→ 只做一类改动（表面疏水→极性）→ 重测同一性质（SEC 单体）。我们的对应动作应是"识别出竞争副产物来自哪一步 → 只改对应的一两个残基 → 用产物化学而不是表达量验收"。
+5. **漏斗逐级计数 + 每级口径的写法**：本卡的台账表就是我们要的引用格式（数值 · 含义 · 出处），今后我们自己的每一轮筛选也要按层级报数，而不是只报最后成功几个。
+
+**不可迁移（为什么不能照搬）**
+
+1. **本文的成功判据是"折叠到设计构象"，与 UAA 酶活没有逻辑通路**。SEC 单分散 + CD 相符，甚至 1.84-2.53 Å 的 backbone RMSD，都只回答"形状"；UAA 合成酶要回答"三步化学事件按顺序发生且不产生错误产物"。结构自洽对后者既不必要也不充分。**DP2R 口径明确禁止把这类结构一致性判据当酶活闸口**，所以本文没有任何数字可以进我们的漏斗阈值表。
+2. **"21%" 不能当我们的命中率预期，也不能反向校准我们的目标概率**。它的分母是人工目检挑剩的 129，标签是"可溶+CD 相符"，绝对端到端只有 27/2,000 量级，结构级 3/2,000；我们的体系连一个"已知正确"的正样本都没有（**至今没有一条被产物化学确认的天然 UAA 合成酶**），根本不具备可比性。这里只许引用它的**方法结构**，不许引用它的**比例数字**。
+3. **KL 对比度只惩罚"模糊"，不惩罚"错"**。网络可以在一张很锐但错的距离图上达到最高反差（本文 0738_mod 整链 3.68 Å 就是"自信但走偏"的实例）。所以"让模型自己很满意"不能当我们的筛选闸口，尤其不能用在含非天然化学的位点上——本文连 Cys 都因化学不稳定而被整体排除，说明这套输入根本没有非常规残基的概念。
+4. **无 MD、无 QM、无自由能**：这篇不能为"用 MD/QM 判催化可行性"提供任何命中率背书（它自己的正交复核用的是 Rosetta ab initio 蒙特卡洛折叠模拟，不是动力学轨迹）。我们若要在漏斗里放能量项，参照对象必须是别的工作。
+5. **通量结构不同**：本文 129 个样品是"表达→SEC→CD"的线性小批量，没有展示库、没有测序回收群体信号；我们的一轮验证上限是个位数构建体，末端必须靠**信息量最大化**（机制多样性 + 失活对照 + 副产物定量），不是样本数最大化。把它的"129 送测"当成我们的通量目标是没有意义的。
+
+## 9. 溯源与自检
+
+引句底稿: data/literature_cards/fulltext/B03_PMC9293396_text.txt
+
+- **本卡实际照着写的那一份**：`data/literature_cards/fulltext/B03_PMC9293396_text.txt`（68,260 B，sha256 前 16 位 `71b4f4c28141d997`），由同目录 `B03_PMC9293396_fullTextXML.xml`（140,627 B，sha16 `c997411200d3d732`）经 `scripts/litcards_text.py` 的 `strip_tags + norm` 得到。**该 XML 是 NCBI efetch 回退通路抓的 NIHMS 作者接收稿**（Europe PMC 通道两次 HTTP 500，见 `fetch_log.tsv` 第 56、113 行）；同一篇论文若换 Europe PMC 抽取版，句中夹的参考文献标号位置会变，所以本卡全部引句只以这份文本为准。
+- 抄写纪律：所有引句为从该文本复制粘贴的原句；凡原文两句之间夹参考文献标号（如 `with trRosetta 3 .`、`methods 22`）或图号处，本卡一律**截断或拆成两条**，不做跨句拼接；不使用省略号开头/结尾；状态名与术语（UNKNOWN、METHOD_FAIL、pLDDT 等）不加英文引号；中文叙述里的引号只用全角或与英文引句成对出现，避免配对歧义。
+- 特殊字符坑：本文件的 Å 统一为 U+212B（与底稿一致，非 U+00C5）；α 为 U+03B1（`Cα-RMSDs` 原样），这三处是抄写最容易假红的地方，已用门禁逐字核验。
+- 对照底稿行号：`sources/baker.md:41-52`（原摘要级卡，129/27 的口径来自那里）；`sources/baker.md:603`（骨架生成方法对照行）、`sources/baker.md:636`（"筛子换人"的时间线判断）。**原卡标 `evidence_level=摘要级`、`thresholds=未记录`，本卡升级为全文级并把阈值补全，CSV 的这两个字段应据此改写**（本代理未改 CSV，按作业单禁止项执行）。
+- CSV 字段映射：第 3 节 ↔ `候选生成方法 / 计算筛选判据 / 阈值数字`；第 4 节 ↔ `候选数递减 / 实验命中率 / 成本统计`；第 8 节 ↔ `在方法演进链的位置`。
+- 编号与年份对账：CSV 记 `Nature, 2021, 600:547-552`、year=2021、DOI `10.1038/s41586-021-04184-w`、PMCID `PMC9293396`；本地全文首部元数据为 `12 2021 … 600 7889 412601 547 552`，与 CSV 一致。**任务描述里的"Nature 2020 / Anfinsen 等"与本文不符**：本文第一作者是 Anishchenko I（Ivan Anishchenko），通讯 Baker D；2020 是该文的 online/接收语境（DOI 前缀 s41586-021 表明 2021 年刊出）。本卡按 CSV 与本地全文的 2021 记录。
+- **本卡自检**：`PYTHONIOENCODING=utf-8 python scripts/verify_literature_cards.py --only "B03" --no-report`，结果见交回信息；另用同规则的一次性内存检查脚本（只读，不落生产产物）逐条预核验，卡片完成时 miss=0。
+
+<!--CSV回填
+work_type=论文
+target=全新可溶小蛋白单体（固定 100 aa；无靶点、无功能位点；序列与训练集天然蛋白无关）
+backbone_generation=随机 100 aa 序列（排除 Cys）→ trRosetta 预测 6D 距离/取向分布 → 序列空间 MCMC 模拟退火最大化 KL 对比度 → 最终锐化图用 trRosetta 直接最小化成三维骨架；骨架与序列同时产生，无蓝图、无模板
+computational_filters=KL(P_trRosetta 对 Q_background) 对比度为主目标；氨基酸组成相对 PDB 的负 KL 为约束项；TM-score 层次聚类去冗余；簇内 score = KL 对比度 + 交叉熵差（幻觉结构对网络预测分布的贴合度）；Rosetta ab initio 折叠漏斗做正交复核（明确不参与生成与下单挑选）；人工目检剔除内部空腔、延展表面疏水斑块、错形二级结构
+thresholds=L=100 aa；每条轨迹 40,000 次尝试替换，T=0.1 且每 5,000 步减半；~20,000 MC 步后距离图锐度追平天然蛋白（经验停止点）；聚类阈值 TM-score=0.75（95 簇）；仅取 30 个最大簇（成员≥7）；每簇 top 50% 或 top 20（较小者）→297；目检后 3 簇全删、剩 27 簇、每簇≤10 →129 下单；Rosetta 复核口径 Cα-RMSD<3.0 Å（82/129）；湿实验口径 SEC 单体/小寡聚峰 + CD 与目标二级结构一致（27/129）、表观 Tm>70 °C（21 个）、95 °C 无转变（图 4 那批 αβ）
+md_used=否（全文无分子动力学；正交复核是 Rosetta ab initio 蒙特卡洛折叠模拟与能量打分，不是 MD 轨迹）
+qm_used=否（无量子化学；生成阶段完全不含侧链，只有主链级几何）
+experimental_methods=合成基因→pET28b(+) 带 21 aa His-tag/凝血酶切点前导→E. coli BL21(DE3)（LB 过夜 + Studier 自诱导）→镍柱 IMAC→Superdex 75 10/300 GL SEC（~14 mL 单体峰）+ SEC-MALS→远紫外 CD（260-195 nm、25-95 °C 每 10 °C、220 nm 熔解 2 °C/min、0.35 mg/ml、1 mm）；结构级：0515 溶液 NMR（U-15N/13C、NOE+TALOS-N+70 个 RDC，100 个模型取最低能 20 个用 CNS 精修，PDB 7M5T/BMRB 30890）、0217 与 0738_mod X 射线晶体学（Phaser 分子置换、Rosetta-Phenix/Phenix 精修，PDB 7K3H、7M0Q）；hetNOE 与 15N ZZ-exchange 查构象均一性
+pipeline_counts=2,000 条幻觉设计/轨迹 → 95 个 TM-score 簇 → 30 个最大簇内打分 → 297 → 人工目检删 3 簇、剩 27 簇 → 129 下单合成基因 → 27 单分散且 CD 相符（21 个 Tm>70 °C）→ 3 个三维结构解析（其中 0738_mod 需先做表面疏水→极性改造才结晶）
+hit_rate=27/129 ≈ 21%（口径仅到"可溶单分散 + CD 二级结构相符"）；结构级验证 3/129；Rosetta 正交复核 82/129 落在 Cα-RMSD<3.0 Å；端到端（2,000 轨迹→27 个可用蛋白）约 1.4%，本卡按 §6.2 推断口径列出，非作者所报
+best_metric=未记录（本文为单体折叠设计，无 Kd/转换数/催化效率等活性指标；可类比的最硬指标是结构自洽精度：0515 NMR 系综 ~1.84 Å、0217 晶体骨架 2.53 Å over 100 residues、0738_mod 半段 1.32 Å over 57 与 2.17 Å over 43 residues）
+cost_or_stat_note=未记录（全文无 GPU/CPU 机时、无费用、无吞吐数字）；可量化的算力口径只有：2,000 条轨迹 × 40,000 步（每步一次网络前向）、129 个体系的 Rosetta ab initio 大尺度折叠模拟、分子置换阶段 2,000 个截侧链模型逐个跑 Phaser（唯一 TFZ 13.3 命中，其余 <8）
+role_in_timeline=把"漏斗里的筛子"从物理能量函数换成结构预测网络自身置信度的第一步（KL 对比度即 pLDDT/pAE 型自洽判据的前身）；同时是第一个"骨架与序列一起生成"的 de novo 路线。其瓶颈（只能 100 aa、backbone-only 无侧链、fold 受限于网络训练分布、机时昂贵）直接催生后续的 ProteinMPNN（序列端 [B05]）、hallucination+AF2 界面判据的 binder 管线（[B06][B09]）与 RFdiffusion 类专用生成模型（[B08]）
+source_pointer=data/literature_cards/fulltext/B03_PMC9293396_text.txt（sha256 71b4f4c28141d997…，NIHMS1822786 作者接收稿）+ 同目录 _fullTextXML.xml；底稿对照 sources/baker.md:41-52；PDB 7K3H / 7M0Q / 7M5T
+CSV回填-->

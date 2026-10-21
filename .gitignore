@@ -1,0 +1,10 @@
+tmp/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+Thumbs.db
+.DS_Store
+
+# 抓取过程中留下的第三方网页快照：没有任何卡或底稿引用它们（grep 实测 0 引用），
+# 且页内含站点自身的公开 storefront key 串，提交进仓库只会造成噪音与误判。
+data/interim/claim_lit/*.html
