@@ -216,3 +216,17 @@ summary 实测：FULLTEXT 87 / DEGRADED 65；声明用 MD 36 行、用 QM 18 行
 - 全库凭据扫描（正则覆盖 password/api-key/token/BEGIN KEY/AKIA/ghp_）：除上述第三方页面外 **0 命中**。
 - **推送未执行**：`gh auth status` 实测 github.com 账号 Elephenman 的 keyring 令牌 **invalid**，
   需用户本人 `gh auth login`（或指定已有远端）后才能推；公开发布还涉及全文缓存的再分发许可，见 README"公开前请读这段"。
+
+### 8.3 推送完成（私有仓库，全文缓存一起收）
+
+沿用这台机器既有的 GitHub 通路，不新造认证方式：实测 `ssh -T git@github.com` 用 `~/.ssh/github_id_ed25519`
+返回 `Hi Elephenman!`（:22 与 ssh.github.com:443 都通）；`~/.git-credentials` 里那条 40 字符 classic PAT
+经 `GET /user` 实测有效（scope 含 `repo`），`gh` 的 keyring 令牌仍是 invalid（未动它，推送走 SSH 用不到）。
+
+- 新建私有仓库 `Elephenman/protein-design-screening-reference`（`POST /user/repos`，`auto_init=false`，
+  issues/wiki/projects 关；命名沿用该账号 kebab-case 风格）。
+- `git remote add origin git@github.com:…git` → `git push -u origin main`，退出码 0。
+- 远端核对（不看本地自述）：`git ls-remote` 的 main = `3a67bdcf…` = 本地 HEAD；
+  Trees API `recursive=1` 得 **445 个 blob**，与 `git ls-files` 计数一致，且 README/report/总表/工作流文档/
+  样板卡/门禁脚本/K40 全文/改动账 8 个抽查文件全在；`.gitignore` 排除的三张第三方网页快照确认 0 个 html 入库。
+- 提交作者 `Elephenman <217536768+…@users.noreply.github.com>`，无 AI 署名。
