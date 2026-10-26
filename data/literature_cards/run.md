@@ -230,3 +230,30 @@ summary 实测：FULLTEXT 87 / DEGRADED 65；声明用 MD 36 行、用 QM 18 行
   Trees API `recursive=1` 得 **445 个 blob**，与 `git ls-files` 计数一致，且 README/report/总表/工作流文档/
   样板卡/门禁脚本/K40 全文/改动账 8 个抽查文件全在；`.gitignore` 排除的三张第三方网页快照确认 0 个 html 入库。
 - 提交作者 `Elephenman <217536768+…@users.noreply.github.com>`，无 AI 署名。
+
+## 9. 2026-10-21 登记进 MD 资料库（`A:\Data\MD`）
+
+用户指令："把这东西加到资料库里去。这现在就是我们最重要的核心资料了。"
+
+先说清一件事：这个项目目录本来就住在资料库的 `projects/` 下，缺的不是"复制进去"，而是**索引里没有入口**
+（资料库 README 只有 docs/01–17 的地图，`projects/` 只有一行通用说明；`docs/04` 的 56 条也只覆盖 MD/MLIP）。
+所以本轮只做登记，不改任何卡片、CSV 或门禁脚本。
+
+改了两个库文件（都属资料库自身的索引层）：
+
+- `A:\Data\MD\README.md`：在 DP2R 提示之后、文档地图之前新增 `## 核心资料（2026-10-21 起）：蛋白设计筛选参考库`，
+  给出 7 个入口（项目 README、report、工作流文档、总表 CSV、精读卡目录、证据台账、判据台账；另附私有仓库地址），
+  附实测规模（152/152 PASS、87 行有本地全文、65 行摘要级/二级来源、9 份挂错行全文已隔离）与四条引用纪律；
+  `数据目录` 里的 `projects/` 那一行补上指回本节的说明。
+- `A:\Data\MD\docs\04-文献库-2021-2026.md`：标题下加"跨库指针"，写明本文件只管 MD/MLIP，设计/筛选/命中率/报价去
+  本项目，避免 AI 把 04 当成全库文献底座。
+
+核对（不信自述，逐条实测）：
+
+- 新入口的每个相对链接都存在（脚本解析并 `Path.exists()` 判定，见下）；
+- 文中数字全部重算：CSV 152 行 × 27 列；`inventory.json` 里 `local` 非空的 **87 行**，按目录归属为
+  `data/literature_cards/fulltext/` 41 行 + `data/interim/baker_lit/` 39 行 + `data/interim/claim_lit/` 13 行
+  （6 行跨两处，故和 93 大于 87）；`..._summary.txt` 自报 FULLTEXT 87 / DEGRADED 65。
+- 卡片与 CSV 本轮零改动，`verify_literature_cards.py` 复跑仍为 152/152 PASS（退出码 0）。
+- 清单自相矛盾照旧留在案上（K49 期刊、K48 年份、K59 核验状态、4 行 `证据级别` 过期），新入口里直接指向
+  README 的"已知缺陷"，没有把未定的改动写成已改。

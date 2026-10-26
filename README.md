@@ -24,7 +24,7 @@
 | `data/protein_design_literature.csv` | 文献总表：152 行 × 27 列（按 `人物组` 列首组计：通用方法学 67 / Baker 组 44 / 曹龙兴组 21 / 周如鸿组 16 / 口径对照与独立复核 4；多组重叠行有 13 行，故与"该组出现次数"口径不同） |
 | `data/literature_cards/*.md` | 每篇一张精读卡，十节固定：0 元信息 · 1 解决什么 · 2 难点与应对 · 3 方法工作流 · 4 数字台账 · 5 作者说了什么 · 6 我们怎么推断 · 7 局限 · 8 能不能迁移 · 9 溯源（含 14 键 CSV 回填块） |
 | `data/literature_cards/AGENT_RULES.md` | 写卡规程（引句必须逐字、文件名 slug、非论文行写"取证卡"的口径） |
-| `data/literature_cards/fulltext/` | 本地全文抽取（87 行有底稿）；`_quarantine/` 是身份体检判定"挂错行"的 9 份 + 日志 |
+| `data/literature_cards/fulltext/` | 本地全文抽取：41 行用本目录（另有 39 行用 `data/interim/baker_lit/ft/`、13 行用 `data/interim/claim_lit/`，6 行跨两处，合计覆盖 87 行）；`_quarantine/` 是身份体检判定"挂错行"的 9 份 + 日志 |
 | `data/literature_cards/run.md` | 过程账：每一步的脚本、参数、实测输出、踩过的坑与更正 |
 | `data/interim/` | 抓取日志、回写前的 CSV 备份、2000 处字段改动账 |
 | `sources/*.md` | 四份调研底稿（Baker 组、周如鸿组、曹龙兴组、成本与判据经济学） |
