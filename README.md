@@ -27,7 +27,7 @@
 | `..._full_<date>.zip` | git 跟踪的全部 445 个文件（含全文缓存与抓取日志） | 换机器重建；能原样复跑逐字引句门禁 |
 | `..._ai_<date>.zip` | 卡片 + 总表 + 台账 + 模板 + 脚本 + 调研底稿，**不含** `fulltext/` 与 `data/interim/`，另附 `ai_ingest/` 分层 digest | 喂给别的 AI 当资料库 |
 
-`ai_ingest/` 的分层：`tier0_index.md`（是什么+三条禁令）→ `tier1_core.md`（README+两份工作流+模板+前沿核验，≈2.7 万 token）
+`ai_ingest/` 的分层：`tier0_index.md`（是什么+三条禁令）→ `tier1_core.md`（README+两份工作流+模板+前沿核验，≈2.9 万 token）
 → `tier2_cards.md`（152 张卡全文，≈130 万 token，**按编号取单张**，别整份喂）→ `tier3_ledgers/`（CSV，结构化问题走这里）。
 喂法与 token 估算方法写在 `ai_ingest/HOW_TO_FEED.md`。AI 包不含论文原文，所以卡里的引句在该包内不可复核，
 只能查到声明的底稿路径与哈希——需要原文复核时必须用完整包或本仓库。

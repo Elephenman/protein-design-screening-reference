@@ -302,9 +302,9 @@ python scripts/build_bundles.py      # → deliverables/bundles/{full,ai}_<date>
 python scripts/build_bundles.py --check   # manifest 每行 sha256 与磁盘一致
 ```
 
-- `ai_ingest` digest 实测：tier1_core ≈ 27,369 token、tier2_cards（152 张卡）≈ 1,297,700 token
+- `ai_ingest` digest 实测：tier1_core ≈ 28,810 token、tier2_cards（152 张卡）≈ 1,297,700 token
   （估算方法写进 `HOW_TO_FEED.md`：中日韩 1 token/字、其余 4 字符/token，属粗估）。
-- 完整包 = `git ls-files` 全部 453 个跟踪文件、约 9.75 MiB；AI 包 = 221 个文件、约 8.08 MiB
+- 完整包 = `git ls-files` 全部 454 个跟踪文件、约 9.77 MiB；AI 包 = 221 个文件、约 8.09 MiB
   （剔 `fulltext/`、`data/interim/`、派工/日志类文件，加 `ai_ingest/` digest），
   `--check` 判 PASS（manifest 每行 sha256 与磁盘一致），且脚本自己验"AI 包 0 处缓存泄漏"。
   包级 sha256 见 `deliverables/bundles/SHA256SUMS.txt`（每次构建重写，故此处不抄数）。
