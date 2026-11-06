@@ -348,3 +348,25 @@ python scripts/build_bundles.py --check   # manifest 每行 sha256 与磁盘一�
 
 这条属于"打包脚本顺手抓到的账面不一致"——它没有让门禁变红，因为门禁的规则是"每行≥1 张"，
 而我把"152 张卡"当成了事实写在多处文档里。计数应来自重算，不该来自行数相等。
+
+### 10.6 Release 上传与远端核对
+
+- 私有仓库 `Elephenman/protein-design-screening-reference`：`main` = `3130ad3`；tag `v1-template-and-bundles` → 同一 commit
+  （该 tag 被重指向过两次：一次为复核纠正 `f87af04`→`250b64f`，一次为打包路径修正；每次都是 `git tag -f` + `git push -f`，
+  仓库只有本人使用，没有他人基于旧 tag 的工作）。
+- Release <https://github.com/Elephenman/protein-design-screening-reference/releases/tag/v1-template-and-bundles>，
+  两枚资产（id 717875304 / 717875858）：
+  `..._ai_2026-11-07.zip` 8,481,377 B，`..._full_2026-11-07.zip` 10,247,986 B。
+  **远端核对不是看上传返回码**：用 `Accept: application/octet-stream` 把两枚资产重新下载回来算 sha256，
+  与本地逐字节一致（PASS 2/2），且 Release 正文里写的哈希就是这两枚包。
+- 本机取回包的命令（迁移到别的机器时）：
+  `curl -L -H "Authorization: token <PAT>" -H "Accept: application/octet-stream" -o ai.zip https://api.github.com/repos/Elephenman/protein-design-screening-reference/releases/assets/<id>`
+  ，或直接用 Release 页面的下载链接（浏览器已登录即可）。
+- 三条本轮踩过的操作错，记下来防止复发：
+  ① Python 直连 api.github.com 本轮开始报 `SSL: CERTIFICATE_VERIFY_FAILED / unable to get issuer certificate`
+     （同一份代码在创建 Release 时是通的），换 `curl.exe`（Schannel，走 Windows 根证书库）后稳定；
+  ② DELETE/POST 资产要分别用 `/repos/.../releases/assets/<id>` 与 `uploads.github.com/.../assets?name=`，
+     我把两者都写成 `/releases/<id>/assets` ⇒ 三个 404（幸好删除返回 404＝没删成，没造成资产丢失）；
+  ③ digest 的包内路径一开始嵌成 `deliverables/bundles/ai_ingest/...`，与 tier0 自己写的相对路径不符 ⇒ 改为顶层 `ai_ingest/`。
+- **包与本段的先后关系**：两枚 zip 是从 `3130ad3` 打的，本节（§10.6）在该 commit 之后写入，
+  因此包里没有这段 Release 记录；除此之外包内容与该 commit 的跟踪文件一一对应（`--check` 判 manifest 逐文件哈希一致）。
