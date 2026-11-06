@@ -9,13 +9,28 @@
 ## 三分钟上手
 
 1. [report.md](report.md) — 结论报告（含"我们没能核实到什么"的缺口清单 §八）。
-2. [deliverables/protein_design_workflow.md](deliverables/protein_design_workflow.md) — 工作流文档：十个阶段、
-   判据一览表、每候选成本表、六个常见自欺、MD/QM 该放哪。
-3. [data/protein_design_literature.csv](data/protein_design_literature.csv) — 总表。Excel 直接打开（UTF-8 BOM）。
+2. [工作流模板](deliverables/protein_design_workflow_template.md) — **开工就抄这份**：十个阶段的默认阈值、闸口、
+   停止条件、预算四档、阈值重校准协议，外加三个分支页（binder / 酶 / 肽与大环）。
+3. [证据工作流](deliverables/protein_design_workflow.md) — 模板里每个数字的原文出处与失灵域（"别人怎么做的"记录）。
+4. [data/protein_design_literature.csv](data/protein_design_literature.csv) — 总表。Excel 直接打开（UTF-8 BOM）。
    看任意一行，最后两列 `精读卡文件` 给出单卡路径、`精读卡全文(方法·工作流·遇坑)` 直接把整张卡塞在单元格里。
 
 想查某个数字的出处：先在总表 `阈值数字` / `实验命中率` / `成本/统计` 列里搜，再顺着 `原文出处指针` 列
 进卡（卡 §4 数字台账、§9 溯源），最后进卡声明的 `引句底稿`（本地全文或调研记录）。
+
+## 迁移包与"喂给别的 AI"
+
+`python scripts/build_bundles.py` 在 `deliverables/bundles/` 生成两个包（也发布在本仓库的 GitHub Release 上）：
+
+| 包 | 内容 | 用途 |
+|---|---|---|
+| `..._full_<date>.zip` | git 跟踪的全部 445 个文件（含全文缓存与抓取日志） | 换机器重建；能原样复跑逐字引句门禁 |
+| `..._ai_<date>.zip` | 卡片 + 总表 + 台账 + 模板 + 脚本 + 调研底稿，**不含** `fulltext/` 与 `data/interim/`，另附 `ai_ingest/` 分层 digest | 喂给别的 AI 当资料库 |
+
+`ai_ingest/` 的分层：`tier0_index.md`（是什么+三条禁令）→ `tier1_core.md`（README+两份工作流+模板+前沿核验，≈2.7 万 token）
+→ `tier2_cards.md`（152 张卡全文，≈130 万 token，**按编号取单张**，别整份喂）→ `tier3_ledgers/`（CSV，结构化问题走这里）。
+喂法与 token 估算方法写在 `ai_ingest/HOW_TO_FEED.md`。AI 包不含论文原文，所以卡里的引句在该包内不可复核，
+只能查到声明的底稿路径与哈希——需要原文复核时必须用完整包或本仓库。
 
 ## 目录
 
@@ -29,7 +44,8 @@
 | `data/interim/` | 抓取日志、回写前的 CSV 备份、2000 处字段改动账 |
 | `sources/*.md` | 四份调研底稿（Baker 组、周如鸿组、曹龙兴组、成本与判据经济学） |
 | `scripts/` | 建库、核验、抓取、回写、台账生成的全部脚本 |
-| `deliverables/` | 工作流文档 + 机器生成的证据台账 |
+| `deliverables/` | 工作流模板（主模板+三分支）+ 证据工作流文档 + 机器生成的证据台账 + 前沿方法核验清单 |
+| `deliverables/bundles/` | 迁移包与 AI 投喂包（由 `scripts/build_bundles.py` 生成，不进 git，发布走 GitHub Release） |
 
 ## 门禁（这就是"可复现"的意思）
 
@@ -37,7 +53,10 @@
 cd <项目根目录>
 set PYTHONIOENCODING=utf-8
 python scripts/verify_literature_cards.py     # 152/152 PASS 才算完整；退出码非 0 = 没做完
-python scripts/verify_workflow_doc.py         # 工作流文档的引用与链接体检
+python scripts/verify_workflow_doc.py         # 证据工作流文档的引用与链接体检
+python scripts/verify_workflow_template.py    # 模板：引用可查 + 每条默认阈值带证据级别 + 链接可达
+python scripts/verify_workflow_template.py --selftest   # 三种破坏必须各红一条
+python scripts/build_bundles.py --check       # 包内清单与磁盘哈希一致
 python scripts/build_workflow_evidence.py --check   # 台账行数必须等于从 CSV+卡重算的行数
 ```
 
