@@ -302,10 +302,12 @@ python scripts/build_bundles.py      # → deliverables/bundles/{full,ai}_<date>
 python scripts/build_bundles.py --check   # manifest 每行 sha256 与磁盘一致
 ```
 
-- `ai_ingest` digest 实测：tier1_core ≈ 26,825 token、tier2_cards（152 张卡）≈ 1,297,700 token
+- `ai_ingest` digest 实测：tier1_core ≈ 27,369 token、tier2_cards（152 张卡）≈ 1,297,700 token
   （估算方法写进 `HOW_TO_FEED.md`：中日韩 1 token/字、其余 4 字符/token，属粗估）。
-- 完整包 = `git ls-files` 全部 452 个跟踪文件；AI 包 = 214 个文件（剔 `fulltext/`、`data/interim/`、派工/日志类文件，
-  加 `ai_ingest/` digest），`--check` 判 PASS，且脚本自己验"AI 包 0 处缓存泄漏"。
+- 完整包 = `git ls-files` 全部 453 个跟踪文件、约 9.75 MiB；AI 包 = 221 个文件、约 8.08 MiB
+  （剔 `fulltext/`、`data/interim/`、派工/日志类文件，加 `ai_ingest/` digest），
+  `--check` 判 PASS（manifest 每行 sha256 与磁盘一致），且脚本自己验"AI 包 0 处缓存泄漏"。
+  包级 sha256 见 `deliverables/bundles/SHA256SUMS.txt`（每次构建重写，故此处不抄数）。
 - **AI 包不含论文原文**，所以卡里的引句在该包内不可复核，只能查到声明的底稿路径与哈希；
   这一点写在 `tier0_index.md` 与 README 的"迁移包"一节，不让别人以为喂了包就等于有原文。
 - `deliverables/bundles/` 进 `.gitignore`（大二进制、可由脚本重建），发布走 GitHub Release 资产。
