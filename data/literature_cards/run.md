@@ -302,7 +302,7 @@ python scripts/build_bundles.py      # → deliverables/bundles/{full,ai}_<date>
 python scripts/build_bundles.py --check   # manifest 每行 sha256 与磁盘一致
 ```
 
-- `ai_ingest` digest 实测：tier1_core ≈ 28,810 token、tier2_cards（152 张卡）≈ 1,297,700 token
+- `ai_ingest` digest 实测：tier1_core ≈ 28,972 token、tier2_cards（153 个卡文件）≈ 1,297,746 token
   （估算方法写进 `HOW_TO_FEED.md`：中日韩 1 token/字、其余 4 字符/token，属粗估）。
 - 完整包 = `git ls-files` 全部 454 个跟踪文件、约 9.77 MiB；AI 包 = 221 个文件、约 8.09 MiB
   （剔 `fulltext/`、`data/interim/`、派工/日志类文件，加 `ai_ingest/` digest），
@@ -334,3 +334,17 @@ python scripts/build_bundles.py --check   # manifest 每行 sha256 与磁盘一�
 未覆盖专利库/Google Scholar/闭源代号"），因为笔记里"不存在该用途的方法""四个来源全部返回 0 条"两句都越界
 （后者还和笔记自己的表格矛盾）；`未单独复核` 的条目在模板里一律只准标 `P3`，不许升级成 `P2`。
 归档：`data/interim/frontier_2026_survey_2026-11-07.md`（原始笔记）＋`data/interim/frontier_2026_verify_2026-11-07.md`（复核逐字引文与判定）。
+
+### 10.5 打包时暴露的一处库内事实：B28 有两张卡
+
+`ai_ingest/tier2_cards.md` 的分隔行数是 **153**，不是 152。查下来不是 digest 的 bug，而是库里真有一个多卡行：
+
+- `B28_Dauparas-2023_NatComputSci_ligandmpnn.md` 与 `B28_Dauparas-2025_NatMethods_ligandmpnn-atomic-context.md`
+  是**同一篇**（Nature Methods 2025, 22:717-723, DOI 10.1038/s41592-025-02626-1, PMID 40155723, PMC11978504）的两张卡。
+  前者是早期登记时按预印本名起的文件名（卡内自己也注明了"slug 沿用早期命名，不改名"），后者是后来补写的版本。
+- 台账 `精读卡文件` 列指向**早期那张**；门禁按 `<编号>_*.md` 找卡，"每行至少一张"因此仍 152/152 PASS。
+- 处置：两张都保留（删任何一张都会切断已完成的引句核验链），但**引用一律以台账指向为准**；
+  digest 的 `tier0_index.md` 现在自动算出并写出这个差额，模板与 README 里不再写"152 张卡"这种含糊说法。
+
+这条属于"打包脚本顺手抓到的账面不一致"——它没有让门禁变红，因为门禁的规则是"每行≥1 张"，
+而我把"152 张卡"当成了事实写在多处文档里。计数应来自重算，不该来自行数相等。

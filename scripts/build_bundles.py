@@ -108,10 +108,21 @@ def build_digest(today: str) -> dict[str, int]:
     sizes: dict[str, int] = {}
     card_dir = ROOT / "data" / "literature_cards"
     cards = sorted(p for p in card_dir.glob("*.md") if not p.name.startswith(("README", "AGENT_RULES", "DISPATCH", "run")))
+    dup = {}
+    for p in cards:
+        dup.setdefault(p.name.split("_")[0], []).append(p.name)
+    dups = {k: v for k, v in dup.items() if len(v) > 1}
+    dup_note = ""
+    if dups:
+        dup_note = ("\n> **卡文件数与行数的差额**：本包有 {n} 个卡文件，对应 {rows} 行文献。差额来自 {detail}"
+                    "——同一行存在两张卡（同一篇的早期登记版与后续版），台账 `精读卡文件` 列指向的是"
+                    "早期命名那一张；两张都保留，因为删除会切断已有的引句核验链。引用时以台账指向为准。\n").format(
+            n=len(cards), rows=len(cards) - sum(len(v) - 1 for v in dups.values()),
+            detail="、".join(f"{k}（{' / '.join(v)}）" for k, v in sorted(dups.items())))
 
     tier0 = f"""# 蛋白设计筛选参考库 · 给 AI 的入口（构建日 {today}）
 
-这是一份**逐字核验过**的蛋白设计/筛选文献参考库，152 篇，每篇一张十节精读卡。
+这是一份**逐字核验过**的蛋白设计/筛选文献参考库，152 行文献、每行背后一张十节精读卡（个别行有两张，见下方差额说明）。
 你收到本包时按下面的顺序读，不要一次全读。
 
 ## 分层读取顺序
@@ -120,8 +131,9 @@ def build_digest(today: str) -> dict[str, int]:
 |---|---|---|---|
 | T0 | 本文件 | 是什么、怎么用、禁令 | — |
 | T1 | `tier1_core.md` | 项目 README + 证据工作流 + **可执行工作流模板（主模板+三分支）** + 前沿方法核验 + 口径统计 | {sizes.get('tier1_core.md', 0):,} |
-| T2 | `tier2_cards.md` | 152 张精读卡全文（十节：元信息/解决什么/难点/方法工作流/数字台账/作者原话/我们的推断/局限/可迁移性/溯源） | 见该文件头 |
+| T2 | `tier2_cards.md` | {len(cards)} 个精读卡文件全文（十节：元信息/解决什么/难点/方法工作流/数字台账/作者原话/我们的推断/局限/可迁移性/溯源） | 见该文件头 |
 | T3 | `tier3_ledgers/` | 机器台账 CSV（证据台账 152 行、判据台账 679 行）+ 文献总表 152 行 × 27 列 | 结构化数据，按需检索 |
+{dup_note}
 
 **AI 投喂包不含论文全文**（本包为许可与体积考虑剔除了 `fulltext/` 与 `data/interim/`）。
 因此卡里每条引句你只能查到"它声明的底稿路径 + 该底稿的 sha256"，不能在此包内复核原文；
@@ -157,9 +169,10 @@ def build_digest(today: str) -> dict[str, int]:
     write_text(DIGEST / "tier1_core.md", t1)
     sizes["tier1_core.md"] = est_tokens(t1)
 
-    cp = ["# T2 · 152 张精读卡全文\n\n",
+    cp = [f"# T2 · {len(cards)} 个精读卡文件（对应 152 行文献）\n\n",
           f"构建日 {today}。每卡前有一行 `===== <编号> | <文件> =====` 分隔。\n",
-          "卡内引句声明的底稿路径在本包内不可解析（AI 投喂包不含全文缓存）。\n"]
+          "卡内引句声明的底稿路径在本包内不可解析（AI 投喂包不含全文缓存）。\n",
+          "同行两张卡的情况见 tier0 的差额说明；引用时以台账 `精读卡文件` 列指向的那张为准。\n"]
     for p in cards:
         cp.append(f"\n\n===== {p.name.split('_')[0]} | data/literature_cards/{p.name} =====\n\n")
         cp.append(read(p))
@@ -194,19 +207,20 @@ def build_digest(today: str) -> dict[str, int]:
 
 # ---------------------------------------------------------------- bundling ----
 
-def build_zip(zip_path: Path, files: list[str], stamp: tuple[int, int, int, int, int, int]) -> list[tuple[str, int, str]]:
+def build_zip(zip_path: Path, pairs: list[tuple[str, str]], stamp: tuple[int, int, int, int, int, int]) -> list[tuple[str, int, str]]:
+    """pairs = [(压缩包内路径, 磁盘相对路径)]；manifest 记磁盘路径，包内用干净路径。"""
     rows: list[tuple[str, int, str]] = []
     with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
-        for f in files:
-            p = ROOT / f
+        for arc, relpath in pairs:
+            p = ROOT / relpath
             if not p.exists():
-                raise SystemExit(f"清单里的文件不存在：{f}")
+                raise SystemExit(f"清单里的文件不存在：{relpath}")
             data = p.read_bytes()
-            zi = zipfile.ZipInfo(f, date_time=stamp)
+            zi = zipfile.ZipInfo(arc, date_time=stamp)
             zi.compress_type = zipfile.ZIP_DEFLATED
             zi.external_attr = 0o644 << 16
             zf.writestr(zi, data)
-            rows.append((f, len(data), sha256(data)))
+            rows.append((relpath, len(data), sha256(data)))
     return rows
 
 
@@ -248,18 +262,19 @@ def main(argv=None) -> int:
     OUT.mkdir(parents=True, exist_ok=True)
     sizes = build_digest(today)
     print(f"digest: tier1≈{sizes['tier1_core.md']:,} tok, tier2≈{sizes['tier2_cards.md']:,} tok")
-
-    # digest 目录本身也要进 AI 包
-    digest_files = [rel(p) for p in sorted(DIGEST.rglob("*")) if p.is_file()]
     results = []
     if not args.ai_only:
         full_zip = OUT / f"protein_design_reference_full_{today}.zip"
-        rows = build_zip(full_zip, files, stamp)
+        rows = build_zip(full_zip, [(f, f) for f in files], stamp)
         mh = write_manifest(OUT / "manifest_full.csv", rows)
         results.append((full_zip, len(rows), mh))
     ai_zip = OUT / f"protein_design_reference_ai_{today}.zip"
-    ai_files = ai_file_list(files) + digest_files
-    rows = build_zip(ai_zip, sorted(set(ai_files)), stamp)
+    ai_pairs = [(f, f) for f in ai_file_list(files)]
+    # digest 在磁盘上位于 deliverables/bundles/ai_ingest/（被 gitignore），包内提到顶层 ai_ingest/，
+    # 否则收件人要按 deliverables/bundles/ai_ingest/... 找入口，与 tier0 里写的相对路径不符。
+    ai_pairs += [(d.relative_to(OUT).as_posix(), rel(d)) for d in sorted(DIGEST.rglob("*")) if d.is_file()]
+    ai_pairs = sorted(set(ai_pairs))
+    rows = build_zip(ai_zip, ai_pairs, stamp)
     mh = write_manifest(OUT / "manifest_ai.csv", rows)
     results.append((ai_zip, len(rows), mh))
 

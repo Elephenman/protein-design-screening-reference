@@ -28,7 +28,7 @@
 | `..._ai_<date>.zip` | 卡片 + 总表 + 台账 + 模板 + 脚本 + 调研底稿，**不含** `fulltext/` 与 `data/interim/`，另附 `ai_ingest/` 分层 digest | 喂给别的 AI 当资料库 |
 
 `ai_ingest/` 的分层：`tier0_index.md`（是什么+三条禁令）→ `tier1_core.md`（README+两份工作流+模板+前沿核验，≈2.9 万 token）
-→ `tier2_cards.md`（152 张卡全文，≈130 万 token，**按编号取单张**，别整份喂）→ `tier3_ledgers/`（CSV，结构化问题走这里）。
+→ `tier2_cards.md`（153 个卡文件 / 152 行，≈130 万 token，**按编号取单张**，别整份喂）→ `tier3_ledgers/`（CSV，结构化问题走这里）。
 喂法与 token 估算方法写在 `ai_ingest/HOW_TO_FEED.md`。AI 包不含论文原文，所以卡里的引句在该包内不可复核，
 只能查到声明的底稿路径与哈希——需要原文复核时必须用完整包或本仓库。
 
@@ -37,7 +37,7 @@
 | 路径 | 内容 |
 |---|---|
 | `data/protein_design_literature.csv` | 文献总表：152 行 × 27 列（按 `人物组` 列首组计：通用方法学 67 / Baker 组 44 / 曹龙兴组 21 / 周如鸿组 16 / 口径对照与独立复核 4；多组重叠行有 13 行，故与"该组出现次数"口径不同） |
-| `data/literature_cards/*.md` | 每篇一张精读卡，十节固定：0 元信息 · 1 解决什么 · 2 难点与应对 · 3 方法工作流 · 4 数字台账 · 5 作者说了什么 · 6 我们怎么推断 · 7 局限 · 8 能不能迁移 · 9 溯源（含 14 键 CSV 回填块） |
+| `data/literature_cards/*.md` | 每行一张精读卡（共 153 个卡文件，`B28` 一行有两张同篇卡，见"已知缺陷"），十节固定：0 元信息 · 1 解决什么 · 2 难点与应对 · 3 方法工作流 · 4 数字台账 · 5 作者说了什么 · 6 我们怎么推断 · 7 局限 · 8 能不能迁移 · 9 溯源（含 14 键 CSV 回填块） |
 | `data/literature_cards/AGENT_RULES.md` | 写卡规程（引句必须逐字、文件名 slug、非论文行写"取证卡"的口径） |
 | `data/literature_cards/fulltext/` | 本地全文抽取：41 行用本目录（另有 39 行用 `data/interim/baker_lit/ft/`、13 行用 `data/interim/claim_lit/`，6 行跨两处，合计覆盖 87 行）；`_quarantine/` 是身份体检判定"挂错行"的 9 份 + 日志 |
 | `data/literature_cards/run.md` | 过程账：每一步的脚本、参数、实测输出、踩过的坑与更正 |
@@ -82,6 +82,9 @@ python scripts/build_workflow_evidence.py --check   # 台账行数必须等于�
 - 表级待改：`K49` 的 `期刊或预印本` 写 Amino Acids，Europe PMC 实查是 **Biophysical Reviews 18 卷**（DOI 与全文没错）；
   `K48` 的 `年份` 写 2025，全文题录 2024；`K59` 的 `核验状态` 写"✅Crossref核验"而 `DOI=未记录`（核验对象是 C&EN 新闻条目 DOI）。
   这三列都不在 14 个回填键范围内，所以是"记录在案、尚未改表"，改动账见 `data/interim/csv_field_corrections.json` 的规则说明。
+- **`B28` 一行有两张卡**（`..._2023_NatComputSci_ligandmpnn.md` 早期登记版与 `..._2025_NatMethods_...md` 后续版，同一篇
+  Nature Methods 2025）。门禁规则是"每行 ≥1 张"，所以 152/152 仍 PASS，但卡文件数是 **153** 而不是 152。
+  两张都保留（删除会切断已完成的引句核验链），**引用一律以台账 `精读卡文件` 列指向的那张为准**。过程账见 `run.md` §10.5。
 - 65 行是 DEGRADED（没拿到正文）：它们的卡按摘要级/二级来源写，阈值与步骤细节不许补，卡 §2 已明写"未获正文无法核验"。
 - `data/literature_cards/fulltext/` 与 `data/interim/` 缓存的是各出版商/PMC 的开放获取全文抽取，
   **仅用于逐字引句核验**。若要公开发布，建议把这两个目录移出仓库（卡里已保留 SHA/身份块指针，核验链不断）。
