@@ -311,3 +311,26 @@ python scripts/build_bundles.py --check   # manifest 每行 sha256 与磁盘一�
 - **AI 包不含论文原文**，所以卡里的引句在该包内不可复核，只能查到声明的底稿路径与哈希；
   这一点写在 `tier0_index.md` 与 README 的"迁移包"一节，不让别人以为喂了包就等于有原文。
 - `deliverables/bundles/` 进 `.gitignore`（大二进制、可由脚本重建），发布走 GitHub Release 资产。
+
+### 10.4 复核代理回来的四条硬错（都已改写，原始笔记与复核结论两份都归档）
+
+复核对象是 6 条最高风险断言（S1/S2/S4/S6/S8/S9/S11 + S0 的范围声明），结论只有 **S9 完全可用**，其余"部分对"。
+四条如果照抄进模板就会误导执行：
+
+1. **RF3 的三个"自带阈值"用错了地方**。`pDE ≤ ln(0.075·length)` / `pLDDT ≥ 0.62` / `pAE ≤ 15` 确实逐字存在于
+   技术报告，但出处是**补充材料 §A.2.2 的 RNA 蒸馏集构造**（用来过滤预测结构以造训练数据），全文 `pDE` 只在这一段出现；
+   rf3/rfd3/rfo/主 四个 README grep `0.075`、`0.62`、`pDE` 全 0 命中，"官方默认筛子"这条退路不存在。
+   → 模板 ④ 那一行改成"RF3 复折可用，但它自带的设计筛选阈值未取得"，可安全引用的只剩 `mean pLDDT > 80` + `mean interface PAE < 10`。
+2. **"跨系列 500× 看不见"的一手来源不是 JCTC 那篇**。复核新定位到 **ChemMedChem `10.1002/cmdc.70531`**
+   （PMID 42894262 / PMC13677808，15-PGDH 四个真实化合物系列，Boltz-2 池化 ρ 0.31 vs FEP+ 0.70，p_adj<0.05），
+   新增为 **S20**；同时 JCTC 那篇的对照是 **ESMACS 模拟自由能**，不是湿实验——原来把它写成"对实验的一致性检验"是错的。
+3. **Chai-2 的 miniprotein 68% 不是 52 靶的子集**，是独立 5 靶面板（PD-L1 25 / IL-7Rα 23 / InsulinR 20 / TNFα 22 / PDGFRβ 21 条）。
+   写成"子集"会让读者把总分母算错。
+4. **Foundry 的"把 Boltz-2 接进打分位"说过头了**。README 原话是 RFO 优化循环里按 `backprop_fraction` 概率切换的
+   结构预测分支，且明写 "it does not rank the samples"、"Independent AlphaFold3 filtering is outside this pipeline"。
+   → §I 第一条按此改写；另外取 README 必须走默认分支 `production`（`main` 返 404）。
+
+顺带两处口径修正：S0 的六个方法名从"查无一手来源"改成**带范围的否定**（"截至 2026-11-07 四路索引未检得；
+未覆盖专利库/Google Scholar/闭源代号"），因为笔记里"不存在该用途的方法""四个来源全部返回 0 条"两句都越界
+（后者还和笔记自己的表格矛盾）；`未单独复核` 的条目在模板里一律只准标 `P3`，不许升级成 `P2`。
+归档：`data/interim/frontier_2026_survey_2026-11-07.md`（原始笔记）＋`data/interim/frontier_2026_verify_2026-11-07.md`（复核逐字引文与判定）。
