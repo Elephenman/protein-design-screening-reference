@@ -257,3 +257,55 @@ summary 实测：FULLTEXT 87 / DEGRADED 65；声明用 MD 36 行、用 QM 18 行
 - 卡片与 CSV 本轮零改动，`verify_literature_cards.py` 复跑仍为 152/152 PASS（退出码 0）。
 - 清单自相矛盾照旧留在案上（K49 期刊、K48 年份、K59 核验状态、4 行 `证据级别` 过期），新入口里直接指向
   README 的"已知缺陷"，没有把未定的改动写成已改。
+
+## 10. 2026-11-07 工作流模板 + 迁移包（用户："打包上传，方便喂给别的 AI"＋"打磨出预设工作流模板"）
+
+### 10.1 先盘库内方法覆盖，再补前沿缺口
+
+台账关键词实测（`deliverables/protein_design_workflow_evidence.csv` 152 行）：RFdiffusion 25 行、ProteinMPNN 32 行、
+Chai 8 行、Boltz 5 行、扩散/diffusion 26 行、all-atom 3 行、FEP 14 行、MD 32 行；
+**ESM3 / OpenFold / RF3 / DockDesign / LockMAC / Zeta 命中 0 行** —— 这就是模板必须走"库外引用通道"的原因，
+否则 2025-H2 之后的默认工具链进不来。
+
+- 派一个调研代理做 2025-06→2026-11 一手核验，产物 `A:\AITEMP\frontier_2026_survey.md`（57 KB，每节带
+  能证明/不能证明/尚缺什么 + FT/ABS/README 取证级别标注）。
+- 另派一个复核代理，专门回原文核对 6 条最高风险断言（S1/S2/S4/S8/S9/S11）。**它的结论出来之前，
+  `frontier_methods_2025_2026.md` 的"复核"列一律写 `复核中`，模板引用这些条目时只能标 `P3`（README/摘要级），不许标 P2。**
+- 调研代理点名否证了我原本的三个记忆词：`RFSolo` 查无一手来源；`MolGen` 是小分子生成不是蛋白设计；
+  `ESM3` 的仓库署名已变 Biohub。三条都进了 `S0` 禁用清单，且写成"四路检索未获得一手来源"，
+  **没有写成"这些方法不存在"**。
+
+### 10.2 模板五份文件与机械门禁
+
+`deliverables/protein_design_workflow_template.md`（主模板：A 参数表 / B 预注册 / C 十阶段 / D 三闸口与停止条件 /
+E 预算四档 / F 防自欺六问 / G 分支路由 / H 阈值重校准协议 / I 前沿默认链 / J 复现）+ 三个分支页（binder / 酶 / 肽与大环）。
+
+```bash
+python scripts/verify_workflow_template.py          # 判定标准: 引用可查 · 阈值带证据级别 · 链接与脚本可达 · 含三态
+                                                    # 判定结果: PASS 0 处（317 处库内引用 + 45 处库外引用 + 85 行默认阈值）
+python scripts/verify_workflow_template.py --selftest   # PASS 3/3 变红
+```
+
+两个自己写出来又被抓回来的检查器缺陷（都属于"账面先于实测"）：
+
+1. **表头误判**：最初用 `"默认阈值" in line` 识别表头，结果 `frontier_methods` 表里一个正文单元格
+   "④ 默认阈值候选"被当成表头，把 S6–S19 全部当成阈值行，判出 34 条假红。改为"必须是表格首行 + 单元格文本
+   恰好等于 `默认阈值`"。
+2. **自测不双向**：三种破坏里两种一开始没判红——因为扰动打在全文第一处 `P0`/第一处引用上，而那两处都在
+   §0 的定义表里，不在阈值行。**检查器没错，是自测写歪了**。改为先用 `tables_with_threshold()` 定位真实阈值行再改该行，
+   并且"删出处"这一模式必须删掉该行**全部**引用（只删第一个时剩下的引用仍满足规则，本来就不该红）。
+
+### 10.3 打包：两个可迁移的包
+
+```bash
+python scripts/build_bundles.py      # → deliverables/bundles/{full,ai}_<date>.zip + ai_ingest/ + manifest_*.csv + SHA256SUMS.txt
+python scripts/build_bundles.py --check   # manifest 每行 sha256 与磁盘一致
+```
+
+- `ai_ingest` digest 实测：tier1_core ≈ 26,825 token、tier2_cards（152 张卡）≈ 1,297,700 token
+  （估算方法写进 `HOW_TO_FEED.md`：中日韩 1 token/字、其余 4 字符/token，属粗估）。
+- 完整包 = `git ls-files` 全部 452 个跟踪文件；AI 包 = 214 个文件（剔 `fulltext/`、`data/interim/`、派工/日志类文件，
+  加 `ai_ingest/` digest），`--check` 判 PASS，且脚本自己验"AI 包 0 处缓存泄漏"。
+- **AI 包不含论文原文**，所以卡里的引句在该包内不可复核，只能查到声明的底稿路径与哈希；
+  这一点写在 `tier0_index.md` 与 README 的"迁移包"一节，不让别人以为喂了包就等于有原文。
+- `deliverables/bundles/` 进 `.gitignore`（大二进制、可由脚本重建），发布走 GitHub Release 资产。
