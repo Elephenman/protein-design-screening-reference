@@ -370,3 +370,22 @@ python scripts/build_bundles.py --check   # manifest 每行 sha256 与磁盘一�
   ③ digest 的包内路径一开始嵌成 `deliverables/bundles/ai_ingest/...`，与 tier0 自己写的相对路径不符 ⇒ 改为顶层 `ai_ingest/`。
 - **包与本段的先后关系**：两枚 zip 是从 `3130ad3` 打的，本节（§10.6）在该 commit 之后写入，
   因此包里没有这段 Release 记录；除此之外包内容与该 commit 的跟踪文件一一对应（`--check` 判 manifest 逐文件哈希一致）。
+
+## 11. 2026-11-07 审核视图（工作流模板可视化）
+
+用户要"把做出来的工作流可视化一下，我审核"。做法是**编译而不是重画一份**：`scripts/build_workflow_visual.py`
+直接解析四份模板 + `protein_design_workflow.md` + 证据台账 + 前沿清单，页面里没有任何手打数字。
+
+- 编译统计：阈值条目 **85** 行（主模板 45 / binder 11 / 酶 13 / 肽 16，与 `verify_workflow_template.py` 的 85 一致）、
+  引用 305 处、台账查不到 **0** 处、S 条目 21。`--check` 就是这个对账，数目不等即退出非 0。
+- 交互：五个标签页；每条阈值带 P0–P5 彩色级别；点 `[B09]` 开右侧抽屉读该行台账原文字段
+  （判据/阈值原文/候选递减/命中率含分母/成本/卡路径），点 `[S2]` 读库外条目的来源·取证级别·复核判定；
+  每行可标 保留／存疑／要改 + 写批注，"生成审核意见"输出 Markdown、"复制审核意见"走剪贴板（带 textarea 兜底）。
+- 产物：`deliverables/protein_design_workflow_visual.html`（独立单文件，可随包迁移）与
+  `..._visual.fragment.html`（会话内展示用片段）。
+- 三个自己踩的坑（都靠"打开页面看 DOM"才发现，不是靠写完就宣布完成）：
+  ① `html()` 里算了 `body` 变量却忘了插进返回值 ⇒ 页面 243 KB 却一片空白；
+  ② `const D=window.__WFDATA__;` 忘了调用括号（数据被定义成函数）⇒ `D.tabs` undefined，静默零渲染；
+  ③ 片段版把 `body{}` 规则带进宿主页面不合适 ⇒ CSS 改成 `.body-font` 类，独立页才附加 body 规则。
+  内联脚本两段都过 `node --check`；渲染核对走浏览器 DOM 断言（78 行主表、抽屉文案、分标签页计数）。
+  截图没拿到：应用内浏览器当时 `visibilityState=hidden`（0×0 视口），所以审美判断没做，只做了结构核对。
