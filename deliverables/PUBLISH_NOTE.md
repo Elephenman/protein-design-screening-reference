@@ -90,6 +90,9 @@ python scripts/build_bundles.py --check           # 包内清单与磁盘 sha256
 ## 发布形态
 
 - 仓库：`Elephenman/protein-design-screening-reference`（当前为**私有**；是否转公开由作者决定）
-- Release 资产：完整迁移包 + AI 投喂包（`ai_ingest/` 分层 digest，按编号取单张卡，约 130 万 token）
+- Release 资产（tag `v1-template-and-bundles`）：完整迁移包 + AI 投喂包（`ai_ingest/` 分层 digest，按编号取单张卡，约 130 万 token）。
+  两个资产在上传后都已**从服务端重新下载并逐字节比对 sha256**，与本地一致；哈希值见 Release 资产页
+  （GitHub API 的 `digest` 字段）与本地 `deliverables/bundles/SHA256SUMS.txt`（该目录被 gitignore，
+  **不进仓库也不进包**——把发布物的哈希写进被发布物本身会自指）。
 - 引用信息：`CITATION.cff`
 - 许可与第三方声明：`LICENSE` / `NOTICE`

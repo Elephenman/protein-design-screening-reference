@@ -29,13 +29,19 @@
 
 | 包 | 内容 | 用途 |
 |---|---|---|
-| `..._full_<date>.zip` | git 跟踪的全部 445 个文件（含全文缓存与抓取日志） | 换机器重建；能原样复跑逐字引句门禁 |
-| `..._ai_<date>.zip` | 卡片 + 总表 + 台账 + 模板 + 脚本 + 调研底稿，**不含** `fulltext/` 与 `data/interim/`，另附 `ai_ingest/` 分层 digest | 喂给别的 AI 当资料库 |
+| `..._full_<date>.zip` | git 可见的全部 479 个文件（含全文缓存与抓取日志）+ `LICENSE`/`NOTICE`/`CITATION.cff` | 换机器重建；能原样复跑逐字引句门禁 |
+| `..._ai_<date>.zip` | 239 个文件：卡片 + 总表 + 台账 + 模板 + 迭代协议 + 脚本 + 调研底稿 + 许可审计，**不含** `fulltext/` 与 `data/interim/`，另附 `ai_ingest/` 分层 digest | 喂给别的 AI 当资料库 |
 
-`ai_ingest/` 的分层：`tier0_index.md`（是什么+三条禁令）→ `tier1_core.md`（README+两份工作流+模板+前沿核验，≈2.9 万 token）
+`ai_ingest/` 的分层：`tier0_index.md`（是什么+三条禁令）→ `tier1_core.md`（README+两份工作流+模板+前沿核验+发布说明，≈5.5 万 token）
 → `tier2_cards.md`（153 个卡文件 / 152 行，≈130 万 token，**按编号取单张**，别整份喂）→ `tier3_ledgers/`（CSV，结构化问题走这里）。
 喂法与 token 估算方法写在 `ai_ingest/HOW_TO_FEED.md`。AI 包不含论文原文，所以卡里的引句在该包内不可复核，
 只能查到声明的底稿路径与哈希——需要原文复核时必须用完整包或本仓库。
+
+最新一次发布：Release [`v1-template-and-bundles`](https://github.com/Elephenman/protein-design-screening-reference/releases/tag/v1-template-and-bundles)。
+两个资产在上传后都已**从服务端重新下载并逐字节比对 sha256**，与本地一致；哈希值见 Release 资产页
+（GitHub API 的 `digest` 字段）与本地生成的 `deliverables/bundles/SHA256SUMS.txt`
+（该目录被 gitignore，**不进仓库也不进包**——把发布物的哈希写进被发布物本身会自指）。
+**仓库当前仍是私有**，是否转公开由作者决定。
 
 ## 目录
 
@@ -46,7 +52,8 @@
 | `data/literature_cards/AGENT_RULES.md` | 写卡规程（引句必须逐字、文件名 slug、非论文行写"取证卡"的口径） |
 | `data/literature_cards/fulltext/` | 本地全文抽取：41 行用本目录（另有 39 行用 `data/interim/baker_lit/ft/`、13 行用 `data/interim/claim_lit/`，6 行跨两处，合计覆盖 87 行）；`_quarantine/` 是身份体检判定"挂错行"的 9 份 + 日志 |
 | `data/literature_cards/run.md` | 过程账：每一步的脚本、参数、实测输出、踩过的坑与更正 |
-| `data/interim/` | 抓取日志、回写前的 CSV 备份、2000 处字段改动账 |
+| `data/interim/` | 抓取日志、回写前的 CSV 备份、2000 处字段改动账、本轮表级改动账（157 条）与许可抓取缓存 |
+| `LICENSE` / `NOTICE` / `CITATION.cff` | 授权（只覆盖作者原创部分）／第三方声明与许可分布／引用信息。**两个迁移包都必须带上它们**，`build_bundles.py` 会检查，缺一个就红 |
 | `sources/*.md` | 四份调研底稿（Baker 组、周如鸿组、曹龙兴组、成本与判据经济学） |
 | `scripts/` | 建库、核验、抓取、回写、台账生成的全部脚本 |
 | `deliverables/` | 工作流模板 v2（主模板+三分支）+ **多轮迭代协议** + 证据工作流文档 + **审核视图 `protein_design_workflow_visual.html`**（把 87 条默认阈值摊开、可逐行标记并导出审核意见；由 `scripts/build_workflow_visual.py` 从模板与台账编译，页面无手打数字，`--check` 的期望值从门禁现算）+ 机器生成的证据台账 + 前沿方法核验清单（S0–S22） |
