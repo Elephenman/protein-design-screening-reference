@@ -147,8 +147,8 @@ K40 按全文级重写（§0 留了一行"CSV 行 证据级别 列仍为 摘要�
 --only M-K34 → PASS M-K34 quotes=25/25
 ```
 K31/K38/K40 是骨架原地填实，K47/K48/K49/M-K34 是新建（文件名分别
-`K47_CamSol-2023_BriefBioinform_pH-solubility.md`、`K48_Aggrescan4D-2025_ProteinSci_pH-aggregation-engineering.md`、
-`K49_AGGRESCAN-2025_AminoAcids_two-decade-perspective.md`、`M-K34_nirFAP-2026_JACS_de-novo-near-infrared-fluorescent-protein.md`）。
+`K47_CamSol-2023_BriefBioinform_pH-solubility.md`、`K48_Aggrescan4D-2024_ProteinSci_pH-aggregation-engineering.md`、
+`K49_AGGRESCAN-2026_BiophysRev_two-decade-perspective.md`、`M-K34_nirFAP-2026_JACS_de-novo-near-infrared-fluorescent-protein.md`）。
 
 ### 7.5 全量门禁 → 回写 → 再全量门禁（顺序固定）
 
@@ -444,3 +444,100 @@ python scripts/build_bundles.py --check   # manifest 每行 sha256 与磁盘一�
 - 判据行数与上一轮的差异是**真的变了**，不是记账漂移：阈值 85→87（模板新增两行）、
   引用 305→379（迭代协议的轮次链把每轮都挂上出处）、S 21→23（S21/S22 是 RFD4 的 README 与预印本）。
   可视化页的期望值从门禁现算，所以它跟着变；这也正是不许在页面里手打数字的理由。
+
+## 13. 2026-11-07 出版化收官（许可/引用/发布说明）＋两处"账目被覆盖"的真实缺陷
+
+用户指令："把这个项目做完整来，因为这个工作流我是要发表出去，然后做盈利的。"
+本轮 = 把库从"能自证"推到"能交付"：第三方许可边界、署名与引用文件、一页发布说明、两个包重打、
+GitHub Release 资产替换。仓库可见性（私有转公开）与最终定价**没有替用户决定**，仍由作者拍板。
+
+### 13.1 第三方全文缓存的许可审计（`scripts/audit_source_licenses.py`）
+
+- 对象：本地缓存了全文抽取的 **87 行**（`inventory.json` 的 `has_fulltext` 为真的那些）。
+- 许可证据一律取**第一方**：① 本地那份文件本身（它就是要再分发的那个东西，最强）；
+  ② NCBI E-utilities `efetch.fcgi?db=pmc&id=<num>&rettype=xml` 的 `<license>` 元素；
+  ③ Europe PMC `search?query=DOI:…&resultType=core` 的 `license` 短码；④ `doi.org` → 落地页 `<meta name="DC.Rights">`。
+  每次外部抓取都记 URL + 抓取时间 + sha256（缓存 `data/interim/license_cache.json`）。
+- 分类：CC0 / PUBLIC_DOMAIN / CC_BY / CC_BY_SA / CC_BY_NC / CC_BY_ND / CC_BY_NC_ND /
+  PUBLISHER_TERMS / TEXT_MINING_ONLY / RESEARCH_REUSE_ONLY / ALL_RIGHTS_RESERVED / UNKNOWN。
+- 结果：**87 行，UNKNOWN 0 行**；许可允许含商用再分发 **61 行**，不允许 **26 行**。
+- 逐行"证据原文"必须是源文件里的**逐字片段**，不许写自己的一句话——`snip()` 按关键词取原文切片。
+- 三个实踩的坑：
+  1. `cc0` 用子串匹配会命中 md5 校验和（`06cc0dfc76d`），把一篇 Elsevier COVID 特许文章误判成公有领域。
+     改用 `\bcc0\b` 词边界后该行才落到 `RESEARCH_REUSE_ONLY`（Elsevier COVID-19 资源中心特许：仅研究性复用并须注明来源）。
+  2. CC URL 可能来自**参考文献列表里别篇文章**，会被全文匹配命中。改成只在文件前 15%（下限 20,000 字符）里找，
+     实测所有命中都落在文件 1.9%–3.7% 处。
+  3. 遍历 CSV 行取编号的第一个 token，会漏掉复合编号行（`B06; C02`），行数少算 4 行。
+     改成建 token→行映射、并按 `inventory` 的键遍历。
+- 产品决策（已写进 `LICENSE`/`NOTICE`/`PUBLISH_NOTE.md`）：**商业版一律不含第三方全文缓存**。
+  三条理由：26 行受限内容的义务履行成本高；客户侧要"换机器就能重跑门禁"就得给全文，
+  而全文的再分发授权不统一；本库的卖点是**阈值带出处 + 分母不许混 + 失败模式清单**，不靠卖全文。
+- 门禁：`python scripts/audit_source_licenses.py --check`（行数与逐行类别必须与重算一致；已实测能红）。
+
+### 13.2 新增的交付物
+
+| 文件 | 内容 |
+|---|---|
+| `LICENSE` | 6 节：适用范围（只覆盖作者原创部分，含卡里作者自己写的 §2/§3/§4/§7/§8）／授权（非独占、不可转让、内部使用+商业方法学参考）／三项条件（不得当独立资源转卖／不得承诺库不支持的准确度／客户交付里用的每个阈值必须能回查 `[文献编号]`）／第三方内容排除并附 87 行审计结论／引用与署名要求／不担保（阈值是方法学参考，不是对任何具体体系的适配承诺）／第三方许可清单 |
+| `NOTICE` | 7 节：第三方全文缓存位置与 87 行许可分布表／卡里的第三方引文（是引用不是再分发，逐条已过逐字门禁）／前沿 S1–S22（S21=RFD4 README 与模型卡，BSD 3-Clause 权重、模型卡效率表不可当 RFD4 效率；S22=预印本 CC BY 4.0，PDF 不分发）／数据来源／用到的工具与 API／商标／联系 |
+| `CITATION.cff` | cff-version 1.2.0，type: dataset，作者 Elephenman，指向本仓库，附 4 条 references（总表 CSV / 证据台账 / 判据台账 / 许可审计） |
+| `deliverables/PUBLISH_NOTE.md` | 一页纸：三层商品（L1 工作流包 / L2 证据包 / L3 定制）／客户为什么付钱（每条阈值带出处、分母不许混、失败模式清单）／边界（证据三态、两个证据口径的 8 行差集、不担保、许可边界、**本库不是 DP2R 主线的判定输入**）／6 条已知坑／8 条门禁命令／发布形态 |
+
+### 13.3 两个"证据级别"口径被拆开（这是本轮最硬的一条技术结论）
+
+库里有两个都能数出数字但含义不同的东西，之前混在一列里：
+
+| 口径 | 数字 | 含义 |
+|---|---|---|
+| 底稿形态 | FULLTEXT 87 / DEGRADED 65 | `inventory.json` 的 `has_fulltext`：本地存有一份登记在册的全文抽取文件 |
+| 卡证据级别 | FULLTEXT 79 / DEGRADED 73 | 卡 §0 自己声明的级别，且每条直引号已在它声明的那一份底稿里逐字命中 |
+
+差 **8 行**：`Z01 Z02 Z03 Z05 Z09 C13 C18 M-K29`。这 8 行的 PMC 全文就在本地，但卡的逐字命中率只有
+3/11–32/43 ⇒ **本轮不升级**（升级需要重核 8 张卡的全部引句，不是顺手能改的）。
+台账（`protein_design_workflow_evidence.csv`）从此分列两栏：`底稿形态` 与 `卡证据级别`；
+`build_workflow_evidence.py --check` 从"比行数"升级为**逐字节比对三个产物**（改一个 `rosetta`→`ROSETTA` 即 FAIL，已实测）。
+
+### 13.4 两处"账目被覆盖"的真实缺陷（本轮抓到并修好）
+
+- **缺陷 1：表级改动账被同日第二次运行冲成 1 条。** `scripts/fix_table_fields.py` 把改动账写成按日期命名的固定文件，
+  当天第二次运行（只改 C10 一处）把第一次的 **152 条**记录整体覆盖。现已：
+  ① 由 `git show f07540d:data/protein_design_literature.csv` 重放 `table_field_fixes.json` +
+  `litcards_evidence_level.py`，复原 **157 条**（152 条整列刷新 + 5 条手工更正）写回
+  `data/interim/table_field_fixes_2026-11-07.json`，并与幸存的 C10 条目逐字比对一致；
+  ② 脚本改为同日多次运行**合并账目、备份不覆盖**；
+  ③ 新增 `--check`：账里每条新值必须等于当前表该格 + 受管列每处改动都必须有账 + 证据级别必须与卡 §0 一致
+  （两种破坏各实测红一条，退出码 1）。
+- **缺陷 2：字段改动账（`csv_field_corrections.json`）从 2000 条缩成 1 条。**
+  `scripts/litcards_embed_csv.py` 每次运行都把账**整体覆盖**成本次运行发现的改动；
+  本轮只有 K49 一处改动，于是 2026-10-21 的 2000 条历史被静默清掉。现已：
+  ① 用 git HEAD 的 2000 条恢复，并把本轮的 K49 条目就地更新（条目仍为 2000 条）；
+  ② 脚本改为**合并**写入（同 `(id, field)` 就地更新、新键追加），并加两条拒绝条件：
+  条数变少、或新账里少了旧账的任何一个 `(id, field)` 键，都拒绝写盘；
+  ③ 注入缺陷实测：吞掉一条历史后脚本拒绝写入、退出码 1、账目仍是 2000 条。
+- 教训（同一个项目里第 4 次"账目先于实测"）：**任何写账脚本都要先问"这是累积账还是本次清单"**。
+  累积账被覆盖写入时，一次只有 1 处改动的小跑就会把整本历史清零，而且**不报错**。
+
+### 13.5 本轮门禁实测（全部现跑）
+
+| 门禁 | 读数 | 退出码 |
+|---|---|---|
+| `verify_literature_cards.py` | 152/152 卡 PASS，0 行不合格 | 0 |
+| `verify_workflow_template.py` | PASS（465 处库内 + 88 处库外 · 87 行阈值带级别 · 链接可达） | 0 |
+| `build_workflow_evidence.py --check` | PASS（三个产物逐字节一致） | 0 |
+| `build_workflow_visual.py --check` | 阈值 87/87 · 引用 379 处缺失 0 · S 23/23 · 门禁不合格 0 | 0 |
+| `verify_workflow_doc.py` | PASS（工作流文档） | 0 |
+| `verify_workflow_doc.py --doc deliverables/PUBLISH_NOTE.md` | PASS | 0 |
+| `audit_source_licenses.py --check` | PASS（87 行 · 逐行类别与重算一致） | 0 |
+| `fix_table_fields.py --check` | PASS（157 条账目 · 每条新值 == 当前表） | 0 |
+| `build_bundles.py` | 完整包 479 文件 · AI 包 239 文件；AI 包 0 处缓存泄漏、带齐 LICENSE/NOTICE/CITATION.cff | 0 |
+| `build_bundles.py --check` | PASS 0 处不符 | 0 |
+| `litcards_embed_csv.py`（实跑，0 处字段改动） | 回写 152/152 · 列数 27→27 · CSV sha256 前后一致 `6f2aebeb…` · 账目仍 2000 条 | 0 |
+
+### 13.6 发布资产替换协议（照旧执行，逐字节核对）
+
+1. `DELETE /repos/{o}/{r}/releases/assets/{id}`（旧资产）
+2. `POST https://uploads.github.com/repos/{o}/{r}/releases/{id}/assets?name=`（`curl.exe`，GitHub API 的
+   `api.github.com` 直连会撞 `SSL: unable to get issuer certificate`，必须走 `curl.exe`）
+3. 回读：`Accept: application/octet-stream` + `-L` 下载，逐字节比 sha256
+4. 资产哈希同时落在 `deliverables/bundles/SHA256SUMS.txt`（该目录被 gitignore，不进仓库；
+   避免"记录发布哈希"这件事反过来改变被发布物的字节）与 GitHub API 的 `digest` 字段里。

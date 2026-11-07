@@ -11895,9 +11895,9 @@
  {
   "id": "K49",
   "field": "原文出处指针",
-  "old": "sources/cost-benchmarks.md §六〔Crossref 核验〕",
-  "new": "data/literature_cards/fulltext/K49_PMC13031676_text.txt（PMCID PMC13031676，PMID 41909611，DOI 10.1007/s12551-025-01404-9）；只读参考 sources/cost-benchmarks.md:198；期刊字段以全文题录 Biophysical Reviews 2026, 18:83-94 为准（CSV 记 Amino Acid",
-  "card": "K49_AGGRESCAN-2025_AminoAcids_two-decade-perspective.md"
+  "old": "data/literature_cards/fulltext/K49_PMC13031676_text.txt（PMCID PMC13031676，PMID 41909611，DOI 10.1007/s12551-025-01404-9）；只读参考 sources/cost-benchmarks.md:198；期刊字段以全文题录 Biophysical Reviews 2026, 18:83-94 为准（CSV 记 Amino Acid",
+  "new": "data/literature_cards/fulltext/K49_PMC13031676_text.txt（PMCID PMC13031676，PMID 41909611，DOI 10.1007/s12551-025-01404-9）；只读参考 sources/cost-benchmarks.md:198；期刊与年份以全文题录 Biophysical Reviews 2026, 18:83-94 为准（CSV 曾记 Amino Ac",
+  "card": "K49_AGGRESCAN-2026_BiophysRev_two-decade-perspective.md"
  },
  {
   "id": "K50",

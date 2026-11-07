@@ -135,10 +135,42 @@ def main() -> int:
         w.writerows(rows)
     CSVP.replace(INTERIM / "protein_design_literature_pre_embed.csv")
     tmp.replace(CSVP)
-    (INTERIM / "csv_field_corrections.json").write_text(json.dumps(corrections, ensure_ascii=False, indent=1), encoding="utf-8")
+
+    # 字段改动账是**累积**账，不是"本次运行清单"。早期版本直接覆盖写，实测把 2026-10-21 的
+    # 2000 条记录冲成了 1 条（本次只有 K49 一处改动，就把整本账覆盖了）。现在合并写入：
+    # 同 (id, field) 就地更新旧值，新键追加；并且账目条数不许变少。
+    ledger_p = INTERIM / "csv_field_corrections.json"
+    prev = json.loads(ledger_p.read_text(encoding="utf-8")) if ledger_p.exists() else []
+    merged = [dict(x) for x in prev]
+    idx = {(x["id"], x["field"]): i for i, x in enumerate(merged)}
+    applied = 0
+    for c in corrections:
+        k = (c["id"], c["field"])
+        if k in idx:
+            if merged[idx[k]] != c:
+                merged[idx[k]] = c
+                applied += 1
+        else:
+            merged.append(c)
+            idx[k] = len(merged) - 1
+            applied += 1
+    if len(merged) < len(prev):
+        print(f"拒绝写入：改动账条数变少（{len(prev)} → {len(merged)}），账目不许被覆盖")
+        return 1
+    # 更强的检查：上一版账里的每一条 (id, field) 都必须还在新账里。
+    # 只比条数不够——覆盖成"条数相同但内容不同"照样是丢记录。
+    prev_keys = {(x["id"], x["field"]) for x in prev}
+    merged_keys = {(x["id"], x["field"]) for x in merged}
+    lost = prev_keys - merged_keys
+    if lost:
+        print(f"拒绝写入：改动账丢失 {len(lost)} 条历史记录（如 {sorted(lost)[:3]}），账目不许被覆盖")
+        return 1
+    ledger_p.write_text(json.dumps(merged, ensure_ascii=False, indent=1), encoding="utf-8")
     (INTERIM / "csv_embed_manifest.json").write_text(json.dumps({
         "date": date.today().isoformat(),
-        "csv_rows": len(rows), "cards_filled": filled, "field_corrections": len(corrections),
+        "csv_rows": len(rows), "cards_filled": filled,
+        "field_corrections_this_run": len(corrections),
+        "field_corrections_ledger_total": len(merged),
         "csv_columns_before": len(fields), "csv_columns_after": len(out_fields),
         "backup": str(backup.relative_to(ROOT)).replace("\\", "/"),
         "backup_sha256": sha(backup),
@@ -159,7 +191,8 @@ def main() -> int:
             bad.append(f"{acc} 卡片路径不可达")
         if len(r.get("精读卡全文(方法·工作流·遇坑)", "")) < 2000:
             bad.append(f"{acc} 行内卡正文过短")
-    print(f"字段改动 {len(corrections)} 处已记入 data/interim/csv_field_corrections.json（旧值/新值/卡片名，不改卡片不改备份）")
+    print(f"字段改动 {len(corrections)} 处已记入 data/interim/csv_field_corrections.json"
+          f"（旧值/新值/卡片名，不改卡片不改备份）；累计账目 {len(merged)} 条（本次更新 {applied} 条）")
     print(f"判定标准: 门禁 PASS + 152 行全部有卡 + 回读后行数/列数一致 + 每行的卡路径可达且正文已进单元格")
     print(f"判定结果: 回写 {filled}/{len(rows2)} 行 · 列数 {len(fields)}→{len(f2)} · 回读 {'一致' if ok else '不一致'}"
           f" · 坏行 {len(bad)}")

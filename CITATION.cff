@@ -1,0 +1,44 @@
+cff-version: 1.2.0
+message: "If you use this reference library or the workflow templates derived from it, please cite it as below."
+title: "蛋白设计筛选参考库（152 篇文献逐字核验版）"
+abstract: >-
+  一份以"每个阈值都能回查原文哪一句"为标准的蛋白设计筛选参考库。
+  152 篇文献各配一张十节精读卡（方法 / 工作流 / 难点与作者应对 / 数字台账 /
+  作者原话 / 我们的推断 / 局限 / 可迁移性 / 溯源），每条英文直引号都在该卡
+  声明的那一份底稿里逐字命中，由脚本强制。同时沉淀出可执行的工作流模板
+  （主线十阶段 + 结合体/酶/肽三分支，每条默认阈值带 P0–P5 证据级别）、
+  多轮迭代协议与前沿方法核验清单。
+type: dataset
+authors:
+  - name: "Elephenman"
+    alias: "Elephenman"
+repository-code: "https://github.com/Elephenman/protein-design-screening-reference"
+url: "https://github.com/Elephenman/protein-design-screening-reference"
+keywords:
+  - protein design
+  - computational screening
+  - binder design
+  - workflow
+  - literature curation
+  - reproducibility
+license: other
+license-url: "https://github.com/Elephenman/protein-design-screening-reference/blob/main/LICENSE"
+version: "2026-11-07"
+date-released: "2026-11-07"
+references:
+  - type: dataset
+    title: "文献总表 CSV（152 行 × 27 列，含逐篇 DOI/PMID 与证据级别）"
+    repository-code: "https://github.com/Elephenman/protein-design-screening-reference"
+    path: "data/protein_design_literature.csv"
+  - type: dataset
+    title: "工作流证据台账（152 行，机器抽取，含两个证据口径）"
+    repository-code: "https://github.com/Elephenman/protein-design-screening-reference"
+    path: "deliverables/protein_design_workflow_evidence.csv"
+  - type: dataset
+    title: "判据拆分台账（679 行）"
+    repository-code: "https://github.com/Elephenman/protein-design-screening-reference"
+    path: "deliverables/protein_design_workflow_criteria_ledger.csv"
+  - type: dataset
+    title: "第三方全文许可审计（87 行，逐篇许可与证据来源）"
+    repository-code: "https://github.com/Elephenman/protein-design-screening-reference"
+    path: "deliverables/protein_design_license_audit.csv"

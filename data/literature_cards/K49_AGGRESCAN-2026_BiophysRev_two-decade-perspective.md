@@ -3,7 +3,7 @@
 Pesce G, Solé O, Bárcenas O, Ventura S（巴塞罗那自治大学 IBB / 生化与分子生物学系 + IQAC-CSIC + Parc Taulí 研究所）
 Biophysical Reviews 2026, 18:83-94（在线 2026-01-19；收稿 2025-11-28，接收 2025-12-29）· DOI 10.1007/s12551-025-01404-9 · PMID 41909611 · PMCID PMC13031676
 开放获取（CC BY 4.0）· 全文链接 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC13031676/
-（CSV 行记为 Amino Acids 2025，与全文题录不符，见 §0 与 §7）
+（CSV 曾记为 Amino Acids 2025，与全文题录不符；**2026-11-07 已按全文题录更正为 Biophysical Reviews 2026**，见 §0 与 §7）
 
 ---
 
@@ -15,9 +15,9 @@ Biophysical Reviews 2026, 18:83-94（在线 2026-01-19；收稿 2025-11-28，接
 | 文献类型 | **综述／方法史**（正文自述为 mini-review，只综述自家 Aggrescan 平台，不含新的自做实验；`Data availability` 明写本次研究未生成或分析数据集） |
 | 本地全文 | `data/literature_cards/fulltext/K49_PMC13031676_text.txt`（56,635 B，Europe PMC 检索后取 fullTextXML 再剥标签；登记通道见 `inventory.json`：`epmc_search_then_fulltext`；同名 `_fullTextXML.xml` 为原始件） |
 | 身份核验 | 底稿前 600 字符内的标题、DOI 10.1007/s12551-025-01404-9、PMCID PMC13031676 与分派行一致 ⇒ 认定是本篇；**但期刊字段不一致**（见下一行） |
-| 期刊/年份不符 | 全文题录头是 `biophysrev / Biophysical Reviews / Biophys Rev`，卷 18、页 83-94、DOI 前缀 s12551（Springer 的 Biophysical Reviews 刊号）；CSV `期刊或预印本` 记 Amino Acids、`年份` 记 2025。**以全文为准**：Biophysical Reviews（2026 年卷，2026-01-19 在线）。差异已记入 §7，未改 CSV |
+| 期刊/年份不符 | 全文题录头是 `biophysrev / Biophysical Reviews / Biophys Rev`，卷 18、页 83-94、DOI 前缀 s12551（Springer 的 Biophysical Reviews 刊号）；CSV `期刊或预印本` 曾记 Amino Acids、`年份` 曾记 2025。**以全文为准**：Biophysical Reviews（2026 年卷，2026-01-19 在线）。差异已记入 §7；**2026-11-07 已更正 CSV 两列**（依据见 `scripts/table_field_fixes.json`，改动账 `data/interim/table_field_fixes_2026-11-07.json`） |
 | 对照底稿 | `sources/cost-benchmarks.md` 第 198 行（"包涵体/不溶"判据行，仅以 DOI 转引本评述，无方法细节）——本卡内容一律取自全文，未从该行取材 |
-| 证据级别 | **全文级**（本卡所有英文引句均可在该份本地纯文本里逐字命中；见 §9 自检）。**CSV 行 `证据级别` 列仍为 摘要级（旧值），该列不在 14 键回填范围内，未擅自改表** |
+| 证据级别 | **全文级**（本卡所有英文引句均可在该份本地纯文本里逐字命中；见 §9 自检）。CSV `证据级别` 列曾为 摘要级（旧值），**2026-11-07 已按本卡 §0 重刷为 `FULLTEXT｜全文级`** |
 | 未取到的部分 | Fig 1-3 只有图注文字、无原图数值；A4D 基准的逐例结果在其原文补充材料里（本卡只引到"18 例／300 余篇"这一层）；AGGRESCAN 逐残基聚集标度的具体数值表不在本文（本文只描述其来源与用法）；A3D/A4D 的 Web 服务参数页不在本文 |
 
 ## 1. 这篇到底解决什么（大白话）
@@ -100,7 +100,7 @@ Biophysical Reviews 2026, 18:83-94（在线 2026-01-19；收稿 2025-11-28，接
 
 - **作者自陈**：见 §5 第 5 条（简化能量学、数据稀缺、PTM 未建模、粗粒度柔性、standalone 未交付、不做相分离预测）。
 - **我们读出的**：① 全文没有任何 ROC、AUC、相关系数或前瞻盲测数字，所有"更好"都是转引原论文的定性结论；② A3D 的系统基准数值（灵敏度/特异度具体值）本文未给出，只说"significantly improved"；③ hotspot 阈值是"按 SwissProt 频率加权的平均分"这种内部归一，不是跨蛋白可比的绝对标尺；④ 10% 暴露截断、10 Å 邻域、12 个构象这三个参数在本文里没有敏感性分析；⑤ 综述由工具作者自己撰写（同一实验室），"迄今最可溶的 GFP 变体""完美预测表现"是自评而非第三方复现；⑥ 应用案例的证据强度不齐——从"6 种工具打分 + 一条凝胶"到"四种预测器比较中只有一种命中"都被平铺在同一节里；⑦ Fig. 1 图注把 CamSol 3.0 描述为 "structure-based, environment-sensitive aggregation prediction" 的起点，但它引用的原论文是序列法（"Sequence-based prediction of pH-dependent protein solubility using CamSol"），此处图注与其引文库标题自相矛盾，本文未澄清——本文里最可疑的一处。
-- **与 CSV 行不符（以全文为准）**：① 期刊：CSV 记 Amino Acids，全文题录是 Biophysical Reviews（DOI 前缀 s12551 亦属该刊）；② 年份：CSV 记 2025，全文为 2026 年卷（2026-01-19 在线，2025-11-28 收稿 / 2025-12-29 接收）；③ `PMID/PMCID/arXiv` 列 CSV 记 未记录，实际为 PMID 41909611 / PMCID PMC13031676；④ `证据级别` 列 CSV 仍为 摘要级（旧值），本卡按全文级写；⑤ `是否用MD`／`是否用QM` 两列 CSV 记 未记录，全文实为：MD 以"综述转述的方式"出现（CABS-flex 粗粒度采样是 A3D 的内置模块；另转述一个 MD 轨迹 + A3D 联用的他人研究），QM 未被本文使用。以上差异**只记录不改表**（CSV 与 `sources/*.md` 均非本代理写域）。
+- **与 CSV 行不符（以全文为准；2026-11-07 已更正『期刊』与『年份』两列）**：① 期刊：曾记 Amino Acids，全文题录是 Biophysical Reviews（DOI 前缀 s12551 亦属该刊）；② 年份：曾记 2025，全文为 2026 年卷（2026-01-19 在线，2025-11-28 收稿 / 2025-12-29 接收）；③ `PMID/PMCID/arXiv` 列 CSV 记 未记录，实际为 PMID 41909611 / PMCID PMC13031676；④ `证据级别` 列曾为 摘要级（旧值），本卡按全文级写，2026-11-07 已重刷；⑤ `是否用MD`／`是否用QM` 两列 CSV 记 未记录，全文实为：MD 以"综述转述的方式"出现（CABS-flex 粗粒度采样是 A3D 的内置模块；另转述一个 MD 轨迹 + A3D 联用的他人研究），QM 未被本文使用。以上差异**只记录不改表**（CSV 与 `sources/*.md` 均非本代理写域）。
 
 ## 8. 对 UAA 筛选的迁移判断
 
@@ -142,5 +142,5 @@ hit_rate=不适用（本文未给前瞻命中率或 ROC/AUC 类数字；作者�
 best_metric=未记录（本文无 Kd 或活性最优值；最接近的性能表述为 A4D 的 18 例基准优于 CamSol 3.0，未给具体数值）
 cost_or_stat_note=方法评述；无单价/机时统计；给出计算取向为"AGGRESCAN 因可解释、免费、计算便宜而适合蛋白质组级大规模分析"；唯一影响力数字是被引 1,500 次以上；柔性采样使静态结构低估风险的案例占 80%；作者列出的瓶颈是可靠标注实验数据集稀缺与能量学简化假设
 role_in_timeline=聚集类判据的方法学背景与谱系梳理：把 2004-2024 聚集预测从序列到结构到环境敏感（含 AlphaFold 整合）的三代演进写成失效驱动的时间线，明确本家族只做溶解度/聚集倾向、不做催化与相分离预测；CSV 原记其为"聚集类判据的方法学背景"仍成立
-source_pointer=data/literature_cards/fulltext/K49_PMC13031676_text.txt（PMCID PMC13031676，PMID 41909611，DOI 10.1007/s12551-025-01404-9）；只读参考 sources/cost-benchmarks.md:198；期刊字段以全文题录 Biophysical Reviews 2026, 18:83-94 为准（CSV 记 Amino Acids 2025 与全文不符，未改表）
+source_pointer=data/literature_cards/fulltext/K49_PMC13031676_text.txt（PMCID PMC13031676，PMID 41909611，DOI 10.1007/s12551-025-01404-9）；只读参考 sources/cost-benchmarks.md:198；期刊与年份以全文题录 Biophysical Reviews 2026, 18:83-94 为准（CSV 曾记 Amino Acids 2025，2026-11-07 已更正）
 CSV回填-->

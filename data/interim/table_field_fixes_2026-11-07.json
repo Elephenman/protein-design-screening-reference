@@ -1,0 +1,1292 @@
+{
+ "date": "2026-11-07",
+ "csv_sha256_before": "aa8f5013ae5ccd5e6e9df49309cb877752feaf9b4b0da833e66412e34deaf57f",
+ "csv_sha256_before_source": "git show f07540d:data/protein_design_literature.csv",
+ "changes": [
+  {
+   "id": "K49",
+   "column": "期刊或预印本(venue)",
+   "kind": "manual_fact_fix",
+   "old": "Amino Acids",
+   "new": "Biophysical Reviews",
+   "reason": "全文题录为 Biophys Rev / Biophysical Reviews，卷 18、页 83-94、2026-01-19 在线；DOI 前缀 s12551 亦属该刊。原值 Amino Acids 与全文不符（Europe PMC 实查）。"
+  },
+  {
+   "id": "K49",
+   "column": "年份(year)",
+   "kind": "manual_fact_fix",
+   "old": "2025",
+   "new": "2026",
+   "reason": "同上一条：刊期为 2026 年（收稿 2025-11-28、接收 2025-12-29、在线 2026-01-19）。原值 2025 是收稿年，不是刊期年。"
+  },
+  {
+   "id": "K48",
+   "column": "年份(year)",
+   "kind": "manual_fact_fix",
+   "old": "2025",
+   "new": "2024",
+   "reason": "Protein Science 2024, 33(10):e5180（在线 2024-09-26）；DOI 10.1002/pro.5180 与全文题录一致。原值 2025 为误记。"
+  },
+  {
+   "id": "B12",
+   "column": "年份(year)",
+   "kind": "manual_fact_fix",
+   "old": "2023",
+   "new": "2024",
+   "reason": "Nature 2024, 626:435-442 为刊期年；Crossref 在线年标 2023 已保留在同一行的『期刊或预印本』列（原文写法：Crossref 年标 2023 在线/2024 刊期）。本列与全库其它行统一记刊期年。"
+  },
+  {
+   "id": "K59",
+   "column": "核验状态(doi_verified)",
+   "kind": "manual_fact_fix",
+   "old": "✅Crossref核验",
+   "new": "✅已核验（核验对象为 C&EN 新闻条目 DOI 10.47287/cen-09942-buscon15；本行『DOI』列记为未记录，条目 DOI 见『期刊或预印本』列）",
+   "reason": "原值『✅Crossref核验』会被下游读成『本行 DOI 字段已核验』，而该字段实际为『未记录』；核验对象是新闻条目标识，类型是新闻条目不是论文。卡 §2 已把这条取证教训写明。"
+  },
+  {
+   "id": "B01",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B01_Langan-2019_Nature_LOCKR-switch.md）"
+  },
+  {
+   "id": "B02",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B02_Barros-2019_JCTC_md-screening-ligand-binders.md）"
+  },
+  {
+   "id": "B03",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B03_Anishchenko-2021_Nature_hallucination.md）"
+  },
+  {
+   "id": "B04",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B04_Coventry-2021_PLoSCompBiol_3bop-buried-hbond-penalty.md）"
+  },
+  {
+   "id": "B05",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B05_Dauparas-2022_Science_ProteinMPNN.md）"
+  },
+  {
+   "id": "B06; C02",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级（本次独立复核 PMC9117152）",
+   "new": "FULLTEXT｜全文级（本次独立复核 PMC9117152）",
+   "reason": "按卡 §0 推导（B06-C02_Cao-2022_Nature_broad-search-focused-resampling.md）"
+  },
+  {
+   "id": "B07",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B07_Linsky-2022_NatComms_smallfolds-foldarchitect.md）"
+  },
+  {
+   "id": "B08",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级（本次独立复核 PMC10468394）",
+   "new": "FULLTEXT｜全文级（本次独立复核 PMC10468394）",
+   "reason": "按卡 §0 推导（B08_Watson-2023_Nature_rfdiffusion.md）"
+  },
+  {
+   "id": "B09",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级（本次独立复核 PMC10163288）",
+   "new": "FULLTEXT｜全文级（本次独立复核 PMC10163288）",
+   "reason": "按卡 §0 推导（B09_Bennett-2023_NatComms_af2-filter.md）"
+  },
+  {
+   "id": "B10; C08",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B10-C08_Yeh-2023_Nature_luciferase-dl.md）"
+  },
+  {
+   "id": "B11",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B11_Kim-2023_PNAS_small-beta-barrel.md）"
+  },
+  {
+   "id": "B12",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B12_VazquezTorres-2024_Nature_helical-peptide-binders.md）"
+  },
+  {
+   "id": "B13",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（B13_Krishna-2024_Science_rosettafold-allatom.md）"
+  },
+  {
+   "id": "B14",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B14_Glugl-2024_Science_tnfr-free-and-partial-diffusion.md）"
+  },
+  {
+   "id": "B15",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B15_Rettie-2025_NatChemBio_rfpeptides-macrocycles.md）"
+  },
+  {
+   "id": "B16",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B16_Baryshev-2024_NatChemBio_mp3seq.md）"
+  },
+  {
+   "id": "B17",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级（本次独立复核 PMC12288761）",
+   "new": "FULLTEXT｜全文级（本次独立复核 PMC12288761）",
+   "reason": "按卡 §0 推导（B17_Lauko-2025_Science_serine-hydrolase-placer.md）"
+  },
+  {
+   "id": "B18",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B18_Kim-2026_Nature_metallohydrolase-zeta.md）"
+  },
+  {
+   "id": "B19",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级（本次独立复核 PMC12625923）",
+   "new": "FULLTEXT｜全文级（本次独立复核 PMC12625923）",
+   "reason": "按卡 §0 推导（B19_Anishchenko-2025_PNAS_placer-ensemble.md）"
+  },
+  {
+   "id": "B20",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级（本次独立复核 PMC12791007）",
+   "new": "FULLTEXT｜全文级（本次独立复核 PMC12791007）",
+   "reason": "按卡 §0 推导（B20_Ahern-2026_NatMethods_rfdiffusion2-ame.md）"
+  },
+  {
+   "id": "B21",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B21_Liu-2025_Nature_idp-binders.md）"
+  },
+  {
+   "id": "B22",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级（本次独立复核 PMC12727541）",
+   "new": "FULLTEXT｜全文级（本次独立复核 PMC12727541）",
+   "reason": "按卡 §0 推导（B22_Bennett-2025_Nature_rfantibody.md）"
+  },
+  {
+   "id": "B23",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B23_Sappington-2026_NatComms_beta-pairing.md）"
+  },
+  {
+   "id": "B24",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B24_Qian-2026_NatComms_SAPP-DMX.md）"
+  },
+  {
+   "id": "B25",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B25_Dowling-2025_Nature_pseudosymmetric-nanocages.md）"
+  },
+  {
+   "id": "B26",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B26_Haddox-2026_PLoSCompBiol_energy-retrain.md）"
+  },
+  {
+   "id": "B27",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B27_Glasscock-2025_NSMB_sequence-specific-dbp.md）"
+  },
+  {
+   "id": "B28",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B28_Dauparas-2023_NatComputSci_ligandmpnn.md）"
+  },
+  {
+   "id": "B29",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B29_Goverde-2024_Nature_af2seq-membrane-analogue.md）"
+  },
+  {
+   "id": "B30",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B30_deHaas-2024_PNAS_mpnn-auto-t33.md）"
+  },
+  {
+   "id": "B31",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B31_smallmol-family-binding-sensing.md）"
+  },
+  {
+   "id": "B32; C14",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B32-C14_immune-receptor-binders2025.md）"
+  },
+  {
+   "id": "B33",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "未获正文",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B33_Wu-2023_Nature_superhelical-matching.md）"
+  },
+  {
+   "id": "B34",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B34_buttressed-loops-2024.md）"
+  },
+  {
+   "id": "B35",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（B35_Butcher-2025_biorxiv_rfdiffusion3.md）"
+  },
+  {
+   "id": "B36",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（B36_Yang-2026_Nature_design-perspective.md）"
+  },
+  {
+   "id": "B37",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B37_Klima-2021_NatComms_mFAP-sensing.md）"
+  },
+  {
+   "id": "B38",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B38_Oligomorph-2025_NatStructMolBiol_local-flexibility-oligomorphism.md）"
+  },
+  {
+   "id": "B39",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B39_confdyn2023_PNAS_conformational-dynamics-function.md）"
+  },
+  {
+   "id": "B40",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B40_Ennist-2024_NatChemBio_exciton-coupled-chlorophyll.md）"
+  },
+  {
+   "id": "B41",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B41_symmetry-breaking-fourcomp-nanocages-2025.md）"
+  },
+  {
+   "id": "B42; C11",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B42-C11_endycyte-degron-2025.md）"
+  },
+  {
+   "id": "B43",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B43_snakvenom2025_de-novo-venom-neutralizers.md）"
+  },
+  {
+   "id": "B44",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（B44_Roy-2023_NatComms_integrin-miniprotein.md）"
+  },
+  {
+   "id": "Z01",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（Z01_Yang-2026_eLife_rna-aptamer-fep-degraded.md）"
+  },
+  {
+   "id": "Z02",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（Z02_Bell-2020_PNAS_epcam-rna-aptamer-degraded.md）"
+  },
+  {
+   "id": "Z03",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（Z03_Chan-2026_SciRep_neoantigen-vaccine-mcmc-fep-degraded.md）"
+  },
+  {
+   "id": "Z04",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（Z04_Song-2023_PNAS_dq8-autoantigen-fep.md）"
+  },
+  {
+   "id": "Z05",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（Z05_Ye-2025_CSBJ_psk-phytosulfokine-fep-degraded.md）"
+  },
+  {
+   "id": "Z06",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（Z06_Zhang-2025_IJBM_ctx-egfr-electrostatic-degraded.md）"
+  },
+  {
+   "id": "Z07",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（Z07_ANUBI-2026_JCTC_mc-mmpbsa-platform-degraded.md）"
+  },
+  {
+   "id": "Z08",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（Z08_Autiero-2025_JCTC_affinity-scorer-benchmark.md）"
+  },
+  {
+   "id": "Z09",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（Z09_Zhong-2025_BIB_fepaml-mimotope-degraded.md）"
+  },
+  {
+   "id": "Z10",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（Z10_Yang-2025_JCIM_deep-covboost-mpro-degraded.md）"
+  },
+  {
+   "id": "Z11",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（Z11_Ye-2025_JPCB_gp100-mimotope-md-fep.md）"
+  },
+  {
+   "id": "Z12",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（Z12_Feng-2024_IJB_hla-b44-peptide-fep.md）"
+  },
+  {
+   "id": "Z13",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（Z13_Xie-2025_biorxiv_tcr-mimic-electrostatic-filter.md）"
+  },
+  {
+   "id": "Z14",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（Z14_Tang-2023_SmallMethods_dna-framework-aptamer.md）"
+  },
+  {
+   "id": "Z15",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（Z15_CASTELO-cvae-peptide-mhc-2021.md）"
+  },
+  {
+   "id": "Z16",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（Z16_QM-usage-forensics-summary.md）"
+  },
+  {
+   "id": "C01",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级（本次独立复核 PMC7857403）",
+   "new": "FULLTEXT｜全文级（本次独立复核 PMC7857403）",
+   "reason": "按卡 §0 推导（C01_Cao-2020_Science_de-novo-picomolar-miniproteins.md）"
+  },
+  {
+   "id": "C03",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（C03_QuijanoRubio-2021_Nature_biosensor-function-geometry-first.md）"
+  },
+  {
+   "id": "C04",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（C04_Case-2021_CellHostMicrobe_LCB1-invivo.md）"
+  },
+  {
+   "id": "C05",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（C05_Singer-2022_PLoSONE_sequence-only-stability.md）"
+  },
+  {
+   "id": "C06",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（C06_Hunt-2022_SciTranslMed_multivalent-minibinders.md）"
+  },
+  {
+   "id": "C07",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（C07_FGFR4-mb7TH-isoform-2022.md）"
+  },
+  {
+   "id": "C09",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（C09_Lutz-2023_Science_rl-topdown.md）"
+  },
+  {
+   "id": "C10",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（C10_Edman-2024_Cell_dhr-oligomer-assemblies.md）"
+  },
+  {
+   "id": "C12",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（C12_Cao-2024_NatBionEng_CAR-T-designed-binders.md）"
+  },
+  {
+   "id": "C13",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（C13_Cao-2024_CellRes_heterochiral-ppi.md）"
+  },
+  {
+   "id": "C15",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（C15_Cao-2025_NatChem_light-responsive-ppi-azof.md）"
+  },
+  {
+   "id": "C16",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（C16_Proteus-2024_biorxiv_structure-generation.md）"
+  },
+  {
+   "id": "C17",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（C17_Cao-2026_Science_small-molecule-oligomer-switch.md）"
+  },
+  {
+   "id": "C18",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（C18_Cao-2026_NatCommun_C9-MAC-inhibitor.md）"
+  },
+  {
+   "id": "C19",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（C19_HalluDesign-iterative-hallucination.md）"
+  },
+  {
+   "id": "C20",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（C20_HalluDesign-NA-2026_biorxiv_nucleic-acid-design.md）"
+  },
+  {
+   "id": "C21",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（C21_Cao-2026_biorxiv_physics-ligand-binding-design.md）"
+  },
+  {
+   "id": "C22",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（C22_Cao-2026_biorxiv_metalloprotease-abeta-cleavage.md）"
+  },
+  {
+   "id": "C23",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（C23_Ke-2026_biorxiv_ml-droplet-enzyme-screening.md）"
+  },
+  {
+   "id": "C24",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "未获正文",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（C24_IDP-binder-review-2026.md）"
+  },
+  {
+   "id": "C25",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "未标注",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（C25_cao-application-and-background-merged.md）"
+  },
+  {
+   "id": "K01",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（K01_Jann-2026_PLoSBiol_barcoded-dms-opool.md）"
+  },
+  {
+   "id": "K02",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K02_twist-gene-synthesis-price.md）"
+  },
+  {
+   "id": "K03",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K03_gene-synthesis-2023-historical-price.md）"
+  },
+  {
+   "id": "K04",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K04_genscript-opools-price.md）"
+  },
+  {
+   "id": "K05",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K05_gene-synthesis-cost-breakdown-error-rate.md）"
+  },
+  {
+   "id": "K06",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（K06_Pinheiro-2025_ProteinSci_fida-lysate-screen.md）"
+  },
+  {
+   "id": "K07",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K07_protein-production-purification-2008-review.md）"
+  },
+  {
+   "id": "K08",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "未获正文",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K08_display-throughput-per-hit-cost-unverified.md）"
+  },
+  {
+   "id": "K09",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K09_octet-red96-bli-machine-time-price.md）"
+  },
+  {
+   "id": "K10",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K10_octet-r2-r4-bli-throughput.md）"
+  },
+  {
+   "id": "K11",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K11_spr-machine-time-multi-facility.md）"
+  },
+  {
+   "id": "K12",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K12_spr-sensor-chip-2010-price.md）"
+  },
+  {
+   "id": "K13",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K13_spr-single-chip-throughput-vendor-page.md）"
+  },
+  {
+   "id": "K14",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K14_itc-machine-time-and-service-price.md）"
+  },
+  {
+   "id": "K15",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K15_dls-price-per-sample.md）"
+  },
+  {
+   "id": "K16",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K16_nanodsf-prometheus-hourly-price.md）"
+  },
+  {
+   "id": "K17",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K17_mass-spec-confirmation-prices.md）"
+  },
+  {
+   "id": "K18",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K18_cryo-em-300kv-machine-time.md）"
+  },
+  {
+   "id": "K19",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K19_em-consumables-grid-preparation.md）"
+  },
+  {
+   "id": "K20",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K20_xray-crystallography-lab-prices.md）"
+  },
+  {
+   "id": "K21",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K21_synchrotron-beamtime-fee-snapshot.md）"
+  },
+  {
+   "id": "K22",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K22_facs-sorting-hourly-price-snapshot.md）"
+  },
+  {
+   "id": "K23",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K23_facsaria-iii-nominal-sorting-speed.md）"
+  },
+  {
+   "id": "K24",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K24_per-candidate-marginal-cost-estimate.md）"
+  },
+  {
+   "id": "K25",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K25_yeast-display-facs-throughput-cost.md）"
+  },
+  {
+   "id": "K26",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K26_single-point-bli-spr-screen.md）"
+  },
+  {
+   "id": "K27",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K27_md-prescreen-vs-synthesize-cost.md）"
+  },
+  {
+   "id": "K28",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（K28_Mirdita-2022_NatMethods_colabfold.md）"
+  },
+  {
+   "id": "K29",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（K29_Kutzner-2022_JCIM_gromacs-cloud-abfe.md）"
+  },
+  {
+   "id": "K30",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级（本次独立复核）",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文（本次独立复核）",
+   "reason": "按卡 §0 推导（K30_Rocklin-2017_Science_massively-parallel-design-synthesis-testing.md）"
+  },
+  {
+   "id": "K31",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（K31_Yin-2022_ProteinScience_af-complex-benchmark.md）"
+  },
+  {
+   "id": "K32",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（K32_Yin-2024_ProteinSci_af-ab-ag-benchmark.md）"
+  },
+  {
+   "id": "K33",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级（本次独立复核 PMC10273344）",
+   "new": "FULLTEXT｜全文级（本次独立复核 PMC10273344）",
+   "reason": "按卡 §0 推导（K33_dms-functional-score-correspondence.md）"
+  },
+  {
+   "id": "K34",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（K34_LastMile-2026_JCIM_screening-critique.md）"
+  },
+  {
+   "id": "K35",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（K35_Niazi-2026_ComIB_qm-drug-design-review.md）"
+  },
+  {
+   "id": "K36",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "未获正文",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K36_2025_JPCB_prospective-kinase-mutation-simulations.md）"
+  },
+  {
+   "id": "K37",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "未获正文",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K37_2026_JCIM_openfe-collaborative-binding-free-energy-benchmark.md）"
+  },
+  {
+   "id": "K38",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（K38_Wenran-2026_IJMS_diffusion-review.md）"
+  },
+  {
+   "id": "K39",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级（本次独立复核 PMC13113996）",
+   "new": "FULLTEXT｜全文级（本次独立复核 PMC13113996）",
+   "reason": "按卡 §0 推导（K39_AI-de-novo-binder-review.md）"
+  },
+  {
+   "id": "K40",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（K40_Mischley-2026_eLife_ppiscreenml-af-screening.md）"
+  },
+  {
+   "id": "K41",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（K41_complementarity-binder-design-2025.md）"
+  },
+  {
+   "id": "K42",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（K42_scaffold-lab-backbone-generation-benchmark.md）"
+  },
+  {
+   "id": "K43",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（K43_AF3-benchmark.md）"
+  },
+  {
+   "id": "K44",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "未获正文",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（K44_Behera-2025_JCIM_structure-quality-rbfe.md）"
+  },
+  {
+   "id": "K45",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K45_Hanes-Plueckthun-2000_NatBiotech_ribosome-display-picomolar-antibodies.md）"
+  },
+  {
+   "id": "K46",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K46_2020_MethodsEnzymol_droplet-ultrahigh-throughput-enzyme-screening.md）"
+  },
+  {
+   "id": "K47",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（K47_CamSol-2023_BriefBioinform_pH-solubility.md）"
+  },
+  {
+   "id": "K48",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（K48_Aggrescan4D-2024_ProteinSci_pH-aggregation-engineering.md）"
+  },
+  {
+   "id": "K49",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（K49_AGGRESCAN-2026_BiophysRev_two-decade-perspective.md）"
+  },
+  {
+   "id": "K50",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K50_Siegel-2010_Science_diels-alderase-theozyme.md）"
+  },
+  {
+   "id": "K51",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K51_qmmm-retro-aldolase-posthoc-mechanism.md）"
+  },
+  {
+   "id": "K52",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K52_qmmm-methods-review-senn-thiel.md）"
+  },
+  {
+   "id": "K53",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K53_gpu4pyscf-periodic-qmmm-md.md）"
+  },
+  {
+   "id": "K54",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K54_pyp-chromophore-excited-state-qmmm.md）"
+  },
+  {
+   "id": "K55",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K55_transition-metal-ff-parameterization.md）"
+  },
+  {
+   "id": "K56",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（K56_Schauperl-2020_CommChem_resp2-nonbonded-ff.md）"
+  },
+  {
+   "id": "K57",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K57_profluent-ai-editor-selfreport.md）"
+  },
+  {
+   "id": "K58",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K58_xaira-dbtl-loop-selfreport.md）"
+  },
+  {
+   "id": "K59",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K59_generate-biomedicines-flagship-funding.md）"
+  },
+  {
+   "id": "K60",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K60_iambic-insulin-receptor-abstract-pdb-record.md）"
+  },
+  {
+   "id": "K61",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "未获正文",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K61_nabla-morphic-throughput-not-retrieved.md）"
+  },
+  {
+   "id": "K62",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "二级来源",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K62_industry-anchor-100k-per-structure.md）"
+  },
+  {
+   "id": "K63",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（K63_Listov-2025_Nature_kemp-complete-design.md）"
+  },
+  {
+   "id": "K64",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "全文级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（K64_Braun-2025_Nature_riff-diff-motif-scaffolding.md）"
+  },
+  {
+   "id": "K65",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（K65_Maguire-2018_JCTC_mc-hbnet.md）"
+  },
+  {
+   "id": "K66",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "摘要级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（K66_Boyken-2016_Science_hbnet-oligomers.md）"
+  },
+  {
+   "id": "K67b",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "题录级（本次经 PubMed/Crossref 核对，未读正文）",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（K67b_Dieckhaus-2026_bioRxiv_hbdesigner.md）"
+  },
+  {
+   "id": "M-K27",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "已核验DOI",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（M-K27_mmdesign-zenodo-2026-10_target-level-94.7.md）"
+  },
+  {
+   "id": "M-K28",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "已核验DOI",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（M-K28_mmdesign-zenodo-2026-06_target-level-90.9.md）"
+  },
+  {
+   "id": "M-K29",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "已核验DOI",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（M-K29_multiepitope-scaffold-2026-degraded.md）"
+  },
+  {
+   "id": "M-K34",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "已核验DOI",
+   "new": "FULLTEXT｜全文级",
+   "reason": "按卡 §0 推导（M-K34_nirFAP-2026_JACS_de-novo-near-infrared-fluorescent-protein.md）"
+  }
+ ],
+ "run_log": [
+  {
+   "run": 1,
+   "scope": "证据级别整列刷新 + 5 处手工事实更正",
+   "changes": 157,
+   "ledger_status": "已被同日第 2 次运行覆盖（脚本按日期写固定文件名），本账由 git HEAD 重放复原"
+  },
+  {
+   "run": 2,
+   "scope": "仅 C10 一处：证据级别由 FULLTEXT｜全文级 改判为 DEGRADED｜摘要级/二级来源/未获正文",
+   "changes": 1,
+   "ledger_status": "幸存条目，逐字保留于 prior_run_entries"
+  }
+ ],
+ "prior_run_entries": [
+  {
+   "id": "C10",
+   "column": "证据级别(evidence_level)",
+   "kind": "evidence_level_refresh",
+   "old": "FULLTEXT｜全文级",
+   "new": "DEGRADED｜摘要级/二级来源/未获正文",
+   "reason": "按卡 §0 推导（C10_Edman-2024_Cell_dhr-oligomer-assemblies.md）"
+  }
+ ],
+ "provenance": {
+  "why_reconstructed": "scripts/fix_table_fields.py 早期版本把改动账写成按日期命名的固定文件，同一天第二次运行把第一次运行的 152 条证据级别刷新记录整体覆盖，只剩 C10 一条。本账由 git HEAD(f07540d) 的总表重放 scripts/table_field_fixes.json + scripts/litcards_evidence_level.py 推导，逐条复原；C10 的最终值与幸存条目逐字一致。",
+  "verification": "重放结果与当前总表逐格比对：7 处不同，全部来自本轮另有改动的卡文件名与卡正文（B12/K48/K49/K59 卡的改名与改写），与本账无关；其余格子全部一致。",
+  "defect_fixed": "scripts/fix_table_fields.py 已改为同日多次运行合并账目、备份不覆盖，并加 --check 复核。"
+ }
+}

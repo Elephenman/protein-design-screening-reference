@@ -81,6 +81,8 @@ AI_INCLUDE = (
     re.compile(r"^data/interim/rfd4_2026-11-07/(rfd4_paper_findings|PROVENANCE)\.md$"),
     re.compile(r"^data/interim/iteration_evidence_2026-11-07\.md$"),
 )
+# 许可与署名文件必须随每个包走：没有 LICENSE 的包等于无授权地再分发。
+AI_MUST_INCLUDE = ("LICENSE", "NOTICE", "CITATION.cff")
 AI_EXCLUDE_TOP = {rel(OUT) }
 
 
@@ -113,6 +115,7 @@ def read(p: Path) -> str:
 
 TIER1_SRC = [
     "README.md",
+    "deliverables/PUBLISH_NOTE.md",
     "deliverables/protein_design_workflow.md",
     "deliverables/protein_design_workflow_template.md",
     "deliverables/protein_design_workflow_iteration.md",
@@ -121,6 +124,7 @@ TIER1_SRC = [
     "deliverables/protein_design_workflow_template_branch_peptide.md",
     "deliverables/frontier_methods_2025_2026.md",
     "deliverables/protein_design_workflow_summary.txt",
+    "deliverables/protein_design_license_audit.md",
 ]
 
 
@@ -159,6 +163,10 @@ def build_digest(today: str) -> dict[str, int]:
 **AI 投喂包不含论文全文**（本包为许可与体积考虑剔除了 `fulltext/` 与 `data/interim/`）。
 因此卡里每条引句你只能查到"它声明的底稿路径 + 该底稿的 sha256"，不能在此包内复核原文；
 要复核必须用完整迁移包或原仓库。本包的定位是**判据、阈值、成本与流程口径的参考**，不是原文数据库。
+
+**许可**：本包内属于作者原创的内容适用包内 `LICENSE`；第三方论文全文**不在本包内**，
+逐篇许可类别与证据见 `tier3_ledgers/protein_design_license_audit.csv`。
+卡里的英文短引句是**引用**（不是全文再分发），每条带 `[文献编号]`，出处可在 T3 台账回查。
 
 ## 引用本库时必须遵守的三条
 
@@ -205,7 +213,8 @@ def build_digest(today: str) -> dict[str, int]:
     led.mkdir(parents=True, exist_ok=True)
     for f in ["data/protein_design_literature.csv",
               "deliverables/protein_design_workflow_evidence.csv",
-              "deliverables/protein_design_workflow_criteria_ledger.csv"]:
+              "deliverables/protein_design_workflow_criteria_ledger.csv",
+              "deliverables/protein_design_license_audit.csv"]:
         src = ROOT / f
         dst = led / Path(f).name
         dst.write_bytes(src.read_bytes())
@@ -307,11 +316,17 @@ def main(argv=None) -> int:
         print(f"{zp.name}: {n} 文件 · {zp.stat().st_size/1024/1024:.2f} MiB")
     print(f"清单条目合计: 完整包 {len(files)} · AI 包 {len(set(ai_files))}")
     print("判定标准: 包内文件数 = 清单行数；manifest 每行 sha256 与磁盘一致；AI 包不含 fulltext/ 与 interim/"
-          "（AI_INCLUDE 白名单里的三份归纳件除外）")
+          "（AI_INCLUDE 白名单里的三份归纳件除外）；AI 包必须带 LICENSE/NOTICE/CITATION.cff")
     leak = [p for p in ai_files
             if p.startswith(("data/literature_cards/fulltext/", "data/interim/"))
             and not any(rx.match(p) for rx in AI_INCLUDE)]
     print(f"判定结果: {'PASS AI 包 0 处缓存泄漏' if not leak else 'FAIL 泄漏 ' + str(len(leak))}")
+    # 许可文件缺失 = 无授权再分发。缺一个就红。
+    missing_legal = [f for f in AI_MUST_INCLUDE if f not in ai_files]
+    if missing_legal:
+        print(f"FAIL AI 包缺许可文件: {missing_legal}")
+    else:
+        print("PASS AI 包带齐 LICENSE / NOTICE / CITATION.cff")
     print("找出来没有: 本脚本只判'打包内容是否如声明'，不判文献内容对错（那走 verify_literature_cards.py）")
     return 1 if leak else 0
 

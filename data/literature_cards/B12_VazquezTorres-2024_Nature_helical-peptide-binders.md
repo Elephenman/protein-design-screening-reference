@@ -15,6 +15,7 @@ Nature 2024, 626:435-442 · DOI 10.1038/s41586-023-06953-1 · PMID 38109936 · P
 | 本地全文①（本次唯一登记全文） | `data/interim/baker_lit/ft/helicalpeptide2024.txt`（74,815 B，Europe PMC fullTextXML 去标签纯文本） |
 | 登记底稿 | `sources/baker.md` 第 160–170 行（原卡） |
 | 证据级别 | **全文级**（本卡所有英文引句均在该本地纯文本里逐字命中；见第 9 节门禁自检） |
+| 年份口径 | 刊期年 **2024**（Nature 2024, 626:435-442）；Crossref 的在线年标是 2023，两种写法都写在本行『期刊或预印本』列。2026-11-07 把 CSV 的『年份』列统一为刊期年 2024（改动账 `data/interim/table_field_fixes_2026-11-07.json`） |
 | 未取到的部分 | Supplementary Methods/Tables 1–9/Figs 1–12、Extended Data 原图数值、FP/ITC 原始曲线。凡涉这些处本卡明写"正文未给出" |
 | 文本细节 | 抓取文本里 `&lt;`/`&gt;` 为未解码实体；本卡涉及阈值的引句按归一化后的 `<`/`>` 书写（门禁两侧同用 `scripts/litcards_text.py` 的 `norm()`，故命中）；`RF joint`、`K d` 等是标签剥离后的写法，本卡照录 |
 

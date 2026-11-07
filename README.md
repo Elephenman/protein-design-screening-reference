@@ -63,12 +63,30 @@ python scripts/verify_workflow_doc.py         # 证据工作流文档的引用�
 python scripts/verify_workflow_template.py    # 模板：引用可查 + 每条默认阈值带证据级别 + 链接可达
 python scripts/verify_workflow_template.py --selftest   # 四种破坏必须各红一条
 python scripts/build_bundles.py --check       # 包内清单与磁盘哈希一致
-python scripts/build_workflow_evidence.py --check   # 台账行数必须等于从 CSV+卡重算的行数
+python scripts/build_workflow_evidence.py --check   # 台账三个产物必须与从 CSV+卡重算的结果逐字节一致
+python scripts/build_workflow_visual.py --check     # 页面无手打数字：阈值/引用/S 条目数从门禁现算
+python scripts/fix_table_fields.py --check        # 表级改动账：账里新值==当前表，受管列每处改动都有账
+python scripts/audit_source_licenses.py --check    # 第三方全文缓存的许可分类：行数与逐行类别与重算一致
 ```
 
 门禁判的是五件事：每行有且仅有一张卡；十节标题齐全且顺序固定；工作流表 ≥3 步、难点 ≥2 条；
 **卡里每一条纯英文直引号片段必须在该卡声明的那一份底稿里逐字命中**；证据级别不许造假
 （没有本地全文却写"全文级"直接 FAIL）。它不判文献内容对不对——那是卡 §7 与 `report.md` §八 的活。
+
+## 两个"证据级别"口径，不许混用
+
+这个库有两个都能数出数字但含义不同的东西，2026-11-07 起在台账里分列两栏（`底稿形态` / `卡证据级别`）：
+
+| 口径 | 数字 | 含义 |
+| --- | --- | --- |
+| **底稿形态** | FULLTEXT 87 / DEGRADED 65 | `inventory.json` 的 `has_fulltext`：本地存有一份登记在册的全文抽取文件 |
+| **卡证据级别** | FULLTEXT 79 / DEGRADED 73 | 卡片 §0 自己声明的级别，且每条直引号已在它声明的那一份底稿里逐字命中 |
+
+两个口径相差 **8 行**：`Z01 Z02 Z03 Z05 Z09 C13 C18 M-K29`。这 8 行的 PMC 全文就在本地，
+但卡里写的是"未获正文／二级来源"，逐字命中率只有 3/11 – 32/43（缺的那些句在该 XML 里并不逐字一致）。
+**本轮不把它们升级为全文级**——升级的前提是重写卡片让引句逐字命中，不是改一个标签。
+这 8 行的编号、单条命中率见 `deliverables/protein_design_workflow_summary.txt`。
+
 
 ## 这个库遵守的三条规矩
 
@@ -85,15 +103,31 @@ python scripts/build_workflow_evidence.py --check   # 台账行数必须等于�
 
 ## 已知缺陷（公开前请读这段）
 
-- 表级待改：`K49` 的 `期刊或预印本` 写 Amino Acids，Europe PMC 实查是 **Biophysical Reviews 18 卷**（DOI 与全文没错）；
-  `K48` 的 `年份` 写 2025，全文题录 2024；`K59` 的 `核验状态` 写"✅Crossref核验"而 `DOI=未记录`（核验对象是 C&EN 新闻条目 DOI）。
-  这三列都不在 14 个回填键范围内，所以是"记录在案、尚未改表"，改动账见 `data/interim/csv_field_corrections.json` 的规则说明。
+- 表级字段缺陷**已于 2026-11-07 更正并留账**（`scripts/fix_table_fields.py` + `scripts/table_field_fixes.json`，
+  改动账 `data/interim/table_field_fixes_2026-11-07.json`，备份
+  `data/interim/protein_design_literature_backup_2026-11-07_fieldfix.csv`）：
+  `K49` 的 `期刊或预印本` 原写 Amino Acids，Europe PMC 实查是 **Biophysical Reviews 18 卷**；
+  `K48` 的 `年份` 原写 2025，全文题录 2024；`B12` 的 `年份` 原写 2023，Nature 626:435-442 实为 2024
+  （Crossref 在线年 2023、期号年 2024，故以期号年为准）；`K59` 的 `核验状态` 原写"✅Crossref核验"而 `DOI=未记录`
+  （核验对象是 C&EN 新闻条目 DOI，已改写为写明核验对象）。同时把 `证据级别` 整列重刷成机器标签，
+  并在 `verify_literature_cards.py` 里加了**表↔卡一致性**检查（2026-11-07 之前该列有 58/152 行与卡相反，
+  其中 8 行把"未获正文"写成了"全文级"）。
+- **改动账被覆盖过一次，已复原并加了门**：早期版本的 `fix_table_fields.py` 把改动账写成按日期命名的固定文件，
+  同一天第二次运行（只改 C10 一处）把第一次运行的 **152 条**记录整体覆盖成 1 条。现已：
+  ① 由 `git show f07540d:data/protein_design_literature.csv` 重放 `table_field_fixes.json` +
+  `litcards_evidence_level.py`，把 157 条（152 条整列刷新 + 5 条手工更正）逐条复原回
+  `data/interim/table_field_fixes_2026-11-07.json`，并与幸存的 C10 条目逐字比对一致；
+  ② 脚本改为同日多次运行**合并账目、备份不覆盖**；
+  ③ 新增 `python scripts/fix_table_fields.py --check`：账里每条新值必须等于当前表该格，
+  受管列每处改动都必须有账，证据级别必须与卡 §0 一致（两种破坏已实测各红一条，退出码 1）。
+- **两个证据口径的 8 行差集**（`Z01 Z02 Z03 Z05 Z09 C13 C18 M-K29`）见上一节，本轮不升级，理由已写明。
 - **`B28` 一行有两张卡**（`..._2023_NatComputSci_ligandmpnn.md` 早期登记版与 `..._2025_NatMethods_...md` 后续版，同一篇
   Nature Methods 2025）。门禁规则是"每行 ≥1 张"，所以 152/152 仍 PASS，但卡文件数是 **153** 而不是 152。
   两张都保留（删除会切断已完成的引句核验链），**引用一律以台账 `精读卡文件` 列指向的那张为准**。过程账见 `run.md` §10.5。
-- 65 行是 DEGRADED（没拿到正文）：它们的卡按摘要级/二级来源写，阈值与步骤细节不许补，卡 §2 已明写"未获正文无法核验"。
+- 73 行的卡按摘要级/二级来源/未获正文写（卡证据级别 DEGRADED），阈值与步骤细节不许补，卡 §2 已明写"未获正文无法核验"。
 - `data/literature_cards/fulltext/` 与 `data/interim/` 缓存的是各出版商/PMC 的开放获取全文抽取，
-  **仅用于逐字引句核验**。若要公开发布，建议把这两个目录移出仓库（卡里已保留 SHA/身份块指针，核验链不断）。
+  **仅用于逐字引句核验**。若要公开发布，建议把这两个目录移出仓库（卡里已保留 SHA/身份块指针，核验链不断）；
+  逐篇第三方许可与商业边界见 `deliverables/protein_design_license_audit.md`。
 
 ## 与"天然 UAA 合成酶发现"那条主线的关系
 

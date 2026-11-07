@@ -26,6 +26,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from litcards_spec import CSV_COL, CSV_KEYS, parse_card  # noqa: E402
+from litcards_evidence_level import tag_from_card  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 CSVP = ROOT / "data" / "protein_design_literature.csv"
@@ -67,6 +68,7 @@ def build(rows: list[dict], fields: list[str], inv: dict) -> tuple[list[dict], l
         if errs:
             notes.append(f"{acc}: 回填块 {errs[0]}")
             continue
+        body = cf.read_text(encoding="utf-8")
         line = {
             "编号": acc,
             "人物组": r[col_of(fields, "人物组")],
@@ -74,7 +76,12 @@ def build(rows: list[dict], fields: list[str], inv: dict) -> tuple[list[dict], l
             "年份": r[col_of(fields, "年份")],
             "期刊或预印本": r[col_of(fields, "期刊或预印本")],
             "DOI": r[col_of(fields, "DOI")],
+            # 两个口径必须分列，不能混成一个"证据级别"：
+            #   底稿形态 = 本地是否有一份登记在册的全文文件（inventory.has_fulltext）
+            #   卡证据级别 = 卡片 §0 自己声明的逐字核验级别（全文级/摘要级…）
+            # 87 与 80 的差 = 本地有全文但卡按降级写（那 8 行），见 README 已知缺陷。
             "底稿形态": "FULLTEXT" if inv.get(acc, {}).get("has_fulltext") else "DEGRADED",
+            "卡证据级别": tag_from_card(body),
             "精读卡文件": str(cf.relative_to(ROOT)).replace("\\", "/"),
         }
         for k in CSV_KEYS:
@@ -92,6 +99,7 @@ def build(rows: list[dict], fields: list[str], inv: dict) -> tuple[list[dict], l
                 "人物组": line["人物组"],
                 "年份": line["年份"],
                 "底稿形态": line["底稿形态"],
+                "卡证据级别": line["卡证据级别"],
                 "判据": crit[:120],
                 "该行阈值原文": vals["thresholds"][:400],
                 "候选递减": vals["pipeline_counts"][:300],
@@ -104,19 +112,35 @@ def build(rows: list[dict], fields: list[str], inv: dict) -> tuple[list[dict], l
     return ev, ledger, notes
 
 
+def csv_text(rows: list[dict]) -> str:
+    """把行渲染成与写盘完全一致的 CSV 文本（\\n 行尾，不含 BOM）。
+
+    --check 用它做逐字节比对：只比行数抓不到"内容被改了但行数没变"的漂移
+    （实测过一次：改了一个阈值数字，行数不变，旧版 --check 照样 PASS）。
+    BOM 由 utf-8-sig 编码层加，比对时两侧都读成无 BOM 才相等。
+    """
+    import io
+    buf = io.StringIO(newline="")
+    w = csv.DictWriter(buf, fieldnames=list(rows[0].keys()), lineterminator="\n")
+    w.writeheader()
+    w.writerows(rows)
+    return buf.getvalue()
+
+
 def write_csv(path: Path, rows: list[dict]) -> None:
     path.parent.mkdir(exist_ok=True)
-    with path.open("w", encoding="utf-8-sig", newline="") as fh:
-        w = csv.DictWriter(fh, fieldnames=list(rows[0].keys()))
-        w.writeheader()
-        w.writerows(rows)
+    path.write_text(csv_text(rows), encoding="utf-8-sig", newline="")
 
 
 def summary(ev: list[dict], ledger: list[dict]) -> list[str]:
     out = []
     out.append(f"论文行数: {len(ev)}（CSV 152 行里能解析出回填块的行）")
     ft = sum(1 for x in ev if x["底稿形态"] == "FULLTEXT")
-    out.append(f"其中 FULLTEXT {ft} 行 · DEGRADED {len(ev)-ft} 行")
+    out.append(f"底稿形态（本地有登记全文文件）: FULLTEXT {ft} 行 · DEGRADED {len(ev)-ft} 行")
+    cf = sum(1 for x in ev if x["卡证据级别"] == "FULLTEXT")
+    out.append(f"卡证据级别（卡内逐字核验口径）: FULLTEXT {cf} 行 · DEGRADED {len(ev)-cf} 行")
+    gap = [x["编号"] for x in ev if x["底稿形态"] == "FULLTEXT" and x["卡证据级别"] != "FULLTEXT"]
+    out.append(f"两口径差集（本地有全文但卡按降级写）: {len(gap)} 行 {' '.join(gap)}")
     md = sum(1 for x in ev if x["是否用MD"].startswith("是"))
     qm = sum(1 for x in ev if x["是否用QM"].startswith("是"))
     out.append(f"声明用了 MD: {md} 行 · 用了 QM: {qm} 行（其余为 否/未记录/不适用）")
@@ -154,17 +178,25 @@ def main() -> int:
 
     if args.check:
         bad = []
-        for p, expect in ((OUT / "protein_design_workflow_evidence.csv", len(ev)),
-                          (OUT / "protein_design_workflow_criteria_ledger.csv", len(ledger))):
+        expect = {
+            OUT / "protein_design_workflow_evidence.csv": csv_text(ev),
+            OUT / "protein_design_workflow_criteria_ledger.csv": csv_text(ledger),
+            OUT / "protein_design_workflow_summary.txt": "\n".join(summ) + "\n",
+        }
+        for p, want in expect.items():
             if not p.exists():
                 bad.append(f"{p.name} 缺失")
                 continue
-            got = sum(1 for _ in csv.DictReader(p.open(encoding="utf-8-sig")))
-            if got != expect:
-                bad.append(f"{p.name} 行数 {got} != 重算 {expect}")
+            if p.suffix == ".csv":
+                with p.open("r", encoding="utf-8-sig", newline="") as fh:
+                    got = fh.read()
+            else:
+                got = p.read_text(encoding="utf-8")
+            if got != want:
+                bad.append(f"{p.name} 内容与重算结果不一致（逐字节比对）")
         if notes:
             bad.append(f"解析告警 {len(notes)} 条: " + "; ".join(notes[:5]))
-        print("判定标准: 已生成台账的行数必须等于从 CSV+卡重算出的行数，且无解析告警")
+        print("判定标准: 三个产物必须与从 CSV+卡重算的结果逐字节一致（不只是行数对），且无解析告警")
         print(f"判定结果: {'PASS' if not bad else 'FAIL — ' + ' | '.join(bad)}（退出码 {0 if not bad else 1}）")
         return 0 if not bad else 1
 

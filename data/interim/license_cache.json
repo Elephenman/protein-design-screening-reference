@@ -1,0 +1,80 @@
+{
+ "doi:10.1101/2024.02.10.579791": {
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1101/2024.02.10.579791&resultType=core&format=json",
+  "fetched_at": "2026-11-07T07:47:52+00:00",
+  "sha256": "a06f0f5afb26f8e39d69801b329dcdc1441fbee124a4b1b64da827dcbb86f738",
+  "license_text": ""
+ },
+ "doi:10.1101/2025.11.08.686881": {
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1101/2025.11.08.686881&resultType=core&format=json",
+  "fetched_at": "2026-11-07T07:47:55+00:00",
+  "sha256": "e11f66d59839056a661a77765bac97ceef719660a7017110c202bb4322a1baf1",
+  "license_text": "cc by-nc"
+ },
+ "doi:10.64898/2026.06.10.730767": {
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.64898/2026.06.10.730767&resultType=core&format=json",
+  "fetched_at": "2026-11-07T07:48:03+00:00",
+  "sha256": "8d8ede137c663a6a320968a0cdaa6657c3056e635b35c2f6e19652101ab33288",
+  "license_text": "cc by-nc"
+ },
+ "doi:10.64898/2026.07.13.738243": {
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.64898/2026.07.13.738243&resultType=core&format=json",
+  "fetched_at": "2026-11-07T07:48:06+00:00",
+  "sha256": "ade4fa3d54e0287d30bfbd2e1e0bb2f7f6f043f576f03ee7506579e11f352297",
+  "license_text": "cc by-nd"
+ },
+ "doi:10.64898/2026.01.06.697903": {
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.64898/2026.01.06.697903&resultType=core&format=json",
+  "fetched_at": "2026-11-07T07:48:08+00:00",
+  "sha256": "df83aa05f6d91c87f71b15f729de1a2e17a7884664d05a51f1ddf89056df5442",
+  "license_text": ""
+ },
+ "doi:10.64898/2026.06.23.733994": {
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.64898/2026.06.23.733994&resultType=core&format=json",
+  "fetched_at": "2026-11-07T07:48:17+00:00",
+  "sha256": "9ca8136971d44e4b9db1567fef25d9b24e63c9270fb580eb95c1f1e734299bd2",
+  "license_text": "cc by-nd"
+ },
+ "PMC12264970": {
+  "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=12264970&rettype=xml",
+  "fetched_at": "2026-11-07T07:48:20+00:00",
+  "sha256": "7457cf797230363dad3ec8eb4c5056f06cb230f6dfdfed87cfc673e11732e3e0",
+  "license_text": "https://creativecommons.org/licenses/by/4.0/ This article is licensed under CC-BY 4.0"
+ },
+ "PMC9117152": {
+  "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=9117152&rettype=xml",
+  "fetched_at": "2026-11-07T07:48:32+00:00",
+  "sha256": "a210547ff2fdc7eacba55964ca33a81f38d113a69d2a56c0799ecbca8f2a3aae",
+  "license_text": "https://creativecommons.org/licenses/by/4.0/ Open Access This article is licensed under a Creative Commons Attribution 4.0 International License, which permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source, provide a link to the Creative Commons license, and indicate if changes were made. The images or other third party material in this article are included in the article’s Creative Commons license, unless indicated otherwise in a credit line to the material. If material is not in"
+ },
+ "PMC9946828": {
+  "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=9946828&rettype=xml",
+  "fetched_at": "2026-11-07T07:48:34+00:00",
+  "sha256": "7b47726364895fd9a8ff5ff408833a479716bac87c2aede3d35472bb9edb3707",
+  "license_text": "https://creativecommons.org/licenses/by/4.0/ Open Access This article is licensed under a Creative Commons Attribution 4.0 International License, which permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source, provide a link to the Creative Commons licence, and indicate if changes were made. The images or other third party material in this article are included in the article’s Creative Commons licence, unless indicated otherwise in a credit line to the material. If material is not in"
+ },
+ "PMC11865580": {
+  "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=11865580&rettype=xml",
+  "fetched_at": "2026-11-07T07:48:36+00:00",
+  "sha256": "26fdb07bd4307c2f55a19dd539c0057d97aa0a62fefb7b9b5a98c0b3d4f39133",
+  "license_text": "https://creativecommons.org/licenses/by/4.0/ Open Access This article is licensed under a Creative Commons Attribution 4.0 International License, which permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source, provide a link to the Creative Commons licence, and indicate if changes were made. The images or other third party material in this article are included in the article’s Creative Commons licence, unless indicated otherwise in a credit line to the material. If material is not in"
+ },
+ "PMC11839401": {
+  "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=11839401&rettype=xml",
+  "fetched_at": "2026-11-07T07:48:39+00:00",
+  "sha256": "23a837c7d1d70c30a86caf8b3116986610cf9054412a2f168cb96cc90322e06d",
+  "license_text": "https://creativecommons.org/licenses/by/4.0/ Open Access This article is licensed under a Creative Commons Attribution 4.0 International License, which permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source, provide a link to the Creative Commons licence, and indicate if changes were made. The images or other third party material in this article are included in the article’s Creative Commons licence, unless indicated otherwise in a credit line to the material. If material is not in"
+ },
+ "landing:10.1101/2024.02.10.579791": {
+  "url": "https://doi.org/10.1101/2024.02.10.579791",
+  "fetched_at": "2026-11-07T07:51:30+00:00",
+  "sha256": "11464e0f9937ed629f7805199ed2985c155647b16b24bdf5c0fb9d11c729966c",
+  "license_text": "© 2024, Posted by Cold Spring Harbor Laboratory. This pre-print is available under a Creative Commons License (Attribution-NoDerivs 4.0 International), CC BY-ND 4.0, as described at http://creativecommons.org/licenses/by-nd/4.0/"
+ },
+ "landing:10.64898/2026.01.06.697903": {
+  "url": "https://doi.org/10.64898/2026.01.06.697903",
+  "fetched_at": "2026-11-07T07:51:36+00:00",
+  "sha256": "94561154b9128d2c8f65613e0dd488d04b8b45a1bd6533570206274626a22429",
+  "license_text": "© 2026, Posted by openRxiv. The copyright holder for this pre-print is the author. All rights reserved. The material may not be redistributed, re-used or adapted without the author's permission."
+ }
+}

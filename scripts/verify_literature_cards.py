@@ -28,6 +28,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from litcards_spec import parse_card, slug  # noqa: E402
 from litcards_text import norm  # noqa: E402
+from litcards_evidence_level import tag_from_card  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 CARDS = ROOT / "data" / "literature_cards"
@@ -218,6 +219,14 @@ def main() -> int:
                 errs.append(f"引句在所有底稿里都不命中: {q[:110]}")
             if rec.get("has_fulltext") and len(qs) < 8:
                 errs.append(f"有全文但引句仅 {len(qs)} 条 (<8)")
+            # 总表 `证据级别` 列必须与卡 §0 的判定一致（标签写在列首）。
+            # 这条检查是 2026-11-07 加的：该列不在 14 个回填键里，卡写完后一直没同步，
+            # 实测 152 行里 58 行与卡相反（含 Z01/Z03/Z05 这类"表里写全文级、卡里明写未获正文"）。
+            csv_tag = (col(r, "证据级别") or "").split("｜")[0].strip()
+            card_tag = tag_from_card(body)
+            if card_tag in ("FULLTEXT", "DEGRADED") and csv_tag != card_tag:
+                errs.append(f"总表 证据级别 列与卡 §0 不一致：表={csv_tag or '(无标签)'} 卡={card_tag}"
+                            f"（改表用 scripts/fix_table_fields.py）")
             head0 = _section_span(body, "元信息") or body[:1200]
             if not rec.get("has_fulltext"):
                 if len(qs) < 2:
