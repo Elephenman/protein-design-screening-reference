@@ -44,7 +44,7 @@
 | `data/interim/` | 抓取日志、回写前的 CSV 备份、2000 处字段改动账 |
 | `sources/*.md` | 四份调研底稿（Baker 组、周如鸿组、曹龙兴组、成本与判据经济学） |
 | `scripts/` | 建库、核验、抓取、回写、台账生成的全部脚本 |
-| `deliverables/` | 工作流模板（主模板+三分支）+ 证据工作流文档 + 机器生成的证据台账 + 前沿方法核验清单 |
+| `deliverables/` | 工作流模板（主模板+三分支）+ 证据工作流文档 + **审核视图 `protein_design_workflow_visual.html`**（把 85 条默认阈值摊开、可逐行标记并导出审核意见；由 `scripts/build_workflow_visual.py` 从模板与台账编译，页面无手打数字）+ 机器生成的证据台账 + 前沿方法核验清单 |
 | `deliverables/bundles/` | 迁移包与 AI 投喂包（由 `scripts/build_bundles.py` 生成，不进 git，发布走 GitHub Release） |
 
 ## 门禁（这就是"可复现"的意思）
