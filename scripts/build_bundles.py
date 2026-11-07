@@ -5,11 +5,15 @@
 两个包（都写到 deliverables/bundles/，该目录被 .gitignore 排除，发布走 GitHub Release）：
 
 1. `protein_design_reference_full_<date>.zip`
-   完整迁移包 = git 跟踪的全部文件（含全文缓存与抓取记录）。换机器时用它可以重建整个工作树，
-   连逐字引句门禁都能原样复跑（门禁需要 `fulltext/` 与 `sources/`）。
+   完整迁移包 = git 可见的全部文件（已跟踪 + 未被忽略的新文件；含全文缓存与抓取记录）。
+   换机器时用它可以重建整个工作树，连逐字引句门禁都能原样复跑（门禁需要 `fulltext/` 与 `sources/`）。
+   **不含**被 `.gitignore` 排除的大二进制，例如 RFD4 预印本原 PDF（54.8 MB，按
+   `data/interim/rfd4_2026-11-07/PROVENANCE.md` 的 URL + sha256 重取）。
 2. `protein_design_reference_ai_<date>.zip`
-   AI 投喂包 = 卡片 + 总表 + 台账 + 工作流/模板 + 脚本 + 调研底稿，**不含** `fulltext/` 与 `data/interim/`
+   AI 投喂包 = 卡片 + 总表 + 台账 + 工作流/模板/迭代协议 + 脚本 + 调研底稿，**不含** `fulltext/` 与 `data/interim/`
    （那两块是各出版商/PMC 的抽取缓存与抓取日志，喂给模型没有增量信息，只涨体积）。
+   例外是 `AI_INCLUDE` 白名单里的三份归纳件（RFD4 事实台账、PROVENANCE、迭代证据台账）——
+   模板与迭代协议正文直接链接它们，剔掉会让包内链接断掉。
    另附 `ai_ingest/` 分层 digest：tier0 索引 → tier1 工作流与判据 → tier2 全部卡片正文。
 
 用法：
@@ -51,8 +55,15 @@ def est_tokens(text: str) -> int:
 
 
 def tracked_files() -> list[str]:
-    out = subprocess.run(["git", "-C", str(ROOT), "ls-files"], capture_output=True, text=True, check=True).stdout
-    return sorted(p for p in out.splitlines() if p)
+    """git 可见的全部文件 = 已跟踪 + 未被 .gitignore 排除的新文件。
+
+    用 `--others --exclude-standard` 而不是只用 `ls-files`：前者让"新建但还没 add"的文档也能进包，
+    否则每轮改版都要先 commit 才能打包，包内会静默缺掉最新文件。被忽略的大二进制（如 RFD4 原 PDF）
+    不会出现在这里。
+    """
+    out = subprocess.run(["git", "-C", str(ROOT), "ls-files", "--cached", "--others", "--exclude-standard"],
+                         capture_output=True, text=True, check=True).stdout
+    return sorted(set(p for p in out.splitlines() if p))
 
 
 def rel(p: Path) -> str:
@@ -64,14 +75,23 @@ AI_EXCLUDE = (
     re.compile(r"^data/interim/"),
     re.compile(r"^tmp/"),
 )
+# 例外：这两份是模板/迭代协议正文直接链接的**归纳件**（不是出版商原文、不含全文缓存），
+# 剔掉会让包内链接断掉。RFD4 原 PDF 与抽出的全文文本仍然不进 AI 包（许可与体积）。
+AI_INCLUDE = (
+    re.compile(r"^data/interim/rfd4_2026-11-07/(rfd4_paper_findings|PROVENANCE)\.md$"),
+    re.compile(r"^data/interim/iteration_evidence_2026-11-07\.md$"),
+)
 AI_EXCLUDE_TOP = {rel(OUT) }
 
 
 def ai_file_list(files: list[str]) -> list[str]:
-    """AI 包 = 全部内容 − 全文缓存/抓取日志/tmp − 内部派工文件。"""
+    """AI 包 = 全部内容 − 全文缓存/抓取日志/tmp − 内部派工文件 + 少量正文直接链接的归纳件。"""
     internal = re.compile(r"DISPATCH|_dispatch|queue\.tsv|rollout_status|selfcheck|fetch_log|batches\.tsv")
     keep = []
     for f in files:
+        if any(rx.match(f) for rx in AI_INCLUDE):
+            keep.append(f)
+            continue
         if any(rx.match(f) for rx in AI_EXCLUDE):
             continue
         if internal.search(f):
@@ -95,6 +115,7 @@ TIER1_SRC = [
     "README.md",
     "deliverables/protein_design_workflow.md",
     "deliverables/protein_design_workflow_template.md",
+    "deliverables/protein_design_workflow_iteration.md",
     "deliverables/protein_design_workflow_template_branch_binder.md",
     "deliverables/protein_design_workflow_template_branch_enzyme.md",
     "deliverables/protein_design_workflow_template_branch_peptide.md",
@@ -130,7 +151,7 @@ def build_digest(today: str) -> dict[str, int]:
 | 层 | 文件 | 内容 | 估算 token |
 |---|---|---|---|
 | T0 | 本文件 | 是什么、怎么用、禁令 | — |
-| T1 | `tier1_core.md` | 项目 README + 证据工作流 + **可执行工作流模板（主模板+三分支）** + 前沿方法核验 + 口径统计 | {sizes.get('tier1_core.md', 0):,} |
+| T1 | `tier1_core.md` | 项目 README + 证据工作流 + **可执行工作流模板（主模板+三分支）** + **多轮迭代协议（含真实轮次台账）** + 前沿方法核验 + 口径统计 | {sizes.get('tier1_core.md', 0):,} |
 | T2 | `tier2_cards.md` | {len(cards)} 个精读卡文件全文（十节：元信息/解决什么/难点/方法工作流/数字台账/作者原话/我们的推断/局限/可迁移性/溯源） | 见该文件头 |
 | T3 | `tier3_ledgers/` | 机器台账 CSV（证据台账 152 行、判据台账 679 行）+ 文献总表 152 行 × 27 列 | 结构化数据，按需检索 |
 {dup_note}
@@ -269,7 +290,8 @@ def main(argv=None) -> int:
         mh = write_manifest(OUT / "manifest_full.csv", rows)
         results.append((full_zip, len(rows), mh))
     ai_zip = OUT / f"protein_design_reference_ai_{today}.zip"
-    ai_pairs = [(f, f) for f in ai_file_list(files)]
+    ai_files = ai_file_list(files)
+    ai_pairs = [(f, f) for f in ai_files]
     # digest 在磁盘上位于 deliverables/bundles/ai_ingest/（被 gitignore），包内提到顶层 ai_ingest/，
     # 否则收件人要按 deliverables/bundles/ai_ingest/... 找入口，与 tier0 里写的相对路径不符。
     ai_pairs += [(d.relative_to(OUT).as_posix(), rel(d)) for d in sorted(DIGEST.rglob("*")) if d.is_file()]
@@ -284,8 +306,11 @@ def main(argv=None) -> int:
     for zp, n, _ in results:
         print(f"{zp.name}: {n} 文件 · {zp.stat().st_size/1024/1024:.2f} MiB")
     print(f"清单条目合计: 完整包 {len(files)} · AI 包 {len(set(ai_files))}")
-    print("判定标准: 包内文件数 = 清单行数；manifest 每行 sha256 与磁盘一致；AI 包不含 fulltext/ 与 interim/")
-    leak = [p for p, _, _ in rows if p.startswith(("data/literature_cards/fulltext/", "data/interim/"))]
+    print("判定标准: 包内文件数 = 清单行数；manifest 每行 sha256 与磁盘一致；AI 包不含 fulltext/ 与 interim/"
+          "（AI_INCLUDE 白名单里的三份归纳件除外）")
+    leak = [p for p in ai_files
+            if p.startswith(("data/literature_cards/fulltext/", "data/interim/"))
+            and not any(rx.match(p) for rx in AI_INCLUDE)]
     print(f"判定结果: {'PASS AI 包 0 处缓存泄漏' if not leak else 'FAIL 泄漏 ' + str(len(leak))}")
     print("找出来没有: 本脚本只判'打包内容是否如声明'，不判文献内容对错（那走 verify_literature_cards.py）")
     return 1 if leak else 0

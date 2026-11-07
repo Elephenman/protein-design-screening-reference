@@ -11,3 +11,10 @@ deliverables/bundles/
 # 抓取过程中留下的第三方网页快照：没有任何卡或底稿引用它们（grep 实测 0 引用），
 # 且页内含站点自身的公开 storefront key 串，提交进仓库只会造成噪音与误判。
 data/interim/claim_lit/*.html
+
+# RFD4 预印本 PDF 单文件 54.8 MB，是仓库其余全部内容的数倍；它唯一的下游用途是抽出纯文本，
+# 而抽出的 RFD4_paper_text.txt（283 KB）已入库，所有引句都是对它逐字核验的。
+# 需要原 PDF 时按下面的 URL + sha256 重新取回即可（记录在 data/interim/rfd4_2026-11-07/PROVENANCE.md）：
+#   https://rfd4-proteina.org/assets/paper/RFD4-Proteina.pdf
+#   sha256 33f4efb4833763a76b84b6989b1e56c01cec0dd697ea83d056387feb821b8bcd
+data/interim/rfd4_2026-11-07/*.pdf

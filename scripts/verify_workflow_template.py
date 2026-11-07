@@ -19,7 +19,7 @@ P4=本报告推算 · P5=未记录。
 
 用法：
     python scripts/verify_workflow_template.py            # 全量
-    python scripts/verify_workflow_template.py --selftest # 三种破坏必须各红一条
+    python scripts/verify_workflow_template.py --selftest # 四种破坏必须各红一条
 """
 from __future__ import annotations
 
@@ -33,13 +33,14 @@ ROOT = Path(__file__).resolve().parents[1]
 DEL = ROOT / "deliverables"
 
 MAIN = "protein_design_workflow_template.md"
+ITER = "protein_design_workflow_iteration.md"
 BRANCHES = [
     "protein_design_workflow_template_branch_binder.md",
     "protein_design_workflow_template_branch_enzyme.md",
     "protein_design_workflow_template_branch_peptide.md",
 ]
 FRONTIER = "frontier_methods_2025_2026.md"
-DOCS = [MAIN, *BRANCHES]
+DOCS = [MAIN, ITER, *BRANCHES]
 
 LIB_ID = re.compile(r"\[(?P<ids>(?:[A-Z]{1,2}-?)[A-Za-z0-9]+(?:; ?[A-Za-z0-9-]+)*)\]")
 S_ID = re.compile(r"\[(S\d{1,3})\]")
@@ -125,7 +126,10 @@ def check(files_text: dict[str, str], ids: set[str], skeys: set[str]) -> tuple[l
                 rel = target.split("#")[0]
                 if not rel:
                     continue
-                p = (DEL / rel).resolve() if not rel.startswith("../") else (ROOT / rel).resolve()
+                # 所有被纳管的文档都在 deliverables/ 里，markdown 相对链接一律以该目录为基准。
+                # 早先版本对 "../" 改用 ROOT 作基准，等于多跳了一级（实测把
+                # deliverables/../data/... 解析成 projects/data/...，把存在的文件判成不存在）。
+                p = (DEL / rel).resolve()
                 if not p.exists():
                     errs.append(f"{name}: 链接 [{label}]({target}) 指向不存在的文件")
         for sp in set(PY.findall(text)):
@@ -147,7 +151,7 @@ def main(argv=None) -> int:
     skeys = frontier_keys()
     files_text = {}
     missing = []
-    for f in [MAIN, *BRANCHES, FRONTIER]:
+    for f in [MAIN, ITER, *BRANCHES, FRONTIER]:
         p = DEL / f
         if not p.exists():
             missing.append(f)
@@ -171,20 +175,26 @@ def main(argv=None) -> int:
             return t.replace(first_row, re.sub(r"\[[^\]]{1,20}\]", "—", first_row), 1)
 
         modes = {
-            "改坏一个库内编号": lambda t: t.replace("[B09]", "[B90]", 1),
-            "删掉阈值行的证据级别": drop_tag,
-            "删掉阈值行的全部出处编号": drop_cite,
+            "改坏一个库内编号": (MAIN, lambda t: t.replace("[B09]", "[B90]", 1)),
+            "删掉阈值行的证据级别": (MAIN, drop_tag),
+            "删掉阈值行的全部出处编号": (MAIN, drop_cite),
+            # 这一条专门盯 "../" 链接：它必须打在真实存在跨目录链接的文档上，
+            # 否则解析基准写错也测不出来（本次就是被它抓到的）。
+            "改坏一个跨目录相对链接": (
+                ITER,
+                lambda t: t.replace("](../data/interim/", "](../data/interim/__nonexistent__/", 1),
+            ),
         }
         bad = 0
-        for label, fn in modes.items():
+        for label, (fname, fn) in modes.items():
             pert = dict(files_text)
-            pert[MAIN] = fn(pert[MAIN])
+            pert[fname] = fn(pert[fname])
             errs, _ = check(pert, ids, skeys)
             ok = bool(errs) and not any("缺三态关键词" in e for e in errs)
             print(f"{'PASS(红)' if ok else 'FAIL(未红)'} {label}: {errs[:1]}")
             bad += 0 if ok else 1
-        print("判定标准: 三种破坏各自必须让门禁变红")
-        print(f"判定结果: {'PASS 3/3 变红' if bad == 0 else f'FAIL {bad} 种破坏没被判红'}")
+        print(f"判定标准: {len(modes)} 种破坏各自必须让门禁变红")
+        print(f"判定结果: {'PASS %d/%d 变红' % (len(modes), len(modes)) if bad == 0 else f'FAIL {bad} 种破坏没被判红'}")
         return 1 if bad else 0
 
     if missing:

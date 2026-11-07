@@ -3,16 +3,21 @@
 一句话：把"从头设计蛋白 / 结合体筛选"这条链路上**别人实际怎么做的、用了哪些判据、阈值原文是多少、
 花多少钱和时间、在哪里翻车**，做成一份每个数字都能查到原文句子的可复现参考库。
 
-建库时间 2026-10-16 至 2026-10-21。当前状态：152 行 × 27 列文献表，每行背后一张十节精读卡，
-全量门禁 `152/152 PASS`（退出码 0）。
+建库时间 2026-10-16 至 2026-10-21；工作流模板 v2 与多轮迭代协议 2026-11-07 改版（同日核实 RFD4-Proteina）。
+当前状态：152 行 × 27 列文献表，每行背后一张十节精读卡，全量门禁 `152/152 PASS`（退出码 0）。
 
 ## 三分钟上手
 
 1. [report.md](report.md) — 结论报告（含"我们没能核实到什么"的缺口清单 §八）。
-2. [工作流模板](deliverables/protein_design_workflow_template.md) — **开工就抄这份**：十个阶段的默认阈值、闸口、
-   停止条件、预算四档、阈值重校准协议，外加三个分支页（binder / 酶 / 肽与大环）。
-3. [证据工作流](deliverables/protein_design_workflow.md) — 模板里每个数字的原文出处与失灵域（"别人怎么做的"记录）。
-4. [data/protein_design_literature.csv](data/protein_design_literature.csv) — 总表。Excel 直接打开（UTF-8 BOM）。
+2. [工作流模板 v2](deliverables/protein_design_workflow_template.md) — **开工就抄这份**：主线十阶段的默认阈值、
+   闸口与停止条件、预算四档、阈值重校准协议，外加三个分支页（binder / 酶 / 肽与大环）。
+   开工登记压到附录 §I（10 分钟填完），前沿默认链已换到 **RFD4-Proteina 共设计**（§F，含退回 RFD3 的条件）。
+3. [多轮迭代协议](deliverables/protein_design_workflow_iteration.md) — **第二轮起看这份**：一轮的定义与必留三文件、
+   候选/判据/路线三轴分离（一轮只动一个轴）、逐分支第二轮怎么打、T0（≤4 构建体）档怎么迭代、多轮战役怎么报数；
+   §1 是**真实轮次台账**（[B17] 九轮含受控对照、[B18] 归因+反证臂、[B10] 几何知识迁移等，每条带分母），
+   §3.4 是用 RFD4 时的"第 0 轮 pilot"（官方建议，不是战役记录）。
+4. [证据工作流](deliverables/protein_design_workflow.md) — 模板里每个数字的原文出处与失灵域（"别人怎么做的"记录）。
+5. [data/protein_design_literature.csv](data/protein_design_literature.csv) — 总表。Excel 直接打开（UTF-8 BOM）。
    看任意一行，最后两列 `精读卡文件` 给出单卡路径、`精读卡全文(方法·工作流·遇坑)` 直接把整张卡塞在单元格里。
 
 想查某个数字的出处：先在总表 `阈值数字` / `实验命中率` / `成本/统计` 列里搜，再顺着 `原文出处指针` 列
@@ -44,7 +49,8 @@
 | `data/interim/` | 抓取日志、回写前的 CSV 备份、2000 处字段改动账 |
 | `sources/*.md` | 四份调研底稿（Baker 组、周如鸿组、曹龙兴组、成本与判据经济学） |
 | `scripts/` | 建库、核验、抓取、回写、台账生成的全部脚本 |
-| `deliverables/` | 工作流模板（主模板+三分支）+ 证据工作流文档 + **审核视图 `protein_design_workflow_visual.html`**（把 85 条默认阈值摊开、可逐行标记并导出审核意见；由 `scripts/build_workflow_visual.py` 从模板与台账编译，页面无手打数字）+ 机器生成的证据台账 + 前沿方法核验清单 |
+| `deliverables/` | 工作流模板 v2（主模板+三分支）+ **多轮迭代协议** + 证据工作流文档 + **审核视图 `protein_design_workflow_visual.html`**（把 87 条默认阈值摊开、可逐行标记并导出审核意见；由 `scripts/build_workflow_visual.py` 从模板与台账编译，页面无手打数字，`--check` 的期望值从门禁现算）+ 机器生成的证据台账 + 前沿方法核验清单（S0–S22） |
+| `data/interim/rfd4_2026-11-07/` | RFD4-Proteina 取证本：两份官方 README、预印本正文抽取 `RFD4_paper_text.txt`（283 KB，逐字引句的唯一比对底稿）、事实台账 `rfd4_paper_findings.md`、`PROVENANCE.md`（四个文件的 sha256 + 重取 URL）。**54.8 MB 原 PDF 不入 git**，按 PROVENANCE 里的 URL 重取并校验哈希即可复现 |
 | `deliverables/bundles/` | 迁移包与 AI 投喂包（由 `scripts/build_bundles.py` 生成，不进 git，发布走 GitHub Release） |
 
 ## 门禁（这就是"可复现"的意思）
@@ -55,7 +61,7 @@ set PYTHONIOENCODING=utf-8
 python scripts/verify_literature_cards.py     # 152/152 PASS 才算完整；退出码非 0 = 没做完
 python scripts/verify_workflow_doc.py         # 证据工作流文档的引用与链接体检
 python scripts/verify_workflow_template.py    # 模板：引用可查 + 每条默认阈值带证据级别 + 链接可达
-python scripts/verify_workflow_template.py --selftest   # 三种破坏必须各红一条
+python scripts/verify_workflow_template.py --selftest   # 四种破坏必须各红一条
 python scripts/build_bundles.py --check       # 包内清单与磁盘哈希一致
 python scripts/build_workflow_evidence.py --check   # 台账行数必须等于从 CSV+卡重算的行数
 ```

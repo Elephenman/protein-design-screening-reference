@@ -13,7 +13,7 @@
 
 | 编号 | 条目 | 一手来源 | 取证级别 | 模板里能用到哪一步 | 复核 |
 |---|---|---|---|---|---|
-| S0 | 六个查无一手来源的方法名（禁用） | 四路索引检索记录 | 检索级 | §I 禁用清单 | 已复现，但范围声明需收窄 |
+| S0 | 六个查无一手来源的方法名（禁用） | 四路索引检索记录 | 检索级 | §F 禁用清单 | 已复现，但范围声明需收窄 |
 | S1 | 官方默认链 RFD3 → MPNN/LigandMPNN → RF3；RFO 里有 Boltz-2 分支 | https://github.com/RosettaCommons/foundry（默认分支 `production`） | README | ②③④ 选型 | 部分对：默认链成立；"打分位"说法被否证 |
 | S2 | RF3 技术报告（手性/步数/早停陷阱；阈值出处已纠正） | https://doi.org/10.1101/2025.08.14.670328 | FT | ④ 复折器选型 | 部分对：三阈值不是设计筛选阈值 |
 | S3 | Boltz 两个亲和力输出的分工 | https://github.com/jwohlwend/boltz | README | ④ 亲和力用法 | 未单独复核（与 S6 同源交叉） |
@@ -24,7 +24,7 @@
 | S8 | Chai-2 零样本抗体设计（52 靶 × ≤20 条，15.5%）；miniprotein 是独立 5 靶面板 | https://doi.org/10.1101/2025.07.05.663018 | FT | A.1 命中率口径与 BLI 判据 | 部分对：68% 不是 52 靶子集 |
 | S9 | RFdiffusion3 正式见刊（96 构型零样本拿到活性催化剂） | https://doi.org/10.1126/science.aeh2982 | ABS | B.1 零样本规模 | **CONFIRMED** |
 | S10 | 有本靶标活性标签后微调亲和力头 | arXiv `2609.24302` | ABS | ⑩ 回灌升级 | 未单独复核 |
-| S11 | OpenFold3 检查点互不兼容、分数不可横比 | https://github.com/aqlaboratory/confornets + https://github.com/aqlaboratory/openfold-3 | README | §A 参数表"模型版本" | 已复核（见 S1 条内） |
+| S11 | OpenFold3 检查点互不兼容、分数不可横比 | https://github.com/aqlaboratory/confornets + https://github.com/aqlaboratory/openfold-3 | README | §I 开工登记"模型版本" | 已复核（见 S1 条内） |
 | S12 | 多态酶设计：单过渡态约束被点名为缺陷 | https://doi.org/10.64898/2026.09.11.750617 | ABS | B.2 约束升级 | 未单独复核 |
 | S13 | CaGE：把 RF3 再训练成设计条件网络 + 迭代衰减 | https://doi.org/10.64898/2026.10.02.756307 | FT | B.1/B.2 活性位约束 | 未单独复核 |
 | S14 | MD+QM/MM 用于**解释**设计–进化差距（Kemp elimase） | https://doi.org/10.64898/2026.09.09.750330 | ABS | B.2 MD 的位置 | 未单独复核 |
@@ -34,6 +34,8 @@
 | S18 | 蛋白–肽复合物：AF2 优于 OF3，且 DockQ 阈值不可从蛋白–蛋白搬来 | https://doi.org/10.64898/2026.04.21.720042 | ABS | C.1 判据边界 | 未单独复核 |
 | S19 | OpenBind：早期实验结构微调共折叠模型改善位姿与虚拟筛选 | https://doi.org/10.64898/2026.08.27.747600 | ABS | B.3/H 微调路径 | 未单独复核 |
 | S20 | 药化真实项目里 ML 亲和力看不见跨系列 500× 提升（Boltz-2 池化 ρ 0.31 vs FEP+ 0.70） | https://doi.org/10.1002/cmdc.70531（PMID 42894262 / PMC13677808） | FT | ④ 禁用绝对门槛（湿实验对照） | 复核时新定位的一手来源 |
+| S21 | **RFD4-Proteina**：序列–结构联合共设计、partial diffusion、reward-guided search；权重配对与硬件门槛 | https://github.com/RosettaCommons/RFD4-Proteina + https://huggingface.co/nvidia/RFD4-Proteina | README | ②③④ 选型、§F 默认链、迭代精修 | 本轮新增，两份官方 README 当日取回并逐字引用 |
+| S22 | RFD4-Proteina 预印本正文（*Biomolecular design through latent reasoning with RFD4-Proteina*） | https://rfd4-proteina.org/assets/paper/RFD4-Proteina.pdf | FT | ②③④ 与迭代协议的实验口径 | 全文已本地归档；引句逐字核验 127/127（抽取代理）+ 主会话另抽查 18 条；**未派第二独立复核代理** |
 
 ## 逐条要点（含分母与局限）
 
@@ -131,11 +133,163 @@ S7（`ABS`，10 个新靶点）：用相互作用模型（BoltzPPI 类）替代�
 
 ### S11 + S18 + S19 版本与迁移边界
 - **S11**：OF3p1(`of3_ft3_v1.pt`) 与 OF3p2(`of3-p2-155k.pt`) 检查点互不兼容，`openfold3==0.3.1` 才能复现某篇数值；
-  `>=0.5.0` 默认参数换成 OpenBind-0（训练截断 2025-06）。→ 模板 §A 参数表要求写死"模型版本 + 训练截断"。
+  `>=0.5.0` 默认参数换成 OpenBind-0（训练截断 2025-06）。→ 模板 §I 开工登记要求写死"模型版本 + 训练截断"。
 - **S18**（271 个非冗余蛋白–肽复合体，CAPRI 判据，分 IDR/Non-IDR）：整体成功率 AF2 一致优于 OF3；AF2 在其训练集已含的
   复合体上有记忆效应；OF3 的 PAE 分布削弱了派生分数判别力；**蛋白–蛋白的 DockQ 阈值不能直接搬到蛋白–肽**。
 - **S19**（肠道病毒 2A 蛋白酶，925 个晶体学结合事件/699 化合物/601 亲和力）：对接表现强依赖口袋构象、构象难排序；
   **用片段筛选阶段的晶体结构微调 OpenFold3-p2 可显著改善后续化合物位姿与虚拟筛选** → 支持"早期实验结构→本靶标微调共折叠模型"。
+
+### S21 RFD4-Proteina：为什么它改的是工作流形状，不只是版本号
+
+`README`（两份官方 README 于 2026-11-07 取回，本地归档
+`data/interim/rfd4_2026-11-07/RFD4-Proteina_README.md` 与 `HF_RFD4-Proteina_README.md`）。
+Baker Lab × NVIDIA GenAIR，BSD 3-Clause，权重发布 **2026-10-19**，
+Hub revision `a06e2509c7033b010fc43614e9fd840303588502`。
+
+**它改了什么（这决定模板 ②③ 的形状）**：model card 原句
+"It generates protein sequences and all-atom structures together, conditioned on the molecular context you want to preserve"。
+即**序列与全原子结构一次出**，v1 的"骨架 → MPNN 序列 → 复折"三件套里的 ③ 不再是必经步。
+GitHub README 另列两条直接影响迭代的能力：
+"Reward-guided search: beam search over generation paths scored by structure-prediction oracles and custom metrics."
+与 "Partial diffusion to refine or diversify existing structures."
+→ 前者把一部分筛选前移进生成过程，后者是**第二轮精修**的现成工具（见迭代协议 §2/§3）。
+
+**四条必须一起抄的限制**：
+
+1. **权重是配对的，跨版本混用不报错**。flow model 与 autoencoder 一对；当前对 latent 32 维、残基词表 147 类，
+   上一对是 16 维 / 33 类。原句："mixing a flow model with a different autoencoder produces nonsense rather than an error"。
+   → 模板 §H 第 5 步因此要求钉住 Hub revision，而不只是写"RFD4"。
+2. **硬件门槛**。"Linux x86_64, Python 3.12, and an NVIDIA GPU with a CUDA 13-compatible driver"，
+   且 "macOS and Windows are not supported."。权重 1.74 GB（FP32，435,622,465 参数），环境约 7 GB。
+   峰值显存取决于 token 数/batch/recycle 深度而不是权重大小。→ 够不上就退回 RFD3 三件套 [S1]，判据不变。
+3. **算力预设是 recycle 深度而不是"步数"**：60 步上按 `(steps, recycle depth)` 分带，
+   low = 120 次 trunk pass、**medium（默认）= 180**、high = 300。
+   → 报"每条设计多少算力"时必须同时报用的是哪一档，否则不可比。
+4. **效率表不是本版本的读数**。model card 自己在表前声明：
+   "These numbers were measured on the previous release pair"，
+   "They have not been re-measured on the current release and should not be read as describing it."
+   表后还有一句 "Computational passers do not establish experimental activity."。
+   表的口径是"每 GPU-小时、每靶、结构上可区分的**计算**通过者数"（含生成与共同 AF3 评估），
+   每靶 200 次原始尝试，失败尝试计入耗时，setup/编译/CPU 打分/空闲分配不计：
+   蛋白 binder 24 靶 **71.60**（对照 Proteina-Complexa 13.24）、小分子 binder 77 靶 **112.25**（BoltzGen 15.48）、
+   Atomic Motif Enzyme 37 靶 **91.18**（AlphaProtein-novo Codesign 26.02）、DNA binder 3 靶 **41.97**（BoltzGen fixed DNA 9.46）。
+   作者同时声明各法条件化方式不同（PPI 用骨架条件 vs 多个基线用全原子条件；DNA 只有 3 个靶）。
+   → **这张表只能当"上一版权重的计算产能量级"，不许当本版本产能规划依据，更不许当湿实验命中率。**
+
+**尚缺**：RFD4 自己的**设计筛选数值阈值**（可直接抄的 pAE/ipTM 切点与通过率）在两份 README 里没有给；
+想要开箱阈值仍须走模板 §H 在自己体系标定。预印本正文的核对见 S22。
+
+### S22 RFD4-Proteina 预印本正文
+
+`FT`：*Biomolecular design through latent reasoning with RFD4-Proteina*，Corley / Didi / Kazman / Brent 等，
+Baker Lab × NVIDIA GenAIR，2026，预印本（PAGE 1 自标 "This preprint has not been peer reviewed."；
+GitHub README 的 citation 块自标 `note = {Preprint}`）。
+全文 116 页于 2026-11-07 取回并本地归档：`data/interim/rfd4_2026-11-07/RFD4-Proteina_paper.pdf`
+（54,797,449 B）与抽出的纯文本 `RFD4_paper_text.txt`（272,125 字符，带 `===== PAGE n =====` 分页标记；
+正文 p1–21、参考文献 p22–27、补充材料 p28–116）。
+逐条实验台账、迭代轮次、筛选判据与局限的摘录见
+[rfd4_paper_findings.md](../data/interim/rfd4_2026-11-07/rfd4_paper_findings.md)（127 条合格引句对底稿逐字核验通过）。
+**本节所有数字均属发布权重版**（Table S11 的 release-scale 模型，~18,000 H200 GPU·h 含 LoRA 微调），
+与 S21 那张"上一版权重"的 HF 效率表**不是同一批读数**。
+
+#### 一、湿实验分母台账（引用任何一条都必须带上它的分母口径）
+
+| 体系 | 计算侧 | 湿实验分母 → 读数 | 口径陷阱 |
+|---|---|---|---|
+| **PTE / paraoxon 有机磷水解酶**（双锌、8 残基 theozyme） | **15 / 1,000（1.5%）** 过 motif RMSD <1 Å + 蛋白–底物 min PAE <1.5 Å；RFD3 对照 **0 / 10,000** | **288 条测试 → 89 条活性（31%）**，覆盖 25/47 骨架家族；RFD3 平行对照 **0 / 192**；6 条（4 家族）进稳态动力学，最佳 k_cat/K_M **3,600 ± 500 M⁻¹s⁻¹**、k_cat 0.9 s⁻¹，较非催化水解提速 **1.5×10⁷ 倍** | **288 ≠ 15**。从生成池/过筛池到 288 条下单的选取规则**论文未给**（S13.7 只说沿用先前 metallohydrolase 流程）。89/288 是**测试池活性率**，不是全池命中率，也不是计算通过者的湿实验转化率。初筛自述缺陷："These initial cultures were not" + "sequence-verified and could be polyclonal."，且初筛时酶浓未归一 |
+| **连接酶**（lenacapavir API 酰胺合成步） | 双判据（motif RMSD <1 Å + 配体 pLDDT≥50）**5.1%** vs RFD3 **0%**；另有多态 AF3 筛偏向氨解 | **67 条下单 → 4 条明确高于背景（6.0%）**；RFD3 旧战役 **0 / 72**。补充 Fig.32 另给 **8 条 >10% 转化**（无酶对照 6.8 ± 0.4%） | 正文"4 条"与补充"8 条 >10%"是**两条不同判定线**，都要记。最佳两条把 (S)-胺转化 79.0% / 61.7%，(R)-胺仅 8.8% / 14.6%；CysKO 对照证明依赖设计 Cys |
+| **钙调蛋白 Ca²⁺ 构象态特异 binder** | 论文未给下单前数值筛 | **18 条测试 → 12 条钙依赖结合（66.7%）**（Table S31 明写 "Calcium-dependent hits: 12/18 (66.7%)."）；表观 K_D **69 pM – 37 nM** | 最低两个 K_D 的 k_off 触到仪器分辨下限（300 s 解离条件下 10⁻⁵ s⁻¹），作者明写亲和估计与 CI **以该下限为条件**。无细胞表达（Adaptyv），18 条的选取规则未给 |
+| **IDR 无序肽 binder**（8 条肽） | 论文未给 | **每靶 94 条**（Table S33 "Screening hits among 94 designs tested"）：G3BP1 11/94、PAR2 16/94、YAP1 18/94、**EA1 0/94**、**TDP-A1 0/94**、N17 6/94、Tau-153 3/94、PER2 5/94 | **两个靶零命中**。正文称 "tight binders against all but one"，与 Table S33 的两个 0/94 有口径张力（"tight" 可能指 SPR 表征级而非筛选级）→ **以表格数字为准**。论文未给 EA1/TDP-A1 的机制性归因 |
+| **Trk 家族 binder** | 论文未给 | 宽松口径：**188 条合计 → 158 条亚微摩尔（84%）**，对照 Claude Mythos Preview **18/60（30%）**。任务特异口径（Table S34）：人特异 TrkA **68/94**、人/鼠跨反应 **18/94**、TrkB **1/94**、TrkC **20/94**（仅筛选级，亲和力未测） | 188 = 94 + 94 两个**平行战役**（不同 spec），不是两轮。158 是"只要结合 hTrkA 就算"的宽松合计，68+18=86 是满足各自特异性约束的严格口径；**论文未给 158 的逐战役拆分**。分母规则明写："Denominators include transformation failures and exclude positive"（对照不算）。人特异战役的选择性证据仅 **n=4** |
+| **糖基化控制**（保留 Man9/Glc1Man9） | RFDAA + ΔRASA 过滤 | **8/9** 占位点 >90% 寡甘露糖 | **补充 Fig.26 明写 "campaign hit rates were not assessed."** —— 9 个是 LC–MS/MS **表征子集**（对照 97 个 RFDAA 基线 + 43 个过滤谱），**不是战役命中率**；初筛 plate-scale 测了多少论文未给 |
+| **pMHC / 磷酸化识别 binder** | 论文未给库容 | 酵母展示库 → FACS → 挑单克隆测序。pMHC 表观半最大浓度 340 pM / 710 pM / 1.60 nM；测序克隆数 SARS 30 / Phox2B 41 / MART-1 20 | 读数是**带 avidity 的展示滴定，不是溶液 K_d**（Table S32 明写）；磷酸肽选择性读数是 NGS 富集，作者明写 "This enrichment-based readout is not a binding affinity."。命中率按**克隆**计不按设计计 |
+| **partial diffusion 救活旧失败设计** | 146 个已发表不结合 RFD1 设计里 **102 个**过不了现代 AF3 筛 → fraction 0.9、每父本 6 次 → **100/102 救活** | **无湿实验复测** | 补充明写 **"These outcomes are computational, not experimental binding measurements."** → 这条只能当计算能力证据，**不许当命中率** |
+
+原句（底稿 `RFD4_paper_text.txt`，PAGE 17）：
+"On this eight-residue theozyme, 15 of 1,000" + "RFD4-Proteina designs (1.5%) passed common motif-RMSD and substrate-confidence"；
+"ing yielded 89 active RFD4-Proteina designs among 288 tested, spanning 25 of 47"；
+PAGE 19："obtained genes encoding 67 designs for experimental testing. Four of these showed clear"。
+
+**"第一轮就有活性"这句新闻转述的核对结果**：正文**没有**与 "many designs active from the first round" 对应的原句。
+可支撑的事实只有：89/288 初筛有活性、全文未描述定向进化/亲和力成熟步骤、6 条直接进动力学。
+新闻稿是对 **31% 测试池活性率**的转述，而 288 的选取口径未明 → **模板引用必须带分母与"选取规则未给"注记**。
+
+#### 二、多轮迭代：论文**没有**序贯湿实验战役
+
+逐条核对过的结论：**本文未描述任何"第一轮→第二轮→第三轮"的序贯设计战役（DBTL 循环）**。
+容易被误读成迭代的四件事，实际各是别的东西：
+
+1. **跨代 spec 迭代（PTE）**：RFD3 六残基 theozyme 催化效率低（"up to 4 ± 3 M−1 s−1"）→ 假设
+   "adding two more catalytic residues could improve catalysis, but would require more" → RFD4 八残基 theozyme 新战役。
+   改的是**模型（RFD3→RFD4）+ 条件 spec（6→8 催化残基）**，触发观察是旧酶效率低。这是跨代演进，不是同模型多轮。
+2. **平行战役（Trk）**：人特异 94 与跨反应 94 是不同 spec 的平行战役，188 是 "collectively" 合计。
+3. **文库内多轮排序（pMHC / 磷酸肽）**：表达排序 → 结合排序 → 竞争排序是**酵母展示选择轮**，
+   设计集合不变（"Selected populations were regrown and reinduced between rounds."），不属于设计迭代。
+4. **计算性二次机会**：partial diffusion 救活 100/102 是"旧设计→精修"的**计算**流程，无湿实验复测。
+
+**论文真正给出的迭代建议是工具层的**：PAGE 4 "In practice, we find that small-scale pilots are helpful in determining the best"
++ "reasoning configurations for a given design challenge."；补充 Table S17 列出 agent skill
+`rfd4-proteina-autoresearch`（"Runs iterative pilot experiments to compare" + "design inputs, inference settings and search" + "rewards."）
+与 `rfd4-proteina-commitment-curves`（"Uses partial diffusion from a grid of restart steps"，测特征何时定型）。
+→ **可抄的三种模式：pilot 定推理配置、失败设计 partial diffusion 精修、跨代 spec 升级。
+不可写成"论文做了三轮战役"。** 迭代协议 §1 的轮次链因此全部取自库内 [B17] [B18] [B10] 等，不取自本篇。
+
+#### 三、序列设计这一步：共设计已内置，MPNN 在本文只是基线
+
+- 共设计内含序列：PAGE 8 Fig.2 注 "intrinsic sequence design and model-specific internal prediction but excludes downstream AF3 evalu-"。
+  动机是 RFD3 无法同时优化结构与序列（PAGE 3）。
+- **RFD4 自己就能做 inverse folding**：PAGE 11 "inverse folding tool by resampling side-chain identities while keeping the backbone"
+  + "RFD4-Proteina consistently achieved higher pass rates than LigandMPNN at matched"（diversity）。
+  实现【补充 PAGE 86】："RFD4-Proteina was run by partial diffusion from the input backbone (t = 0.99)"
+  + "with the sequence latents at t = 0 and 60 steps of the temporal-score-rescaled sampler,"
+  + "where the backbone is effectively fixed (Cα RMSD to the input below 0.4 ˚A)."
+- MPNN 的不可替代场景也被内置：逐位残基概率条件化（PAGE 37 "specify arbitrary position-wise residue-type probabilities."
+  + "constraints such as avoiding cysteine residues that may impact expression in E. coli."）。
+- **MPNN 在本文的实际角色 = 基线**：BindCraft 单骨架协议含一步 ProteinMPNN、Genie3 配 CA-MPNN、
+  AlphaProtein-novo 有 LigandMPNN 重设计变体；侧链 packing/inverse folding 对比用 LigandMPNN v1.1.1。
+  **全部湿实验战役描述中未见任何 MPNN 步骤**（补充 S13 一律 RFD4 设计直接下单/建库）。
+→ 模板 ③ 因此降为**可选的序列复核/重设计步**（已写进主模板 ③ 与 binder 分支的 RFD3 退路段）。
+
+#### 四、reward-guided search 的代价边界：**标准基准上反而降效**
+
+- 机制：分阶段剪枝，检查点按特征收敛时序设（界面面积 ~20%、氢键 ~50%、AF3 置信 ~80%）；
+  oracle 在 search 期间蛋白结合用 AF2-Multimer、小分子/AME/DNA 用 OpenFold3，最终统一 AF3 评测另计；能量 oracle = TMol。
+- **划算的场景**：示例肽-DNA 切割酶 "three times as many unique passing designs per GPU-hour"
+  （Table S18：0.38 vs 0.13 unique passers/GPU·h，各 24 GPU·h；naive 23,316 完成→3 通过，search 4,057 完成→35 通过/9 unique）；
+  酶包埋任务 **+22.6%**（"with burial, temporal search yielded 22.6% more passing" + "clusters per GPU-hour than naive sampling"）；
+  小分子相互作用加难任务 **+24.6%**。
+- **不划算的场景**：PAGE 78 "benchmark criteria reduced passing-cluster yield per GPU-hour."
+  Table S29 蛋白结合 high-thinking **66.5 → search 8.4** clusters/GPU·h（尽管通过率 10.6%→14.9%）。
+  正文 PAGE 9 自述原因："the efficiency gains from search do not outweigh" + "the computational overhead"。
+→ **模板 ④ 的"生成内筛选"行必须带这条边界：search 不是默认开，只在难任务（复杂活性位/包埋/多相互作用）上开。**
+
+#### 五、论文实际用的计算判据（**基准评测判据 ≠ 湿实验下单筛**）
+
+四大基准 pass criteria【补充 S8.2，PAGE 72】：蛋白结合 = 骨架 RMSD ≤2.5 Å + binder pTM ≥0.80 + min 界面 PAE ≤1.5 Å；
+小分子结合 = 蛋白骨架 RMSD ≤1.5 Å + 配体 RMSD ≤5 Å + ipTM ≥0.80 + min 界面 PAE ≤1.5 Å（作者明言严于原 DISCO）；
+酶 scaffolding（AME）= 骨架 RMSD ≤2 Å + motif 全原子 RMSD ≤1.5 Å + min 界面 PAE <1.5 Å（改造了 RFD2 原判据：加 min PAE、删 clash 滤）；
+DNA 结合 = DNA 对齐骨架 RMSD ≤8 Å + min 界面 PAE ≤1.5 Å（binder 长度改 120–150）。
+分母：每靶 **200 次尝试**，失败留在分母（"Failed attempts and outputs with unmatched required motifs remain in the denomi-"）；
+clustered pass rate = 通过结构簇 / 200（Foldseek TM-score 0.5）。
+
+**湿实验战役真正用的筛子只有两处给了数值**：PTE = motif RMSD <1 Å + 蛋白–底物 min PAE <1.5 Å（Fig.6c）；
+连接酶 = motif RMSD <1 Å + 配体 pLDDT≥50（Fig.6j）。
+**binder 战役（钙调蛋白/IDR/Trk/pMHC/磷酸肽/糖基化）论文未给下单前的数值筛选阈值**
+→ 模板**不得**把上面的基准判据冒充成这些战役的下单筛。想要开箱阈值仍须走模板 §H 在自己体系标定。
+
+#### 六、作者自述的局限（除上表已列外）
+
+- 计算指标 ≠ 实验成功的自认：PAGE 20 "In cases where existing computational metrics have not yet"
+  + "translated to experimental success, the ability to generate diverse candidates meeting"
+  → RFD4 被定位为**检验新筛选假设的基础**，不保证湿实验转化。
+- 统计自限：retroaldolase AUROC 0.90 vs PLACER 0.82，但 PAGE 87 "The main-panel intermediate was selected retrospectively."
+  + "paired intervals do not establish a method advantage."；HBDesigner 柔性 vs 固定比较里 recycling 与打分也不同，
+  **不能孤立骨架柔性因素**，且柔性 RFD4 vs HBDesigner 的区间含零。
+- 失败任务如实报告（EA1/TDP-A1 各 0/94、TrkB 1/94、TrkC 亲和力未测、RFD3 对照 PTE 0/192 与连接酶 0/72），
+  但**未给机制性归因**；也**没有**"某类靶标不适用"的一般性声明。
+- 训练数据截断：实验结构限 **2024-01-01** 前沉积（PAGE 31），另有 ESMFold2/TCR 等蒸馏数据。
+  → 模板 §I 开工登记要求写死"模型版本 + 训练截断"，本篇的截断就是 2024-01-01。
+- 基准适配自述：AME 41 任务剔除 4 个（3 个共价加合物需未索引修饰残基支持、1 个缺磷酸原子坐标）。
 
 ## 复现
 

@@ -389,3 +389,58 @@ python scripts/build_bundles.py --check   # manifest 每行 sha256 与磁盘一�
   ③ 片段版把 `body{}` 规则带进宿主页面不合适 ⇒ CSS 改成 `.body-font` 类，独立页才附加 body 规则。
   内联脚本两段都过 `node --check`；渲染核对走浏览器 DOM 断言（78 行主表、抽屉文案、分标签页计数）。
   截图没拿到：应用内浏览器当时 `visibilityState=hidden`（0×0 视口），所以审美判断没做，只做了结构核对。
+
+## 12. 2026-11-07 用户审核意见落实（RFD4 / 压缩准备段 / 迭代协议）＋一次真实门禁缺陷
+
+用户审完 §11 的可视化，提三条：RFD3 已更新到 RFD4；准备工作别占那么大篇幅，以推进项目为主线；
+多轮迭代要详细写怎么迭代。三条都落在文档与门禁上，本节只记**过程账与踩到的坑**，内容本身见
+`deliverables/protein_design_workflow_template.md` §F、`deliverables/protein_design_workflow_iteration.md` §1/§3.4。
+
+### 12.1 RFD4 的证据链（先取一手件，再改一个字）
+
+- 取回四件并归档到 `data/interim/rfd4_2026-11-07/`：官方项目 README、HF 模型卡 README、
+  116 页预印本 PDF、从 PDF 抽出的纯文本。`PROVENANCE.md` 记四件的字节数与 sha256、
+  PyMuPDF 抽取命令，以及抽取已知损伤（`˚A`→`Å`、上标丢成 `107`、`10 3` 断行、行尾连字符）。
+- **PDF 54.8 MB 不入 git**（体积是仓库其余全部内容的数倍），只入 283 KB 的纯文本——
+  所有引句都是对这份文本逐字核验的。`.gitignore` 里写了重新取回的 URL 与 sha256，核验链不断。
+- 引句核验：抽取代理报 127/127 命中，主会话另抽查 18 条；**没有第二独立复核代理**，
+  这句话写在 `frontier_methods_2025_2026.md` 的 S22 复核列里，不写成"双重核验"。
+- 改模板前先订正了两处会把人带错的事实：① HF 模型卡的每 GPU·h 通过数表**自己声明**
+  是"上一代权重对"的实测、未在当前版本重测 ⇒ 不能当 RFD4 的效率；② 预印本**没有**序贯多轮湿实验战役，
+  它的"轮"是跨代规格迭代与并行 Trk 战役、文库内 FACS 分选轮。于是 §F 写的是
+  "第 0 轮 pilot 定推理配置"，迭代章真正的轮次链取自 [B17] [B18] [B10]，这个分工是明确的。
+
+### 12.2 门禁缺陷：相对链接解析基准错了（不是文档错，是判据错）
+
+- 现象：`iteration_evidence_2026-11-07.md` 明明在盘上，门禁判"链接指向不存在的文件"，复现两次。
+- 根因：`p = (DEL / rel).resolve() if not rel.startswith("../") else (ROOT / rel).resolve()`。
+  所有纳管文档都在 `deliverables/` 里，`../data/...` 本就该相对 `deliverables/` 解析；
+  改用 `ROOT` 等于多跳一级，解析成 `projects/data/...`。改成一律以 `DEL` 为基准。
+- 防复发：`--selftest` 从 3 种破坏扩到 4 种，第 4 种专测跨目录相对链接（把 `../data/interim/` 改坏），
+  实测 4/4 各红一条。**只修不测等于没修**——这条是同一个项目里第三次踩到。
+
+### 12.3 打包链的三处修正（都在"新文件还没进 git"这个缝里）
+
+- `tracked_files()` 原来只取 `git ls-files`，本轮新建的迭代协议与 RFD4 取证件都是未跟踪文件 ⇒
+  会被静默漏出包。改成 `ls-files --cached --others --exclude-standard`（= git 眼里的全部文件）。
+- AI 投喂包排除 `data/interim/`，但模板与迭代协议现在**链接**到三份 interim 归纳件 ⇒
+  收件人点开是断链。加窄白名单 `AI_INCLUDE`（只放那三份），泄漏检查同步改成白名单感知。
+- `print(f"... AI 包 {len(set(ai_files))}")` 引用了未定义的 `ai_files` ⇒ 包已写完但脚本退出码 1。
+  **产物有效不等于命令成功**，若只看 zip 存在就会漏掉这个 bug。
+
+### 12.4 本轮门禁实测（全部现跑，不是引用上一轮）
+
+| 门禁 | 读数 |
+|---|---|
+| `verify_literature_cards.py` | 152/152 卡 PASS，退出码 0 |
+| `verify_workflow_doc.py` | PASS（45 个引用编号去重·152 行台账） |
+| `verify_workflow_template.py` | PASS（465 处库内 + 88 处库外·87 行阈值带级别·链接可达） |
+| `verify_workflow_template.py --selftest` | PASS 4/4 变红 |
+| `build_workflow_evidence.py --check` | PASS |
+| `build_workflow_visual.py --check` | 阈值 87/87·引用 379 处缺失 0·S 23/23 |
+| `build_bundles.py` | 完整包 464 文件 10.27 MiB·AI 包 228 文件 8.50 MiB |
+| `build_bundles.py --check` | PASS 0 处不符 |
+
+- 判据行数与上一轮的差异是**真的变了**，不是记账漂移：阈值 85→87（模板新增两行）、
+  引用 305→379（迭代协议的轮次链把每轮都挂上出处）、S 21→23（S21/S22 是 RFD4 的 README 与预印本）。
+  可视化页的期望值从门禁现算，所以它跟着变；这也正是不许在页面里手打数字的理由。

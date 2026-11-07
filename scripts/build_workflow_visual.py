@@ -26,6 +26,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DEL = ROOT / "deliverables"
 FILES = {
     "main": ("主模板 · 十阶段", DEL / "protein_design_workflow_template.md"),
+    "iteration": ("多轮迭代", DEL / "protein_design_workflow_iteration.md"),
     "binder": ("分支 A · 结合体", DEL / "protein_design_workflow_template_branch_binder.md"),
     "enzyme": ("分支 B · 酶", DEL / "protein_design_workflow_template_branch_enzyme.md"),
     "peptide": ("分支 C · 肽与大环", DEL / "protein_design_workflow_template_branch_peptide.md"),
@@ -389,6 +390,20 @@ def html(data: dict, standalone: bool) -> str:
             f'{body}{payload}{script}</body></html>')
 
 
+def gate_counts() -> tuple[int, int, list[str]]:
+    """期望值从门禁脚本现算，不在本文件里写死。
+
+    写死过 85/21，模板一改就要手改两处、漏改就假绿（实测踩过的维护陷阱）。
+    改成单一事实来源：门禁数到多少，可视化就必须渲染出多少。
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import verify_workflow_template as gate
+
+    texts = {f: (DEL / f).read_text(encoding="utf-8") for f in [*gate.DOCS, gate.FRONTIER]}
+    errs, stats = gate.check(texts, gate.load_ids(), gate.frontier_keys())
+    return stats["thr_rows"], len(gate.frontier_keys()), errs
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true")
@@ -397,12 +412,16 @@ def main(argv=None) -> int:
     data = build()
     c = data["counts"]
     if args.check:
-        print(f"判定标准: 阈值条目数==门禁口径(85) · 引用缺失==0 · S 条目数==21 · 台账编号覆盖==全部被引编号")
-        ok = (c["thresholds"] == 85 and c["missing"] == 0 and c["frontier_keys"] == 21)
-        print(f"判定结果: 阈值 {c['thresholds']} · 引用 {c['cites']} 处缺失 {c['missing']} · S {c['frontier_keys']} · "
-              f"{'PASS' if ok else 'FAIL'}")
+        exp_thr, exp_s, gate_errs = gate_counts()
+        print(f"判定标准: 阈值条目数==门禁现算({exp_thr}) · 引用缺失==0 · S 条目数==门禁现算({exp_s}) · 门禁自身 0 处不合格")
+        ok = (c["thresholds"] == exp_thr and c["missing"] == 0
+              and c["frontier_keys"] == exp_s and not gate_errs)
+        print(f"判定结果: 阈值 {c['thresholds']}/{exp_thr} · 引用 {c['cites']} 处缺失 {c['missing']} · "
+              f"S {c['frontier_keys']}/{exp_s} · 门禁不合格 {len(gate_errs)} 处 · {'PASS' if ok else 'FAIL'}")
         if data["missing_list"]:
             print("缺失样本:", data["missing_list"][:10])
+        for e in gate_errs[:5]:
+            print("门禁:", e)
         return 0 if ok else 1
 
     (DEL / "protein_design_workflow_visual.html").write_text(html(data, True), encoding="utf-8")
