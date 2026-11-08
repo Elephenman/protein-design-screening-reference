@@ -44,8 +44,8 @@
 | 数值/条目 | 含义 | 出处 |
 |---|---|---|
 | "Computational design of an enzyme catalyst for a stereoselective bimolecular Diels-Alderase reaction" | 底稿锚点段的题名写法（带 -erase） | `sources/baker.md:594` |
-| "Houk KN, Michael FE, Baker D, Computational design of an enzyme catalyst for a stereoselective bimolecular Diels-Alder reaction" | 该文以 [B17] 参考文献身份出现时的题名写法（不带 -erase）；两种拼写的差异照实登记 | `sources/baker.md:594` |
-| "De novo enzyme design starts from a configuration of catalytic groups around the reaction transition state(s) (a theozyme) generated using" | theozyme 惯例的定义句（**[B20] 原文引句经底稿转录**，用于登记 K50 所锚定的惯例，非 Siegel 2010 原文） | `sources/baker.md:273`、`:662` |
+| "Houk KN, Michael FE, Baker D," | 该文以 [B17] 参考文献身份出现时的题名写法（不带 -erase）；两种拼写的差异照实登记 | `sources/baker.md:594` |
+| "De novo enzyme design starts from a configuration of catalytic groups around the reaction" | theozyme 惯例的定义句（**[B20] 原文引句经底稿转录**，用于登记 K50 所锚定的惯例，非 Siegel 2010 原文） | `sources/baker.md:273`、`:662` |
 | 十几个原子 | QM 作用范围（反应中心） | `sources/cost-benchmarks.md:161`（口径对照底稿，本卡未从其取引句）；CSV 行成本栏同义 |
 | 2010；DOI 10.1126/science.1190239 ✅ | 年份与 DOI 核验状态 | CSV 行；`sources/baker.md:594` |
 | 未记录 | 建库规模、命中率、活性/选择性最好值 | CSV K50 行各栏原值 |
@@ -86,6 +86,8 @@
 - **本卡是降级卡**：K50 未获正文（`fetch_log.tsv:100`、`:148`、`:186` 记 PMC3241958 抓取 HTTP 500；NCBI/预印本通道无路）。从未成功下载全文，**不存在挂错行/隔离事件**。本行虽有双登记底稿，本卡**只声明 `sources/baker.md` 一份**作引句来源；`sources/cost-benchmarks.md` 的口径句仅入台账并标注对照。降级卡引句规则（≥2 条、逐字命中声明底稿）；本卡共 3 条逐字引句，全部命中 `sources/baker.md`（第 594 行两条、第 273 行一条；第 3 条已显式标注为 [B20] 原文经底稿转录，不是 Siegel 2010 正文）。
 - **登记底稿核对**：`sources_map.json` K50 项登记 `sources/baker.md` + `sources/cost-benchmarks.md`（均实存）。对照行号：`sources/baker.md:594`（经典锚点段）、`:273`/`:662`（theozyme 惯例）、`:664`（QM 成本论断）；`sources/cost-benchmarks.md:161`（对照）。CSV 行：`data/protein_design_literature.csv:132`（证据级别=摘要级）。
 - **门禁自检**：命令 `cd A:\Data\MD\projects\protein-design-screening-20261016 && PYTHONIOENCODING=utf-8 python scripts/verify_literature_cards.py --only "K50" --no-report`。本卡未改 CSV、`sources/*.md`、样板卡、`scripts/`，未做网络抓取。
+
+- **引用预算截短（2026-11-08，公开仓库口径）**：本卡有 2 条逐字引句来自许可受限的第三方来源（B01；PUBLISHER_TERMS），按 `deliverables/fulltext_manifest.csv` 的逐份许可判定，已把单条引句截到 ≤100 字符、同一来源总量截到 ≤600 字符；**截短后仍逐字命中同一份底稿**（门禁 `scripts/verify_literature_cards.py` 仍是逐字核验），完整原句按 §9 的重取方式与 sha256 可复核。逐条改动账见 `deliverables/quote_budget_ledger.csv`。本卡其余内容（我们自己的分析、判断与台账）未被改动。
 
 <!--CSV回填
 work_type=论文（降级卡：摘要级，未获正文；经典锚点/口径对照条目）

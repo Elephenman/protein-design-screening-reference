@@ -99,7 +99,7 @@ Nature 2023, 620:1089–1100 · DOI 10.1038/s41586-023-06415-8 · PMID 37433327 
 | **19%** | binder 总体实验成功率（单点 BLI 判据） | "The overall experimental success rate, defined as binding at or above 50% of the maximal response for the positive control, was 19%" |
 | 约 2 个数量级 | 相对同靶旧 Rosetta 战役的提升 | "an increase of roughly two orders of magnitude over our previous Rosetta-based method on the same targets" |
 | 1 个数量级 + 1 个数量级 | 提升的归因拆分（生成端 / AF2 过滤端） | "We attribute one order of magnitude to RFdiffusion, and the second to filtering with AF2" |
-| 0% / 2.2% / 5.5% / 3.7% / 1.5% | 旧战役**若**用 AF2 过滤的事后估算成功率（HA / IL-7Rα / InsR / PD-L1 / TrkA） | "estimated success rates for previous campaigns if AF2 filtering had been used: HA, 0%; IL-7Rα, 2.2%; InsR, 5.5%; PD-L1, 3.7%; TrkA, 1.5%" |
+| 0% / 2.2% / 5.5% / 3.7% / 1.5% | 旧战役**若**用 AF2 过滤的事后估算成功率（HA / IL-7Rα / InsR / PD-L1 / TrkA） | "estimated success rates for previous campaigns if AF2 filtering had been used: HA, 0%;" |
 | <100 vs thousands | 每靶实测数与前作量级对比 | "Binders were identified for all five targets, with fewer than 100 designs tested per target compared to thousands in previous studies" |
 | ~30 nM / 28 nM | HA 与 IL-7Rα 最佳亲和力（正文口径）；HA_20 的 K_D（图注口径） | "Full BLI titrations for a subset of the designs showed nanomolar affinities with no further experimental optimization, including HA and IL-7Rɑ binders with affinities of roughly 30 nM"；"The highest affinity HA binder, HA_20, binds with a K D of 28 nM" |
 | 6/6 | 高亲和 IL-7Rα 结合体与阳性对照竞争同一位点 | "six of the highest affinity IL-7Rɑ binders were assessed by means of competition BLI, and all six competed for binding with a structurally validated positive control binding to the same site" |
@@ -177,6 +177,8 @@ Nature 2023, 620:1089–1100 · DOI 10.1038/s41586-023-06415-8 · PMID 37433327 
 - **自检过程**：卡片落盘前，候选引句分五批（共 183 条）用 `A:\AITEMP\b08_check.py`（import 门禁同一 `norm`）逐字预核验，179 条命中；4 条因抄写走样（漏主语、use/used、首字母大小写）在写入前剔除或改正。写入后用 `A:\AITEMP\b08_cardcheck.py` 以门禁同一抽取规则整卡复核：**105 条英文引句，MISS 0**。
 - **门禁实测输出**：`PASS B08 quotes=105/105`（命令 `cd A:\Data\MD\projects\protein-design-screening-20261016 && PYTHONIOENCODING=utf-8 python scripts/verify_literature_cards.py --only B08 --no-report`，退出码 0）。首次运行曾因 §9 未写引句底稿声明行而 FAIL，补上该行后复跑通过。未跑 `--sync-map`，未跑不带 `--no-report` 的全量门禁；未改 CSV、`sources/*.md`、样板卡 B09 与 `scripts/` 下任何文件。
 - **本卡不能核验的部分**：这份本地文本没有独立 Methods 章节与 Supplementary Methods/Tables、没有 Extended Data Table 1 的数值、没有原图；且本卡只有**一条**取回通路（不同于 B09 的双通路互证），无法做跨通路交叉验证，此差异如实记录，不称"双通路互证"。
+
+- **引用预算截短（2026-11-08，公开仓库口径）**：本卡有 1 条逐字引句来自许可受限的第三方来源（B01；PUBLISHER_TERMS），按 `deliverables/fulltext_manifest.csv` 的逐份许可判定，已把单条引句截到 ≤100 字符、同一来源总量截到 ≤600 字符；**截短后仍逐字命中同一份底稿**（门禁 `scripts/verify_literature_cards.py` 仍是逐字核验），完整原句按 §9 的重取方式与 sha256 可复核。逐条改动账见 `deliverables/quote_budget_ledger.csv`。本卡其余内容（我们自己的分析、判断与台账）未被改动。
 
 <!--CSV回填
 work_type=论文

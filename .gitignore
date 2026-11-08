@@ -13,8 +13,31 @@ deliverables/bundles/
 data/interim/claim_lit/*.html
 
 # RFD4 预印本 PDF 单文件 54.8 MB，是仓库其余全部内容的数倍；它唯一的下游用途是抽出纯文本，
-# 而抽出的 RFD4_paper_text.txt（283 KB）已入库，所有引句都是对它逐字核验的。
+# 而抽出的 RFD4_paper_text.txt 是第三方预印本正文，按公开口径同样不入库（见下）。
 # 需要原 PDF 时按下面的 URL + sha256 重新取回即可（记录在 data/interim/rfd4_2026-11-07/PROVENANCE.md）：
 #   https://rfd4-proteina.org/assets/paper/RFD4-Proteina.pdf
 #   sha256 33f4efb4833763a76b84b6989b1e56c01cec0dd697ea83d056387feb821b8bcd
 data/interim/rfd4_2026-11-07/*.pdf
+
+# ---------------------------------------------------------------- 第三方原文 ----
+# 公开仓库 = 公开再分发。2026-11-08 起，**所有第三方原文一律不进 git**：
+# 逐份许可判定与 sha256 见 deliverables/fulltext_manifest.csv（224 行，其中 220 份第三方内容
+# 不随仓库分发、4 份是我们自写的题录日志随包走），
+# 需要哪一份按表里的"重取方式"取回并校验哈希即可复原；文件仍留在本机磁盘，只是不再被跟踪。
+data/literature_cards/fulltext/
+data/interim/baker_lit/ft/
+data/interim/baker_lit/dig/
+data/interim/baker_lit/mdqm.out
+data/interim/claim_lit/*.xml
+data/interim/claim_lit/abs.txt
+data/interim/claim_lit/abs2.txt
+data/interim/claim_lit/ppr.json
+data/interim/claim_lit/rl.json
+data/interim/rfd4_2026-11-07/RFD4_paper_text.txt
+
+# 回写进 CSV 的**旧版卡全文快照**（每份 4.8 MB，内含卡片里的逐字引句，截短前的老内容）：
+# 这些是本地工作轨迹，公开树里只需要当前版 CSV；文件留在本机磁盘，不进 git。
+data/interim/protein_design_literature_backup_2026-11-0[78]*.csv
+data/interim/protein_design_literature_backup_2026-11-08.csv
+data/interim/protein_design_literature_pre_embed.csv
+

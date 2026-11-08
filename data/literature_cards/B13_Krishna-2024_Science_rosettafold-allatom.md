@@ -25,7 +25,7 @@
 
 1. **筛选器失效：AF2/RF2 的表示里没有非蛋白组分。** 现象/证据：底稿 `:183` 记「此前 AF2/RF2 无法评估金属、辅因子、共价修饰，导致小分子/酶设计的筛选器失效」——即在这类任务上，用只表示蛋白的自洽性打分等于没筛。→ 他们做了什么：换成 RFAA 的全原子（非残基级）复合物置信度做筛选器（`:179`），生成端同步换成 RFdiffusionAA 围绕小分子做全原子扩散（`:178`）。→ 应对后仍留下的代价：置信度的数值阈值**原文未给阈值（本次未取正文）**（`:175` 明写本卡片仅摘要级），本卡给不出可复算的门槛。
 
-2. **设计起点没有骨架：从围绕目标分子的随机氨基酸分布出发。** 现象/证据：摘要原句（底稿 `:182` 转录）—— "Starting from random distributions of amino acid residues surrounding target small molecules, we designed and experimentally validated, through crystallography and binding measurements, proteins that bind the cardiac disease therapeutic digoxigenin, the enzymatic cofactor heme, and the light-harvesting molecule bilin"。→ 他们做了什么：不做先折叠再对接的两步，直接全原子扩散生成，末端用 X 射线晶体学 + 结合测定确认（`:181`）。→ 代价：摘要**未给出 N/M/命中率数字**（`:182` 原话），底稿 §五缺口 2（`:673`）写明「Europe PMC 无 PMC 全文（RFAA）……缺观察：正文 Methods 中每靶点的 96/几十名额与命中率」→ **命中率与递减链本文未解决（对我们是取证缺口）**。
+2. **设计起点没有骨架：从围绕目标分子的随机氨基酸分布出发。** 现象/证据：摘要原句（底稿 `:182` 转录）—— "Starting from random distributions of amino acid residues surrounding target small molecules,"。→ 他们做了什么：不做先折叠再对接的两步，直接全原子扩散生成，末端用 X 射线晶体学 + 结合测定确认（`:181`）。→ 代价：摘要**未给出 N/M/命中率数字**（`:182` 原话），底稿 §五缺口 2（`:673`）写明「Europe PMC 无 PMC 全文（RFAA）……缺观察：正文 Methods 中每靶点的 96/几十名额与命中率」→ **命中率与递减链本文未解决（对我们是取证缺口）**。
 
 3. **取证困难（我们的）：曾下载到的 OA 文件经身份体检挂错行，已隔离。** `fetch_log.tsv:114` 记 2024 批次曾按 PMC13669634 抓到 HTTP 200 / 218,930 B 的全文并标 OK；后续身份体检改判 `WRONG_PAPER_Fetched`（`fetch_log.tsv:160`：doi_conflict，文件内 DOI 为 10.1093/nar/gkag999，与本行期望 10.1126/science.adl2528 冲突），该文件已移入 `data/literature_cards/fulltext/_quarantine/`。→ 处置：本卡**没有**取该文件任何句子当引句、不把它当正文；引句底稿声明为 `sources/baker.md`，§0 证据级别不高于摘要级（处置范本见 C17 样板卡）。
 
@@ -49,7 +49,7 @@
 | 数值/条目 | 含义 | 出处 |
 |---|---|---|
 | "we designed and experimentally validated, through crystallography and binding measurements" | 摘要原句片段：验证方式=晶体学+结合测定 | `sources/baker.md:182` |
-| "the cardiac disease therapeutic digoxigenin, the enzymatic cofactor heme, and the light-harvesting molecule bilin" | 摘要原句片段：三个验证靶 | `sources/baker.md:182` |
+| "the cardiac disease therapeutic digoxigenin, the enzymatic cofactor heme," | 摘要原句片段：三个验证靶 | `sources/baker.md:182` |
 | digoxigenin / heme / bilin | 设计对象（小分子/辅因子结合蛋白） | `sources/baker.md:177` |
 | MD: 否 / QM: 否（摘要层面） | 是否用 MD/QM 的可核状态 | `sources/baker.md:180`；CSV B13 行 是否用MD / 是否用QM 填 否 |
 | 未给出 N/M/命中率数字 | 摘要不含分母；缺口 2 待正文/SI | `sources/baker.md:182`、`:673` |
@@ -93,6 +93,8 @@
 - **⚠️ 挂错行文件的处置记录（交接用）**：批次抓取曾按 PMC13669634 下到一份全文并记 OK（`fetch_log.tsv:114`，HTTP 200 / 218,930 B / sha 前缀 33f6ae0286d6a859）；身份体检改判 WRONG_PAPER_Fetched（`fetch_log.tsv:160`：doi_conflict ['10.1093/nar/gkag999'] vs ['10.1126/science.adl2528']），文件现位于 `data/literature_cards/fulltext/_quarantine/B13_PMC13669634_text.txt`。本卡未取其中任何句子作引句、未视其为正文；曾下载到的 OA 文件经身份体检挂错行、已隔离，故本卡为降级卡。
 - **登记底稿核对**：`sources_map.json` B13 项只登记 `sources/baker.md`（实存）。对照行号：`:172–183`（[B13] 卡段）、`:673`（§五 缺口 2）。CSV 行：`data/protein_design_literature.csv:14`（证据级别列=摘要级）。
 - **门禁自检**：命令 `cd A:\Data\MD\projects\protein-design-screening-20261016 && PYTHONIOENCODING=utf-8 python scripts/verify_literature_cards.py --only "B13" --no-report`。本卡未改 CSV、`sources/*.md`、样板卡、`scripts/`，未做网络抓取。
+
+- **引用预算截短（2026-11-08，公开仓库口径）**：本卡有 2 条逐字引句来自许可受限的第三方来源（B01；PUBLISHER_TERMS），按 `deliverables/fulltext_manifest.csv` 的逐份许可判定，已把单条引句截到 ≤100 字符、同一来源总量截到 ≤600 字符；**截短后仍逐字命中同一份底稿**（门禁 `scripts/verify_literature_cards.py` 仍是逐字核验），完整原句按 §9 的重取方式与 sha256 可复核。逐条改动账见 `deliverables/quote_budget_ledger.csv`。本卡其余内容（我们自己的分析、判断与台账）未被改动。
 
 <!--CSV回填
 work_type=论文（降级卡：摘要级，未获正文）

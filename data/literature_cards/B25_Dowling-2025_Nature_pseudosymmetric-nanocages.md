@@ -66,7 +66,7 @@ Nature 638:553–561（2024-12-18 在线；2025 刊期）· DOI 10.1038/s41586-0
 | 240 / 540 / 960 亚基；49 / 71 / 96 nm | 三代笼子规模与直径 | "At 49, 71 and 96 nm diameter, these nanocages are the largest bounded computationally designed protein assemblies generated to date" |
 | 120 亚基 | 旧法（严格对称）上限 | "The largest and most complex structures designed using this approach comprise 120 subunits and have strict icosahedral symmetry" |
 | 98 接触对 / 36 位点 | Rosetta 突变扫描空间 | "the energetic effects of all possible single and pairwise mutations in 98 contacting residue pairs over 36 positions in the 1WA3 homotrimer interface were evaluated using Rosetta" |
-| >100 REU；96 个 | 破坏突变能量阈值与数量 | "Ninety-six unique individual mutations increased the predicted homotrimerization energy (ddG) or Rosetta score by more than 100 Rosetta energy units" |
+| >100 REU；96 个 | 破坏突变能量阈值与数量 | "Ninety-six unique individual mutations increased the predicted homotrimerization energy (ddG) or" |
 | 76 对 | 送测突变对 | "In total, mutations from 76 mutant pairs were selected for experimental screening" |
 | 82 单测 → 3 破坏 | 对称破坏实测成功率 | "The 1WA3 trimer proved remarkably plastic: only 3 out of the 82 single mutants tested did not yield a band corresponding to the assembled I53-50 nanocage" |
 | 3 对成立 | 破坏/补偿功能对 | "three pairs of functional disrupting and compensatory mutations were identified: H91I/V118Y, P90F/P147A and P114F/F131V" |
@@ -128,6 +128,8 @@ Nature 638:553–561（2024-12-18 在线；2025 刊期）· DOI 10.1038/s41586-0
 - 汇总引用：`sources/baker.md:550`（负向筛选新判据形态）、`sources/baker.md:612`（确证行：直径偏差 <2%、Cα 11.5 Å/540 亚基）、`sources/baker.md:648`（准对称笼条目）。
 - CSV 字段映射：第 3 节 ↔ `候选生成方法/计算筛选判据/阈值数字`；第 4 节 ↔ `候选数递减/成本统计`；第 8 节 ↔ `在方法演进链的位置`。
 - **本卡自检**：写卡前用与门禁同一的 `litcards_text.norm` 预校验全部候选引句（四处首字母大小写不一致致 MISS，已按原文改回 We/The；一处 pentasymmetron 单引号缺失致 MISS，已补）。引句分布：Abstract/引言 6 处、Results 叙述段为主、Methods 5 处、Extended Data 图注 1 处（「The lack of an I53-50 nanocage band…」句在 Methods 段内，卡中以全句逐字引用）。台账第 4 节「12 residues」行已按原文数值标注核对（原文为 mutated 12 residues，本卡正文口径一致）。
+
+- **引用预算截短（2026-11-08，公开仓库口径）**：本卡有 1 条逐字引句来自许可受限的第三方来源（B01；PUBLISHER_TERMS），按 `deliverables/fulltext_manifest.csv` 的逐份许可判定，已把单条引句截到 ≤100 字符、同一来源总量截到 ≤600 字符；**截短后仍逐字命中同一份底稿**（门禁 `scripts/verify_literature_cards.py` 仍是逐字核验），完整原句按 §9 的重取方式与 sha256 可复核。逐条改动账见 `deliverables/quote_budget_ledger.csv`。本卡其余内容（我们自己的分析、判断与台账）未被改动。
 
 <!--CSV回填
 work_type=论文（结构/材料设计）

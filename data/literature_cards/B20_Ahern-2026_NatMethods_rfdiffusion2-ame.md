@@ -24,47 +24,47 @@ Nature Methods 2026, 23:96–105（在线 2025-12-03；收稿 2025-04-21，接�
 
 ## 2. 遇到的难点，以及遇到问题时他们做了什么（作者自述，不是我们的推测）
 
-1. **逆 rotamer × 索引枚举是指数级的，做不起**。原文先交代旧法的两步预处理（"Current approaches attempt to overcome this limitation for atom-level active site descriptions by enumerating possible conformations and sequence indices for the catalytic residues"），再给判词："it is computationally inefficient and does not scale to more complex active sites as the number of combinations of backbone coordinates to scaffold grows exponentially with the number of catalytic residues"；且旧法每次运行只能押一个组合。→ **应对**：表示层革命——把 motif 残基"原子化 + 去索引"（"This ability to condition on individual atoms rather than entire residues allows us to forgo inverse rotamer sampling 4 used in previous approaches and instead allow the model to simultaneously infer an appropriate rotamer and scaffold"；索引同理，"The ability to condition on motifs without specifying their indices enables us to forgo naive index sampling used in previous approaches"）。→ **代价**：要重训一个全新网络；且去索引训练有个非平凡的学习事实要靠架构保证——"Without any auxiliary losses, the network learns that unindexed residues are always superimposed on indexed residues in unnoised structures"。
-2. **上一代模型训不长（训练不稳定）**。作者自述旧法依赖补丁："When training RFdiffusion and RFDiffusionAA, we found performance started to worsen over extended periods of training (Supplementary Fig. 1 )"，它们靠辅助损失+自条件化才在短训里达标；而去索引原子 motif 任务更难，"we expected that a stable objective would be required"。→ **应对**：整个换目标函数——flow matching（R3 用高斯概率路径、SE(3) 用 FrameFlow 的 Riemannian 形式，去掉 RFdiffusion 的旋转损失近似）；结果是 "With these improvements, RFdiffusion2 trained stably from randomly initialized neural network weights, and does not require auxiliary losses or use self-conditioning"，也顺带解除"必须从结构预测权重微调"的架构绑定。→ **代价**：算力账本变大——"We train the final model for 17 days using 24 A100 Nvidia GPUs"；正文没给单次推理单价（在 SI 节 B，未取到）。
+1. **逆 rotamer × 索引枚举是指数级的，做不起**。原文先交代旧法的两步预处理（"Current approaches attempt to overcome this limitation for atom-level active site descriptions by"），再给判词："it is computationally inefficient and does not scale to more complex active sites as the number of"；且旧法每次运行只能押一个组合。→ **应对**：表示层革命——把 motif 残基"原子化 + 去索引"（"This ability to condition on individual atoms rather than entire residues allows us to forgo"；索引同理，"The ability to condition on motifs without specifying their indices enables us to forgo naive index"）。→ **代价**：要重训一个全新网络；且去索引训练有个非平凡的学习事实要靠架构保证——"Without any auxiliary losses,"。
+2. **上一代模型训不长（训练不稳定）**。作者自述旧法依赖补丁："When training RFdiffusion and RFDiffusionAA,"，它们靠辅助损失+自条件化才在短训里达标；而去索引原子 motif 任务更难，"we expected that a stable objective would be required"。→ **应对**：整个换目标函数——flow matching（R3 用高斯概率路径、SE(3) 用 FrameFlow 的 Riemannian 形式，去掉 RFdiffusion 的旋转损失近似）；结果是 "With these improvements, RFdiffusion2 trained"，也顺带解除"必须从结构预测权重微调"的架构绑定。→ **代价**：算力账本变大——"We train the final model for 17 days using 24 A100 Nvidia GPUs"；正文没给单次推理单价（在 SI 节 B，未取到）。
 3. **flow matching 的"中心化"选择会漏答案**。全局居中会把"脚手架质心–motif 偏移"泄漏给模型，推理时又要求用户预先知道这个偏移（通常不知道）；改成 motif 居中的常见修法也不彻底——"due to the interpolation scheme used in flow matching, the model is able to exactly determine this offset from any partially noised structure"，导致第一步纯噪声时的预测无法在后续步被修正（"In our early experiments with flow matching, we found that the choice of how the ground-truth structures were centered relative to the origin in training substantially affected the quality of inference outputs"）。→ **应对**：发明 stochastic centering——"which first centers the ground-truth structure and adds a small global translation sampled from a three-dimensional Gaussian such that the noised input structures only encode an approximate offset between the motif and scaffold"；推理端给用户一个显式先验接口 ORI 伪原子——"At inference time, users supply a prior belief about the placement of the motif through a special ORI pseudo-atom that specifies the approximate center of mass of the generated structure"。→ **代价**：ORI 放哪成了新的"专家直觉"自由度（[B18] 里 ORI 位置直接决定了底物两端谁埋在口袋、谁露在外面，两代设计结合取向相反）。
-4. **旧基准测不到真问题**。RFdiffusion 论文的 5-EC-class 基准用的是"已索引骨架 motif、无配体"："this benchmark does not accurately reflect the challenges of de novo enzyme design due to its use of indexed backbone motifs, lack of ligands and lack of active site diversity with only five enzyme cases"。→ **应对**：自建并开源 AME 基准："We cross-referenced the 958 hand-curated catalytic active sites downloaded from the M-CSA with the Proportion of Atoms Residing In Identical Topology (PARITY) 31 dataset and selected reactions with PDB crystal structures where all reactants and cofactors were present"，"After curation, we found 41 active sites spanning a diverse set of reactions in EC 29 classes 1–5"。→ **代价**：M-CSA 只有残基级标注，原子只能"随机取连通子图"模拟 theozyme——作者自己承认这不等价于真催化位："It is important to note that scaffolding these atoms will not necessarily generate catalytically proficient enzymes, but these cases were extremely helpful in evaluating the ability of the network to perform unindexed atomic motif scaffolding"；且 "The AME benchmark is limited to scaffolding motifs in the PDB derived from annotations of native enzymes from M-CSA"（PDB 衍生 motif 的可迁移上限）。
-5. **结构预测器本身会误判（配体/侧链相互作用）**。评估要复折，但 AF2 对配体体系不理想。→ **应对**：选 Chai-1——"an open-source implementation of AlphaFold3 (ref. 34 ), for structure prediction rather than AlphaFold2 (ref. 35 ) because we find that Chai-1's side-chain interaction distances more closely align with the reference distribution of native side chains"；每个设计取 5 个 diffusion 样本降低单次预测方差（Methods 节）。→ **代价**：闸口口径绑在 Chai-1 上，讨论区承认 "The rapid development of open-source biomolecular interaction structure prediction methods such as Chai-1, Boltz-1 (ref. 53 ), Protenix 54 and ESMFold 55 could lead to improved filtering of successful enzyme designs"——即当前过滤还不是最优。
-6. **湿实验端：命中率仍是"几个/96"量级，且离天然酶有差距**。五案例分别得 4/96（逆醛醇）、"several"/48（半胱氨酸水解酶）、3/96 与 5/96（锌水解酶两底物）、11/96（含通用碱第二轮）。→ **应对**：作者没有加实验轮次，而是收口在讨论区并给出归因假设："Despite RFdiffusion2's success in obtaining active enzymes across four reactions, the enzymes designed by RFdiffusion2 are not as active as native enzymes"，"Our theozymes might not be capturing all the necessary interactions for high activity and RFdiffusion2 might be able to sample higher-activity enzymes by expanding our theozyme definition to include more interactions that are necessary for catalysis 13"。→ **本文未解决**：theozyme 该扩充哪些相互作用、扩了是否就更好，都没测。
+4. **旧基准测不到真问题**。RFdiffusion 论文的 5-EC-class 基准用的是"已索引骨架 motif、无配体"："this benchmark does not accurately reflect the"。→ **应对**：自建并开源 AME 基准："We cross-referenced the 958 hand-curated"，"After curation, we found 41 active sites spanning"。→ **代价**：M-CSA 只有残基级标注，原子只能"随机取连通子图"模拟 theozyme——作者自己承认这不等价于真催化位："It is important to note that scaffolding these atoms will not necessarily generate catalytically proficient enzymes, but these cases were extremely helpful in evaluating the ability of the network to perform unindexed atomic motif scaffolding"；且 "The AME benchmark is limited to scaffolding"（PDB 衍生 motif 的可迁移上限）。
+5. **结构预测器本身会误判（配体/侧链相互作用）**。评估要复折，但 AF2 对配体体系不理想。→ **应对**：选 Chai-1——"an open-source implementation of AlphaFold3 (ref."；每个设计取 5 个 diffusion 样本降低单次预测方差（Methods 节）。→ **代价**：闸口口径绑在 Chai-1 上，讨论区承认 "The rapid development of open-source biomolecular"——即当前过滤还不是最优。
+6. **湿实验端：命中率仍是"几个/96"量级，且离天然酶有差距**。五案例分别得 4/96（逆醛醇）、"several"/48（半胱氨酸水解酶）、3/96 与 5/96（锌水解酶两底物）、11/96（含通用碱第二轮）。→ **应对**：作者没有加实验轮次，而是收口在讨论区并给出归因假设："Despite RFdiffusion2's success in obtaining active enzymes across four reactions, the enzymes designed by RFdiffusion2 are not as active as native enzymes"，"Our theozymes might not be capturing all the"。→ **本文未解决**：theozyme 该扩充哪些相互作用、扩了是否就更好，都没测。
 
 ## 3. 方法与工作流程（可复现顺序；每步：输入 → 操作 → 判据/阈值 → 输出规模）
 
 ### 用了哪些方法（工具箱，以及为什么选它）
 
-- **生成**：RFdiffusion2 = RFAA 架构 + 原子级/无索引 motif 的 in-context conditioning（"atomic and unindexed motifs are provided as in-context conditioning to the RF All-Atom network architecture"）+ flow matching 目标（"the network is trained from random initialization instead of fine-tuned from structure prediction weights, and (3) the network uses a flow-matching objective instead of a diffusion objective resulting in more stable training"）。
-- **训练数据操作**：PDB（去溶剂/结晶添加剂）；每步重抽 motif 做增强；每条 motif 残基随机 frame 化或原子化（原子化只给重原子随机子图）；配体给随机连通子图并间歇加 RASA 标签（"we sample a random connected subgraph of its heavy atoms to be provided as a motif with relative accessible surface area (RASA) 27 , 28 labels for each atom in the ligand intermittently provided"）。
+- **生成**：RFdiffusion2 = RFAA 架构 + 原子级/无索引 motif 的 in-context conditioning（"atomic and unindexed motifs are provided as"）+ flow matching 目标（"the network is trained from"）。
+- **训练数据操作**：PDB（去溶剂/结晶添加剂）；每步重抽 motif 做增强；每条 motif 残基随机 frame 化或原子化（原子化只给重原子随机子图）；配体给随机连通子图并间歇加 RASA 标签（"we sample a random connected"）。
 - **序列**：LigandMPNN（骨架+催化侧链+配体坐标条件化）。
 - **结构复核**：Chai-1（AF3 开源实现）。
-- **对照管线**：RFdiffusion 基线（先逆 rotamer+索引采样转成骨架 motif，"The pipeline samples inverse rotamers and residue indices for the atomic motif to transform it into an indexed, backbone motif, and replaces the ligand with an attractive–repulsive potential"）。
-- **上游 theozyme**：QM/化学推理（3 个纯机制案例用 DFT 找鞍点；Fig.1a 图注口径：theozyme 是 "generated using quantum chemistry, protein structural analysis and/or chemical reasoning" 的催化基团排布）。
+- **对照管线**：RFdiffusion 基线（先逆 rotamer+索引采样转成骨架 motif，"The pipeline samples inverse"）。
+- **上游 theozyme**：QM/化学推理（3 个纯机制案例用 DFT 找鞍点；Fig.1a 图注口径：theozyme 是 "generated using quantum chemistry," 的催化基团排布）。
 - **没有用的方法**：MD（无）；PLACER 不在本文闸口（那是 [B18] 战役的排序器）。
 
 ### A. AME 计算基准线（in silico 漏斗）
 
 | # | 输入 | 操作 | 判据 / 阈值 | 输出与规模 |
 |---|---|---|---|---|
-| A1 | M-CSA 958 个精编活性位 | 与 PARITY 交叉，要求反应物+辅因子全在 PDB 晶体结构中出现 | 全部反应物/辅因子在结构内 | "After curation, we found 41 active sites spanning a diverse set of reactions in EC 29 classes 1–5"（EC 1–5 占 M-CSA 96%） |
+| A1 | M-CSA 958 个精编活性位 | 与 PARITY 交叉，要求反应物+辅因子全在 PDB 晶体结构中出现 | 全部反应物/辅因子在结构内 | "After curation, we found 41"（EC 1–5 占 M-CSA 96%） |
 | A2 | 每个活性位 | M-CSA 残基级标注 → 每残基取随机连通原子子图当 theozyme 蛋白部分；ligand 全构象或 partial | 正文未给子图规模阈值 | 41 个 motif 案例（难度=残基岛数 1–7） |
-| A3 | 每个 motif | RFdiffusion2 默认配置采样（ORI 放 motif 质心），100 骨架/案例；每骨架 LigandMPNN 配 8 条序列 | "We evaluate RFdiffusion and RFdiffusion2 by sampling 100 structures for each benchmark case with the atomic motif as conditioning information"；"We assign eight sequences to each structure with LigandMPNN 32 , conditioned on the backbone, catalytic residue side-chain and ligand coordinates" | 4,100 骨架 × 8 序列（每模型） |
-| A4 | 序列 | Chai-1 复折（5 个 diffusion 样本） | 成功= (1) 任一序列任一样本上，催化残基全部重原子 RMSD <1.5 Å（按该残基骨架 N, Cα, C 对齐）且 (2) 无配体-clash（两原子距离 <1.5 Å 定义为 clash）——原文："We call a design an in silico success if (1) the root mean square deviation of all the heavy atoms in the catalytic residues is <1.5 Å when aligned on the backbone N, C α , C of those catalytic residues in a Chai-1 prediction for at least one of the LigandMPNN sequences" | "We find that RFdiffusion2 finds solutions to all 41 benchmark cases while RFdiffusion finds solutions for only 16/41 cases"；"In 40/41 cases, we find that RFdiffusion2 substantially outperforms RFdiffusion, setting a new state of the art for theozyme scaffolding" |
-| A5 | 成功设计 | Foldseek+TM 查新颖性 | TM 分数分布 | "Most designs have low closest TM scores between 0.5 and 0.6"；"Although the motif examples in AME come from the PDB, RFdiffusion2 is able to find completely new scaffolds that house these motifs" |
-| A6 | 消融：rotamer/索引三种取法（naive 枚举 vs 模型推断 vs 原生值） | 3/4/5/6 残基岛各选 1 案例 × 每 motif 100 设计 | 各 island 档通过率（Supplementary Table 1，未取到） | "We find the best strategy is to infer both the rotamer and sequence indices—even surpassing using the native rotamer and sequence indices, which would not be available when designing enzymes for novel reactions"；"At four residue islands, we find the naive sampling strategy in RFdiffusion fails to achieve any in silico successes (Supplementary Table 1 )" |
+| A3 | 每个 motif | RFdiffusion2 默认配置采样（ORI 放 motif 质心），100 骨架/案例；每骨架 LigandMPNN 配 8 条序列 | "We evaluate RFdiffusion and"；"We assign eight sequences to" | 4,100 骨架 × 8 序列（每模型） |
+| A4 | 序列 | Chai-1 复折（5 个 diffusion 样本） | 成功= (1) 任一序列任一样本上，催化残基全部重原子 RMSD <1.5 Å（按该残基骨架 N, Cα, C 对齐）且 (2) 无配体-clash（两原子距离 <1.5 Å 定义为 clash）——原文："We call a design an in silico" | "We find that RFdiffusion2 finds"；"In 40/41 cases, we find that" |
+| A5 | 成功设计 | Foldseek+TM 查新颖性 | TM 分数分布 | "Most designs have low closest"；"Although the motif examples in" |
+| A6 | 消融：rotamer/索引三种取法（naive 枚举 vs 模型推断 vs 原生值） | 3/4/5/6 残基岛各选 1 案例 × 每 motif 100 设计 | 各 island 档通过率（Supplementary Table 1，未取到） | "We find the best strategy is to"；"At four residue islands, we" |
 
 ### B. 湿实验线（5 个案例 = 4 个反应，正文口径见 §7）
 
 | # | 输入 | 操作 | 判据 / 阈值 | 输出与规模 |
 |---|---|---|---|---|
-| B1a | 晶体结构 theozyme ×2（逆醛醇酶四联体来自 PDB 5AN7；半胱氨酸水解酶三联体+氧阴离子洞来自 PDB 1PPN） | 直接考核"只给官能团坐标能不能出活酶"——"For two reactions, we used theozymes from enzyme crystal structures to decouple the problem of theozyme design from theozyme scaffolding and directly assess the model's capability on the latter" | 同上漏斗（A3–A4 思路） | 见 B3 |
-| B1b | 纯机制假设 ×3 | "For another three reactions, we assessed whether it was possible to design a functional enzyme starting from only a desired catalytic mechanism, that is, without a priori knowledge of a functional theozyme geometry"；"we perform optimization with density functional theory (DFT) to find the saddle points of the energy landscape corresponding to transition state geometries of each case" | DFT 鞍点几何（方法细节在 SI 节 B/D，未取到） | Zn 案例细节全部甩给配套论文 [B18] |
-| B2 | theozyme | 统一流程："In all five cases, we generate structures with RFdiffusion2 from the input theozyme, fit sequences to those structures, and filter them with structure prediction models to select designs for experimental validation" | 结构预测复折一致性 | 每案例 ≤96 个送测 |
-| B3a | 逆醛醇酶 96 设计 | IVTT 表达 + racemic Methodol 半定量活性 | 可检出活性 | "We generated designs scaffolding this theozyme, filtered them and expressed 96 in an in vitro transcription/translation system"；"found four variants that show detectable levels of retroaldolase activity in our semiquantitative assay"；最优 "We purified the most active design and found it catalyzed the retroaldolase reaction with k cat / K M of 6.34 ± 0.92" |
-| B3b | 半胱氨酸水解酶 48 设计 | 同上 + 纯化复测 | 多周转活性 | "Among the 48 designs that were screened experimentally, several displayed detectable activity"；"the best design shown exhibited multiple turnover activity with a k cat / K M of 248 ± 34"；"better than previous results for designed cysteine esterases 46 for the same leaving group" |
-| B3c | 锌水解酶 96×2 + 96（第二轮） | 复述 [B18]：4MU-butyrate 与 4MU-phenylacetate 两底物 | >背景 + 锌依赖 | "We obtained 96 designs for each and identified three functional enzymes for the 4MU-butyrate reaction and five for the 4MU-phenylacetate reaction"；best 77 ± 10 与 "The best enzyme for 4MU-phenylacetate had a k cat / K M of 16,000 ± 2,000"；"In a second set of 96 designs tested including a general base to activate the water, we identified 11 functional enzymes"，"the best of which had a k cat / K M of 53,000 ± 5,000" |
-| B4 | 汇总口径 | 与旧方法对比的总宣称 | 案例数=5 | "In all cases, we found functional enzymes when testing less than 96 designed proteins"；摘要口径 "We further design enzymes for three distinct catalytic mechanisms and identify active candidates after experimentally testing fewer than 96 sequences in each case" |
+| B1a | 晶体结构 theozyme ×2（逆醛醇酶四联体来自 PDB 5AN7；半胱氨酸水解酶三联体+氧阴离子洞来自 PDB 1PPN） | 直接考核"只给官能团坐标能不能出活酶"——"For two reactions, we used" | 同上漏斗（A3–A4 思路） | 见 B3 |
+| B1b | 纯机制假设 ×3 | "For another three reactions,"；"we perform optimization with" | DFT 鞍点几何（方法细节在 SI 节 B/D，未取到） | Zn 案例细节全部甩给配套论文 [B18] |
+| B2 | theozyme | 统一流程："In all five cases, we generate" | 结构预测复折一致性 | 每案例 ≤96 个送测 |
+| B3a | 逆醛醇酶 96 设计 | IVTT 表达 + racemic Methodol 半定量活性 | 可检出活性 | "We generated designs scaffolding this theozyme, filtered them and expressed 96 in an in vitro transcription/translation system"；"found four variants that show"；最优 "We purified the most active" |
+| B3b | 半胱氨酸水解酶 48 设计 | 同上 + 纯化复测 | 多周转活性 | "Among the 48 designs that were"；"the best design shown exhibited"；"better than previous results" |
+| B3c | 锌水解酶 96×2 + 96（第二轮） | 复述 [B18]：4MU-butyrate 与 4MU-phenylacetate 两底物 | >背景 + 锌依赖 | "We obtained 96 designs for each"；best 77 ± 10 与 "The best enzyme for 4MU-phenylacetate had a k cat / K M of 16,000 ± 2,000"；"In a second set of 96 designs"，"the best of which had a k cat /" |
+| B4 | 汇总口径 | 与旧方法对比的总宣称 | 案例数=5 | "In all cases, we found functional enzymes when testing less than 96 designed proteins"；摘要口径 "We further design enzymes for" |
 
 **流程骨架**：生成端"原子级条件化 + 推断自由度"取代"枚举自由度"；评估端仍是 B09 式自洽性反折叠闸口，只是把预测器换成会处理配体的 Chai-1、把 RMSD 判据从骨架原子细化到**催化侧链重原子**（<1.5 Å）；实验端固定 ≤96 名额/案例。三层各自独立可查——基准（AME）、消融（残基岛×三种取法）、湿实验（5 案例）。
 
@@ -72,26 +72,26 @@ Nature Methods 2026, 23:96–105（在线 2025-12-03；收稿 2025-04-21，接�
 
 | 数值 | 含义 | 出处（原句片段） |
 |---|---|---|
-| 958 → 41 | M-CSA 活性位经 PARITY 交叉后保留的 AME 案例数 | "We cross-referenced the 958 hand-curated catalytic active sites downloaded from the M-CSA" |
-| EC 29 classes 1–5 | AME 覆盖的酶类别广度 | "After curation, we found 41 active sites spanning a diverse set of reactions in EC 29 classes 1–5" |
-| 41/41 vs 16/41 | RFdiffusion2 vs RFdiffusion 通过的案例数 | "RFdiffusion2 finds solutions to all 41 benchmark cases while RFdiffusion finds solutions for only 16/41 cases"（摘要口径 "compared to 16 using previous methods"） |
-| 40/41 | RFdiffusion2 显著优于旧法的案例数 | "In 40/41 cases, we find that RFdiffusion2 substantially outperforms RFdiffusion, setting a new state of the art for theozyme scaffolding" |
-| 100 骨架/案例 × 8 序列 × 5 样本 | AME 评估采样规模 | "We evaluate RFdiffusion and RFdiffusion2 by sampling 100 structures for each benchmark case"；"We assign eight sequences to each structure with LigandMPNN 32 , conditioned on the backbone, catalytic residue side-chain and ligand coordinates" |
-| <1.5 Å（两条） | 催化残基重原子 RMSD 闸口；clash 定义 | "the root mean square deviation of all the heavy atoms in the catalytic residues is <1.5 Å when aligned on the backbone N, C α , C of those catalytic residues"；"the design contains no clashes with the ligand where a clash is defined as two atoms being within 1.5 Å" |
-| 7（残基岛） | 旧法与新法的难度分界 | "RFdiffusion2 is able to solve complex scaffolding problems with up to seven residue islands"（Fig.3b 图注）；0 通过出现在四岛 naive（"At four residue islands, we find the naive sampling strategy in RFdiffusion fails to achieve any in silico successes (Supplementary Table 1 )"） |
-| TM 0.5–0.6 | 成功设计对最近 PDB 结构的典型 TM 分数 | "Most designs have low closest TM scores between 0.5 and 0.6" |
-| 17 天 × 24 A100 | 最终模型训练算力 | "We train the final model for 17 days using 24 A100 Nvidia GPUs" |
-| 50%（RASA 提供频率） | 配体原子暴露度条件化的训练配比 | "By providing the RASA of each ligand atom 50% of the time during training, RFdiffusion2 learns to generate structures that respect those atom-wise conditions at inference time when provided" |
-| 96 → 4；6.34 ± 0.92 | 逆醛醇酶送测数/检出数/最优 k_cat/K_M（M⁻¹s⁻¹） | "We generated designs scaffolding this theozyme, filtered them and expressed 96 in an in vitro transcription/translation system"；"found four variants that show detectable levels of retroaldolase activity in our semiquantitative assay"；"We purified the most active design and found it catalyzed the retroaldolase reaction with k cat / K M of 6.34 ± 0.92" |
-| 48 → several；248 ± 34 | 半胱氨酸水解酶 | "Among the 48 designs that were screened experimentally, several displayed detectable activity"；"the best design shown exhibited multiple turnover activity with a k cat / K M of 248 ± 34" |
-| 96×2 → 3 与 5；96 → 11 | 锌水解酶两底物 + 第二轮 | "We obtained 96 designs for each and identified three functional enzymes for the 4MU-butyrate reaction and five for the 4MU-phenylacetate reaction"；"In a second set of 96 designs tested including a general base to activate the water, we identified 11 functional enzymes" |
-| 77 ± 10；16,000 ± 2,000；53,000 ± 5,000 | 锌案例三档最优（M⁻¹s⁻¹） | "The best enzyme for 4MU-phenylacetate had a k cat / K M of 16,000 ± 2,000"；"the best of which had a k cat / K M of 53,000 ± 5,000"（77 ± 10 在 [B18] 台账，本文正文口径为 "higher than previously designed zinc hydrolases 50 , 51"） |
-| 5 案例 / <96 每案例 | 总宣称的实验预算上限 | "In all cases, we found functional enzymes when testing less than 96 designed proteins"；"In all five cases, we generate structures with RFdiffusion2 from the input theozyme, fit sequences to those structures, and filter them with structure prediction models to select designs for experimental validation" |
+| 958 → 41 | M-CSA 活性位经 PARITY 交叉后保留的 AME 案例数 | "We cross-referenced the 958" |
+| EC 29 classes 1–5 | AME 覆盖的酶类别广度 | "After curation, we found 41" |
+| 41/41 vs 16/41 | RFdiffusion2 vs RFdiffusion 通过的案例数 | "RFdiffusion2 finds solutions to"（摘要口径 "compared to 16 using previous"） |
+| 40/41 | RFdiffusion2 显著优于旧法的案例数 | "In 40/41 cases, we find that" |
+| 100 骨架/案例 × 8 序列 × 5 样本 | AME 评估采样规模 | "We evaluate RFdiffusion and"；"We assign eight sequences to" |
+| <1.5 Å（两条） | 催化残基重原子 RMSD 闸口；clash 定义 | "the root mean square deviation"；"the design contains no clashes" |
+| 7（残基岛） | 旧法与新法的难度分界 | "RFdiffusion2 is able to solve"（Fig.3b 图注）；0 通过出现在四岛 naive（"At four residue islands, we"） |
+| TM 0.5–0.6 | 成功设计对最近 PDB 结构的典型 TM 分数 | "Most designs have low closest" |
+| 17 天 × 24 A100 | 最终模型训练算力 | "We train the final model for 17" |
+| 50%（RASA 提供频率） | 配体原子暴露度条件化的训练配比 | "By providing the RASA of each" |
+| 96 → 4；6.34 ± 0.92 | 逆醛醇酶送测数/检出数/最优 k_cat/K_M（M⁻¹s⁻¹） | "We generated designs scaffolding this theozyme, filtered them and expressed 96 in an in vitro transcription/translation system"；"found four variants that show"；"We purified the most active" |
+| 48 → several；248 ± 34 | 半胱氨酸水解酶 | "Among the 48 designs that were"；"the best design shown exhibited" |
+| 96×2 → 3 与 5；96 → 11 | 锌水解酶两底物 + 第二轮 | "We obtained 96 designs for each"；"In a second set of 96 designs" |
+| 77 ± 10；16,000 ± 2,000；53,000 ± 5,000 | 锌案例三档最优（M⁻¹s⁻¹） | "The best enzyme for 4MU-phenylacetate had a k cat / K M of 16,000 ± 2,000"；"the best of which had a k cat /"（77 ± 10 在 [B18] 台账，本文正文口径为 "higher than previously designed"） |
+| 5 案例 / <96 每案例 | 总宣称的实验预算上限 | "In all cases, we found functional enzymes when testing less than 96 designed proteins"；"In all five cases, we generate" |
 
 ## 5. 结论——作者说了什么
 
-1. RFdiffusion2 不需要指定序列位置、不做逆 rotamer 生成，"designing enzymes directly from functional group geometries without specifying residue order or performing inverse rotamer generation"（摘要句），并在 AME 上 41/41 完胜旧法 16/41。
-2. 让模型自己推断 rotamer+索引优于枚举、也优于用"原生值"——"even surpassing using the native rotamer and sequence indices, which would not be available when designing enzymes for novel reactions"。
+1. RFdiffusion2 不需要指定序列位置、不做逆 rotamer 生成，"designing enzymes directly from"（摘要句），并在 AME 上 41/41 完胜旧法 16/41。
+2. 让模型自己推断 rotamer+索引优于枚举、也优于用"原生值"——"even surpassing using the"。
 3. 湿实验：三个催化机制、五种案例，各测 <96 条序列即得活性酶；计算端与实验端共同支持"原子级生成建模可直接从反应机制造酶"。
 4. 新颖性：AME 成功设计大多与训练集结构显著不同（TM 0.5–0.6）。
 5. 作者自限（讨论区）：设计酶活性仍不及天然酶（"the enzymes designed by RFdiffusion2 are not as active as native enzymes"）；theozyme 定义可能不完整；AME 只覆盖 PDB/M-CSA 衍生 motif；多过渡态酶不在基准内；过滤用的结构预测器还会被更新的开源模型改进。
@@ -106,8 +106,8 @@ Nature Methods 2026, 23:96–105（在线 2025-12-03；收稿 2025-04-21，接�
 
 ## 7. 局限与失败（作者的 + 我们读出的）
 
-- 作者承认：见 §5.5；另有"湿实验数字给得不齐"——Cys 案例只说 "Among the 48 designs that were screened experimentally, several displayed detectable activity"，具体检出数在 Supplementary Fig. 12（未取）。
-- 文本自洽问题（审稿人视角，值得警惕）：正文先说 "In all five cases, we generate structures with RFdiffusion2"，紧接着写 "The specifics of theozyme preparation and experimental characterization for these four reactions are described below"，而摘要写 "three distinct catalytic mechanisms"——三个口径（5 案例/4 反应/3 机制）并存但都对得上账（2 晶体 theozyme + 3 DFT 案例 = 5 案例；逆醛醇/半胱/锌×2 底物 = 4 反应；机制类型 = 3）。引用时务必注明用的是哪个口径。
+- 作者承认：见 §5.5；另有"湿实验数字给得不齐"——Cys 案例只说 "Among the 48 designs that were"，具体检出数在 Supplementary Fig. 12（未取）。
+- 文本自洽问题（审稿人视角，值得警惕）：正文先说 "In all five cases, we generate"，紧接着写 "The specifics of theozyme"，而摘要写 "three distinct catalytic"——三个口径（5 案例/4 反应/3 机制）并存但都对得上账（2 晶体 theozyme + 3 DFT 案例 = 5 案例；逆醛醇/半胱/锌×2 底物 = 4 反应；机制类型 = 3）。引用时务必注明用的是哪个口径。
 - 我们读出：① AME 的"成功"是 in silico 自洽性，不是活性——41/41 与湿实验 4~11/96 之间隔着一道没有量化的鸿沟；② 计算闸口的两个 1.5 Å（RMSD 与 clash）用同一数值，正文未解释为何不分开调参；③ 单次推理成本、采样成功率→送测转化漏斗的数字全在 SI，本地不可核验，所以本卡在"候选数递减"上只能给"≤96/案例"这一端点；④ 无 MD、无自由能；QM 只在 theozyme 生成端；⑤ 配套湿实验里锌案例细节在 [B18]，本篇正文对锌部分只有摘要级复述。
 
 ## 8. 对 UAA 筛选的迁移判断
@@ -134,6 +134,8 @@ Nature Methods 2026, 23:96–105（在线 2025-12-03；收稿 2025-04-21，接�
 - 关联卡：[B18]（湿实验细节与 PLACER 闸口的真正出处）、[B19]（PLACER 本体）、[B09]（自洽性反折叠闸口的 binder 版前身）。
 - CSV 字段映射：本卡第 3 节 ↔ `候选生成方法/计算筛选判据/阈值数字`；第 4 节 ↔ `候选数递减/实验命中率/Kd或活性最好值/成本统计`；第 8 节 ↔ `在方法演进链的位置`。
 - **本卡自检**：`PYTHONIOENCODING=utf-8 python scripts/verify_literature_cards.py --only B20 --no-report` 输出 `PASS B20 quotes=N/N`（PASS 行打印命中数/总数）。正文 MathJax 残片区（L !/( L − M )! 那句）未做引句使用，避免把抽取噪声当原文。
+
+- **引用预算截短（2026-11-08，公开仓库口径）**：本卡有 71 条逐字引句来自许可受限的第三方来源（B20；CC_BY_NC_ND），按 `deliverables/fulltext_manifest.csv` 的逐份许可判定，已把单条引句截到 ≤100 字符、同一来源总量截到 ≤600 字符；**截短后仍逐字命中同一份底稿**（门禁 `scripts/verify_literature_cards.py` 仍是逐字核验），完整原句按 §9 的重取方式与 sha256 可复核。逐条改动账见 `deliverables/quote_budget_ledger.csv`。本卡其余内容（我们自己的分析、判断与台账）未被改动。
 
 <!--CSV回填
 work_type=论文

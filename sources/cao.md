@@ -11,7 +11,7 @@
 **身份（✅ 官方主页 + 会议简介互证）**
 - 曹龙兴，1990 年生，山东巨野。2008–2012 山东大学生命科学学院学士；2012–2017 **中国科学院分子细胞科学卓越创新中心（原上海生物化学与细胞生物学研究所，SIBCB）**博士，做细胞表面受体的冷冻电镜结构；2017–2021 **华盛顿大学蛋白质设计研究所（IPD, Univ. of Washington）**博士后（David Baker）；2021-08 起西湖大学生命科学学院研究员/助理教授（独立 PI），并挂名"西湖人工智能药物设计核心实验室"（AI Drug Design Core Lab）。
   - 来源：https://www.westlake.edu.cn/faculty/longxing-cao.html （"2012-2017 年在中国科学院生物化学与细胞生物学研究所攻读博士学位…2017-2021 年在华盛顿大学蛋白质设计研究所进行博士后研究…2021 年 8 月全职加入西湖大学"）
-  - 博士期间论文的单位行（Europe PMC core 记录，PMID 31116791 / 29079480）："State Key Laboratory of Molecular Biology, National Center for Protein Science Shanghai, … Shanghai Institute of Biochemistry and Cell Biology, Chinese Academy of Sciences"。
+  - 博士期间论文的单位行（Europe PMC core 记录，PMID 31116791 / 29079480）："State Key Laboratory of Molecular Biology, National Center for Protein Science Shanghai,"。
   - **博士导师（推断，非官方声明）**：其博士期两篇一作/共一论文末位作者均为 **He Y（何永盛）**：Cao L\*, Yu B\*, …, Baker D, **He Y**. PLoS Pathog 2019（✅ 10.1371/journal.ppat.1007759）；Dong Y\*, **Cao L\***, Tang H, Shi X, **He Y**. J Mol Biol 2017（⚠️仅摘要级，10.1016/j.jmb.2017.10.019）。信心：中高（仅凭作者位次推断，未见官方"师从"表述）。
   - **曹龙兴 ORCID = 0000-0003-4002-3648**（来源：Crossref `https://api.crossref.org/works/10.1126/science.ady6017` 的 author.ORCID 字段，已核对与 Science 2026 作者列表匹配）。
 
@@ -78,12 +78,12 @@
 - 期刊, 年: **Nature 591(7850):482–487, 2021** | DOI: **10.1038/s41586-021-03258-z** ✅ | PMID 33503651 / PMCID PMC8074680 | 预印本 10.1101/2020.07.18.206946（✅ EPMC PPR189983）
 - 设计对象: 别构蛋白开关/lucKey–lucCage–latch 体系（生物素、BCL-2、IgG1-Fc、HER2、BoNT B、cTnI、HBV、SARS-CoV-2 RBD/S/M/N）。
 - 候选生成: DHR 骨架（lucCage/lucKey）+ Rosetta 界面设计 + 热力学耦合模型（ΔG_open、ΔG_CK、ΔG_LT）。
-- 计算筛选器: 以**自由能不等式**作为设计判据（✅全文）："the binding free energy of lucKey to lucCage (ΔG_CK) is insufficient to overcome the free energy cost of lucCage opening (ΔG_open) in the absence of target (ΔG_open − ΔG_CK >> 0), but in the presence of the target … (ΔG_open − ΔG_CK − ΔG_LT << 0)"。无 pLDDT/ipTM 类阈值（早于该体系）。
+- 计算筛选器: 以**自由能不等式**作为设计判据（✅全文）："the binding free energy of lucKey to lucCage (ΔG_CK) is insufficient to overcome the free energy"。无 pLDDT/ipTM 类阈值（早于该体系）。
 - MD 使用: 未见（⛔全文检索无 MD 关键词）。 QM 使用: 未见。
 - 实验验证: BLI（OTK 生物传感器层）、发光重建读数（solution readout）、酵母展示 E. coli 表达。
 - **命中率原始数字（✅全文，NCBI PMC efetch db=pmc&id=8074680）**：
-  - "**Of 13 candidates tested**, the best, which we refer to as lucCageRBD, was able to detect both monomeric RBD and the full trimeric SARS-CoV2 spike protein with **15 pM LOD** and >1700% dynamic range for the RBD detection"
-  - "**The best of 8 designs tested**, lucCageHBV had a ~150% increase in luciferase activity upon addition of the anti-HBV antibody HzKR127–3.2"
+  - "**Of 13 candidates tested**, the best, which we refer to as lucCageRBD,"
+  - "**The best of 8 designs tested**,"
   - 即"每类 8–13 个候选中取最优"的漏斗末端口径；未给整库命中率。
 - 演进链位置: 从"静态结合"转向"**多态/可切换**"体系的关键一步；西湖组的光控（C16）、小分子调控寡聚体（C17）与配体诱导折叠/重组传感器（C23）都是这条线。
 
@@ -264,7 +264,7 @@
 - 候选生成: Proteus = 深度扩散网络 + **graph-based triangle 方法 + multi-track interaction network**，**不依赖结构预测网络预训练**（对比 RFdiffusion 依赖 ESM/AF2 预训练）。
 - 计算筛选器: 以 in-silico designability + 效率为核心指标（具体阈值见正文；本卡片引用的是其自述）。
 - 实验验证: "comprehensive **in silico** evaluations and **experimental characterizations**"（摘要级）；其后续 Proteus2 直接用于金属蛋白酶设计（C21）。
-- **命中率原始数字**: ⚠️**仅摘要级**——摘要原句："These promising results underscore Proteus's ability to generate highly designable protein backbones **efficiently**."（无百分比；不编造）
+- **命中率原始数字**: ⚠️**仅摘要级**——摘要原句："These promising results underscore Proteus's ability to generate highly designable protein"（无百分比；不编造）
 - 演进链位置: **他从"用 Baker 的生成模型"走向"自研生成模型"的节点**，动机是效率（算力是他反复抱怨的成本项，见 C18 讨论）。
 
 ### [C17] De novo design of small molecule–regulated protein oligomers
@@ -308,15 +308,15 @@
 - 设计对象: 通用框架——蛋白优化、**de novo binder**、小分子结合蛋白、磷酸化特异性抗体/纳米抗体、核酸（见 C20）。
 - 候选生成: 用 **AlphaFold3/Protenix 式结构预测模型的"幻觉"能力**做**免微调、仅前向**的序列-结构协同迭代优化（不同噪声水平控制采样空间）。
 - 计算筛选器（✅全文，含成功率定义）：
-  - 成功率定义原句："**The success rate is defined as: protein RMSD ≤ 1.5 Å, protein pLDDT ≥ 85, ligand RMSD ≤ 2 Å, ligand pLDDT ≥ 85, and ipTM ≥ 0.85.**"
-  - 配体任务 in-silico："This success rate was **inversely proportional to ligand size and polarity**: for small, hydrophobic ligands, **the rate exceeded 60%** … while it was considerably lower for larger, polar targets."
-  - 口袋定义："Binding pockets are defined using **Fpocket**, with ligands centered on the pocket's spatial center and randomly rotated."（三种初始化：质量中心 / 口袋中心 / 幻觉）
+  - 成功率定义原句："**The success rate is defined as:**"
+  - 配体任务 in-silico："This success rate was **inversely proportional to ligand size and polarity**:"
+  - 口袋定义："Binding pockets are defined using **Fpocket**,"（三种初始化：质量中心 / 口袋中心 / 幻觉）
 - MD/QM: 全文未见 MD/QM 自算（⛔无相关关键词）。
 - 实验验证: **每靶点固定投测 16 个设计**（BLI 结合 + 亲和力）；E. coli 表达、晶体学；对比 RFdiffusion / BoltzDesign1 基线。
 - **命中率原始数字（✅全文，https://www.biorxiv.org/content/10.1101/2025.11.08.686881v1.full-text）**：
-  - de novo binder："For each target, **we experimentally tested 16 de novo designed binders** and observed high success rates: **8 out of 16 PD-L1 binders** showed binding signals in BLI experiments, with the strongest affinity reaching **32 pM**, and **13 out of 16 FGFR2 binders** showed binding, with the best achieving **sub-nanomolar affinity**." → **50% 与 81.3%**
-  - 拯救（优化 RFdiffusion 失败设计）："**Biolayer interferometry (BLI) assays demonstrated that 12 out of 16 PD-L1 binders successfully bound their target, while 8 out of 16 IL7RA binders showed binding**"；图注对比："Optimized Failed Scaffold from RFdiffusion for PDL1: **RFdiffusion reports a success rate of 12/95 for PDL1, whereas our method achieves a higher success rate of 12/16.** … for IL7RA: **RFdiffusion reports a success rate of 32/96 for IL7RA, while our method achieves a higher success rate of 8/16.**" → **12.6% vs 75%**；**33.3% vs 50%**
-  - 实验口径声明："Experimental characterization of binder design **spanning small molecule, metal ion, protein, and antibody design of phosphorylation-specific peptide** revealed high design success rates and excellent structural accuracy."
+  - de novo binder："For each target, **we experimentally tested 16 de novo designed binders** and observed high success" → **50% 与 81.3%**
+  - 拯救（优化 RFdiffusion 失败设计）："**Biolayer interferometry (BLI) assays demonstrated that 12 out of 16 PD-L1 binders successfully**"；图注对比："Optimized Failed Scaffold from RFdiffusion for" → **12.6% vs 75%**；**33.3% vs 50%**
+  - 实验口径声明："Experimental characterization of binder design"
 - 演进链位置: **这是他筛选逻辑改变的最直接证据**：不再"生成 10⁵ 设计→用物理分数排序→投 10²–10³ 个"，而是"**用预测模型自身的幻觉把设计直接推到判定阈值以上→只投 16 个/靶**"，因此"投测命中率"从 <1–5% 跳到 50–81%。**注意：分母从 10⁴–10⁵ 变成 16，正是"90%+"类传闻的口径来源。**
 
 ### [C20] HalluDesign-NA: Extending HalluDesign for De Novo Nucleic Acid Design
@@ -327,25 +327,25 @@
 - 计算筛选器: 置信度分数改进（pLDDT、ipTM）；约束含长度、对称性、与蛋白结构上下文。
 - MD/QM: 未见。
 - 实验验证: **仅计算基准（computational benchmarking）**——摘要未声称湿实验闭环。
-- **命中率原始数字**: ⚠️**仅摘要级且为 in-silico**："Computational benchmarking across ssDNA, ssRNA, and aptamer design tasks demonstrates **consistent improvements in confidence scores (pLDDT, ipTM)**"。
+- **命中率原始数字**: ⚠️**仅摘要级且为 in-silico**："Computational benchmarking across ssDNA, ssRNA,"。
 - 演进链位置: 方法外推到核酸；提示其"以模型置信度为准入判据"的漏斗逻辑正在**脱离实验验证**（风险项）。
 
 ### [C21] De novo design of ligand binding and sensing with a physics based generative approach
 - 作者/单位/角色: Zhang Y, Ke Y, Zhi R, Jin Q, Feng Y, Wang C, Fang M, Liao J, Chen D, Liu J, **Cao L（末位通讯）**。西湖组（2026-07-13 预印本）。
 - 期刊, 年: preprint | DOI: **10.64898/2026.07.13.738243** ✅（EPMC PPR1279910；正文已核 https://www.biorxiv.org/content/10.64898/2026.07.13.738243v1.full-text）
 - 设计对象: 小分子与金属离子结合蛋白 + **配体诱导的构象变化传感器**（DTG、CIA、DFHBI、血清素、多巴胺、Zn²⁺/Ni²⁺ 等）。
-- 候选生成: **物理-based 生成 + 折叠模拟并行**："Small molecule conformers were sampled, clustered, and refined through **quantum optimization**, and **RIFs were generated from these optimized conformers using RIFGen**"；蒙特卡洛折叠采样、"if a predefined threshold of consecutive unsuccessful moves is reached, the folding root is reassigned…"；序列由 **Rosetta + ProteinMPNN**（异源体系用 **LigandMPNN**）。
-- 计算筛选器: "the structural accuracy of the final models was assessed by **comparing each design to AlphaFold2-predicted structures**"；迭代优化中"Following rigorous computational filtering, selected variants were experimentally characterized, with the highest-affinity binder advanced to the next optimization round."（阈值数字未列于正文可提取部分）
+- 候选生成: **物理-based 生成 + 折叠模拟并行**："Small molecule conformers were sampled, clustered, and refined through **quantum optimization**,"；蒙特卡洛折叠采样、"if a predefined threshold of consecutive unsuccessful moves is reached,"；序列由 **Rosetta + ProteinMPNN**（异源体系用 **LigandMPNN**）。
+- 计算筛选器: "the structural accuracy of the final models was assessed by **comparing each design to**"；迭代优化中"Following rigorous computational filtering, selected variants were experimentally characterized,"（阈值数字未列于正文可提取部分）
 - **QM 使用: ✅有**（配体构象"quantum optimization"，用于生成 RIF 的输入）；**MD 使用: ✗未见自算**——"Computational design of Periplasmic binding protein biosensors guided by molecular dynamics"仅作为参考文献出现。
 - 实验验证: E. coli 表达 + **ITC**（定量热）+ 荧光/发光读数 + 菌落筛选 + 晶体学。
 - **命中率原始数字（✅全文）**：
-  - 投测规模："For experimental characterization, we selected **96 DTG designs, 94 CIA designs, and 32 DFHBI designs**"；多样性度量"**median pairwise backbone RMSD of 12.63 Å for DTG, 11.98 Å for CIA, and 12.68 Å for DFHBI**"（刻意最大化骨架多样性）
-  - "**For CIA, 20 out of 94 designs showed binding**, with the highest measured affinity of 43.7 μM" → **21.3%**
+  - 投测规模："For experimental characterization, we selected **96 DTG designs, 94 CIA designs,**"；多样性度量"**median pairwise backbone RMSD of 12.63 Å for**"（刻意最大化骨架多样性）
+  - "**For CIA, 20 out of 94 designs showed binding**," → **21.3%**
   - "**For DFHBI … 2 out of 16 designs produced a clear fluorescence increase** following ligand incubation" → **12.5%**
-  - 血清素："six serotonin binders exhibited binding, with the highest measured affinity reaching **72.8 μM**"；多巴胺："identified one binder with an affinity of **75.0 μM**"
-  - 迭代改良："After evaluating **16 redesigned variants** based on our top initial candidate, we achieved a **15.8-fold increase in affinity, reaching 971 nM**"；"After four rounds of iterative optimization, we obtained a SRO_26 variant with a **15.7-fold improvement**, achieving an affinity of **29.9 μM**"
-  - 金属/结构："the nickel binder NiM4 displayed 1:1 stoichiometry with a **Kd of 5.38 μM**"；晶体与设计："Cα RMSD of **0.97 Å / 0.791 Å / 0.446 Å**"，配体 "ligand RMSD of just **0.883 Å**"
-  - 自评："these results demonstrate the **high success rate** and general applicability of our physics-based generative approach"
+  - 血清素："six serotonin binders exhibited binding,"；多巴胺："identified one binder with an affinity of **75.0**"
+  - 迭代改良："After evaluating **16 redesigned variants** based"；"After four rounds of iterative optimization,"
+  - 金属/结构："the nickel binder NiM4 displayed 1:1"；晶体与设计："Cα RMSD of **0.97 Å / 0.791 Å / 0.446 Å**"，配体 "ligand RMSD of just **0.883 Å**"
+  - 自评："these results demonstrate the **high success**"
 - 演进链位置: **小分子结合/传感是他组当前最硬的瓶颈**（μM 级），因此他刻意用"高骨架多样性 × 大投测数（90+）"换取 ~20% 命中——与蛋白 binder 的 50–80% 形成鲜明对比。
 
 ### [C22] De novo design of metalloproteases for targeted amyloid-β cleavage
@@ -358,25 +358,25 @@
 - 实验验证: 表达纯化、**质谱裂解产物定量**（含"约 10% of the main product's abundance"的旁路切割）、时间降解曲线、动力学（Km、kcat、-log K_tx）、突变体分析、Aβ 降解。
 - **命中率原始数字（✅全文，部分）**：
   - "Notably, for DP221-S3, … a very minor peak—**representing approximately 10% of the main product's abundance**—was also observed, indicating an alternative cleavage site shifted by one residue toward the C-terminus."（特异性水平）
-  - "the **DP622-S2 Y91F** variant maintained a Km nearly identical to the original, resulting in a **twofold enhancement** in overall catalytic efficiency"
-  - 坦诚上限："**Although the turnover rates of our designs are lower than those of natural enzymes**, achieving **micromolar substrate affinity** demonstrates that our computational strategy can successfully encode robust recognition…"
+  - "the **DP622-S2 Y91F** variant maintained a Km nearly identical to the original,"
+  - 坦诚上限："**Although the turnover rates of our designs are**"
   - **未给"投测 N 个 → 命中 M 个"的漏斗计数**（列入未核实清单）。
 - 演进链位置: 酶设计从"静态 theozyme 匹配"（C08）走到"**生成模型直接共生成酶-底物复合物**"，瓶颈由"结合"转为"**精确到亚埃的催化几何 + 底物特异识别**"。
 
 ### [C23] Integrating Machine-learning and Ultra-high-throughput Screening for Enzyme spaces exploration (IMUSE)
-- 作者/单位/角色: Ke Y（易开）, Zhang Y, Fang M, Zhao J, Zhu H, Xu Z, **Cao L（末位通讯）**；单位"State Key Laboratory of Gene Expression, School of Life Sciences, Westlake University" + "Artificial Intelligence Drug Design Core Laboratory, Westlake Laboratory of Life Sciences and Biomedicine"（✅ bioRxiv 正文作者单位）。西湖组（2026-06-23 预印本）。
+- 作者/单位/角色: Ke Y（易开）, Zhang Y, Fang M, Zhao J, Zhu H, Xu Z, **Cao L（末位通讯）**；单位"State Key Laboratory of Gene Expression, School of Life Sciences, Westlake University" + "Artificial Intelligence Drug Design Core Laboratory,"（✅ bioRxiv 正文作者单位）。西湖组（2026-06-23 预印本）。
 - 期刊, 年: preprint | DOI: **10.64898/2026.06.23.733994** ✅（EPMC PPR1259026；正文 https://www.biorxiv.org/content/10.64898/2026.06.23.733994v1.full-text）
 - 设计对象: **de novo 锌水解酶**（库 Lib1 / Lib2，荧光底物 FDBz）。
-- 候选生成: "a physics-based generative approach for de novo enzyme design, centered on the precise configuration of **theozyme**"："the substrate **transition state calculated using quantum chemistry**" + **RIF generation** 扰动配位几何 + **Monte Carlo fragment assembly（ProBuilder）** 自下而上建骨架 + **ProteinMPNN / Rosetta** 序列设计。
-- 计算筛选器（✅原文）: "Structures featuring **all three coordination histidines** along with favorable transition state interactions were then selected …"；"Top candidate designs were selected based on **Rosetta energy metrics** and further assessed for **preorganization and structural stability using AlphaFold2**"；"Designs are evaluated by structure prediction (**for example, using AF2 and AF3**) and are considered an **in-silico success if the design and prediction align to a sufficient degree**."；最终"**AlphaFold3-based** features, relating to the compatibility of the protein and the substrate"进入 ML 活性预测器。
-- **QM 使用: ✅有**（"substrate transition state **calculated using quantum chemistry**"）。**MD 使用: ✗未见自算显式溶剂 MD**（无 MD/GROMACS/自由能微扰关键词）。
-- 实验验证方法与通量（这是他"廉价高通量代替昂贵单测"的核心答案）：**sdDE-FACS**——"we developed an ultra-high-throughput screening method by integrating **single-droplet double emulsion** with **fluorescence-activated cell sorting (sdDE-FACS)**"；"This approach enabled the screening of **millions of droplets within a single experimental run**"；"genes encoding the designed enzyme fragments were synthesized as **oligo libraries**"；"E. coli cells expressing unique enzyme sequence were **co-compartmentalized with zinc sulfate (ZnSO₄) and fluorogenic substrate (FDBz) within microfluidic droplets**"；检出下限"capable of detecting **<1 nM fluorescent probe (5 orders of magnitude)**"；"thousands of droplets per second"；**NGS** 计数每轮回收的唯一设计数。
+- 候选生成: "a physics-based generative approach for de novo enzyme design,"："the substrate **transition state calculated using quantum chemistry**" + **RIF generation** 扰动配位几何 + **Monte Carlo fragment assembly（ProBuilder）** 自下而上建骨架 + **ProteinMPNN / Rosetta** 序列设计。
+- 计算筛选器（✅原文）: "Structures featuring **all three coordination histidines** along with favorable transition state"；"Top candidate designs were selected based on **Rosetta energy metrics** and further assessed for"；"Designs are evaluated by structure prediction"；最终"**AlphaFold3-based** features, relating to the compatibility of the protein and the substrate"进入 ML 活性预测器。
+- **QM 使用: ✅有**（"substrate transition state **calculated using**"）。**MD 使用: ✗未见自算显式溶剂 MD**（无 MD/GROMACS/自由能微扰关键词）。
+- 实验验证方法与通量（这是他"廉价高通量代替昂贵单测"的核心答案）：**sdDE-FACS**——"we developed an ultra-high-throughput screening method by integrating **single-droplet double emulsion** with **fluorescence-activated cell sorting (sdDE-FACS)**"；"This approach enabled the screening of"；"genes encoding the designed enzyme fragments were"；"E. coli cells expressing unique enzyme sequence"；检出下限"capable of detecting **<1 nM fluorescent probe (5 orders of magnitude)**"；"thousands of droplets per second"；**NGS** 计数每轮回收的唯一设计数。
 - **命中率原始数字（✅原文）**：
-  - "Subsequently, we generated a second-generation library (Lib2) … **we synthesized and purified 96 candidates from Lib2 to identify 28 active designs (29.2%), with ~4.9-fold increase in the rate of active hits compared to that of the previous Lib1**" → **28/96 = 29.2%（Lib1 ≈ 6%）**
-  - "Strikingly, **16 of these 28 designs (~57%)** exhibited measurable binding affinity and catalytic activity toward the substrate … **which stands in contrast to the 40% success rate typically observed in Lib1**."
-  - 预测器富集："This model was able to **enrich the predictions ranked in the top fifty positions with enzymes with catalytic activity >2-fold better** than would be observed by randomly sampling Lib1, and also **surpassed baseline enzyme prediction methods (Clipzyme)**."
-  - 结构分布证据："structure distribution quantified here by **qTM** score between purified de novo zinc hydrolases from Lib1 (**N = 145**) and all clustered zinc protein families from PDB."
-  - 关键负面结论（判据失效）："Previous retrospective analysis of Lib1 dataset revealed that **none of the conventional metrics showed a significant correlation with experimental activity**, highlighting the difficulty of evaluating de novo enzymes that lack evolutionary metadata."
+  - "Subsequently, we generated a second-generation" → **28/96 = 29.2%（Lib1 ≈ 6%）**
+  - "Strikingly, **16 of these 28 designs (~57%)**"
+  - 预测器富集："This model was able to **enrich the predictions**"
+  - 结构分布证据："structure distribution quantified here by **qTM**"
+  - 关键负面结论（判据失效）："Previous retrospective analysis of Lib1 dataset"
 - 演进链位置: **筛选逻辑的第三次转向**：物理指标（ddG/pAE）对 de novo 酶无效 → 用**微流控液滴 + FACS 造数据** → 训练**合成适应度景观（activity predictor）**当作新的筛选器 → 用模型挑 96 个投测，命中率 6%→29%。
 
 ### [C24] Frontiers and challenges in the design of binders for intrinsically disordered proteins（综述，他本人的漏斗自述）
@@ -397,7 +397,7 @@
 - **综述**：The JAK-STAT pathway: from structural biology to cytokine engineering, Signal Transduct Target Ther 2024, DOI **10.1038/s41392-024-01934-w** ✅（PMID 39169031，含 Correction 10.1038/s41392-024-01975-1）。
 
 > **关于用户假设的两点更正（实证）**
-> 1. **"Robust and tunable immune activation by a designed membrane-bound receptor"（Nature 2021）在曹龙兴的论文记录中不存在**。核查：Europe PMC `TITLE:"Robust and tunable immune activation by a designed membrane-bound receptor"` → **hitCount = 0**；PubMed `designed membrane-bound receptor[Title]` → **count = 1**，即 PMID **39553285**（"Membrane-bound receptor for advanced glycation end products (RAGE) is a stable biomarker of low-quality sperm", Hum Reprod Open 2024，与曹无关）。曹 2021 年的设计论文实为 **C03（Nature 2021 biosensors）** 与 **C04（Cell Host Microbe 2021）**；免疫受体方向是他的 **C14（TGFβRII/CTLA-4/PD-L1 binder）与 C12（DNDB-CAR）**。
+> 1. **"Robust and tunable immune activation by a designed membrane-bound receptor"（Nature 2021）在曹龙兴的论文记录中不存在**。核查：Europe PMC `TITLE:"Robust and tunable immune activation by a designed membrane-bound receptor"` → **hitCount = 0**；PubMed `designed membrane-bound receptor[Title]` → **count = 1**，即 PMID **39553285**（"Membrane-bound receptor for advanced glycation end products (RAGE) is a stable biomarker of", Hum Reprod Open 2024，与曹无关）。曹 2021 年的设计论文实为 **C03（Nature 2021 biosensors）** 与 **C04（Cell Host Microbe 2021）**；免疫受体方向是他的 **C14（TGFβRII/CTLA-4/PD-L1 binder）与 C12（DNDB-CAR）**。
 > 2. **曹龙兴不是 RFdiffusion / ProteinMPNN 的作者**：Crossref 实取 **10.1038/s41586-023-06415-8**（RFdiffusion, 28 位作者）与 **10.1126/science.add2187**（ProteinMPNN）作者列表，均**无 Longxing Cao**。他用这两个工具（C17、C18），但不是其发明者。
 
 ---
@@ -429,13 +429,13 @@
 
 **阶段 1｜物理打分时代（2017–2021，博后）**
 - 起点：Rosetta 能量函数 + RIF docking + 预定义骨架库（C01、C02）。判据全是**热力学/几何近似量**（ddG、SC、埋藏 SASA、CMS），且因算力瓶颈不得不加"**Predictor**"这一廉价代理打分（10× 加速 + sigmoid 通过概率）——筛选逻辑的动机是"**算力/合成成本**"，不是"分数更准"。
-- 反馈学习：810,000 设计 + 240,000 单突变的数据集用于回校力场；"iterative design-build-test cycles … should lead to systematic improvements in the methodology and success rate"（C02 原文）。
+- 反馈学习：810,000 设计 + 240,000 单突变的数据集用于回校力场；"iterative design-build-test cycles … should lead to systematic improvements in the methodology and"（C02 原文）。
 - 同期通量底座：C05（10 万蛋白/次稳定性筛选）、C06（CFPS 高通量）。
 
 **阶段 2｜深度学生成进入 binder（2021–2023）**
 - 序列侧 **ProteinMPNN**、骨架侧 **RFdiffusion** 成为工具（注意：C02 论文主体仍是 Rosetta；RFdiffusion/ProteinMPNN 原作者列表中无曹）。
 - 他参与的"结构预测置信度"作为准入判据开始固化：**pAE_interaction、pLDDT**（C08 用 AF2 pLDDT>92；C11 用 pAE_int<10 + pLDDT≥85 + ddG<−40 + SAP<35 + 净电荷 −7）。
-- 逻辑变化原因：**物理分数与实验结果相关性弱**（C23 直言"none of the conventional metrics showed a significant correlation with experimental activity"），而神经网络置信度是"整链一致性"判据，能过滤掉力场失真的假阳性。
+- 逻辑变化原因：**物理分数与实验结果相关性弱**（C23 直言"none of the conventional metrics showed a"），而神经网络置信度是"整链一致性"判据，能过滤掉力场失真的假阳性。
 
 **阶段 3｜西湖独立 PI（2021– ）：三类新瓶颈与相应筛选改动**
 1. **"没有目标构象"的功能型设计（开关/传感/光/小分子）**：C03→C15→C17→C21。判据从"单态结构像不像"变成"**两个态都要自洽 + 态间自由能差符号正确**"（C03 的 ΔG_open−ΔG_CK 不等式；C17 的"无配体单体稳定 / 有配体高效组装"）。因此他必须回到物理建模 + 自研生成（Proteus/C23 的物理-based generative），而不是直接用为"单一稳态"优化的扩散模型。
@@ -450,7 +450,7 @@
 ## 四、MD/QM 角色判定
 
 **MD（分子动力学）——角色很轻，且主要用于"解释"而非"筛选"**
-- ✅**唯一明确的 MD 计算**：C08 Nature 2023 荧光素酶（曹为第 12 位作者，Baker/Houk/Stanford 合作）——"We used a combination of **density functional theory (DFT) calculations and molecular dynamics (MD) simulations**…"；"…plotted throughout **500 ns MD simulations**"；图题"**Free-energy profile of DTZ chemiluminescence and MD simulations** of proposed protein–intermediate complexes"；用于解释 **50 倍底物选择性**（bis-CTZ 的苄基碳破坏过渡态形状互补、削弱 Arg65 电荷稳定）。
+- ✅**唯一明确的 MD 计算**：C08 Nature 2023 荧光素酶（曹为第 12 位作者，Baker/Houk/Stanford 合作）——"We used a combination of **density functional theory (DFT) calculations and molecular dynamics**"；"…plotted throughout **500 ns MD simulations**"；图题"**Free-energy profile of DTZ chemiluminescence and MD simulations** of proposed"；用于解释 **50 倍底物选择性**（bis-CTZ 的苄基碳破坏过渡态形状互补、削弱 Arg65 电荷稳定）。
   → 性质：**机制解释 + 自由能剖面**，不是准入判据（7,648→3、46→2 的漏斗里没有 MD 关卡）。
 - ✗**未见**他在设计漏斗中使用显式溶剂 MD 预筛、**MM/PBSA、MM/GBSA、FEP/TI、metadynamics、umbrella sampling**：对 C01、C02、C04、C05、C06、C10、C11、C13、C14、C18、C19、C21、C22、C23、ncbipmc_8074680 全部正文做了 `molecular dynamics|MD simulat|GROMACS|OpenMM|AMBER|umbrella|metadynam|MM/PBSA|MM-GBSA|free energy perturbation|thermodynamic integration|explicit solvent` 扫描，除 C08 外**仅命中参考文献条目**（C21 里的 "…guided by molecular dynamics" 是他人工作的引文）。
 - ⚠️他 2021–2026 的西湖论文中，"free energy"一词只以**概念/不等式**出现（C03 的 ΔG 热力学耦合；C14 的 "reducing solvation-free energy" 讨论），非数值模拟。
@@ -458,7 +458,7 @@
 
 **QM（量子化学）——只在"酶/化学步"出现**
 - ✅**C08**（DFT：阴离子态是 ³O₂ 活化的电子源；与 MD 联合）——这是"生色团/化学发光机理"类 QM。
-- ✅**C23 IMUSE**："the substrate **transition state calculated using quantum chemistry**" → theozyme 构建的第一步；即 QM 给出过渡态几何，再由 RIF/MC/ProteinMPNN 装配蛋白。
+- ✅**C23 IMUSE**："the substrate **transition state calculated**" → theozyme 构建的第一步；即 QM 给出过渡态几何，再由 RIF/MC/ProteinMPNN 装配蛋白。
 - ✅**C21**：ligand conformers"refined through **quantum optimization**" → 配体构象系综由 QM 优化，再喂给 RIFGen。
 - ⚠️**C22 金属蛋白酶**：催化依赖过渡态稳定，但正文未出现 QM 计算描述（仅引用无催化肽键水解速率/过渡态亲和力的文献）。
 - ✗**未见**他为任何 **binder/组装体/光开关**工作做 DFT/TD-DFT（C15 的 AzoF 光异构化是否自建激发态计算无法核实，列入 §五）。
@@ -474,8 +474,10 @@
 4. **⛔ 曹龙兴博士导师**：仅由"博士期论文末位通讯均为 He Y + 单位为 SIBCB"推断为何永盛组；**未见官方"师从"表述**。
 5. **⚠️ Nature 2022（C02）各靶位点的确切 binder 数（Extended Data Table 1）**：表格数值未进入 PMC XML（正文只给 "hundreds vs fewer than 10"），故各靶的分子/分母未能逐条列出；**"送测序列数"**也只有间接表述（"at least ten times as many binders were computationally designed than were ordered"）。
 6. **⚠️ Nat Commun 2025（C14）的 TGFβRII 集投测数与 DeepAccNet 截断值**：正文原句在 XML 中被截（"…AccNet with a mean pLDDT cutoff of 0."），数字不完整；TGFβRII 的"投 N 中 M"未能提取。
-7. **⚠️ IMUSE（C23）Lib1 的绝对投测数与"40% success rate"的确切分母**：Lib1 命中率由"28/96=29.2% 是 ~4.9× 提升"反推 ≈6%；"16/28 (~57%) … in contrast to the 40% success rate typically observed in Lib1"这句的 40% 所指（是"活度→可测动力学"的比例）在正文上下文推断得出，未获表格级确认。
+7. **⚠️ IMUSE（C23）Lib1 的绝对投测数与"40% success rate"的确切分母**：Lib1 命中率由"28/96=29.2% 是 ~4.9× 提升"反推 ≈6%；"16/28 (~57%) … in contrast to the 40% success"这句的 40% 所指（是"活度→可测动力学"的比例）在正文上下文推断得出，未获表格级确认。
 8. **⛔ 曹龙兴是否有"跨膜/膜蛋白从头设计"论文**：Europe PMC 作者检索 `AUTH:"Longxing Cao" AND TITLE:"transmembrane"` → **hitCount = 0**；`TITLE:"nanomaterial"` → **0**。→ **未发现**。他参与的"大蛋白"方向实际是**重复蛋白高阶寡聚体（C10）与 120 aa 凹面支架（C14）**，跨膜蛋白设计公开归属为**卢培龙组/Boon 等**，非曹。
 9. **⛔ "周如鸿称曹龙兴（或该方向）设计成功率 90%+"的原话出处**：本次仅在曹的文献侧核实——其 24 份全文/预印本中**不存在 90%+ 的成功率表述**（最高为 13/16 = 81.3%）。周如鸿侧的核查见同目录 `zhou.md` 第四节（结论一致：未找到 90%+ 的论文出处）。**尚缺**：该讲座/发言的原始记录（未发表口径不可核实）。
 10. **⚠️ HalluDesign（C19）与 physics-based（C21）尚无同行评审版本**，其 50–81% 命中率为**作者自述的预印本数字**，未经独立复现；引用时应标注为 preprint。
 11. **⚠️ Pinal 自然语言设计预印本（PPR890188）**中曹龙兴只是众多作者之一（非通讯、非共同一作），不应作为"他的方法"计入。
+
+> **引用预算截短（2026-11-08，公开仓库口径）**：本底稿有 49 条逐字引句被截短（来源编号：B06; C02、B10; C08、C03、C16、C19、C20、C21、C22、C23、C25、未归属；许可类别：ALL_RIGHTS_RESERVED、CC_BY_NC、CC_BY_ND、TEXT_MINING_ONLY、UNKNOWN、未归属），按 `deliverables/protein_design_license_audit.csv` 的逐份许可判定，单条引句截到 ≤100 字符；其中 40 条截短后仍**逐字命中同一份来源全文**，其余 9 条为**原句的前缀**（本地无全文或原句是我们自己的转写，只减不增、不新增第三方内容）。逐条改动账见 `deliverables/quote_budget_notes_ledger.csv`。

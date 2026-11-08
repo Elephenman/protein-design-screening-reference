@@ -3,7 +3,8 @@
 一句话：把"从头设计蛋白 / 结合体筛选"这条链路上**别人实际怎么做的、用了哪些判据、阈值原文是多少、
 花多少钱和时间、在哪里翻车**，做成一份每个数字都能查到原文句子的可复现参考库。
 
-建库时间 2026-10-16 至 2026-10-21；工作流模板 v2 与多轮迭代协议 2026-11-07 改版（同日核实 RFD4-Proteina）。
+建库时间 2026-10-16 至 2026-10-21；工作流模板 v2 与多轮迭代协议 2026-11-07 改版（同日核实 RFD4-Proteina）；
+**2026-11-08 起本仓库公开**，第三方原文一律不入库（见下面"公开仓库口径"一节）。
 当前状态：152 行 × 27 列文献表，每行背后一张十节精读卡，全量门禁 `152/152 PASS`（退出码 0）。
 
 ## 三分钟上手
@@ -29,19 +30,55 @@
 
 | 包 | 内容 | 用途 |
 |---|---|---|
-| `..._full_<date>.zip` | git 可见的全部 479 个文件（含全文缓存与抓取日志）+ `LICENSE`/`NOTICE`/`CITATION.cff` | 换机器重建；能原样复跑逐字引句门禁 |
-| `..._ai_<date>.zip` | 239 个文件：卡片 + 总表 + 台账 + 模板 + 迭代协议 + 脚本 + 调研底稿 + 许可审计，**不含** `fulltext/` 与 `data/interim/`，另附 `ai_ingest/` 分层 digest | 喂给别的 AI 当资料库 |
+| `..._full_<date>.zip` | git 可见的全部文件（作者原创部分：卡片 + 总表 + 台账 + 模板 + 迭代协议 + 脚本 + 调研底稿 + 许可审计与清单）+ `LICENSE`/`NOTICE`/`CITATION.cff` | 换机器重建工作树；**不含任何第三方原文**（复核路径见下面的清单） |
+| `..._ai_<date>.zip` | AI 投喂子集：卡片 + 总表 + 台账 + 模板 + 迭代协议 + 脚本 + 调研底稿，**不含** `fulltext/` 与 `data/interim/`，另附 `ai_ingest/` 分层 digest | 喂给别的 AI 当资料库 |
+
+**两个包都不含第三方论文全文**：这是公开仓库口径（见下面"公开仓库口径"）。需要某一份原文时，
+按 `deliverables/fulltext_manifest.csv` 里的路径与"重取方式"取回，并用表里的 sha256 校验。
 
 `ai_ingest/` 的分层：`tier0_index.md`（是什么+三条禁令）→ `tier1_core.md`（README+两份工作流+模板+前沿核验+发布说明，≈5.5 万 token）
 → `tier2_cards.md`（153 个卡文件 / 152 行，≈130 万 token，**按编号取单张**，别整份喂）→ `tier3_ledgers/`（CSV，结构化问题走这里）。
-喂法与 token 估算方法写在 `ai_ingest/HOW_TO_FEED.md`。AI 包不含论文原文，所以卡里的引句在该包内不可复核，
-只能查到声明的底稿路径与哈希——需要原文复核时必须用完整包或本仓库。
+喂法与 token 估算方法写在 `ai_ingest/HOW_TO_FEED.md`。包内不含论文原文，所以卡里的引句在该包内不可复核，
+只能查到声明的底稿路径与哈希——需要原文复核时按 `fulltext_manifest.csv` 重取，或用本仓库的本地工作树。
 
 最新一次发布：Release [`v1-template-and-bundles`](https://github.com/Elephenman/protein-design-screening-reference/releases/tag/v1-template-and-bundles)。
 两个资产在上传后都已**从服务端重新下载并逐字节比对 sha256**，与本地一致；哈希值见 Release 资产页
 （GitHub API 的 `digest` 字段）与本地生成的 `deliverables/bundles/SHA256SUMS.txt`
 （该目录被 gitignore，**不进仓库也不进包**——把发布物的哈希写进被发布物本身会自指）。
-**仓库当前仍是私有**，是否转公开由作者决定。
+**本仓库自 2026-11-08 起为公开仓库**。
+
+## 公开仓库口径（2026-11-08 起）
+
+公开 = 公开再分发，所以按"公开仓库 = 作者原创内容"这条线处理，规则写死在 `.gitignore` 与门禁里：
+
+1. **第三方原文一律不入库**。全库第三方原文（PMC/出版商全文抽取、逐句转储、题录缓存、预印本正文）
+   都不被 git 跟踪；它们仍留在本机磁盘，只是不进仓库、不进任何发布包。
+   逐份登记在 `deliverables/fulltext_manifest.csv`（224 份：路径、字节数、sha256、许可类别、
+   是否随仓库分发、重取方式），需要哪一份按表取回并校验哈希。
+2. **逐篇许可判定**：87 行做过许可审计（61 行允许含商用再分发、26 行不允许），报告见
+   `deliverables/protein_design_license_audit.md`，机器版同目录 `.csv`。审计只判"能不能再分发"，不判内容对错。
+3. **卡与底稿里的逐字引句按"引用预算"截短**：许可受限来源（CC BY-NC / ND / NC-ND / 出版商条款 /
+   仅文本挖掘 / 仅研究复用 / 保留所有权利）以及**许可未审计**的行，引句截到引用级——
+   单条 ≤100 字符、同一来源行在同卡内合计 ≤600 字符；截短后仍逐字命中同一份底稿，门禁不放宽。
+   可再分发的行（CC BY / CC0）保持原样，并在卡里履行署名。
+   实测：卡片 7,125 条引句里受限来源的 2,180 条、257,368 字符压到 93,663 字符（−63.6%，截短 1,804 条，涉及 43 张卡）；
+   调研底稿与迭代台账 618 条引句里受限来源的 157 条、21,026 字符压到 13,334 字符（−36.6%，截短 86 条，
+   另有 22 条为保住卡片核验链而保留原句）；未归属引句 54 条、4,746 → 4,397 字符。
+   截不短的两类例外都已登记原因：**截断点会落在 markdown 强调段/长词中间**（脚本宁可不截也不产生半截引句），
+   以及**底稿引句是我们自己的转写**（大小写或连字符与原文不一致，逐字自检无法通过）——这类只保证"仍是原句前缀"。
+   逐条改动账：`deliverables/quote_budget_ledger.csv`（卡）、`deliverables/quote_budget_summary.csv`、
+   `deliverables/quote_budget_notes_ledger.csv`（底稿）。
+4. **门禁三态**：`verify_literature_cards.py` 在有本地底稿时判 `PASS_LOCAL`，
+   在公开克隆（底稿不在场）时判 `WITHHELD`（不是失败，是"按公开口径不随包分发所以本机无法复核"），
+   真正的错误才判 `FAIL`。本地工作树当前是 `PASS_LOCAL 152/152 · WITHHELD 0 · FAIL 0`。
+5. **第三方论文全文再分发一律不做**（商业版同样不做）：理由是义务履行成本与客户侧一致性，
+   不是许可允许与否的问题。
+6. **公开树再体检**：`scripts/audit_public_tree.py` 判两件事——
+   ① 清单里标"不随仓库分发"的 220 份第三方原文，**0 份**出现在 git 跟踪集里；
+   ② 许可受限来源的逐字引句，单条不得超过 400 字符（实测最长 344）。
+   同时打印可写进本节的口径统计：第三方引句 13,553 处 / 1,250,761 字符，
+   其中许可受限 4,428 处 / 197,368 字符，可再分发来源 9,125 处未设限（署名前提下可再分发）。
+   `--selftest` 注入三种破坏各红一条。
 
 ## 目录
 
@@ -50,14 +87,16 @@
 | `data/protein_design_literature.csv` | 文献总表：152 行 × 27 列（按 `人物组` 列首组计：通用方法学 67 / Baker 组 44 / 曹龙兴组 21 / 周如鸿组 16 / 口径对照与独立复核 4；多组重叠行有 13 行，故与"该组出现次数"口径不同） |
 | `data/literature_cards/*.md` | 每行一张精读卡（共 153 个卡文件，`B28` 一行有两张同篇卡，见"已知缺陷"），十节固定：0 元信息 · 1 解决什么 · 2 难点与应对 · 3 方法工作流 · 4 数字台账 · 5 作者说了什么 · 6 我们怎么推断 · 7 局限 · 8 能不能迁移 · 9 溯源（含 14 键 CSV 回填块） |
 | `data/literature_cards/AGENT_RULES.md` | 写卡规程（引句必须逐字、文件名 slug、非论文行写"取证卡"的口径） |
-| `data/literature_cards/fulltext/` | 本地全文抽取：41 行用本目录（另有 39 行用 `data/interim/baker_lit/ft/`、13 行用 `data/interim/claim_lit/`，6 行跨两处，合计覆盖 87 行）；`_quarantine/` 是身份体检判定"挂错行"的 9 份 + 日志 |
+| `data/literature_cards/fulltext/` | **不在仓库内**（`.gitignore` 排除，仅存于本机）：本地全文抽取，41 行用本目录（另有 39 行用 `data/interim/baker_lit/ft/`、13 行用 `data/interim/claim_lit/`，6 行跨两处，合计覆盖 87 行）；`_quarantine/` 是身份体检判定"挂错行"的 9 份 + 日志。逐份登记与重取方式见 `deliverables/fulltext_manifest.csv` |
 | `data/literature_cards/run.md` | 过程账：每一步的脚本、参数、实测输出、踩过的坑与更正 |
-| `data/interim/` | 抓取日志、回写前的 CSV 备份、2000 处字段改动账、本轮表级改动账（157 条）与许可抓取缓存 |
+| `data/interim/` | 抓取日志、回写前的 CSV 备份、2000 处字段改动账、本轮表级改动账（157 条）与许可抓取缓存（第三方原文部分同样不入库） |
+| `deliverables/fulltext_manifest.csv` | 第三方原文清单（224 份）：路径、字节数、sha256、许可类别、是否随仓库分发、重取方式。**公开仓库里复核原文的唯一入口** |
+| `deliverables/quote_budget_ledger.csv` / `quote_budget_summary.csv` / `quote_budget_notes_ledger.csv` | 引用预算改动账：卡与底稿里每条引句截前/截后字符数、来源编号、许可类别、是否截短与保留原因 |
 | `LICENSE` / `NOTICE` / `CITATION.cff` | 授权（只覆盖作者原创部分）／第三方声明与许可分布／引用信息。**两个迁移包都必须带上它们**，`build_bundles.py` 会检查，缺一个就红 |
-| `sources/*.md` | 四份调研底稿（Baker 组、周如鸿组、曹龙兴组、成本与判据经济学） |
+| `sources/*.md` | 六份调研底稿（Baker 组、曹龙兴组、周如鸿组、成本与判据经济学、90% 声明可查证性审计、功能判定工作流） |
 | `scripts/` | 建库、核验、抓取、回写、台账生成的全部脚本 |
 | `deliverables/` | 工作流模板 v2（主模板+三分支）+ **多轮迭代协议** + 证据工作流文档 + **审核视图 `protein_design_workflow_visual.html`**（把 87 条默认阈值摊开、可逐行标记并导出审核意见；由 `scripts/build_workflow_visual.py` 从模板与台账编译，页面无手打数字，`--check` 的期望值从门禁现算）+ 机器生成的证据台账 + 前沿方法核验清单（S0–S22） |
-| `data/interim/rfd4_2026-11-07/` | RFD4-Proteina 取证本：两份官方 README、预印本正文抽取 `RFD4_paper_text.txt`（283 KB，逐字引句的唯一比对底稿）、事实台账 `rfd4_paper_findings.md`、`PROVENANCE.md`（四个文件的 sha256 + 重取 URL）。**54.8 MB 原 PDF 不入 git**，按 PROVENANCE 里的 URL 重取并校验哈希即可复现 |
+| `data/interim/rfd4_2026-11-07/` | RFD4-Proteina 取证本：两份官方 README、事实台账 `rfd4_paper_findings.md`、`PROVENANCE.md`（sha256 + 重取 URL）。**预印本正文抽取 `RFD4_paper_text.txt`（283 KB）与 54.8 MB 原 PDF 均不入库**（第三方预印本正文），按 PROVENANCE 里的 URL 重取并校验哈希即可复现 |
 | `deliverables/bundles/` | 迁移包与 AI 投喂包（由 `scripts/build_bundles.py` 生成，不进 git，发布走 GitHub Release） |
 
 ## 门禁（这就是"可复现"的意思）
@@ -74,11 +113,19 @@ python scripts/build_workflow_evidence.py --check   # 台账三个产物必须�
 python scripts/build_workflow_visual.py --check     # 页面无手打数字：阈值/引用/S 条目数从门禁现算
 python scripts/fix_table_fields.py --check        # 表级改动账：账里新值==当前表，受管列每处改动都有账
 python scripts/audit_source_licenses.py --check    # 第三方全文缓存的许可分类：行数与逐行类别与重算一致
+python scripts/build_fulltext_manifest.py --check  # 第三方原文清单：224 份的路径/字节/sha256/许可类别与磁盘一致
+python scripts/apply_quote_budget.py --check       # 卡片引用预算：改动账与卡现状一致
+python scripts/apply_note_quote_budget.py --check  # 底稿引用预算：改动账与底稿现状一致，卡核验链未被破坏
+python scripts/audit_public_tree.py            # 公开树体检：第三方原文 0 处被跟踪 + 受限引句单条 ≤400 字符
+python scripts/audit_public_tree.py --selftest  # 三种破坏必须各红一条
 ```
 
 门禁判的是五件事：每行有且仅有一张卡；十节标题齐全且顺序固定；工作流表 ≥3 步、难点 ≥2 条；
 **卡里每一条纯英文直引号片段必须在该卡声明的那一份底稿里逐字命中**；证据级别不许造假
 （没有本地全文却写"全文级"直接 FAIL）。它不判文献内容对不对——那是卡 §7 与 `report.md` §八 的活。
+
+在**公开克隆**里（没有本机第三方底稿），第一条门禁改判三态：
+`PASS_LOCAL`（本机可逐字核验）/ `WITHHELD`（底稿按公开口径不随包分发，本机无法复核）/ `FAIL`（真错误）。
 
 ## 两个"证据级别"口径，不许混用
 
@@ -132,9 +179,16 @@ python scripts/audit_source_licenses.py --check    # 第三方全文缓存的许
   Nature Methods 2025）。门禁规则是"每行 ≥1 张"，所以 152/152 仍 PASS，但卡文件数是 **153** 而不是 152。
   两张都保留（删除会切断已完成的引句核验链），**引用一律以台账 `精读卡文件` 列指向的那张为准**。过程账见 `run.md` §10.5。
 - 73 行的卡按摘要级/二级来源/未获正文写（卡证据级别 DEGRADED），阈值与步骤细节不许补，卡 §2 已明写"未获正文无法核验"。
-- `data/literature_cards/fulltext/` 与 `data/interim/` 缓存的是各出版商/PMC 的开放获取全文抽取，
-  **仅用于逐字引句核验**。若要公开发布，建议把这两个目录移出仓库（卡里已保留 SHA/身份块指针，核验链不断）；
-  逐篇第三方许可与商业边界见 `deliverables/protein_design_license_audit.md`。
+- **第三方原文已移出仓库**（2026-11-08）：`data/literature_cards/fulltext/`、`data/interim/` 里的出版商/PMC 全文抽取、
+  逐句转储、题录缓存与 RFD4 预印本正文一律不被 git 跟踪，也不出现在任何发布包里；
+  逐份许可与重取方式见 `deliverables/fulltext_manifest.csv`（224 份）与
+  `deliverables/protein_design_license_audit.md`（87 行的逐篇许可判定）。
+  卡里保留了 sha256 与身份块指针，核验链不断——缺底稿时门禁判 `WITHHELD` 而不是 `FAIL`。
+- **引句按引用预算截短**（2026-11-08）：许可受限来源与许可未审计行的逐字引句被压到引用级
+  （单条 ≤100 字符、同一来源行合计 ≤600 字符），截短后仍逐字命中同一份底稿，门禁不放宽；
+  可再分发行（CC BY / CC0）保持原样并履行署名。改动账见
+  `deliverables/quote_budget_ledger.csv` 与 `deliverables/quote_budget_notes_ledger.csv`。
+  底稿里有 21 条引句为保住卡片核验链而保留原句，账上逐条写明原因。
 
 ## 与"天然 UAA 合成酶发现"那条主线的关系
 

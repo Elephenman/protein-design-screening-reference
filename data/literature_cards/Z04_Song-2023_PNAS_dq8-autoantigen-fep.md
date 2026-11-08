@@ -26,34 +26,34 @@ PNAS 2023, 120(16):e2214430120 · DOI 10.1073/pnas.2214430120 · PMID 37040399 �
 
 ## 2. 遇到的难点，以及遇到问题时他们做了什么（作者自述，不是我们的推测）
 
-1. **主矛盾：点突变的 FEP 命中率极低，且这是重复发生的事**。原句："Fig. 2 B reveals that almost all our initial point mutations resulted in a loss of binding affinity; this remains on par with our previous works where only a low rate of the tested mutations turns out to be favorable."
-   **应对**：不是去调力场或加采样，而是**换候选类型**——"Given the low success rate of point mutations, we next turned to double mutants and swap mutations to find enhanced binding affinity mutations."，并把前作验证过的换位策略直接搬过来："In our previous investigation of HLA antigen binding, we found that residue-swapping mutations, such as swapping antigen residues p5 and p6, successfully identified favorable mutations"，初轮换位集就是穷举出来的："Initial residue-swapping mutations included p3-p4, p3-p7, p4-p5, p4-p7, p5-p6, and p3′-p4 epitope position mutations."
+1. **主矛盾：点突变的 FEP 命中率极低，且这是重复发生的事**。原句："Fig. 2 B reveals that almost all our initial point mutations resulted in a loss of binding"
+   **应对**：不是去调力场或加采样，而是**换候选类型**——"Given the low success rate of point mutations,"，并把前作验证过的换位策略直接搬过来："In our previous investigation of HLA antigen binding, we found that residue-swapping mutations,"，初轮换位集就是穷举出来的："Initial residue-swapping mutations included p3-p4, p3-p7, p4-p5, p4-p7, p5-p6,"
    **代价**：突变数量（也就是算力）翻倍以上；正文没有给点/双/换位各自的命中分数（分母在未取到的 SI 表 S1/S2），因此"命中率低"是作者的定性陈述，不是一个可引用的数字。
-2. **自己的直觉是错的，而且错在关键 motif 上**。他们本以为 p6-p7 双酪氨酸是结合必需的："Our intuition led us to believe that this Tyr6-Tyr7 motif was largely stable"（原文此处紧跟一个带引号的短语，本卡不跨引），实测相反："Surprisingly, the p5-p6 swap mutation of Val5->Tyr and Tyr6->Val (V5Y_Y6V) was determined to be robustly favorable."、"However, numerous double mutants of Tyr6-Tyr7 quickly confirmed that this motif was improvable upon mutation."
-   **应对**：接受计算结论并把它转成可检验的机理假设——先分解（"From decomposition of the favorable Val5Tyr6Tyr7 double mutants, it is apparent that gains in binding affinity from Tyr6 mutations drive the enhanced binding affinity interactions."），再对 p6 做**系统化突变扫描**："Lastly, we sought to explore the mutation space of Tyr6 more rigorously by mutating Tyr6 to 13 different residues individually"；最后用**frustration 分析**给"为什么能改"补一个独立指标："From a targeted frustration analysis ( 46 , 47 ) ( Methods ), we found that the native p6 anchor tyrosine is highly frustrated, with a frustration index of 1.5."
+2. **自己的直觉是错的，而且错在关键 motif 上**。他们本以为 p6-p7 双酪氨酸是结合必需的："Our intuition led us to believe that this Tyr6-Tyr7 motif was largely stable"（原文此处紧跟一个带引号的短语，本卡不跨引），实测相反："Surprisingly, the p5-p6 swap mutation of Val5->Tyr and Tyr6->Val (V5Y_Y6V) was determined to be"、"However, numerous double mutants of Tyr6-Tyr7 quickly confirmed that this motif was improvable upon"
+   **应对**：接受计算结论并把它转成可检验的机理假设——先分解（"From decomposition of the favorable Val5Tyr6Tyr7"），再对 p6 做**系统化突变扫描**："Lastly, we sought to explore the mutation space"；最后用**frustration 分析**给"为什么能改"补一个独立指标："From a targeted frustration analysis ( 46 ,"
    **代价**：换位/双突变的"为什么好"最后落在体积相关（R²=0.37）与一个自算的 frustration index 上，作者自己承认疏水性无相关（R²=0.02），机理并未闭合。
-3. **审稿人要求扩表，计算量被迫追加**。"SI Appendix , Table S1 shows a list of all computed mutations and binding affinities, including comprehensive categorical mutations for all anchor residues and residues of high contact area (position 7), which we added based on reviewer's constructive feedback"，且穷举口径写得很清楚："Categorical mutations included either residues of the same charge (negatively charged aspartic acid residues p1 and p9 mutated to glutamic acid) or noncharged residues (residues p4, p6, and p7 mutated to the set of A, C, F, G, I, L, M, N, Q, S, T, V, W, Y, absent proline due to backbone mutational ambiguities)."
+3. **审稿人要求扩表，计算量被迫追加**。"SI Appendix , Table S1 shows a list of all"，且穷举口径写得很清楚："Categorical mutations included either residues of"
    **应对**：照做（锚点 p1/p4/p6/p9 + 高接触面 p7 全类别突变），并明确排除 Pro 的理由（主链突变歧义）。
    **代价**：这一轮"补全表"是纯成本，没有提高命中率；也说明正文里的"低命中率"部分是审稿之后补齐的样本，不是原计划的对照设计。
-4. **误差棒与零重叠 ⇒ 结论性一致不敢讲**。实验 4 条趋势相符的突变体，作者自己下了限制："For instance, mutants M2 (Y6V_Y7V), M3 (Y6Q_Y7Q), M4 (Y6C), and M5 (Y6V) agree in average pHLA-TCR affinity trend to CD4 T cell proliferation (enhanced or reduced relative to X-idiotype), but their predicted 95% CIs overlap with zero affinity improvement, contesting a statement of conclusive agreement."
-   **应对**：①统一口径 "All error bars in this work are 95% CI."；②对预测与实验分歧最大的两条给出可检验的归因假设："The M1 (V5Y_Y6V) swap mutant and M6 (Y6I) point mutant diverge the most between modeling and experiment." + "posit that we may not have captured important long-time regime pHLA-TCR conformational changes for these systems"；③把整体预测能力降格成"够用就行"："This correlation value, though low, agrees with success rates of our previous pHLA-TCR affinity maturation studies ( 15 , 27 , 28 , 30 ) and is sufficient to identify enhanced and reduced binders in experiment."
+4. **误差棒与零重叠 ⇒ 结论性一致不敢讲**。实验 4 条趋势相符的突变体，作者自己下了限制："For instance, mutants M2 (Y6V_Y7V), M3 (Y6Q_Y7Q),"
+   **应对**：①统一口径 "All error bars in this work are 95% CI."；②对预测与实验分歧最大的两条给出可检验的归因假设："The M1 (V5Y_Y6V) swap mutant and M6 (Y6I) point" + "posit that we may not have captured important"；③把整体预测能力降格成"够用就行"："This correlation value, though low,"
    **代价**：**这是本篇最硬的一条限制**——ΔΔG 的置信区间跨过 0，意味着"FEP 判增强"在统计上并未成立；他们靠"方向对 + 实验都阳性"来支撑结论，而不是靠区间分离。
-5. **阴性对照意外阳性，没有解释，只有猜测**。"The M7 (Y6R_Y7R) mutant was included in experiments to serve as a negative control, but unexpectedly achieved similar CD4 T cell proliferation and CD69 activation as the native X-Idiotype."
-   **应对**：先用结构事实给一个可能机制："Given the absence of charged residues in the p6 pocket of DQ8, we speculate that this mutant must undergo a register shift to bind and elicit a T cell response."（他们此前工作已知 DQ8 可用不同 register 结合同一抗原）。**本文未解决**：没有做 register 交换的验证实验，负对照失效就留在讨论里。
-6. **"活化"与"增殖"两个读数不一致**。"X-Id mutants M3, M5, and M6 show reduced proliferation capacity as compared to the X-idiotype peptide." 与 "Despite differences in proliferation, all CD4 T cell populations were found to be functionally activated as measured by the upregulation of surface CD69 activation marker when compared with unstimulated cells"。
-   **应对**：不强行归一到"亲和力决定功能"，而是承认这条链条本身不闭合："Importantly, the HLA-TCR interaction leading to T cell activation is complex ( 39 - 41 ), and though correlations are observed ( 42 ), higher TCR binding affinity does not necessarily correspond with higher T cell functional activity."、"However, affinity maturation does not perfectly correlate with T cell activity ( 51 ) and in some cases can lead to off-target effects ( 52 )."；再引一个**替代优化目标**（catch bond）来安放这些数据："For this technique, pHLA-TCR systems with high CD69 activation but low affinity are optimized by adding polar and charged residues that form transient hydrogen bonds to enhance the pHLA-TCR catch bond interaction."
+5. **阴性对照意外阳性，没有解释，只有猜测**。"The M7 (Y6R_Y7R) mutant was"
+   **应对**：先用结构事实给一个可能机制："Given the absence of charged"（他们此前工作已知 DQ8 可用不同 register 结合同一抗原）。**本文未解决**：没有做 register 交换的验证实验，负对照失效就留在讨论里。
+6. **"活化"与"增殖"两个读数不一致**。"X-Id mutants M3, M5, and M6 show reduced" 与 "Despite differences in proliferation, all CD4 T cell populations were found to be functionally activated as measured by the upregulation of surface CD69 activation marker when compared with unstimulated cells"。
+   **应对**：不强行归一到"亲和力决定功能"，而是承认这条链条本身不闭合："Importantly, the HLA-TCR"、"However, affinity maturation"；再引一个**替代优化目标**（catch bond）来安放这些数据："For this technique, pHLA-TCR"
    **代价**：目标函数从"亲和力最大化"变成"按治疗意图挑方向"（HLA-blocker 型反而要 TCR 结合弱："In this case, the X-idiotype mutants V5Y_Y6V and Y6Q_Y7Q are superior due to their enhanced binding affinity for HLA and reduced binding affinity for TCR."），命中率因此无法定义成单一指标。
-7. **FEP 前置结构的采样极限，作者主动写明**。"Notably, we do not run extensive MD simulations ( ≈ μ s ) to account for any structural changes that could occur upon mutation ( 48 )."，并给出不做的理由："Single point mutations in proteins are known to cause sizeable changes in structure ( 49 , 50 ); however, given that the antigen is deeply buried in the HLA binding pocket, drastic changes are not anticipated."
+7. **FEP 前置结构的采样极限，作者主动写明**。"Notably, we do not run extensive MD simulations ( ≈ μ s ) to account for any structural changes that could occur upon mutation ( 48 )."，并给出不做的理由："Single point mutations in"
    **应对**：改在**同一结构上做大量突变、再用长窗口多副本复算有希望的**（见第 3 节 C 段），把算力花在自由能收敛而不是构象搜索。
    **代价**：位点特异的结构重塑风险被假设排除；这与第 2.4 条"没抓到长时间尺度构象变化"是同一处漏洞的两面。
-8. **建模侧的取舍与人工介入**：只保留 α1/β1（"After the initial MD simulations, only the HLA-α1 and HLA-β1 domains were modeled; α2 and β2 domains were excluded due to their distance from the antigen."）；TCR 靠 Modeller 以 6DFX 为模板搭（"The TCR homology structure template was taken from PDB ID: 6DFX ( 8 )."）；抗原是把 PDB 5UJT 里的天然 mimotope 用 VMD 原地改成 X-idiotype 序列（"The HLA-X-idiotype antigen system was built as described previously ( 15 ) from PDB ID: 5UJT."）。**应对**：用 500 ns MD 的 RMSD 稳定性来给建模结果"发合格证"（"Briefly, this antigen-bound complex structure was selected from 500 ns molecular dynamics (MD) simulations due to its stability based on RMSD analysis"；判据句见第 3 节）。**代价**：三级复合物的界面完全来自同源建模 + 短均衡，没有任何界面结构实验验证（cryoEM/晶体未做，本文无）。
+8. **建模侧的取舍与人工介入**：只保留 α1/β1（"After the initial MD simulations, only the HLA-α1 and HLA-β1 domains were modeled; α2 and β2 domains were excluded due to their distance from the antigen."）；TCR 靠 Modeller 以 6DFX 为模板搭（"The TCR homology structure"）；抗原是把 PDB 5UJT 里的天然 mimotope 用 VMD 原地改成 X-idiotype 序列（"The HLA-X-idiotype antigen"）。**应对**：用 500 ns MD 的 RMSD 稳定性来给建模结果"发合格证"（"Briefly, this antigen-bound"；判据句见第 3 节）。**代价**：三级复合物的界面完全来自同源建模 + 短均衡，没有任何界面结构实验验证（cryoEM/晶体未做，本文无）。
 
 ## 3. 方法与工作流程（可复现顺序；每步：输入 → 操作 → 判据 → 输出规模）
 
 ### 用了哪些方法（工具箱，以及为什么选它）
 
 - **结构准备**：VMD 定点改序列建模（HLA-DQ8–X-idiotype，源 PDB 5UJT）+ Modeller 同源建模 TCR 可变域（模板 PDB 6DFX）；NAMD2 + CHARMM36 + TIP3P + 100 mM NaCl，310 K、2 fs。
-- **准入判据（第一道）**：**MD 稳定性**——RMSD 达标才拿来算自由能。原句："After MD simulation, the final structure was selected based on rmsd analysis showing structural stability (<0.5 nm) for 300+ ns."
+- **准入判据（第一道）**：**MD 稳定性**——RMSD 达标才拿来算自由能。原句："After MD simulation, the final"
 - **打分器（核心）**：**FEP（soft-core 势能）**，结合态/游离态两态分别算 ΔG，取差 ΔΔG；误差用 **95% CI**（多副本平均）。
 - **归因/辅助分析**：HLA–抗原接触面积分析（定锚点与 p7）、突变体周围残基相互作用解析、体积-亲和力与 Eisenberg 疏水性-亲和力的 Pearson 相关、**single-residue frustration index**（用同一位点 13 个突变的自由能分布算）。
 - **实验回验**：固相多肽（Peptide 2.0，>95% 纯度）→ DQ8+ T1D 供者 PBMC → CFSE 稀释法 CD4 增殖 → 流式（Attune-Nxt，TCRab+CD4+ 门控）→ anti-CD69 活化；无抗原与抗 CD3-CD28 作阴性/阳性对照。
@@ -63,8 +63,8 @@ PNAS 2023, 120(16):e2214430120 · DOI 10.1073/pnas.2214430120 · PMID 37040399 �
 
 | # | 输入 | 操作 | 判据 / 阈值 | 输出与规模 |
 |---|---|---|---|---|
-| A1 | 起点问题：要不要用 ML 做突变亲和力预测 | 方法论选择（引言明确对比） | 判据＝是否受既有数据集分布约束："Although machine learning models of pHLA-TCR recognition ( 19 - 22 ) yield fast results and are increasingly powerful, they are limited to learning from finite sequence datasets."；选 FEP 的理由："One of the advantages of the molecular mechanics FEP method is the ability to study each system de novo, without biases to existing pHLA-TCR sequencing data, however extensive." | 路线定为 in silico 突变扫描 + 细胞功能回验 |
-| A2 | PDB 5UJT | VMD 把 mimotope 原地突变成 X-idiotype；TIP3P + 100 mM NaCl 溶剂化；CHARMM36 | 最小化两步各 50,000 步（先重原子约束、后无约束）→ 10 ns 均衡 | 二元复合物 HLA-DQ8–X-idiotype 起点结构（序列 "The X-idiotype sequence is CARQEDTAMVYYFDYW with the core epitope highlighted in bold."） |
+| A1 | 起点问题：要不要用 ML 做突变亲和力预测 | 方法论选择（引言明确对比） | 判据＝是否受既有数据集分布约束："Although machine learning"；选 FEP 的理由："One of the advantages of the" | 路线定为 in silico 突变扫描 + 细胞功能回验 |
+| A2 | PDB 5UJT | VMD 把 mimotope 原地突变成 X-idiotype；TIP3P + 100 mM NaCl 溶剂化；CHARMM36 | 最小化两步各 50,000 步（先重原子约束、后无约束）→ 10 ns 均衡 | 二元复合物 HLA-DQ8–X-idiotype 起点结构（序列 "The X-idiotype sequence is"） |
 | A3 | A2 体系 | NAMD2 生产 MD，310 K、2 fs | **RMSD <0.5 nm 且持续 300+ ns** 才算稳定并作为后续结构 | **500 ns** MD；选出用于 FEP 的构象 |
 | A4 | A3 结构 | 接触面积 / 溶剂暴露分析定"可突变位点" | 判据＝锚点残基 + 高接触面残基（正文：p7 意外高接触但非传统锚点） | 锚点 Asp1/Met4/Tyr6/Asp9 + 高接触 Tyr7 → 后续突变集 |
 | A5 | A3 结构 + 只保留 α1/β1 | 建 TCR 可变域（Modeller，模板 6DFX）、对齐到 6DFX、同样溶剂化与最小化流程 | 与 A3 同一 MD 判据 | 三级复合物 pHLA-TCR；TCR 接触面取生产轨迹末帧、按 **4.5 Å** 判接触原子 |
@@ -73,55 +73,55 @@ PNAS 2023, 120(16):e2214430120 · DOI 10.1073/pnas.2214430120 · PMID 37040399 �
 
 | # | 输入 | 操作 | 判据 / 阈值 | 输出与规模 |
 |---|---|---|---|---|
-| B1 | A4 定义的位点 | 初始点突变：同类残基替换 + 已知能提升柔性的替换 + 经验猜测 | ΔΔG<0 记"增强"；误差 **95% CI** | 结果句："almost all our initial point mutations resulted in a loss of binding affinity"；只有 p4 两条有利："two substantially hydrophobic mutations of the same residue were found to be favorable" |
+| B1 | A4 定义的位点 | 初始点突变：同类残基替换 + 已知能提升柔性的替换 + 经验猜测 | ΔΔG<0 记"增强"；误差 **95% CI** | 结果句："almost all our initial point mutations resulted in a loss of binding affinity"；只有 p4 两条有利："two substantially hydrophobic" |
 | B2 | 同一批结构 | FEP 单次计算 | **34 λ 窗口 × ≥200 ps = 6.8 ns/次**，soft-core 势能 | 每条突变的 ΔΔG ± 95% CI |
 | B3 | 审稿意见 | 追加锚点 p1/p4/p6/p9 与 p7 的**全类别点突变**（14 种非 Pro 氨基酸集 + 同电荷替换） | 排除 Pro（主链突变歧义） | 全表在未取到的 SI Table S1；正文只给"穷举"这一事实 |
-| B4 | 有利/不利结果 | 结构归因（残基埋藏深度、与 HLA 具体残基的作用差异） | 判据＝侧链填充与接触数变化 | 解释 M4V 不利："reveals poor space-filling propensity and fewer interactions with the anchor pocket"；并给出 M4L、M4I、M4V 的 ΔΔG 数值（见第 4 节） |
-| B5 | 反向验证 | 检查侧链朝外残基（Ala3、Phe8）的突变 | 预期＝中性；实测吻合 | "Most of the mutations on residues whose sidechains point away from the HLA, Ala3, and Phe8 were neutral in affinity change; this agrees with the large backbone interactions of these residues." |
+| B4 | 有利/不利结果 | 结构归因（残基埋藏深度、与 HLA 具体残基的作用差异） | 判据＝侧链填充与接触数变化 | 解释 M4V 不利："reveals poor space-filling"；并给出 M4L、M4I、M4V 的 ΔΔG 数值（见第 4 节） |
+| B5 | 反向验证 | 检查侧链朝外残基（Ala3、Phe8）的突变 | 预期＝中性；实测吻合 | "Most of the mutations on" |
 
 ### C. 第二轮：双/换位突变 → p6 系统扫描 → 复算 → 实验
 
 | # | 输入 | 操作 | 判据 / 阈值 | 输出与规模 |
 |---|---|---|---|---|
 | C1 | B1 的低命中 | 改做**换位突变 + 双突变**（6 组换位 + 双突变集，全表在 SI Table S2） | ΔΔG<0 且 95% CI | 头部结果 V5Y_Y6V（"robustly favorable"）与 Y6V_Y7V |
-| C2 | C1 结果 | 把有利双突变**拆解到单残基**归因 | 判据＝哪个位点贡献增益 | "Val5 and Tyr7 mutations largely remain neutral to binding affinity, while the Tyr6 mutations see binding affinity improvements." → 锁定 p6 |
-| C3 | p6 | Tyr6 → **13 个残基**逐一 FEP（SI Table S3） | 体积相关 R² **0.37**；疏水性相关 R² **0.02** | 作者结论 "The binding improvement of tyrosine at p6 is modestly correlated with residue size" → 小体积疏水残基有利；frustration index 1.5 佐证天然 Y6 高受挫 |
-| C4 | C1/C3 的有利突变 | **复算加长**：结合态/游离态两态、多副本 | "Mutations that were found promising (enhanced binding affinity) from this initial round of FEP calculations were run for longer timescales for verification"；**34 λ × ≥1 ns = 34 ns/次**，"These FEP calculations were computed with at least five replicas and averaged for the final Δ Δ G value, thus an aggregate of at least 34ns × 5 replicas × 2 states (bound, free) = 340 ns for each mutation." | 复算名单（正文点名）：HLA 侧 M4L、V5Y、Y6V、Y6I、Y7W、V5Y_Y6V；pHLA-TCR 侧 Y6C、Y6I、Y6V_Y7V。全研究累计模拟量正文口径："The total simulation time for this study is approximately 5 μ s ."（约 5 μs） |
+| C2 | C1 结果 | 把有利双突变**拆解到单残基**归因 | 判据＝哪个位点贡献增益 | "Val5 and Tyr7 mutations largely" → 锁定 p6 |
+| C3 | p6 | Tyr6 → **13 个残基**逐一 FEP（SI Table S3） | 体积相关 R² **0.37**；疏水性相关 R² **0.02** | 作者结论 "The binding improvement of" → 小体积疏水残基有利；frustration index 1.5 佐证天然 Y6 高受挫 |
+| C4 | C1/C3 的有利突变 | **复算加长**：结合态/游离态两态、多副本 | "Mutations that were found"；**34 λ × ≥1 ns = 34 ns/次**，"These FEP calculations were" | 复算名单（正文点名）：HLA 侧 M4L、V5Y、Y6V、Y6I、Y7W、V5Y_Y6V；pHLA-TCR 侧 Y6C、Y6I、Y6V_Y7V。全研究累计模拟量正文口径："The total simulation time for"（约 5 μs） |
 | C5 | C4 的 pHLA-TCR 预测 | 选 7 条 mutant 序列送合成（表 1：x-Id-mutant-1 至 mutant-7），加天然 X-Id 与 insulin-mimotope 对照 | 合成品纯度 **>95%** | 7 条设计多肽 + 2 条对照；供者为单个 DQ8+ T1D subject |
-| C6 | C5 多肽 | PBMC CFSE 标记 → 24 孔（1.5–2.0×10⁶ cells/well）抗原刺激 **7 d** → 流式门控 CFSE-low CD4 | 每样采集 **400,000–500,000** 淋巴细胞；无抗原/抗 CD3-CD28 作阴/阳对照 | 增殖：M1、M2、M4、M7 相当或增强（"expand CD4 T cell populations by four to sevenfold"）；M3、M5、M6 减弱 |
-| C7 | C6 细胞 | anti-CD69 染色读活化 | "We used anti-CD69 staining as a readout to evaluate the activation of CD4 T cells." | 全部设计抗原 CD69 活化高于天然："revealing that all designed antigens increased CD69 activation and four out of seven antigens increased or maintained PBMC cell proliferation relative to the native X-idiotype antigen" |
-| C8 | C4 预测 vs C6/C7 实测 | 逐条比对方向 + 算 Pearson 相关（相关分布仅在 SI Fig S5） | 判据＝趋势方向一致 + 95% CI 是否跨 0 | 结论句："This correlation value, though low, agrees with success rates of our previous pHLA-TCR affinity maturation studies ( 15 , 27 , 28 , 30 ) and is sufficient to identify enhanced and reduced binders in experiment." |
+| C6 | C5 多肽 | PBMC CFSE 标记 → 24 孔（1.5–2.0×10⁶ cells/well）抗原刺激 **7 d** → 流式门控 CFSE-low CD4 | 每样采集 **400,000–500,000** 淋巴细胞；无抗原/抗 CD3-CD28 作阴/阳对照 | 增殖：M1、M2、M4、M7 相当或增强（"expand CD4 T cell populations"）；M3、M5、M6 减弱 |
+| C7 | C6 细胞 | anti-CD69 染色读活化 | "We used anti-CD69 staining as a" | 全部设计抗原 CD69 活化高于天然："revealing that all designed" |
+| C8 | C4 预测 vs C6/C7 实测 | 逐条比对方向 + 算 Pearson 相关（相关分布仅在 SI Fig S5） | 判据＝趋势方向一致 + 95% CI 是否跨 0 | 结论句："This correlation value, though" |
 
 ## 4. 关键数字台账（全部来自本地全文）
 
 | 数值 | 含义 | 出处（原句片段） |
 |---|---|---|
-| 500 ns | HLA-抗原、HLA-抗原-TCR 体系的生产 MD 时长 | "we simulated the system for 500 ns MD simulations at 310 K with a 2 fs time step" |
+| 500 ns | HLA-抗原、HLA-抗原-TCR 体系的生产 MD 时长 | "we simulated the system for 500" |
 | 310 K / 2 fs / 10 ns 均衡 / 50,000 步 ×2 | 温度、步长、均衡时长、最小化步数 | "The structure was then minimized for 50,000 steps with heavy atom protein constraints and then an additional 50,000 steps without constraints"；"After 10 ns of equilibration" |
 | **<0.5 nm 持续 300+ ns** | 结构准入判据（RMSD 稳定性） | "the final structure was selected based on rmsd analysis showing structural stability (<0.5 nm) for 300+ ns" |
-| 34 λ 窗口 × ≥200 ps = **6.8 ns/次** | 初筛 FEP 的窗口数与单次时长 | "All FEP calculations were conducted over a course of 34 λ windows with at least 200 ps per window for a total of 6.8 ns per calculation" |
-| 34 λ × ≥1 ns = **34 ns/次**；≥5 副本 × 2 态 = **≥340 ns/突变** | 复算档位的时长/副本/两态口径 | "conducted over 34 λ windows with at least 1 ns per window for a total of 34 ns per calculation"；"an aggregate of at least 34ns × 5 replicas × 2 states (bound, free) = 340 ns for each mutation" |
-| ≈5 μs | 全研究累计模拟时长 | "The total simulation time for this study is approximately 5 μ s ." |
-| M4L **−1.3 ± 1.0**、M4I **−0.6 ± 0.4**、M4V **+2.1 ± 0.7** kcal/mol | 三个 p4 突变的 ΔΔG（±95% CI） | "M4L with Δ Δ G = - 1.3 ± 1.0 kcal/mol and M4I with Δ Δ G = - 0.6 ± 0.4 kcal/mol, ± 95%CI"；"A similar hydrophobic mutation, M4V, was tantalizingly unfavorable Δ Δ G = 2.1 ± 0.7 kcal/mol" |
+| 34 λ 窗口 × ≥200 ps = **6.8 ns/次** | 初筛 FEP 的窗口数与单次时长 | "All FEP calculations were" |
+| 34 λ × ≥1 ns = **34 ns/次**；≥5 副本 × 2 态 = **≥340 ns/突变** | 复算档位的时长/副本/两态口径 | "conducted over 34 λ windows"；"an aggregate of at least 34ns ×" |
+| ≈5 μs | 全研究累计模拟时长 | "The total simulation time for" |
+| M4L **−1.3 ± 1.0**、M4I **−0.6 ± 0.4**、M4V **+2.1 ± 0.7** kcal/mol | 三个 p4 突变的 ΔΔG（±95% CI） | "M4L with Δ Δ G = - 1.3 ± 1.0 kcal/mol and M4I with Δ Δ G = - 0.6 ± 0.4 kcal/mol, ± 95%CI"；"A similar hydrophobic mutation," |
 | 13 个 | p6（Tyr6）被单独突变的残基数 | "by mutating Tyr6 to 13 different residues individually" |
-| 体积 R² **0.37** / 疏水性 R² **0.02** | 突变亲和力与残基体积/疏水性的 Pearson 相关 | "resulting in a Pearson's product moment correlation of R 2 = 0.37"；"Surprisingly, Eisenberg hydrophobicity has no correlation with affinity, R 2 = 0.02" |
-| frustration index **1.5** | 天然 p6 Tyr 的单残基受挫指数（>1.0 SD 即"highly frustrated"） | "The single-residue-level frustration index was computed to be 1.5, meaning the native Y6 is unfavorable by 1.5× the SD of the average free energy of the other residues" |
-| 6 组换位 | 初轮换位突变组合（p3-p4、p3-p7、p4-p5、p4-p7、p5-p6、p3′-p4） | "Initial residue-swapping mutations included p3-p4, p3-p7, p4-p5, p4-p7, p5-p6, and p3′-p4 epitope position mutations" |
-| 14 种氨基酸集（无 Pro） | 全类别点突变的替换残基集 | "mutated to the set of A, C, F, G, I, L, M, N, Q, S, T, V, W, Y, absent proline due to backbone mutational ambiguities" |
-| 4.5 Å | TCR 接触面判定距离（生产轨迹末帧） | "showing contacting TCR atoms within 4.5 Å of HLA-X-idiotype" |
-| 7 条设计抗原；4/7 增殖；CD69 7/7 | 实验回验送样与功能结果 | "four out of seven antigens increased or maintained PBMC cell proliferation relative to the native X-idiotype antigen" |
-| 四到七倍 / 一到七倍 | 增殖倍数（增强组）与突变体间增殖跨度 | "expand CD4 T cell populations by four to sevenfold"；"CD4 T cell proliferation differs by one to sevenfold for the antigen mutants" |
-| >95% 纯度；1.5–2.0×10⁶ cells/well；7 d；40万–50万事件 | 多肽纯度、接种量、培养时长、流式采集量 | "all antigenic peptides used in this study were purified (>95% purity)"；"Around 400,000 to 500,000 lymphocytes (singlet gated) were acquired for each sample" |
-| NAMD2 / CHARMM36 / TIP3P / 100 mM NaCl / IBM Power8；Modeller、模板 6DFX；PDB 5UJT | 模拟软件与建模来源 | "All simulations were run using NAMD2 ( 56 , 57 ) on an IBM Power8 cluster" |
-| 95% CI | 全文所有误差棒口径 | "All error bars in this work are 95% CI." |
+| 体积 R² **0.37** / 疏水性 R² **0.02** | 突变亲和力与残基体积/疏水性的 Pearson 相关 | "resulting in a Pearson's"；"Surprisingly, Eisenberg hydrophobicity has no correlation with affinity, R 2 = 0.02" |
+| frustration index **1.5** | 天然 p6 Tyr 的单残基受挫指数（>1.0 SD 即"highly frustrated"） | "The single-residue-level" |
+| 6 组换位 | 初轮换位突变组合（p3-p4、p3-p7、p4-p5、p4-p7、p5-p6、p3′-p4） | "Initial residue-swapping" |
+| 14 种氨基酸集（无 Pro） | 全类别点突变的替换残基集 | "mutated to the set of A, C, F," |
+| 4.5 Å | TCR 接触面判定距离（生产轨迹末帧） | "showing contacting TCR atoms" |
+| 7 条设计抗原；4/7 增殖；CD69 7/7 | 实验回验送样与功能结果 | "four out of seven antigens" |
+| 四到七倍 / 一到七倍 | 增殖倍数（增强组）与突变体间增殖跨度 | "expand CD4 T cell populations"；"CD4 T cell proliferation" |
+| >95% 纯度；1.5–2.0×10⁶ cells/well；7 d；40万–50万事件 | 多肽纯度、接种量、培养时长、流式采集量 | "all antigenic peptides used in"；"Around 400,000 to 500,000 lymphocytes (singlet gated) were acquired for each sample" |
+| NAMD2 / CHARMM36 / TIP3P / 100 mM NaCl / IBM Power8；Modeller、模板 6DFX；PDB 5UJT | 模拟软件与建模来源 | "All simulations were run using" |
+| 95% CI | 全文所有误差棒口径 | "All error bars in this work are" |
 
 ## 5. 结论——作者说了什么
 
 1. X-idiotype 的锚点贡献可拆解：p4 Met 可被更疏水的小一号残基替换而**略微**增强 HLA 结合（M4L/M4I）。
-2. **点突变几乎全负、双/换位突变才有货**：这是他们从数据里得出的、并写进推荐的意见——"We have previously found ( 31 ), and substantiate here, that swap mutations, such as swapping p5 and p6 residues, present an efficient technique to test HLA-antigen binding affinity and recommend them for future studies."
+2. **点突变几乎全负、双/换位突变才有货**：这是他们从数据里得出的、并写进推荐的意见——"We have previously found ( 31"
 3. p6 是主要的可改进位点，机制是**位阻/受挫**（小体积疏水有利、frustration 1.5、疏水性与亲和力无相关）。
 4. pHLA-TCR 端可以**朝两个方向挑**：Y6C/Y6I 增强 TCR 结合；V5Y_Y6V、Y6Q_Y7Q 增强 HLA 但削弱 TCR，适合做成 HLA-blocker 型治疗。
-5. 实验端："These in silico predictions agree well with our CFSE-based T cells proliferation assays."；全部设计抗原 CD69 活化不低于天然，7 条里 4 条增殖增强或维持。
+5. 实验端："These in silico predictions"；全部设计抗原 CD69 活化不低于天然，7 条里 4 条增殖增强或维持。
 6. 自我定位的预测能力：相关性"though low"，但"足以把增强型与减弱型分开"；四条趋势相符的突变体因 95% CI 跨 0 而不能称"结论性一致"。
 
 ## 6. 结论——我们读出了什么（以下为推断，非作者原文）
@@ -146,7 +146,7 @@ PNAS 2023, 120(16):e2214430120 · DOI 10.1073/pnas.2214430120 · PMID 37040399 �
 
 1. **"MD 稳定性当准入，FEP 当打分"的两段式结构**，且两段时长差一个数量级（500 ns 选结构 / 6.8 ns 粗筛 / ≥340 ns 复核）。→ 我们若用 MD+端点法/xTB 打分，也应明确"结构准入 vs 候选打分"是不同预算档位，并在正文点名谁进了复核档。
 2. **正例稀到几乎不存在时，改候选空间而不是改阈值**（点突变→双/换位突变）。→ 对我们：若单点突变在计算上必然打负，应把"多残基组合 + 环重构 + 金属/辅因子位点协同改造"纳入候选生成，而不是收紧 ΔΔG 阈值把负类切得更干净。
-3. **误差口径统一 + 不许跨零断言**（"All error bars in this work are 95% CI."；CI 跨 0 时明写"contesting a statement of conclusive agreement"）。→ 直接搬：我们每个通过判据的候选必须带区间，且区间跨零时不得写"预测被证实"，只能写"方向一致"。
+3. **误差口径统一 + 不许跨零断言**（"All error bars in this work are"；CI 跨 0 时明写"contesting a statement of"）。→ 直接搬：我们每个通过判据的候选必须带区间，且区间跨零时不得写"预测被证实"，只能写"方向一致"。
 4. **双功能读数并存（活化 vs 增殖）不做归一** → 我们保留"产物检出"与"转化量/竞争副产物"两条读数，允许不一致并写明。
 5. **失败/异常结果给出可检验的机制假说而不是删掉**（register shift、catch bond）→ 我们给"无产物候选"标注可能卡住的事件（S0/S1/S2），并把它们列入可反驳清单。
 6. **正交解释指标**（frustration index、体积相关性）用于把"数字大小"变成"结构理由"→ 我们可以用几何/静电/柔性指标解释候选好坏，但这些**只作解释**，不作准入闸口（见下一条）。
@@ -168,6 +168,8 @@ PNAS 2023, 120(16):e2214430120 · DOI 10.1073/pnas.2214430120 · PMID 37040399 �
 - 对照底稿行号：`sources/zhou.md:59-70`（原卡，含 FEP/MD 参数与 4/7 命中率）；`sources/zhou.md:210`（演进链里对 Z04 的定位："单点突变 FEP success rate 低 → 被迫上双突变/换位突变"）。
 - CSV 字段映射：第 3 节 ↔ `候选生成方法/计算筛选判据/阈值数字/是否用MD`；第 4 节 ↔ `候选数递减/实验命中率/成本统计`；第 8 节 ↔ `在方法演进链的位置`。
 - **本卡自检**：`scripts/verify_literature_cards.py --only Z04 --no-report` 把卡内所有不含中日韩字符、被直双引号包住的 ≥20 字符片段，在"引句底稿"指向的全文里逐字查找，任何一条不命中即 FAIL；本轮结果见交付回报。
+
+- **引用预算截短（2026-11-08，公开仓库口径）**：本卡有 62 条逐字引句来自许可受限的第三方来源（Z04；CC_BY_NC_ND），按 `deliverables/fulltext_manifest.csv` 的逐份许可判定，已把单条引句截到 ≤100 字符、同一来源总量截到 ≤600 字符；**截短后仍逐字命中同一份底稿**（门禁 `scripts/verify_literature_cards.py` 仍是逐字核验），完整原句按 §9 的重取方式与 sha256 可复核。逐条改动账见 `deliverables/quote_budget_ledger.csv`。本卡其余内容（我们自己的分析、判断与台账）未被改动。
 
 <!--CSV回填
 work_type=论文（物理模拟 + 合作湿实验闭环；方法校准与候选优化并重）

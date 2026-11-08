@@ -25,7 +25,7 @@ Nature Communications 2023, 14:2625 · DOI 10.1038/s41467-023-38328-5 · PMID 37
 
 ## 2. 遇到的难点，以及遇到问题时他们做了什么（作者自述，不是我们的推测）
 
-1. **成功率低是核心痛点，而且是已知的**。原文开篇即承认："the overall design success rate is low"，并给出前作的量级：回顾集里 "**15,000–100,000 designs were experimentally tested for each target, and the number of actual binders ranged from 1 to 584**"（10 个靶）。→ 也就是说，同一个漏斗对不同靶点能差 3 个数量级，"平均命中率"没有意义。 **应对**：不报平均值，改为逐靶分开报，并把"该用哪个判据"变成一个能在历史数据上打分的问题（第 3 节 A 段）。
+1. **成功率低是核心痛点，而且是已知的**。原文开篇即承认："the overall design success rate is low"，并给出前作的量级：回顾集里 "**15,000–100,000 designs were experimentally tested for each target,**"（10 个靶）。→ 也就是说，同一个漏斗对不同靶点能差 3 个数量级，"平均命中率"没有意义。 **应对**：不报平均值，改为逐靶分开报，并把"该用哪个判据"变成一个能在历史数据上打分的问题（第 3 节 A 段）。
 2. **失败被拆成两类，而且第二类才是主因**（这是本文最有迁移价值的概念，Fig 1 图注原句）：
    - Type I：**"Failures. The designed sequence does not fold to the designed monomer structure."**（压根没折成设计构象）
    - Type II：**"Type-2 Failures. The designed sequence folds to the designed monomer structure but does not form the designed interface."**（折对了，界面没形成）
@@ -75,7 +75,7 @@ Nature Communications 2023, 14:2625 · DOI 10.1038/s41467-023-38328-5 · PMID 37
 | 数值 | 含义 | 出处（原句片段） |
 |---|---|---|
 | ~1 million / 10 靶 | 回顾集规模（带实验结果的设计数） | "experimentally characterized designs for 10 different targets" |
-| 15,000–100,000 → 1–584 | 每靶实测数 → 每靶 binder 数 | "15,000-100,000 designs were experimentally tested for each target, and the number of actual binders ranged from 1 to 584" |
+| 15,000–100,000 → 1–584 | 每靶实测数 → 每靶 binder 数 | "15,000-100,000 designs were experimentally tested for each target," |
 | ~2M / 靶 | 前瞻计算库规模 | "~2 million designs for each target" |
 | ~20,000 / 靶 = 15,000 + 5,000 | 送测集合拆分（物理 / AF2） | "~5000 designs with AF2 pAE_interaction <10" |
 | ~80,000 | 合成基因总数 | "Synthetic genes were obtained for the ~80,000 designs" |
@@ -137,6 +137,8 @@ Nature Communications 2023, 14:2625 · DOI 10.1038/s41467-023-38328-5 · PMID 37
 - 对照底稿行号：`sources/baker.md:120–133`；引用汇总表：`sources/baker.md:605`（3a 自洽性反折叠闸口行）、`sources/baker.md:642`（漏斗数字对照）。
 - CSV 字段映射：本文第 3 节 ↔ `计算筛选判据/阈值数字/候选生成方法`；第 4 节 ↔ `候选数递减/实验命中率/成本统计引用`；第 8 节 ↔ `在方法演进链的位置`。
 - **本卡自检**：`scripts/verify_literature_cards.py`（参数：无；输入：本目录 `*.md` + `fulltext/` + `sources_map.json`）把卡内所有不含中日韩字符、且被直双引号包住的 ≥20 字符片段，在**该卡的每一份本地全文**里做逐字查找；任何一条不命中即 FAIL、退出码 1，登记的全文缺失同样算失败。本轮结果 **36/36 × 2 份全文 PASS**，见 `data/literature_cards/selfcheck.txt`；写本卡前同一脚本曾以 3 条 MISS 判 FAIL（一处把跨引文编号的两句连成一句、一处用省略号开头、一处把状态名 UNKNOWN/METHOD_FAIL 误当引句），已逐条改正后复跑通过。**反向自测**（同日上午，只在内存里改路径、不写生产产物）：把一处真引句里的 `nearly 10-fold` 篡改成 `nearly 20-fold`，并登记一份不存在的全文 ⇒ 脚本输出 `35/36`＋`SRC_MISSING`＋`REF FAIL`、退出码 1。也就是"引用造假会被机器抓到"这件事是可执行的，不是声明。
+
+- **引用预算截短（2026-11-08，公开仓库口径）**：本卡有 2 条逐字引句来自许可受限的第三方来源（B01；PUBLISHER_TERMS），按 `deliverables/fulltext_manifest.csv` 的逐份许可判定，已把单条引句截到 ≤100 字符、同一来源总量截到 ≤600 字符；**截短后仍逐字命中同一份底稿**（门禁 `scripts/verify_literature_cards.py` 仍是逐字核验），完整原句按 §9 的重取方式与 sha256 可复核。逐条改动账见 `deliverables/quote_budget_ledger.csv`。本卡其余内容（我们自己的分析、判断与台账）未被改动。
 
 <!--CSV回填
 work_type=论文

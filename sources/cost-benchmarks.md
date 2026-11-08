@@ -57,7 +57,7 @@
 | 计算动作 | 每候选成本 | 出处（原文口径） | 备注 |
 |---|---|---|---|
 | Rosetta 序列设计（全组合优化） | **~350 CPU-s** | Bennett et al., Nat Commun 2023, 10.1038/s41467-023-38328-5："ProteinMPNN is very fast, generating a sequence for a minibinder backbone in ~2 CPU-s compared to ~350 CPU-s for Rosetta-design" | 同文给出效率指标：Rosetta-design ≈ **7.6×10⁻⁷ 个成功设计 / CPU-s**（换算因子 100 CPU-s = 1 GPU-s） |
-| 大规模 binder 设计（dock-and-design 全跑） | **~100,000 CPU·小时 / 10 万个设计**（即约 1 CPU·小时/设计） | Cao et al., Nature 2022, 10.1038/s41586-022-04654-9："CPU time requirements to produce 100,000 designed binders to be tested experimentally were typically around 100,000 CPU hours (usually at least ten times as many binders were computationally designed than were ordered)" | 同时给出"计算量→下单量"的 10 倍漏斗惯例 |
+| 大规模 binder 设计（dock-and-design 全跑） | **~100,000 CPU·小时 / 10 万个设计**（即约 1 CPU·小时/设计） | Cao et al., Nature 2022, 10.1038/s41586-022-04654-9："CPU time requirements to produce 100,000 designed binders to be tested experimentally were" | 同时给出"计算量→下单量"的 10 倍漏斗惯例 |
 | ProteinMPNN 序列生成 | **~2 CPU-s**（原文另有 1.2 s vs 4.3 min/100 残基 的对比口径） | 10.1038/s41467-023-38328-5；10.1126/science.add2187（Science 2022） | 序列端已不是瓶颈 |
 | ProteinMPNN + Rosetta FastRelax 循环 | **~120 CPU-s/设计**，其中 **6.6%** 过 AF2 过滤 → 效率 **2.2×10⁻⁶ 成功设计/CPU-s**，较 Rosetta-design 平均提 **~8 倍** | 10.1038/s41467-023-38328-5 | 折中方案：物理端做局部精修 |
 | AlphaFold2 复折叠（过滤用） | **~30 GPU-s/设计**，且**仅 ~2.3% 设计通过** | 10.1038/s41467-023-38328-5："the AF2 filter is computationally expensive (~30 GPU-seconds per design) and only ~2.3% of designs pass" | 用的是"减少 MSA＋initial guess"的加速配置 |
@@ -115,7 +115,7 @@
 - **论文 B**：Yin R, Pierce BG. *Evaluation of AlphaFold antibody–antigen modeling with implications for improving predictive accuracy.* Protein Sci 2024. DOI **10.1002/pro.4865**。
   - 数字：**427 个非冗余 Ab–Ag 复合物**；top-1：acceptable+ **26%**、near-native(medium+) **18%**、high **5%**；用全部 25 个模型则 37%/22%/6%；"the latest version of AlphaFold improves near-native modeling success to **over 30%, versus approximately 20%** for a previous version, while increased AlphaFold sampling gives **approximately 50%** success"；"The default AlphaFold model confidence score was found to be **well correlated with antibody–antigen model accuracy**"。
 - **论文 C（产业端后果）**：*Atomically accurate de novo design of antibodies with RFdiffusion.* Nature 2026. DOI **10.1038/s41586-025-09721-5**†。
-  - baker.md 已核录的原文：对多个靶点 "success rates … range from **0% to 2%**"；作者找到 **AF3 ipTM 对结合有预测力（AUC = 0.86）**，但"only **9%** of our ordered VHH designs have an ipTM > 0.6"；scFv 端 "only **4%** of the initial design library has ipTM > 0.85, whereas **5 of the 6** experimentally confirmed designs pass this threshold"。
+  - baker.md 已核录的原文：对多个靶点 "success rates … range from **0% to 2%**"；作者找到 **AF3 ipTM 对结合有预测力（AUC = 0.86）**，但"only **9%** of our ordered VHH designs have an ipTM > 0.6"；scFv 端 "only **4%** of the initial design library has ipTM > 0.85,"。
   - **意义**：这是"加入新判据（ipTM 阈值）本可提升命中率"的定量缺口证明，也解释了为什么抗体设计还得回到展示库（9,000 设计/靶）。
 
 ### 3.5 物理 ΔΔG 判据对实验功能分的预测力其实很弱（关键否定性定量证据）
@@ -244,3 +244,5 @@
 
 **仅 Europe PMC 侧列出、Crossref 未复核（引用前请再核）**：
 10.1038/s41467-025-67866-3；10.1021/acs.jcim.6c00089；10.1021/acs.jpcb.4c07794；10.1021/acs.jcim.5c00947；10.1021/acs.jpcb.4c05947；10.1021/jacs.5c04962；10.1021/acs.analchem.5c01029；10.17504/protocols.io.j8nlkyo5dg5r/v1；10.2337/db25-2148-lb；10.1002/pro.70698；10.2210/pdb9dn6/pdb、10.2210/pdb9dnn/pdb（PDB 记录）。
+
+> **引用预算截短（2026-11-08，公开仓库口径）**：本底稿有 2 条逐字引句被截短（来源编号：B06; C02、未归属；许可类别：UNKNOWN、未归属），按 `deliverables/protein_design_license_audit.csv` 的逐份许可判定，单条引句截到 ≤100 字符；其中 1 条截短后仍**逐字命中同一份来源全文**，其余 1 条为**原句的前缀**（本地无全文或原句是我们自己的转写，只减不增、不新增第三方内容）。逐条改动账见 `deliverables/quote_budget_notes_ledger.csv`。

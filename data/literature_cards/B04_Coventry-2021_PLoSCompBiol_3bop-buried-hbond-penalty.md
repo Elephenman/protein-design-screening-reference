@@ -95,7 +95,7 @@ Rosetta 做侧链打包时，为了跑得快，**只会两两相加地算能量*
 ## 5. 结论——作者说了什么
 
 1. 3BOP 是一个**可两两分解**的埋藏未满足极性原子惩罚，能直接插进现有 Rosetta 侧链打包，不需要改采样器。
-2. 加了这一项之后，"We show that inclusion of this term in Rosetta sidechain packing calculations substantially reduces the number of buried unsatisfied polar groups."（摘要收口），且效果优于单纯把氢键项加权。
+2. 加了这一项之后，"We show that inclusion of this term in Rosetta sidechain packing calculations substantially reduces"（摘要收口），且效果优于单纯把氢键项加权。
 3. 惩罚是**可定制**的：设计者自己定 β/σ/ω，因此 "Explicit control allows designers to directly penalize buried unsatisfied polar atoms."，并且可以为不同原子类型指定不同理想氢键数。
 4. 该实现无显式水；作者认为加入水的做法直接（第 2.10 条），但没有做。
 5. 作者的自我限制：多余过饱和罚是真实存在的近似误差，会影响结构预测；对设计则论证代价不对称。本文没有任何湿实验。
@@ -139,6 +139,8 @@ Rosetta 做侧链打包时，为了跑得快，**只会两两相加地算能量*
 - 对照底稿行号：`sources/baker.md:55–66`（原卡，摘要级）；同文件 `:636` 把本文归入「Rosetta 时代修补物理打分」的解释线、`:606` 把「埋藏未满足氢键惩罚」列入 3b 物理/化学正交筛。
 - CSV 字段映射：本文第 3 节 ↔ `计算筛选判据/阈值数字/候选生成方法`；第 4 节 ↔ `候选数递减/成本统计引用`；第 8 节 ↔ `在方法演进链的位置`。
 - **本卡自检**：`PYTHONIOENCODING=utf-8 python scripts/verify_literature_cards.py --only B04 --no-report`（输入：本卡 + `sources_map.json` 登记的 B04 底稿）把卡内所有不含中日韩字符、且被直双引号包住的 ≥20 字符 / ≥12 字母片段，在 §9 声明的那一份全文里逐字查找，任何一条不命中即 FAIL。本卡结果 **PASS B04 quotes=82/82，退出码 0**。首轮有两处不合格：①一处引句截在了省略号处（原文那句中间自带一组引号 all or none，直双引号跨不过去），改成只引可核验的后半段；②把 singular 的 the same sequence position 抄成了复数 positions。两处按全文原样改回后复跑转绿；此后又红过一次——原因是 §9 自检段里用直双引号举了一个「我抄错的片段」作例子，那一行本身被门禁当引句比对（省略号式截断必红），改成中文述句后转绿。B04 只有一份全文通路（Europe PMC），没有 B09 那样的双通路互证，这一点在本卡第 0 节已标明。
+
+- **引用预算截短（2026-11-08，公开仓库口径）**：本卡有 1 条逐字引句来自许可受限的第三方来源（B01；PUBLISHER_TERMS），按 `deliverables/fulltext_manifest.csv` 的逐份许可判定，已把单条引句截到 ≤100 字符、同一来源总量截到 ≤600 字符；**截短后仍逐字命中同一份底稿**（门禁 `scripts/verify_literature_cards.py` 仍是逐字核验），完整原句按 §9 的重取方式与 sha256 可复核。逐条改动账见 `deliverables/quote_budget_ledger.csv`。本卡其余内容（我们自己的分析、判断与台账）未被改动。
 
 <!--CSV回填
 work_type=方法（能量函数/打分器改造，无湿实验）

@@ -23,7 +23,7 @@
 
 > 按降级卡规则：K66 的「作者做了什么」在底稿层不可核验，凡不可核处明写；可核的是**谱系下游如何继承这一判据**（转引，已点名出处）。
 
-1. **（作者的、谱系级）埋藏极性基团在疏水界面里若不满足氢键，界面就不可设计。** 现象/证据：底稿 `:66` 记这一「埋藏极性必须成氢键」的判据后来被吸收进 ProteinMPNN/LigandMPNN 的序列似然与全原子打分。→ 作者做了什么：**Boyken 2016 本文未解决核验**（未获正文，作者侧操作无法登记）；可核的是下游继承——[B01] LOCKR 全文自述（转引，非 Boyken 原文）："we chose to design interfaces containing buried hydrogen bond networks; as in DNA base-pairing, specificity can be altered by minor changes to hydrogen bond donors and acceptors"（`sources/baker.md:20`），即把 HBnet 当可微调特异性的正交模块。→ 代价：起点论文自身的设计流程、通过率全部未记录。
+1. **（作者的、谱系级）埋藏极性基团在疏水界面里若不满足氢键，界面就不可设计。** 现象/证据：底稿 `:66` 记这一「埋藏极性必须成氢键」的判据后来被吸收进 ProteinMPNN/LigandMPNN 的序列似然与全原子打分。→ 作者做了什么：**Boyken 2016 本文未解决核验**（未获正文，作者侧操作无法登记）；可核的是下游继承——[B01] LOCKR 全文自述（转引，非 Boyken 原文）："we chose to design interfaces containing buried hydrogen bond networks;"（`sources/baker.md:20`），即把 HBnet 当可微调特异性的正交模块。→ 代价：起点论文自身的设计流程、通过率全部未记录。
 
 2. **（取证级）K66 在 Baker 笔记里的存在感只有一句谱系句，行内容易被下游细节污染。** 现象/证据：CSV 行第一作者字段只能写到『Boyken 2016 Science HBnet』；实验手段/递减/命中率全部 未记录。→ 我们做了什么：本卡把 [B01]、[B04]、Maguire 2018 的每一条转引都**显式标注不是 Boyken 原文**；§3 只登记取证工作流而非实验流程（避免为凑步骤编造实验）。→ 仍留下的代价：想判定 HBnet 起点论文的实际效果，必须取回 2016 正文/SI——当前抓取通道 500/SSL 失败，缺口未闭合。
 
@@ -45,7 +45,7 @@
 |---|---|---|
 | "Boyken 2016 Science HBnet" | 底稿对该文的唯一直接锚点句片段 | `sources/baker.md:66` |
 | "Rapid Sampling of Hydrogen Bond Networks for Computational Protein Design" | 谱系第二环 Maguire 2018 JCTC 的题目（**非 Boyken 2016 本身**） | `sources/baker.md:66` |
-| "we chose to design interfaces containing buried hydrogen bond networks; as in DNA base-pairing, specificity can be altered by minor changes to hydrogen bond donors and acceptors" | [B01] LOCKR 全文对 HBnet 用法的自述（**转引，非 Boyken 原文**） | `sources/baker.md:20` |
+| "we chose to design interfaces containing buried hydrogen bond networks;" | [B01] LOCKR 全文对 HBnet 用法的自述（**转引，非 Boyken 原文**） | `sources/baker.md:20` |
 | 2016；DOI 10.1126/science.aad8865 ✅ | K66 的年份与 DOI 核验状态 | CSV 行；`sources/baker.md:66`、`:675` |
 | 10.1021/acs.jctc.8b00033 ✅（PMC5940506）；10.1371/journal.pcbi.1008061 ✅ | 可核谱系其余两环（Maguire 2018；Coventry 2021） | `sources/baker.md:66`、`:675` |
 | 未记录 | 设计库/送测/命中/实验手段/MD-QM 全部 | CSV K66 行各栏原值；底稿无对应记录 |
@@ -83,6 +83,8 @@
 - **本卡是降级卡**：K66 未获正文（抓取两次 HTTP 500 + 一次 SSL 失败，`fetch_log.tsv:108`、`:156`、`:193`；`inventory.json` local=[]）。与 B13/B36 不同，**本文从未成功下载过全文，不存在挂错行隔离事件**。降级卡引句规则（≥2 条、逐字命中登记底稿）；本卡共 3 条逐字引句，全部命中 `sources/baker.md`（第 66 行两条、第 20 行一条；后者已在卡内多处显式标注为 [B01] 转引而非 Boyken 原文）。
 - **登记底稿核对**：`sources_map.json` K66 项只登记 `sources/baker.md`（实存）。对照行号：`:66`（[B04] 段谱系句）、`:675`（缺口 4）、`:20`（[B01] 段转引）。CSV 行：`data/protein_design_literature.csv:148`（证据级别=摘要级）。
 - **门禁自检**：命令 `cd A:\Data\MD\projects\protein-design-screening-20261016 && PYTHONIOENCODING=utf-8 python scripts/verify_literature_cards.py --only "K66" --no-report`。本卡未改 CSV、`sources/*.md`、样板卡、`scripts/`，未做网络抓取。
+
+- **引用预算截短（2026-11-08，公开仓库口径）**：本卡有 2 条逐字引句来自许可受限的第三方来源（B01；PUBLISHER_TERMS），按 `deliverables/fulltext_manifest.csv` 的逐份许可判定，已把单条引句截到 ≤100 字符、同一来源总量截到 ≤600 字符；**截短后仍逐字命中同一份底稿**（门禁 `scripts/verify_literature_cards.py` 仍是逐字核验），完整原句按 §9 的重取方式与 sha256 可复核。逐条改动账见 `deliverables/quote_budget_ledger.csv`。本卡其余内容（我们自己的分析、判断与台账）未被改动。
 
 <!--CSV回填
 work_type=论文（降级卡：摘要级，未获正文；底稿信息稀薄）

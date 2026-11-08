@@ -506,8 +506,8 @@
  {
   "id": "B06; C02",
   "field": "实验命中率",
-  "old": "<10/100,000 (TIE2, CD3δ) 至 数百/100,000; 全文 810,000 binder 设计 + 240,000 单突变",
-  "new": "作者不给统一命中率，只给区间对比：\"Only a small fraction of designs bind, and in almost all cases, the best of these require additional substitutions to achieve high-affinity binding\"；分靶两极（数百 vs 少于 10，即 10^-2 与 10^-4 量级的差别）；全局唯一规律是成功率与靶面",
+  "old": "作者不给统一命中率，只给区间对比：\"Only a small fraction of designs bind, and in almost all cases, the best of these require additional substitutions to achieve high-affinity binding\"；分靶两极（数百 vs 少于 10，即 10^-2 与 10^-4 量级的差别）；全局唯一规律是成功率与靶面",
+  "new": "作者不给统一命中率，只给区间对比：\"Only a small fraction of designs bind, and in almost all cases,\"；分靶两极（数百 vs 少于 10，即 10^-2 与 10^-4 量级的差别）；全局唯一规律是成功率与靶面疏水性正相关（\"Across all targets, there was a strong correlation between success rate and ",
   "card": "B06-C02_Cao-2022_Nature_broad-search-focused-resampling.md"
  },
  {
@@ -814,7 +814,7 @@
  {
   "id": "B10; C08",
   "field": "是否用MD",
-  "old": "是-事后验证或机理",
+  "old": "是（仅事后机理，不进筛选漏斗）：把 Int2/Int3 中间体分别对接进 LuxSit 与 LuxSit-i 后跑 500 ns MD，观测 His98-O1、Arg65-N1 距离随时间演化以解释 LuxSit-i 更高活性；bis-CTZ 过氧化物阴离子形态对接进 LuxSit-i 的 MD 用于解释对 DTZ 的 50 倍选择性；正文原句为 \"We used a combination of density functional ",
   "new": "是（仅事后机理，不进筛选漏斗）：把 Int2/Int3 中间体分别对接进 LuxSit 与 LuxSit-i 后跑 500 ns MD，观测 His98-O1、Arg65-N1 距离随时间演化以解释 LuxSit-i 更高活性；bis-CTZ 过氧化物阴离子形态对接进 LuxSit-i 的 MD 用于解释对 DTZ 的 50 倍选择性；正文原句为 \"We used a combination of density functional ",
   "card": "B10-C08_Yeh-2023_Nature_luciferase-dl.md"
  },

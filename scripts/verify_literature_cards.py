@@ -14,7 +14,13 @@
     没有本地全文的卡，引句至少要命中登记的非全文底稿（sources/*.md 等）。
   D 证据级别不许造假：卡里没有本地全文却在卡头声明"全文级" ⇒ FAIL。
   E 引句数量下限：有全文的卡 >=8 条；无全文的降级卡 >=2 条且必须写明受限。
-输出: data/literature_cards/selfcheck.txt + rollout_status.tsv（逐行 PASS/FAIL 与原因）。
+
+三态判定（2026-11-08 起，公开仓库口径）：
+  PASS_LOCAL —— 底稿在本机，逐字引句全部命中（维护者本地树：152/152）。
+  WITHHELD   —— 底稿是第三方原文，按公开口径不随仓库分发（清单：deliverables/fulltext_manifest.csv），
+                本机（公开克隆）不可逐字复核；这不是缺漏，不算 FAIL。
+  FAIL       —— 真错：结构不全、引句不命中、证据级别造假、登记底稿缺失且不是第三方原文。
+输出: data/literature_cards/selfcheck.txt + rollout_status.tsv（逐行状态与原因）。
 """
 from __future__ import annotations
 
@@ -36,6 +42,7 @@ FULLTEXT = CARDS / "fulltext"
 INVENTORY = CARDS / "inventory.json"
 MAPFILE = CARDS / "sources_map.json"
 CSVP = ROOT / "data" / "protein_design_literature.csv"
+MANIFEST = ROOT / "deliverables" / "fulltext_manifest.csv"
 
 CJK = re.compile(r"[\u3000-\u30ff\u4e00-\u9fff\uff00-\uffef]")
 QUOTE = re.compile(r'"([^"\n]{20,})"')
@@ -94,6 +101,18 @@ def load_map() -> dict:
     return json.loads(MAPFILE.read_text(encoding="utf-8"))
 
 
+def load_manifest() -> dict:
+    """第三方原文清单：路径 -> 行。用来区分"底稿缺失（缺漏，FAIL）"与
+    "底稿是第三方原文、按公开口径不随仓库分发（WITHHELD）"。"""
+    if not MANIFEST.exists():
+        return {}
+    out: dict[str, dict] = {}
+    with MANIFEST.open(encoding="utf-8-sig", newline="") as fh:
+        for r in csv.DictReader(fh):
+            out[r["path"]] = r
+    return out
+
+
 def check_sections(body: str) -> list[str]:
     """按 ## N. 编号判存在、唯一、顺序与标题关键词（只扫标题行，正文同词不算）。"""
     bad: list[str] = []
@@ -149,10 +168,12 @@ def main() -> int:
     rows = list(csv.DictReader(CSVP.open(encoding="utf-8-sig")))
     inv = {r["id"]: r for r in json.loads(INVENTORY.read_text(encoding="utf-8"))}
     smap = load_map()
+    manifest = load_manifest()
     want = set(args.only) if args.only else None
     report: list[str] = []
     status: list[dict] = []
     failures = 0
+    withheld_rows = 0
 
     for r in rows:
         acc = col(r, "编号")
@@ -162,6 +183,7 @@ def main() -> int:
         line = {"id": acc, "title": col(r, "标题")[:40], "has_fulltext": "yes" if rec.get("has_fulltext") else "no",
                 "card": "no", "quotes": "", "errors": ""}
         errs: list[str] = []
+        unverifiable = False
         card = card_for(acc)
         if card is None:
             errs.append("无卡片文件")
@@ -179,8 +201,15 @@ def main() -> int:
                 errs.append(f"§难点与应对只有 {d} 条 (<2)")
             srcs = [p for p in smap.get(acc, []) if (ROOT / p).exists() and not p.endswith(".xml")]
             missing_reg = [p for p in smap.get(acc, []) if not (ROOT / p).exists()]
+            # 三态之一：WITHHELD —— 底稿是第三方原文，按公开口径不进仓库
+            # （逐份登记在 deliverables/fulltext_manifest.csv）。这种"缺"不是缺漏，
+            # 本机维护者树里文件还在，照样逐字核验；公开克隆里核不了，只能记 WITHHELD。
+            withheld: list[str] = []
             for p in missing_reg:
-                errs.append(f"登记底稿缺失 {p}")
+                if manifest.get(p, {}).get("随仓库分发") == "否":
+                    withheld.append(p)
+                else:
+                    errs.append(f"登记底稿缺失 {p}")
             texts, raws = {}, {}
             for p in srcs:
                 raw = (ROOT / p).read_text(encoding="utf-8", errors="replace")
@@ -204,19 +233,30 @@ def main() -> int:
                         errs.append(f"{p} 是多记录拼接文件但其中找不到本行 DOI，禁止作为引句底稿")
             m = re.search(r"引句底稿[:：]\s*[`\"']?([\w./\\-]+?\.(?:txt|md))", body)
             declared = m.group(1).replace("\\", "/") if m else ""
+            unverifiable = False
             if not declared:
                 errs.append("§9 没写 引句底稿: <路径>，门禁不知道该拿哪份全文逐字比对")
             elif declared not in srcs:
-                errs.append(f"引句底稿 {declared} 不在该编号登记的可读底稿里")
+                if manifest.get(declared, {}).get("随仓库分发") == "否":
+                    # 底稿是第三方原文，公开仓库不随包分发 → 本机不可复核，记 WITHHELD
+                    unverifiable = True
+                    withheld.append(declared)
+                    line["quotes"] = "本机不可复核（底稿未随仓库分发）"
+                else:
+                    errs.append(f"引句底稿 {declared} 不在该编号登记的可读底稿里")
             elif qs:
                 miss = [q for q in qs if q not in texts[declared]]
                 for q in miss[:6]:
                     errs.append(f"引句未逐字命中 {declared}: {q[:110]}")
                 line["quotes"] = f"{len(qs)-len(miss)}/{len(qs)}"
             if not srcs and qs:
-                errs.append("该编号没有任何可读底稿，却有英文引句")
-            for q in [q for q in qs if not any(q in t for t in texts.values())][:4]:
-                errs.append(f"引句在所有底稿里都不命中: {q[:110]}")
+                if withheld:
+                    unverifiable = True
+                else:
+                    errs.append("该编号没有任何可读底稿，却有英文引句")
+            if srcs:
+                for q in [q for q in qs if not any(q in t for t in texts.values())][:4]:
+                    errs.append(f"引句在所有底稿里都不命中: {q[:110]}")
             if rec.get("has_fulltext") and len(qs) < 8:
                 errs.append(f"有全文但引句仅 {len(qs)} 条 (<8)")
             # 总表 `证据级别` 列必须与卡 §0 的判定一致（标签写在列首）。
@@ -237,26 +277,34 @@ def main() -> int:
                     errs.append("证据级别造假：§0 声明全文级但没有本地全文")
         if errs:
             failures += 1
+            line["state"] = "FAIL"
             line["errors"] = " ; ".join(errs)
             report.append(f"FAIL {acc} {line['title']}\n     " + "\n     ".join(errs))
+        elif unverifiable:
+            withheld_rows += 1
+            line["state"] = "WITHHELD"
+            report.append(f"WITHHELD {acc} {line['title']} —— 底稿为第三方原文，未随仓库分发，"
+                          f"本机不可逐字复核（可按 deliverables/fulltext_manifest.csv 重取）")
         else:
-            report.append(f"PASS {acc} quotes={line['quotes']}")
+            line["state"] = "PASS_LOCAL"
+            report.append(f"PASS_LOCAL {acc} quotes={line['quotes']}")
         status.append(line)
 
     if not args.no_report:
         (CARDS / "selfcheck.txt").write_text("\n".join(report) + "\n", encoding="utf-8")
         with (CARDS / "rollout_status.tsv").open("w", encoding="utf-8", newline="") as fh:
-            fh.write("id\thas_fulltext\tcard\tquotes\terrors\n")
+            fh.write("id\tstate\thas_fulltext\tcard\tquotes\terrors\n")
             for s in status:
-                fh.write("\t".join(str(s[k]).replace("\n", " ") for k in
-                         ("id", "has_fulltext", "card", "quotes", "errors")) + "\n")
+                fh.write("\t".join(str(s.get(k, "")).replace("\n", " ") for k in
+                         ("id", "state", "has_fulltext", "card", "quotes", "errors")) + "\n")
     total = len(status)
-    npass = total - failures
+    npass = total - failures - withheld_rows
     if args.no_report:
         print("\n".join(report))
-    print(f"判定标准: 每行一张卡、10 节齐全、工作流程>=3 步、难点>=2 条、逐字引句在登记底稿里全部命中、证据级别不许造假")
-    print(f"判定结果: {npass}/{total} 张卡 PASS，{failures} 行不合格（退出码 {'1' if failures else '0'}）")
-    print(f"找出来没有: 本门禁只判卡片的完整性与引用真实性；正文内容对错仍需按 §溯源 指针人工复核")
+    print("判定标准: 每行一张卡、10 节齐全、工作流程>=3 步、难点>=2 条、逐字引句在登记底稿里全部命中、证据级别不许造假")
+    print(f"判定结果: PASS_LOCAL {npass}/{total} · WITHHELD {withheld_rows}（底稿为第三方原文，"
+          f"按公开口径未随仓库分发，本机不可复核）· FAIL {failures}（退出码 {'1' if failures else '0'}）")
+    print("找出来没有: 本门禁只判卡片的完整性与引用真实性；正文内容对错仍需按 §溯源 指针人工复核")
     return 1 if failures else 0
 
 

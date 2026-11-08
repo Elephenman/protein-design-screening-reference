@@ -66,7 +66,7 @@
 - **MD/自由能筛选器**: ①500 ns MD（310 K，NAMD2，CHARMM36）；入选结构须 RMSD 稳定（**<0.5 nm 持续 300+ ns**）；②初筛 **FEP 34 λ 窗口 × ≥200 ps = 6.8 ns/突变**（soft-core）；③有希望的突变复算 **≥34 ns × 5 副本 × 2 态 = ≥340 ns/突变**；④ΔΔG<0 判"增强"。原文承认"the low success rate of point mutations"（单点突变命中低）→ 这是转向双/换位突变的设计动因。
 - QM: 否。
 - 实验验证手段: CFSE/细胞增殖实验 + 流式（CD69 活化）+ HLA-DQ8 稳定 tetramer 类检测。
-- **命中率原始数字（原文）**: "revealing that **all designed antigens increased CD69 activation** and **four out of seven antigens increased or maintained PBMC cell proliferation** relative to the native X-idiotype antigen"（功能读出 4/7≈57%，活化标记 7/7；且原文明确说预测与实验的相关系数"though low…sufficient to identify enhanced and reduced binders"）。
+- **命中率原始数字（原文）**: "revealing that **all designed antigens increased CD69 activation** and **four out of seven**"（功能读出 4/7≈57%，活化标记 7/7；且原文明确说预测与实验的相关系数"though low…sufficient to identify enhanced and reduced binders"）。
 - 演进链位置: 2021–2023"纯 FEP 物理筛选"阶段核心论文；也是"送合成 N 很小、逐条回看 ΔΔG 符号正确率"模式的样本。
 
 ### [Z05] Mutagenesis-based optimal design of plant peptide phytosulfokine for enhanced biological activity
@@ -146,7 +146,7 @@
 - 作者: Mei Feng（兰州大学-浙大联培）, Kevin C. Chan, Qinglu Zhong, **Ruhong Zhou**
 - 期刊, 年: Int J Biol Macromol, 2024
 - DOI: 10.1016/j.ijbiomac.2024.131356 ✅  PMID: 38574928（**仅摘要级**）
-- 筛选器: MD + FEP 突变设计 → "Enhancement in binding affinities compared to the wild-type was found in **three out of five** mutated candidates"——注意这是**计算端 FEP 的预测分布**（3/5 判增强），非湿实验命中率。
+- 筛选器: MD + FEP 突变设计 → "Enhancement in binding affinities compared to the wild-type was found in **three out of five**"——注意这是**计算端 FEP 的预测分布**（3/5 判增强），非湿实验命中率。
 - 机制输出: p6-Arg/p7-Lys 引发 groove "induced-fit" 构象迁移；提出 HLA "dynamic pocket"。
 - 演进链位置: 纯物理筛选产线的"计算命中率"参照。
 
@@ -233,3 +233,5 @@
 5. 周如鸿是否有 Baker 式**全 de novo 大蛋白骨架设计 + 实验闭环**论文：多轮关键词（Rosetta / RFdiffusion / scaffolding / miniprotein / 曹龙兴 / 卢培龙）交叉检索均无——**现存证据只支持"基于物理的亲和力成熟与小库设计"**；此点与讲座措辞的落差本身值得向讲者确认。
 6. SARS-CoV-2 spike 方向：周组公开工作为 RBD 适配体（Z01）与糖基化/受体机制类纯模拟研究；未发现周组"设计结合蛋白中和 SARS-CoV-2"的论文（该叙事在媒体上多归属 Baker 组 miniprotein，曹龙兴一作 Science 2020——再次确认周、曹无合著）。
 7. MD 轨迹聚类/水介导界面分析等是否设过显式数值阈值：全文中只见 RMSD、BSA、接触概率（末 100 ns）等描述性判据，**无"ΔG < 某固定值即送合成"的全局阈值**——准入判据始终是"相对亲代 ΔΔG<0 + 结构机理可解释"。
+
+> **引用预算截短（2026-11-08，公开仓库口径）**：本底稿有 2 条逐字引句被截短（来源编号：Z04、Z12；许可类别：CC_BY_NC_ND、UNKNOWN），按 `deliverables/protein_design_license_audit.csv` 的逐份许可判定，单条引句截到 ≤100 字符；其中 1 条截短后仍**逐字命中同一份来源全文**，其余 1 条为**原句的前缀**（本地无全文或原句是我们自己的转写，只减不增、不新增第三方内容）。逐条改动账见 `deliverables/quote_budget_notes_ledger.csv`。

@@ -5,13 +5,17 @@
 两个包（都写到 deliverables/bundles/，该目录被 .gitignore 排除，发布走 GitHub Release）：
 
 1. `protein_design_reference_full_<date>.zip`
-   完整迁移包 = git 可见的全部文件（已跟踪 + 未被忽略的新文件；含全文缓存与抓取记录）。
-   换机器时用它可以重建整个工作树，连逐字引句门禁都能原样复跑（门禁需要 `fulltext/` 与 `sources/`）。
-   **不含**被 `.gitignore` 排除的大二进制，例如 RFD4 预印本原 PDF（54.8 MB，按
+   完整迁移包 = git 可见的全部文件（作者原创部分：卡片、总表、台账、模板、迭代协议、
+   脚本、调研底稿、许可审计与清单）。
+   换机器时用它可以重建整个工作树并复跑全部门禁。
+   **不含第三方原文**（公开仓库 = 公开再分发）：需要某一份时按
+   `deliverables/fulltext_manifest.csv` 的路径与"重取方式"取回并校验 sha256。
+   也不含被 `.gitignore` 排除的大二进制，例如 RFD4 预印本原 PDF（54.8 MB，按
    `data/interim/rfd4_2026-11-07/PROVENANCE.md` 的 URL + sha256 重取）。
 2. `protein_design_reference_ai_<date>.zip`
-   AI 投喂包 = 卡片 + 总表 + 台账 + 工作流/模板/迭代协议 + 脚本 + 调研底稿，**不含** `fulltext/` 与 `data/interim/`
-   （那两块是各出版商/PMC 的抽取缓存与抓取日志，喂给模型没有增量信息，只涨体积）。
+   AI 投喂包 = 卡片 + 总表 + 台账 + 工作流/模板/迭代协议 + 脚本 + 调研底稿，
+   **不含** `fulltext/` 与 `data/interim/`（那两块是各出版商/PMC 的抽取缓存与抓取日志，
+   喂给模型没有增量信息，只涨体积）。
    例外是 `AI_INCLUDE` 白名单里的三份归纳件（RFD4 事实台账、PROVENANCE、迭代证据台账）——
    模板与迭代协议正文直接链接它们，剔掉会让包内链接断掉。
    另附 `ai_ingest/` 分层 digest：tier0 索引 → tier1 工作流与判据 → tier2 全部卡片正文。
@@ -160,13 +164,17 @@ def build_digest(today: str) -> dict[str, int]:
 | T3 | `tier3_ledgers/` | 机器台账 CSV（证据台账 152 行、判据台账 679 行）+ 文献总表 152 行 × 27 列 | 结构化数据，按需检索 |
 {dup_note}
 
-**AI 投喂包不含论文全文**（本包为许可与体积考虑剔除了 `fulltext/` 与 `data/interim/`）。
-因此卡里每条引句你只能查到"它声明的底稿路径 + 该底稿的 sha256"，不能在此包内复核原文；
-要复核必须用完整迁移包或原仓库。本包的定位是**判据、阈值、成本与流程口径的参考**，不是原文数据库。
+**AI 投喂包不含论文全文**（本包与完整迁移包都不含第三方原文：公开仓库 = 公开再分发，
+第三方原文只登记在 `deliverables/fulltext_manifest.csv`，需要哪份按表里的"重取方式"取回并校验 sha256）。
+因此卡里每条引句你只能查到"它声明的底稿路径 + 该底稿的 sha256"，不能在此包内复核原文。
+本包的定位是**判据、阈值、成本与流程口径的参考**，不是原文数据库。
 
 **许可**：本包内属于作者原创的内容适用包内 `LICENSE`；第三方论文全文**不在本包内**，
-逐篇许可类别与证据见 `tier3_ledgers/protein_design_license_audit.csv`。
-卡里的英文短引句是**引用**（不是全文再分发），每条带 `[文献编号]`，出处可在 T3 台账回查。
+逐篇许可类别与证据见 `tier3_ledgers/protein_design_license_audit.csv`，
+逐份文件的 sha256 与重取方式见 `tier3_ledgers/fulltext_manifest.csv`。
+卡里的英文短引句是**引用**（不是全文再分发），每条带 `[文献编号]`，出处可在 T3 台账回查；
+许可受限来源的引句已按"引用预算"截到引用级（单条 ≤100 字符、同一来源行合计 ≤600 字符），
+截短后仍逐字命中同一份底稿。
 
 ## 引用本库时必须遵守的三条
 
@@ -214,7 +222,10 @@ def build_digest(today: str) -> dict[str, int]:
     for f in ["data/protein_design_literature.csv",
               "deliverables/protein_design_workflow_evidence.csv",
               "deliverables/protein_design_workflow_criteria_ledger.csv",
-              "deliverables/protein_design_license_audit.csv"]:
+              "deliverables/protein_design_license_audit.csv",
+              "deliverables/fulltext_manifest.csv",
+              "deliverables/quote_budget_ledger.csv",
+              "deliverables/quote_budget_notes_ledger.csv"]:
         src = ROOT / f
         dst = led / Path(f).name
         dst.write_bytes(src.read_bytes())
@@ -228,7 +239,8 @@ def build_digest(today: str) -> dict[str, int]:
 4. 结构化问题（"哪些行用了 MD""哪个判据出现最多"）走 `tier3_ledgers/` 里的 CSV，不要靠模型记忆。
 5. token 估算方法：中日韩字符按 1 token/字、其余按 4 字符/token，是粗估，不同分词器会有出入。
 
-需要原文逐字复核时用完整迁移包（含 `data/literature_cards/fulltext/` 与 `data/interim/`）。
+需要原文逐字复核时，按 `tier3_ledgers/fulltext_manifest.csv` 里该底稿的路径与"重取方式"取回，
+并用同一张表里的 sha256 校验；本包与完整迁移包都不含第三方原文（公开仓库口径）。
 """,
         encoding="utf-8",
     )
@@ -321,6 +333,18 @@ def main(argv=None) -> int:
             if p.startswith(("data/literature_cards/fulltext/", "data/interim/"))
             and not any(rx.match(p) for rx in AI_INCLUDE)]
     print(f"判定结果: {'PASS AI 包 0 处缓存泄漏' if not leak else 'FAIL 泄漏 ' + str(len(leak))}")
+    # 完整包同样不得含第三方原文：以清单里"随仓库分发=否"的路径为准（清单是机器生成的）。
+    manifest = ROOT / "deliverables" / "fulltext_manifest.csv"
+    full_leak: list[str] = []
+    if manifest.exists():
+        with manifest.open(encoding="utf-8-sig", newline="") as fh:
+            for row in csv.DictReader(fh):
+                if row.get("随仓库分发", "").strip() == "否" and row["path"] in set(files):
+                    full_leak.append(row["path"])
+    else:
+        print("FAIL 缺 deliverables/fulltext_manifest.csv：无法判定完整包是否含第三方原文")
+        full_leak.append("(manifest missing)")
+    print(f"判定结果: {'PASS 完整包 0 处第三方原文' if not full_leak else 'FAIL 完整包含第三方原文 ' + str(len(full_leak))}")
     # 许可文件缺失 = 无授权再分发。缺一个就红。
     missing_legal = [f for f in AI_MUST_INCLUDE if f not in ai_files]
     if missing_legal:
@@ -328,7 +352,7 @@ def main(argv=None) -> int:
     else:
         print("PASS AI 包带齐 LICENSE / NOTICE / CITATION.cff")
     print("找出来没有: 本脚本只判'打包内容是否如声明'，不判文献内容对错（那走 verify_literature_cards.py）")
-    return 1 if leak else 0
+    return 1 if (leak or full_leak) else 0
 
 
 if __name__ == "__main__":

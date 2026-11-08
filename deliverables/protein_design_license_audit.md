@@ -1,6 +1,6 @@
 # 第三方全文许可审计与商业分发边界
 
-生成日期：2026-11-07　·　生成脚本：`scripts/audit_source_licenses.py`（重跑可复现；外部取回结果缓存在 `data/interim/license_cache.json`）
+生成日期：2026-11-08　·　生成脚本：`scripts/audit_source_licenses.py`（重跑可复现；外部取回结果缓存在 `data/interim/license_cache.json`）
 
 本文件回答一个问题：**我们缓存的这些第三方全文，哪些可以随商业产品一起再分发？**
 
@@ -48,11 +48,11 @@
 | B03 | 仅文本挖掘 / 公平使用 | 不可 | data/literature_cards/fulltext/B03_PMC9293396_fullTextXML.xml | <permissions><license><license-p>This file is available for text mining. It may also be used consistent with the princip |
 | B04 | CC BY 4.0 | 可（含商用） | data/literature_cards/fulltext/B04_PMC7971855_fullTextXML.xml | creativecommons.org/licenses/by/4.0 |
 | B05 | CC BY 4.0 | 可（含商用） | data/interim/baker_lit/ft/proteinmpnn2022.txt | creativecommons.org/licenses/by/4.0 |
-| B06 | CC BY 4.0 | 可（含商用） | https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=9117152&rett | creativecommons.org/licenses/by/4.0 |
+| B06 | CC BY 4.0 | 可（含商用） | data/interim/baker_lit/ft/cao2022.txt | creativecommons.org/licenses/by/4.0 |
 | B07 | CC BY 4.0 | 可（含商用） | data/interim/baker_lit/ft/smallfolds2022.txt | creativecommons.org/licenses/by/4.0 |
 | B08 | CC BY 4.0 | 可（含商用） | data/interim/baker_lit/ft/rfdiffusion2023.txt | creativecommons.org/licenses/by/4.0 |
 | B09 | CC BY 4.0 | 可（含商用） | data/interim/baker_lit/ft/binderDL2023.txt | creativecommons.org/licenses/by/4.0 |
-| B10 | CC BY 4.0 | 可（含商用） | https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=9946828&rett | creativecommons.org/licenses/by/4.0 |
+| B10 | CC BY 4.0 | 可（含商用） | data/interim/baker_lit/ft/luciferase2023.txt | creativecommons.org/licenses/by/4.0 |
 | B11 | CC BY-NC-ND 4.0 | 不可 | data/interim/baker_lit/ft/betaBarrel2023.txt | creativecommons.org/licenses/by-nc-nd/4.0 |
 | B12 | CC BY 4.0 | 可（含商用） | data/interim/baker_lit/ft/helicalpeptide2024.txt | creativecommons.org/licenses/by/4.0 |
 | B14 | CC BY 4.0 | 可（含商用） | data/interim/baker_lit/ft/tnfr2024.txt | Creative Commons Attribution 4.0 International |
@@ -73,7 +73,7 @@
 | B29 | CC BY 4.0 | 可（含商用） | data/interim/baker_lit/ft/memprot_analogue2024.txt | creativecommons.org/licenses/by/4.0 |
 | B30 | CC BY-NC-ND 4.0 | 不可 | data/interim/baker_lit/ft/autotwo_comp2024.txt | creativecommons.org/licenses/by-nc-nd/4.0 |
 | B31 | CC BY 4.0 | 可（含商用） | data/interim/baker_lit/ft/smallmol_family2026.txt | creativecommons.org/licenses/by/4.0 |
-| B32 | CC BY 4.0 | 可（含商用） | https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=11865580&ret | creativecommons.org/licenses/by/4.0 |
+| B32 | CC BY 4.0 | 可（含商用） | data/interim/baker_lit/ft/immune_receptor_binder2025.txt | creativecommons.org/licenses/by/4.0 |
 | B33 | CC BY 4.0 | 可（含商用） | data/literature_cards/fulltext/B33_PMC10115654_fullTextXML.xml | creativecommons.org/licenses/by/4.0 |
 | B34 | CC BY 4.0 | 可（含商用） | data/interim/baker_lit/ft/buttressedloops2024.txt | creativecommons.org/licenses/by/4.0 |
 | B37 | CC BY 4.0 | 可（含商用） | data/interim/baker_lit/ft/fap2021.txt | creativecommons.org/licenses/by/4.0 |
@@ -81,7 +81,7 @@
 | B39 | CC BY-NC-ND 4.0 | 不可 | data/interim/baker_lit/ft/confdyn2023.txt | creativecommons.org/licenses/by-nc-nd/4.0 |
 | B40 | CC BY 4.0 | 可（含商用） | data/interim/baker_lit/ft/chlorophyll2024.txt | creativecommons.org/licenses/by/4.0 |
 | B41 | CC BY 4.0 | 可（含商用） | data/interim/baker_lit/ft/fourcomp_cages2025.txt | creativecommons.org/licenses/by/4.0 |
-| B42 | CC BY 4.0 | 可（含商用） | https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=11839401&ret | creativecommons.org/licenses/by/4.0 |
+| B42 | CC BY 4.0 | 可（含商用） | data/interim/baker_lit/ft/endocytosis2025.txt | creativecommons.org/licenses/by/4.0 |
 | B43 | CC BY 4.0 | 可（含商用） | data/interim/baker_lit/ft/snakvenom2025.txt | creativecommons.org/licenses/by/4.0 |
 | B44 | CC BY 4.0 | 可（含商用） | data/interim/baker_lit/ft/integrin_miniprot2023.txt | creativecommons.org/licenses/by/4.0 |
 | C01 | CC BY 4.0 | 可（含商用） | data/literature_cards/fulltext/C01_PMC7857403_fullTextXML.xml | creativecommons.org/licenses/by/4.0 |
@@ -142,4 +142,5 @@
 3. "可（含商用）"表示许可本身允许商业性再分发，**仍须履行署名/相同方式共享等条件**；本审计不替代法律意见。
 4. 预印本（bioRxiv 等）默认多为 CC BY-NC-ND，**按不可再分发处理**；正式发表版可能是 CC BY，因此下架预印本缓存、改用已发表版引句是更稳的做法。
 5. 本审计只判**许可文本**与**能不能再分发**，不判内容对错，也不替代法律意见。若要正式商用，建议对受限的 26 篇按需单独向权利人申请授权。
+6. 公开克隆里没有第三方原文（按公开再分发口径不入库），此时本脚本的许可类别取自 `deliverables/fulltext_manifest.csv` 的快照列，**类别不变**，但"证据来源"列会指向清单（含该文件的 sha256 与重取方式）而不是原始 URL。
 

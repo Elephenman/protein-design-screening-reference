@@ -94,7 +94,7 @@ Science 2024, 386:1154-1161 · DOI 10.1126/science.adp1779 · PMID 39636970 · P
 | 0.52 Å | TNFR2_mb1–TNFR2 复合物结合体的 Cα RMSD | "nearly identical over the designed binder (C-alpha RMSD 0.52Å" |
 | 44 个寡聚体；24 种结构域 | 激动剂几何/价数扫描规模 | "Over a set of 44 oligomers"；"Binders 4-1BB_mb2 and OX40_mb1 were fused N- or C-terminal to 24 oligomerization domains each" |
 | 107 残基 | 拮抗剂尺寸（界面却大于天然界面） | "even larger than the native interface despite being only 107 amino acids" |
-| 96 + 96 + 48 | 全流程实测序列总数口径 | "The number of sequences tested (96 free diffusion and 96 partial diffusion designs for TNFR1, and 48 partial diffusion designs for TNFR2, OX40, and 4-1BB)" |
+| 96 + 96 + 48 | 全流程实测序列总数口径 | "The number of sequences tested (96 free diffusion and 96 partial diffusion designs for TNFR1," |
 | 680 pM / 10–100 nM | 抗体的对照亲和力区间（二价 vs 单体形式） | "have affinities of up to 680 pM"；"whereas monomeric Fabs, scFvs, and nanobodies are in the range of 10-100 nM" |
 | 10,000 倍 | off-target 试验浓度相对 KD 的倍数 | "up to 100 nM, 10,000 fold higher than the K D" |
 
@@ -143,6 +143,8 @@ Science 2024, 386:1154-1161 · DOI 10.1126/science.adp1779 · PMID 39636970 · P
 - 登记底稿：`sources/baker.md:185–196`（原卡；本卡在两处修正其写法：① 底稿把 KD 写作 `K_D`，全文实际为 `K D`；② 底稿把主闸口并写为 "interface pae < 7.5 且 pLDDT > 85"，全文原句用未解码实体 `&lt; 7.5` / `&gt;85`，本卡因此未把该句作为英文引句使用）。
 - CSV 字段映射：本文第 3 节 ↔ `候选生成方法/计算筛选判据/阈值数字`；第 4 节 ↔ `候选数递减/实验命中率/成本统计`；第 8 节 ↔ `在方法演进链的位置`。
 - **本卡自检**：由 `scripts/verify_literature_cards.py --only B14 --no-report` 执行——把卡内所有"直双引号包住、不含中日韩字符、≥20 字符且 ≥12 个字母"的片段，在该编号登记的**每一份**本地全文里做逐字命中检查；任一条不命中即 FAIL。本卡不引用任何带未解码实体的句子，以避免比对歧义。
+
+- **引用预算截短（2026-11-08，公开仓库口径）**：本卡有 1 条逐字引句来自许可受限的第三方来源（B01；PUBLISHER_TERMS），按 `deliverables/fulltext_manifest.csv` 的逐份许可判定，已把单条引句截到 ≤100 字符、同一来源总量截到 ≤600 字符；**截短后仍逐字命中同一份底稿**（门禁 `scripts/verify_literature_cards.py` 仍是逐字核验），完整原句按 §9 的重取方式与 sha256 可复核。逐条改动账见 `deliverables/quote_budget_ledger.csv`。本卡其余内容（我们自己的分析、判断与台账）未被改动。
 
 <!--CSV回填
 work_type=论文

@@ -26,14 +26,14 @@ Nature Structural & Molecular Biology 2025, 32:1050-1060 · DOI 10.1038/s41594-0
 
 ## 2. 遇到的难点，以及遇到问题时他们做了什么（作者自述，不是我们的推测）
 
-1. **设计阶段用过的常规结构指标，全都看不出这个坑**。AF2 对三个三聚体支架给的**整体平均置信度都非常高**："Overall, AF2 predicted all scaffolds with high confidence"，平均 pLDDT 分别是 93、95、94；DLS 与 SEC 也只报告"均一"——"Dynamic light scattering (DLS) and size-exclusion chromatography (SEC) of the purified proteins suggested that in all three cases, self-assembly resulted in mostly homogeneous assemblies"。也就是说**"表征说均一"和"对称性说错了"可以同时为真**。
+1. **设计阶段用过的常规结构指标，全都看不出这个坑**。AF2 对三个三聚体支架给的**整体平均置信度都非常高**："Overall, AF2 predicted all scaffolds with high confidence"，平均 pLDDT 分别是 93、95、94；DLS 与 SEC 也只报告"均一"——"Dynamic light scattering (DLS) and size-exclusion chromatography (SEC) of the purified proteins"。也就是说**"表征说均一"和"对称性说错了"可以同时为真**。
    → **他们做了什么**：把 pLDDT 从"全链平均"改成**分区比对**，把假定的柔性区（junction / hinge）与 core 区的**每残基均值**分开画："the former present on average lower pLDDT scores"；再叠加**独立于 AF2** 的物理量（Rosetta 计算的溶剂可及面积 SASA 与 average degree，即 10 Å 内邻居残基数）做旁证："the junction and hinge regions appear to be more exposed to solvent and less well embedded in the protein structure than the core regions"。
    → **代价**：这套分区读数是**事后诊断**，没有变成设计前的过滤器；正文也没给"pLDDT 低于多少就算柔性区"的阈值（**原文未给阈值**，只给区域均值±标准差的图）。
-2. **柔性体系在冷冻电镜里拿不到高分辨率，而且结果不可复现**。I32-10 最终只得到六个 7-15 Å 的图（表 1 记为 ~10 to 25 Å），作者对流程的处理写得很直白：迭代式 3D 分类、不加对称算符、参考模型由上一轮输出派生，"These initial iterations revealed the additional presence of a diverse set of nanoparticle assembly configurations that deviated from the reference tetrahedra"；最后一轮 gold-standard 精修前对初始模型做低通滤波，"Maps and particles that did not reach a geometry resembling the symmetrically refined input map at this stage were promptly discarded"，而这样做的理由是承认失败："This decision stemmed from a reduced level of confidence due to the system's flexibility, which led to the lower-than-expected resolution cryo-EM maps reported here and the inconsistency in achieving reproducible final map data"。
+2. **柔性体系在冷冻电镜里拿不到高分辨率，而且结果不可复现**。I32-10 最终只得到六个 7-15 Å 的图（表 1 记为 ~10 to 25 Å），作者对流程的处理写得很直白：迭代式 3D 分类、不加对称算符、参考模型由上一轮输出派生，"These initial iterations revealed the additional presence of a diverse set of nanoparticle assembly"；最后一轮 gold-standard 精修前对初始模型做低通滤波，"Maps and particles that did not reach a geometry resembling the symmetrically refined input map at"，而这样做的理由是承认失败："This decision stemmed from a reduced level of confidence due to the system's flexibility,"。
    → **他们做了什么**：①改用**无对称 C1 分类 + 事后按目视几何指定对称群再精修**；②用"按测得的 2D 直径选择性剔除粒子"帮 3D 分类分开不同组装态；③对 I32-10 放弃 MD 快照路线，改用**从设计模型里直接抽两块能引入铰链自由度的刚体**去拟合，"Rigid-body fitting using these building blocks recovered all six of the observed architectures"；④样本制备上也针对聚集做处理（两轮离心 + 100 mM glycine + 冰上再平衡一小时）。
    → **代价**：他们自己承认六个图"很可能只是溶液中结构的**一个子集**"（摘要："six cryo-EM reconstructions for the third likely represent a subset of its solution-phase structures"）；被丢弃的粒子/图没有留账。
 3. **不知道柔性来自哪一层**（作者明确列出三个候选来源：三折轴即三聚螺旋束、两折轴即设计的蛋白-蛋白界面、亚基内部两结构域连接处）。
-   → **他们做了什么**：对每个三聚体/二聚体 building block **以及它们之间的界面**分别跑 MD，看均方根涨落，发现域本身是刚的——"While the simulations suggest that the individual domains are rigid"——但"large fluctuations between trimer arms were observed"，微小亚基内涨落在三聚臂末端（正是设计界面所在处）被放大。然后做**反事实对照**：用原始完美对称设计模型的刚体去拟合，"using rigid bodies extracted from the original, perfectly symmetric design models yielded structures that fit worse to the experimental cryo-EM densities, with large alignment defects and clashes that would prevent assembly"。结论落到亚基内部："the main source of flexibility is not at the three- or twofold protein-protein interfaces, but rather the junction region within the subunit between them"。
+   → **他们做了什么**：对每个三聚体/二聚体 building block **以及它们之间的界面**分别跑 MD，看均方根涨落，发现域本身是刚的——"While the simulations suggest that the individual"——但"large fluctuations between trimer arms were"，微小亚基内涨落在三聚臂末端（正是设计界面所在处）被放大。然后做**反事实对照**：用原始完美对称设计模型的刚体去拟合，"using rigid bodies extracted from the original,"。结论落到亚基内部："the main source of flexibility is not at the"。
    → **代价**：判定用的是"**最少需要几张 MD 快照能拼出该架构**"（KWOCA 18 的 D5/D2 各需 1 与 2 张三聚体快照、2 与 5 张界面快照；KWOCA 70 的 D2/D3 需 4 与 4、5 与 4），这是拟合充分性的代理指标，不是能量判据。
 4. **看得见的架构只是被实验采样到的那几个，看不到全景**。
    → **他们做了什么**：把"可能的多面体架构"变成**几何枚举问题**——只允许正则五边形与正方形面，用欧拉公式 2F4+F5=12 列出 8/10/12/14/16/20 三聚体的全部解（其中 F4=1、F5=10 明写不可能成笼），再用两个几何量约束：三聚体三个内角之和 S、界面角 δ（外加把三聚臂扭开的 θ）。前提假设作者自己摊开写了："The key assumption behind our approach was that the geometric features of the most populated species detected by nMS and cryo-EM represent the most energetically favorable conformations of the constituent proteins"。判据即"平均 δ 是否落在实测架构的 δ 区间内"。
@@ -58,11 +58,11 @@ Nature Structural & Molecular Biology 2025, 32:1050-1060 · DOI 10.1038/s41594-0
 | S1 | 三个已发表设计：KWOCA 18（拟二十面体，一组分）、KWOCA 70（拟八面体，一组分）、I32-10（拟二十面体，三聚体+二聚体两组分） | E. coli（Lemo21(DE3)、pET29b）表达 → Ni-NTA → Superose 6 Increase 10/300 GL 纯化 → DLS + SEC + SAXS + nsEM 四路低分辨表征 | 正文未给量化判定线，按"是否单峰/均一 + 实测粒径 vs 设计模型粒径"对比；每个测量重复至少三次独立实验 | 实测水合直径 **25、32、37 nm**，设计模型预期 **21、13、25 nm**；SEC/DLS 显示"mostly homogeneous"，但三个都不符合设计模型；nsEM 显示 I32-10 明显不均一 |
 | S2 | 同一批纯化蛋白 | 找"设计期就能看出柔性"的指标：AF2 multimer 预测三聚体支架，按 **junction/hinge 区 vs core 区**分别算每残基 pLDDT 均值；再算 Rosetta SASA 与 average degree（10 Å 内邻居残基数） | 判据＝**分区对比**而非绝对阈值（原文未给阈值）；佐证方向：SASA 更高 + average degree 更低 ⇒ 欠堆积 | 三支架整体平均 pLDDT **93、95、94**（全部高置信）；junction/hinge 区 pLDDT **平均更低**、更暴露、更浅埋在结构里 |
 | S3 | 纯化样品（KWOCA 18 4.93 mg/ml，KWOCA 70 4.58 mg/ml，I32-10 初值 2 mg/ml） | 冷冻制样（Vitrobot Mark IV，T=10 °C、湿度 100%、吸胀 4-7 s；KWOCA 样品制样时先把 0.5 μl 的 0.04 mM lauryl maltose neopentyl glycol 储备液与 3.5 μl 样品混合，再取 3 μl 上样）→ Talos Arctica / Glacios 200 kV 采集 → MotionCor2/GCTF → cryoSPARC 2D 类别平均与初始模型 → **C1 无对称 3D 分类** → 按目视几何指定对称群做 3D 精修 | KWOCA 18：三轮 C1 分类分出两个主类；KWOCA 70：一轮 C1 分类分出两个子集；I32-10：迭代 3D 分类、参考来自上一轮输出，末轮精修前低通滤波，几何不像对称精修输入图的**直接丢弃** | KWOCA 18：1,803 张显微图 → 300,970 粒子 → 45,922 与 22,981，分辨率 **8.0 与 7.1 Å**，D5（**10 个三聚体**）与 D2（**12 个**）。KWOCA 70：2,364 张图 → 360,972 粒子 → 32,790 与 302,683，**7.2 与 7.1 Å**，D2（**12 个**）与 D3（**14 个**）。I32-10：3,381 段视频 → **六张图，7-15 Å**（表 1 记 ~10 to 25，C1），包括预期二十面体（20 三聚体+30 二聚体）、一个四面体（28+42）、三个二面体（26/32/36 三聚体 + 39/48/54 二聚体）与一个低对称环式（30+45），全部属 fullerene 笼系列 |
-| S4 | KWOCA 18 与 70 的 SEC 洗脱组分 | 换 150 mM 醋酸铵（pH 8，50 kDa MWCO 超滤）→ 金涂层硼硅毛细管纳电喷雾 → Orbitrap Q Exactive UHMR 原生 MS（去溶剂电压 -75 V，HCD 100-125 V）；CDMS 单独按 mass = m/z × z - z 算单粒子质量；串联 MS 用 150-175 V HCD 打碎选定的母离子 | 判据＝**去卷积后的实测质量与按化学计量算出的质量的偏差** | KWOCA 18：m/z 12,000-16,500 处三种组装体含 **28、30、36 个亚基**，质量 **827、886、1,064 kDa**，"These measured masses are highly consistent with the calculated masses"（偏差 <0.3%）。KWOCA 70：m/z 14,000-18,500 处 **36 与 42 亚基**，**1,137 与 1,327 kDa**，均在 0.1% 内。KWOCA 18 可指认 trimer 到 decamer 的连续分布（单体加/减），KWOCA 70 的中间态亚基数**都是 3 的倍数**（三聚体更稳定）；I32-10 质谱"宽谱无可分辨峰"，未进一步分析 |
+| S4 | KWOCA 18 与 70 的 SEC 洗脱组分 | 换 150 mM 醋酸铵（pH 8，50 kDa MWCO 超滤）→ 金涂层硼硅毛细管纳电喷雾 → Orbitrap Q Exactive UHMR 原生 MS（去溶剂电压 -75 V，HCD 100-125 V）；CDMS 单独按 mass = m/z × z - z 算单粒子质量；串联 MS 用 150-175 V HCD 打碎选定的母离子 | 判据＝**去卷积后的实测质量与按化学计量算出的质量的偏差** | KWOCA 18：m/z 12,000-16,500 处三种组装体含 **28、30、36 个亚基**，质量 **827、886、1,064 kDa**，"These measured masses are highly consistent with"（偏差 <0.3%）。KWOCA 70：m/z 14,000-18,500 处 **36 与 42 亚基**，**1,137 与 1,327 kDa**，均在 0.1% 内。KWOCA 18 可指认 trimer 到 decamer 的连续分布（单体加/减），KWOCA 70 的中间态亚基数**都是 3 的倍数**（三聚体更稳定）；I32-10 质谱"宽谱无可分辨峰"，未进一步分析 |
 | S5 | 三个三聚体/二聚体 building block 及其界面 | Amber18（CUDA）MD：每模型 **4 条并行轨迹 × 240 ns**（2 fs 步长，ff19SB、OPC、150 mM NaCl、1 bar、298 K、非键截断 10 Å）；算每残基均方根涨落与沿序列的分布 | 判据＝涨落幅度与来源定位（域内 / 三折轴 / 两折界面 / junction-hinge） | 每模型累计 **960 ns**；单个域内平均 r.m.s.d. 约 **1 Å**（刚），三聚臂末端（设计界面所在）涨落被放大；界面与 I32-10 二聚体轨迹涨落整体低于三聚体 |
-| S6 | MD 轨迹快照 + S3 的冷冻电镜密度图 | Situs `colores` 逐个界面掩膜拟合（快照每 **2 ns** 取一张），按互相关打分，"Snapshots were scored by cross-correlation, and the top 100 fits were used for stitching"；拼接后用一段 **20 残基螺旋区**的 r.m.s.d. 给相邻三聚/二聚体打分，整笼按拼接区总 r.m.s.d. 排序取最低；最后 Rosetta 3 依密度放松 | 判据＝**拼出该架构所需的不同快照张数**（越少越说明柔性够用），以及对称刚体对照的拟合质量 | KWOCA 18 的 D5/D2 各需 **1 与 2 张三聚体快照 + 2 与 5 张界面快照**；KWOCA 70 的 D2/D3 需 **4 与 4、5 与 4**。用原始对称设计模型的刚体拟合**更差**，出现大错位与立体冲突。I32-10 因分辨率低改走"两块设计刚体（中央三螺旋束 / 二聚体+相邻三聚体两个球状域）"路线，**六个观测架构全部重构成功** |
+| S6 | MD 轨迹快照 + S3 的冷冻电镜密度图 | Situs `colores` 逐个界面掩膜拟合（快照每 **2 ns** 取一张），按互相关打分，"Snapshots were scored by cross-correlation,"；拼接后用一段 **20 残基螺旋区**的 r.m.s.d. 给相邻三聚/二聚体打分，整笼按拼接区总 r.m.s.d. 排序取最低；最后 Rosetta 3 依密度放松 | 判据＝**拼出该架构所需的不同快照张数**（越少越说明柔性够用），以及对称刚体对照的拟合质量 | KWOCA 18 的 D5/D2 各需 **1 与 2 张三聚体快照 + 2 与 5 张界面快照**；KWOCA 70 的 D2/D3 需 **4 与 4、5 与 4**。用原始对称设计模型的刚体拟合**更差**，出现大错位与立体冲突。I32-10 因分辨率低改走"两块设计刚体（中央三螺旋束 / 二聚体+相邻三聚体两个球状域）"路线，**六个观测架构全部重构成功** |
 | S7 | S6 得到的模型 + 欧拉公式枚举的正则五边形/正方形笼 | 用三个几何量描述：S=α+β+γ（三聚体扁平度）、δ（界面角）、θ（三聚臂绕棱的非对称扭转）；从实测模型量出 S 与 δ 的区间，再看 8/10/12/14/16/20 三聚体各架构所需的平均 δ 是否落在区间内 | KWOCA 18 实测 S **278-288°**（设计二十面体单值 **277°**）、KWOCA 70 **305-312°**（设计八面体单值 **318°**）；实测平均 δ：KWOCA 18 **56-60°**、KWOCA 70 **74-79°**；θ 可达范围按冷冻电镜结构估为 **0-20°（KWOCA 18）与 0-12°（KWOCA 70）** | 结论：其余架构的 δ **全部落在实测区间之外**。KWOCA 18 要缩 9° 或扩 3° 才能碰下一个架构；KWOCA 70 要缩 3° 才够到 10-三聚体，16-三聚体在无极端不对称（θ 需比观测上限至少再大 119%/148%）时无法实现 ⇒ **柔性受限，只通向少数规整架构，而非无序聚集或多态** |
-| S8 | 假设"把 junction 刚性化就能回收单一对称架构" | 对 KWOCA 70 junction 做两条重设计路线：①只用 ProteinMPNN 重出序列（**48 条**）；②用 RFdiffusion 对 junction（含上下各 5 残基侧翼）做 partial diffusion，**每个定义 24 个骨架**，再对扩散残基+5 侧翼用 ProteinMPNN 出 **每条骨架 48 条序列**；AF2 单序列、无模板、一次 recycle 预测 | 进实验的门槛："the top five designs from approach 1 (KWOCA 70 OG 1-5) and top ten designs from approach 2 (KWOCA 70 D1-10) based on highest pLDDT scores and lowest ProteinMPNN score were selected"，且要求 r.m.s.d. < 1 Å | **15 条设计**进湿实验 → **KWOCA 70 D7** 命中：DLS/SEC 粒径 **19 nm**（原 KWOCA 70 为 32 nm），nsEM 二维类别平均出现设计模型式的**四折投影 ⇒ 八面体**；AF2 分区 pLDDT 升到与 core 无法区分，而 Rosetta SASA/average degree **无可见差异** |
+| S8 | 假设"把 junction 刚性化就能回收单一对称架构" | 对 KWOCA 70 junction 做两条重设计路线：①只用 ProteinMPNN 重出序列（**48 条**）；②用 RFdiffusion 对 junction（含上下各 5 残基侧翼）做 partial diffusion，**每个定义 24 个骨架**，再对扩散残基+5 侧翼用 ProteinMPNN 出 **每条骨架 48 条序列**；AF2 单序列、无模板、一次 recycle 预测 | 进实验的门槛："the top five designs from approach 1 (KWOCA 70 OG"，且要求 r.m.s.d. < 1 Å | **15 条设计**进湿实验 → **KWOCA 70 D7** 命中：DLS/SEC 粒径 **19 nm**（原 KWOCA 70 为 32 nm），nsEM 二维类别平均出现设计模型式的**四折投影 ⇒ 八面体**；AF2 分区 pLDDT 升到与 core 无法区分，而 Rosetta SASA/average degree **无可见差异** |
 
 **这套流程的骨架值得单独记住**：偏离设计 ≠ 失败噪声——先用**多路低分辨读出**发现"粒径不对"，再用**分区 pLDDT + 独立物理量**定位嫌疑区，再用**MD + 刚体拟合的最少快照数**证明该区柔性足以重建观测架构，再用**几何枚举 + 区间判据**把"还能形成什么"限定成小集合，最后用**只改一处刚性的重设计**做因果闭环。全程是"结构读出 + 质量读出 + 几何可行性"，没有任何功能性/活性判据。
 
@@ -70,44 +70,44 @@ Nature Structural & Molecular Biology 2025, 32:1050-1060 · DOI 10.1038/s41594-0
 
 | 数值 | 含义 | 出处（原句片段或正文明确定位） |
 |---|---|---|
-| 25 / 32 / 37 nm | 三个设计实测平均水合直径（KWOCA 18 / 70 / I32-10） | "the measured average hydrodynamic diameter was substantially larger (25, 32 and 37 nm for KWOCA 18, KWOCA 70 and I32-10, respectively)" |
-| 21 / 13 / 25 nm | 设计模型预期的水合直径 | 同上句后半 "than expected from the design models (21, 13 and 25 nm, respectively)" |
-| 93 / 95 / 94 | 三支架 AF2 平均 pLDDT（整体高置信） | "Overall, AF2 predicted all scaffolds with high confidence"；括注 "93, 95 and 94 for KWOCA 18, KWOCA 70 and I32-10, respectively" |
-| 7-8 Å；7-15 Å | KWOCA 的三维重构分辨率；I32-10 六个图的范围 | "revealed that KWOCAs 18 and 70 do not assemble into the originally intended architectures, but instead form two distinct assemblies each"；"revealing even greater heterogeneity"（两个分辨率数值在同一句群内，因原文紧跟度数/Å 符号而未纳入引句） |
+| 25 / 32 / 37 nm | 三个设计实测平均水合直径（KWOCA 18 / 70 / I32-10） | "the measured average hydrodynamic diameter was" |
+| 21 / 13 / 25 nm | 设计模型预期的水合直径 | 同上句后半 "than expected from the design models (21," |
+| 93 / 95 / 94 | 三支架 AF2 平均 pLDDT（整体高置信） | "Overall, AF2 predicted all scaffolds with high"；括注 "93, 95 and 94 for KWOCA 18, KWOCA 70 and I32-10," |
+| 7-8 Å；7-15 Å | KWOCA 的三维重构分辨率；I32-10 六个图的范围 | "revealed that KWOCAs 18 and 70"；"revealing even greater heterogeneity"（两个分辨率数值在同一句群内，因原文紧跟度数/Å 符号而未纳入引句） |
 | 8.0/7.1 Å；7.2/7.1 Å；~10 to 25 Å | 表 1 三个样品的最终地图分辨率 | Table 1 Cryo-EM data collection, refinement and validation statistics 的 Map resolution 行（原文含 Å 符号，不作引句；同表 FSC threshold 一行空值，Map resolution range 三列均记 NA） |
-| D5=10、D2=12（18）；D2=12、D3=14（70） | 两种实测架构的各含三聚体数 | "KWOCA 18 forms species with D5 and D2 symmetry assembled from 10 and 12 trimers, respectively"；"KWOCA 70 forms species with D2 and D3 symmetry assembled from 12 and 14 trimers, respectively" |
-| 20+30；28+42；26/32/36 + 39/48/54；30+45 | I32-10 六架构的三聚体+二聚体计数（均为 fullerene 笼） | "in addition to the originally intended icosahedral architecture (20 trimers + 30 dimers), I32-10 was also observed to form one tetrahedral (28 trimers + 42 dimers), three dihedral (26, 32 and 36 trimers + 39, 48 and 54 dimers, respectively) and one low-symmetry cyclic (30 trimers + 45 dimers) architectures all belonging to the series of fullerene cages" |
-| 28 / 30 / 36 亚基；827 / 886 / 1,064 kDa | KWOCA 18 原生质谱三种组装体及其去卷积质量 | "three distinct assemblies containing 28, 30 and 36 subunits were readily identified in the m/z range between 12,000 and 16,500"；"the acquired masses of these three architectures were 827, 886 and 1,064 kDa, respectively" |
-| <0.3%；0.1% | 实测质量与计算质量偏差（18 / 70） | "These measured masses are highly consistent with the calculated masses"（正文括注 <0.3% deviation）；"both within 0.1% of the expected masses for these assembly states" |
-| 36 / 42 亚基；1,137 / 1,327 kDa | KWOCA 70 原生质谱两种组装体 | "two different assemblies formed by 36 and 42 subunits were abundantly present in the m/z range between 14,000 and 18,500" |
-| ~1 Å | MD 中单个结构域的平均 r.m.s.d.（域本身是刚的） | "with average root mean square deviations (r.m.s.d.s) of approximately 1" |
-| 240 ns × 4 = 960 ns | 每模型 MD 时长（累计模拟量） | "the production simulations were run at 2 fs timestep for a total of 240 ns each, yielding an aggregate simulation time of 960 ns for each model" |
-| 2 ns；top 100 | 拟合用快照取样间隔 / 互相关进入拼接的候选数 | "snapshots from the production runs at 2 ns timesteps were fitted into the cryo-EM maps using the colores function in Situs v.3.1"；"Snapshots were scored by cross-correlation, and the top 100 fits were used for stitching" |
-| 20 残基 | 拼接打分所用的螺旋区长度 | "adjacent trimer and dimers were scored by r.m.s.d. of an 20-residue helical region between the trimer and the assembly interface"（原文 "an 20-residue" 如此） |
-| 1+2、2+5；4+4、5+4 | 重建 KWOCA 18（D5/D2）与 70（D2/D3）所需三聚体/界面快照张数 | "one and two trimeric and two and five interface snapshots were sufficient to build well-fitting models"；"Modeling the D2 and D3 assemblies of KWOCA 70 required four and four trimeric and five and four interface snapshots, respectively" |
-| S = 278-288° vs 277°；305-312° vs 318° | 实测三聚体内角和区间 vs 完美对称设计模型单值 | 正文几何段照录（原文用度数符号，未纳入引句）；对照句："these ranges deviated from the single values expected from the originally designed icosahedral" |
-| δ = 56-60° / 74-79° | 实测架构的平均界面角区间（几何枚举的准入带） | 正文几何段（该句以希腊字母 δ 作主语并含度数符号，故不作引句）；同段结论句："fell outside the observed ranges for each of the other polyhedral architectures" |
+| D5=10、D2=12（18）；D2=12、D3=14（70） | 两种实测架构的各含三聚体数 | "KWOCA 18 forms species with D5"；"KWOCA 70 forms species with D2" |
+| 20+30；28+42；26/32/36 + 39/48/54；30+45 | I32-10 六架构的三聚体+二聚体计数（均为 fullerene 笼） | "in addition to the originally" |
+| 28 / 30 / 36 亚基；827 / 886 / 1,064 kDa | KWOCA 18 原生质谱三种组装体及其去卷积质量 | "three distinct assemblies"；"the acquired masses of these" |
+| <0.3%；0.1% | 实测质量与计算质量偏差（18 / 70） | "These measured masses are"（正文括注 <0.3% deviation）；"both within 0.1% of the expected masses for these assembly states" |
+| 36 / 42 亚基；1,137 / 1,327 kDa | KWOCA 70 原生质谱两种组装体 | "two different assemblies formed" |
+| ~1 Å | MD 中单个结构域的平均 r.m.s.d.（域本身是刚的） | "with average root mean square" |
+| 240 ns × 4 = 960 ns | 每模型 MD 时长（累计模拟量） | "the production simulations were" |
+| 2 ns；top 100 | 拟合用快照取样间隔 / 互相关进入拼接的候选数 | "snapshots from the production"；"Snapshots were scored by" |
+| 20 残基 | 拼接打分所用的螺旋区长度 | "adjacent trimer and dimers were"（原文 "an 20-residue" 如此） |
+| 1+2、2+5；4+4、5+4 | 重建 KWOCA 18（D5/D2）与 70（D2/D3）所需三聚体/界面快照张数 | "one and two trimeric and two"；"Modeling the D2 and D3 assemblies of KWOCA 70 required four and four trimeric and five and four interface snapshots, respectively" |
+| S = 278-288° vs 277°；305-312° vs 318° | 实测三聚体内角和区间 vs 完美对称设计模型单值 | 正文几何段照录（原文用度数符号，未纳入引句）；对照句："these ranges deviated from the" |
+| δ = 56-60° / 74-79° | 实测架构的平均界面角区间（几何枚举的准入带） | 正文几何段（该句以希腊字母 δ 作主语并含度数符号，故不作引句）；同段结论句："fell outside the observed" |
 | θ = 0-20° / 0-12° | 由冷冻电镜结构估出的三聚臂扭转可达范围 | "gauged from the cryo-EM structures of each protein"（数值 0-20 与 0-12 在同一句内，原文带度数符号，不入引句） |
-| 9° / 3° / 3° | 触及下一架构所需界面角变化量（18 缩/扩，70 缩到 10 三聚体） | "to access the next architectures in the series"；"and no angle was found to satisfy the 16-trimer architecture without requiring extreme asymmetry of the trimer arms" |
-| 119% / 148% | 实现 16-三聚体所需扭转角相对观测上限的最小增幅（外推） | "increased by at least 119% for KWOCA 18 and 148% for KWOCA 70 above the maximal value in the observed range" |
-| 2F4 + F5 = 12；6/5/4/3/2/1/0 组解 | 欧拉公式给出的候选笼全集（8/10/12/14/16/20 三聚体；F4=1、F5=10 明写不可能） | "They can be classified using Euler's formula"；枚举清单逐条给出："cube made of eight trimers"、"an assembly with D5 symmetry made of ten trimers"、"an assembly with D3 symmetry made of 14 trimers"、"it is not possible to form an assembly with these values"、"a dodecahedron (icosahedral symmetry) made of 20 trimers"（Methods 段，公式符号在原文为斜体下标） |
-| 48 / 24 / 48 per backbone | 两条重设计路线的生成规模（序列数 / 骨架数 / 每骨架序列数） | "redesign the sequence only of the junction region"；"partial diffusion of the junction region"；两个 48 与 24 的括号数值见 Methods 的 KWOCA 70 redesign 段（原文在工具名后夹参考文献编号，故不整句引用） |
-| 15 条 | 送湿实验的设计总数（5 条 OG + 10 条 D） | "Initial experimental screening of 15 designs"；进实验的准入是 r.m.s.d. 上限 1（原文此处带 Å 符号，不作引句）与 "based on highest pLDDT scores and lowest ProteinMPNN score were selected" |
-| 19 nm vs 32 nm | D7 与原始 KWOCA 70 的水合直径 | "DLS and SEC suggested the presence of mostly homogeneous assemblies of smaller hydrodynamic diameter than KWOCA 70 (19 versus 32 nm, respectively)" |
-| 1,803 / 2,364 / 3,381 | 三个样品的显微图（视频）数 | "The KWOCA 18 dataset comprised 1,803 micrographs"；"For KWOCA 70, we collected 2,364 micrographs"；"A total of 3,381 videos were recorded during data collection" |
-| 300,970 / 360,972 → 45,922+22,981 / 32,790+302,683 | 进入 3D 的初始粒子数 → 两个最终类别的粒子数 | 正文各段；表 1 行 "Initial particle images (no.) 300,970 360,972 Variable" 与 "Final particle images (no.) 45,922 and 22,981 32,790 and 302,683 Variable" |
-| 200 kV；1.15/1.15/1.16 Å；50.1/50.1/60.0 e-/Å2 | 三样品采集条件（表 1；I32-10 方法段另记约 75 e-/Å2） | Table 1 的 Voltage / Pixel size / Electron exposure 三行（原文含 Å 与上标，不作引句）；正文采集段："Nominal exposure magnification was" 后接 ×36,000 与像素 1.15 |
-| 至少 3 次 | 每个低分辨测量的独立重复数（Fig. 1 图注） | "Each measurement was repeated at least three independent times" |
+| 9° / 3° / 3° | 触及下一架构所需界面角变化量（18 缩/扩，70 缩到 10 三聚体） | "to access the next architectures in the series"；"and no angle was found to" |
+| 119% / 148% | 实现 16-三聚体所需扭转角相对观测上限的最小增幅（外推） | "increased by at least 119% for" |
+| 2F4 + F5 = 12；6/5/4/3/2/1/0 组解 | 欧拉公式给出的候选笼全集（8/10/12/14/16/20 三聚体；F4=1、F5=10 明写不可能） | "They can be classified using"；枚举清单逐条给出："cube made of eight trimers"、"an assembly with D5 symmetry"、"an assembly with D3 symmetry"、"it is not possible to form an"、"a dodecahedron (icosahedral"（Methods 段，公式符号在原文为斜体下标） |
+| 48 / 24 / 48 per backbone | 两条重设计路线的生成规模（序列数 / 骨架数 / 每骨架序列数） | "redesign the sequence only of"；"partial diffusion of the"；两个 48 与 24 的括号数值见 Methods 的 KWOCA 70 redesign 段（原文在工具名后夹参考文献编号，故不整句引用） |
+| 15 条 | 送湿实验的设计总数（5 条 OG + 10 条 D） | "Initial experimental screening"；进实验的准入是 r.m.s.d. 上限 1（原文此处带 Å 符号，不作引句）与 "based on highest pLDDT scores" |
+| 19 nm vs 32 nm | D7 与原始 KWOCA 70 的水合直径 | "DLS and SEC suggested the" |
+| 1,803 / 2,364 / 3,381 | 三个样品的显微图（视频）数 | "The KWOCA 18 dataset comprised"；"For KWOCA 70, we collected"；"A total of 3,381 videos were" |
+| 300,970 / 360,972 → 45,922+22,981 / 32,790+302,683 | 进入 3D 的初始粒子数 → 两个最终类别的粒子数 | 正文各段；表 1 行 "Initial particle images (no.)" 与 "Final particle images (no.)" |
+| 200 kV；1.15/1.15/1.16 Å；50.1/50.1/60.0 e-/Å2 | 三样品采集条件（表 1；I32-10 方法段另记约 75 e-/Å2） | Table 1 的 Voltage / Pixel size / Electron exposure 三行（原文含 Å 与上标，不作引句）；正文采集段："Nominal exposure magnification" 后接 ×36,000 与像素 1.15 |
+| 至少 3 次 | 每个低分辨测量的独立重复数（Fig. 1 图注） | "Each measurement was repeated" |
 
 ## 5. 结论——作者说了什么（只写作者的原话所能支撑的）
 
 1. 三个设计都**偏离了设计架构**，但不是乱掉：cryo-EM 与原生质谱给出两个体系各有**两种**规整架构，第三个体系有**六张图**（且"很可能只是溶液中结构的一个子集"）。
-2. 柔性的来源被定位到**亚基内部两结构域之间的 junction/hinge**，而不是三折或两折界面："the main source of flexibility is not at the three- or twofold protein-protein interfaces, but rather the junction region within the subunit between them"。
-3. 亚基内**受约束的**柔性导致"有限几种架构"而非无序聚集："our results indicate that constrained flexibility results in oligomorphic rather than polymorphic assembly outcomes"；"leading to the formation of a small number of distinct, well-defined architectures rather than a wide variety of polymorphic assemblies"。
+2. 柔性的来源被定位到**亚基内部两结构域之间的 junction/hinge**，而不是三折或两折界面："the main source of flexibility"。
+3. 亚基内**受约束的**柔性导致"有限几种架构"而非无序聚集："our results indicate that"；"leading to the formation of a"。
 4. 这些组装体是**准对称（quasisymmetric）**的：同一 building block 取多种相关但不相同的构象，且"these architectures are symmetrically and morphologically distinct, including several that to our knowledge have not been previously observed in natural protein assemblies"。
-5. 因果闭环：只把 junction 刚性化重设计即可**救回设计意图**——"Redesigning the flexible region in one building block rescues the intended monomorphic assembly"（摘要句），正文收口为 "these results support our hypothesis that modulating local structural flexibility can be used as a design principle to control polyhedral assembly outcome"。
-6. 作者的定位性陈述：这是**该领域第一次可控地把结构柔性纳入设计以得到多种组装结果**之前的空白——"there are currently no computational protein design methods that controllably integrate structural flexibility to achieve multiple assembly outcomes"；并且现行方法"mostly focus on combining symmetry with rigid building blocks"。
-7. 展望（作者说的，非本文做的）：柔性笼可能像 clathrin 一样自适应包裹不同尺寸货物，"interactions between such cargos and oligomorphic protein coats may shift the distribution or even type of architectures formed by the coats"。
+5. 因果闭环：只把 junction 刚性化重设计即可**救回设计意图**——"Redesigning the flexible region"（摘要句），正文收口为 "these results support our"。
+6. 作者的定位性陈述：这是**该领域第一次可控地把结构柔性纳入设计以得到多种组装结果**之前的空白——"there are currently no computational protein design methods that controllably integrate structural flexibility to achieve multiple assembly outcomes"；并且现行方法"mostly focus on combining"。
+7. 展望（作者说的，非本文做的）：柔性笼可能像 clathrin 一样自适应包裹不同尺寸货物，"interactions between such"。
 
 ## 6. 结论——我们读出了什么（以下为推断，非作者原文）
 
@@ -116,11 +116,11 @@ Nature Structural & Molecular Biology 2025, 32:1050-1060 · DOI 10.1038/s41594-0
 3. **"最少 MD 快照数能拼出观测架构"实际上是一个柔性充分性的度量**（1/2、2/5、4/4、5/4），并附带一个漂亮的反事实：完美对称刚体拟合更差且有立体冲突。→ 可借鉴的形式是"用**最简模型能否解释观测** + **更刚的假设是否被观测否证**"，这比"分数高即通过"信息量大。
 4. **原生质谱是这里唯一能直接数亚基的手段**，而且它给出的信息是"分布 + 质量偏差"，不是"命中率"。质量偏差 <0.3%/0.1% 只证明**指认的化学计量自洽**，不证明那几种架构是全部或主要物种。→ 我们若讨论寡聚态，必须区分"质量谱指认"与"结构重构"两种证据强度，别把二者混成一个结论。
 5. **本文的"成功"里没有一条活性数据**。KWOCA 70 D7 的回收只靠 DLS/SEC/nsEM（粒径 + 四折投影），没有 cryo-EM 三维重构、没有质谱。→ 推断：这是**成本/优先级**选择，不是"不需要"；对我们写"合格线"时的启示是——**低分辨读出足以否决，但确认需要更硬的读出**，反之亦然。
-6. **15 选 1 不是命中率**。正文只写 "identified KWOCA 70 D7 as particularly promising"，其余 14 条未逐条报告。→ 不许把 1/15 当"刚性化重设计的成功率"引用，分母与分子的定义都不完整。
+6. **15 选 1 不是命中率**。正文只写 "identified KWOCA 70 D7 as"，其余 14 条未逐条报告。→ 不许把 1/15 当"刚性化重设计的成功率"引用，分母与分子的定义都不完整。
 
 ## 7. 局限与失败（作者的 + 我们读出的）
 
-- **作者自己承认的**：①I32-10 的六个图只是子集，且"the inconsistency in achieving reproducible final map data"；②I32-10 的原生质谱"yielded a broad spectrum with no resolvable peaks and was not analyzed further"；③几何枚举建立在"最富物种=最有利构象"这一假设上；④低分辨让 I32-10 的 α 螺旋难以精确对接，只能换更粗的刚体建模；⑤"much"式的开放问题（clathrin 样自适应组装）留给展望而非本文数据。
+- **作者自己承认的**：①I32-10 的六个图只是子集，且"the inconsistency in achieving"；②I32-10 的原生质谱"yielded a broad spectrum with"；③几何枚举建立在"最富物种=最有利构象"这一假设上；④低分辨让 I32-10 的 α 螺旋难以精确对接，只能换更粗的刚体建模；⑤"much"式的开放问题（clathrin 样自适应组装）留给展望而非本文数据。
 - **我们读出的**：
   1. 诊断指标全部是**事后**的：分区 pLDDT、SASA、average degree 都没进入设计前的过滤器；只有 D7 重设计里出现了小规模准入（r.m.s.d. < 1 Å、最高 pLDDT、最低 ProteinMPNN 分数）。
   2. 重设计的正面证据只有**一个体系的一个变体**，且 Rosetta 侧无改善——即"柔性区被刚性化"这件事在两套独立指标上**只有一套支持**。
@@ -156,6 +156,8 @@ Nature Structural & Molecular Biology 2025, 32:1050-1060 · DOI 10.1038/s41594-0
 - 未取到的材料：Extended Data Figs. 1-8、Extended Data Table 1、Supplementary Tables 1-3、Fig. 1-6 原图数值、Reporting Summary；涉及处本卡明写"正文未给出"。
 - CSV 字段映射：第 3 节 ↔ `候选生成方法/计算筛选判据/阈值数字`；第 4 节 ↔ `候选数递减/成本统计`；第 8 节 ↔ `在方法演进链的位置`。
 - **本卡自检**：`PYTHONIOENCODING=utf-8 python scripts/verify_literature_cards.py --only "B38" --no-report`，判据＝10 节齐全、§3 工作流程表 ≥3 步、§2 难点 ≥2 条、卡内所有英文引句逐字命中声明底稿、CSV 回填 14 键非空。结果见本轮终端输出（`PASS B38 quotes=N/N`，退出码 0）。
+
+- **引用预算截短（2026-11-08，公开仓库口径）**：本卡有 60 条逐字引句来自许可受限的第三方来源（B38；CC_BY_NC_ND），按 `deliverables/fulltext_manifest.csv` 的逐份许可判定，已把单条引句截到 ≤100 字符、同一来源总量截到 ≤600 字符；**截短后仍逐字命中同一份底稿**（门禁 `scripts/verify_literature_cards.py` 仍是逐字核验），完整原句按 §9 的重取方式与 sha256 可复核。逐条改动账见 `deliverables/quote_budget_ledger.csv`。本卡其余内容（我们自己的分析、判断与台账）未被改动。
 
 <!--CSV回填
 work_type=论文（三个已发表设计的结构事后解剖 + 一个刚性化重设计的因果验证；非方法学论文）

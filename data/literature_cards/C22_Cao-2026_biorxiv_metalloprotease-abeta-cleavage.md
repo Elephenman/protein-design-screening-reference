@@ -21,7 +21,7 @@ bioRxiv 2026.01.06.697903（Posted 2026-01-06，预印本）· DOI 10.64898/2026
 
 ## 1. 这篇到底解决什么（大白话）
 
-以前的 de novo 酶设计（同组 C08/C23、以及 Baker 组的 Kemp 消除酶、金属水解酶）做成的都是**模型反应**：切一个小而疏水的活化酯，不需要认出“切哪一条键”。这篇要的是**真蛋白酶**——在一条天然多肽（Aβ42）里，只切指定的那一条肽键，相邻序列一律不切。作者把问题定义成：设计一个蛋白，要同时做到三件事——"preserves the strict metal-dependent catalytic geometry, locks the scissile bond into position, and rigorously discriminates against off-target sequences"，并承认此前"an objective that has so far remained out of reach"。
+以前的 de novo 酶设计（同组 C08/C23、以及 Baker 组的 Kemp 消除酶、金属水解酶）做成的都是**模型反应**：切一个小而疏水的活化酯，不需要认出“切哪一条键”。这篇要的是**真蛋白酶**——在一条天然多肽（Aβ42）里，只切指定的那一条肽键，相邻序列一律不切。作者把问题定义成：设计一个蛋白，要同时做到三件事——"preserves the strict metal-dependent catalytic geometry, locks the scissile bond into position,"，并承认此前"an objective that has so far remained out of reach"。
 
 做法上最关键的一步跳转：**不再“先造酶再找底物”，而是让生成模型直接把“酶 + 底物 + 锌”作为一个复合物一起生成**，条件是（a）目标肽的氨基酸序列、（b）预先定好的催化基序（三个锌配位残基 + 一个作广义碱的 Glu + 一个组成 oxyanion hole 的 Tyr 或 His）。为的是让“结合”和“催化就位”在同一轮扩散里同时被优化。他们自述这是为了绕开改造天然蛋白酶的死路——天然酶的底物识别摊在柔性环上，改动识别就伤催化。
 
@@ -29,31 +29,31 @@ bioRxiv 2026.01.06.697903（Posted 2026-01-06，预印本）· DOI 10.64898/2026
 
 ## 2. 遇到的难点，以及遇到问题时他们做了什么（作者自述，不是我们的推测）
 
-1. **改造天然蛋白酶这条路被判定走不通，于是整篇换靶换策略**。现象/证据：作者开篇就给结论 "Attempts to retarget protease through directed evolution" 与理性突变"have met with limited success"，并给出机理性原因——"substrate specificity is typically distributed across flexible loops that are conformationally coupled to the active site, so mutations that alter substrate recognition often compromise catalysis"；又说"Exhaustive screening can explore only a minute fraction of sequence space"、"Consequently, conventional sequence redesign seldom retargets these enzymes while maintaining native-like catalytic efficiency"。 **他们做了什么**：放弃“改造现成酶”，改为从天然酶里**只抠出催化基序**（PP 路线连结合环一起切掉重建；DP 路线只留锌配位 + Glu + oxyanion hole，骨架全新），把特异性问题从“突变哪些残基”转成“重新生成一个夹子的几何”。 **仍留下的代价**：新骨架没有进化压力可借用，turnover 只有 10⁻⁴ s⁻¹；作者自己承认"Although the turnover rates of our designs are lower than those of natural enzymes"。
+1. **改造天然蛋白酶这条路被判定走不通，于是整篇换靶换策略**。现象/证据：作者开篇就给结论 "Attempts to retarget protease through directed evolution" 与理性突变"have met with limited success"，并给出机理性原因——"substrate specificity is typically distributed across flexible loops that are conformationally"；又说"Exhaustive screening can explore only a minute fraction of sequence space"、"Consequently, conventional sequence redesign seldom retargets these enzymes while maintaining"。 **他们做了什么**：放弃“改造现成酶”，改为从天然酶里**只抠出催化基序**（PP 路线连结合环一起切掉重建；DP 路线只留锌配位 + Glu + oxyanion hole，骨架全新），把特异性问题从“突变哪些残基”转成“重新生成一个夹子的几何”。 **仍留下的代价**：新骨架没有进化压力可借用，turnover 只有 10⁻⁴ s⁻¹；作者自己承认"Although the turnover rates of our designs are lower than those of natural enzymes"。
 
-2. **一步扩散造不出可用的活性位点堆积，改成两步封装**。现象/证据：正文对比 conventional one-step diffusion，指出这类做法"which frequently yield suboptimal packing and limited control over overall enzyme topology"；他们的解法是"we developed a 'two-step encapsulation' generative diffusion strategy"——先围着催化 Glu 生成骨架（把广义碱稳住、把底物"pre-wrapping"一半），再围着 oxyanion hole 生成第二部分把底物封起来。 **他们做了什么**：把一次生成拆成两次带条件生成，换来"clamp-like enzymes"形态与更密的界面堆积。 **仍留下的代价**：**本地正文没有任何数值阈值**（无 RMSD/无位阻能量/无通过率），“两步一定比一步好”只有定性断言 + 下游 5 个命中支撑，无法判断这一步在漏斗里到底淘汰了多少。
+2. **一步扩散造不出可用的活性位点堆积，改成两步封装**。现象/证据：正文对比 conventional one-step diffusion，指出这类做法"which frequently yield suboptimal packing and limited control over overall enzyme topology"；他们的解法是"we developed a 'two-step encapsulation'"——先围着催化 Glu 生成骨架（把广义碱稳住、把底物"pre-wrapping"一半），再围着 oxyanion hole 生成第二部分把底物封起来。 **他们做了什么**：把一次生成拆成两次带条件生成，换来"clamp-like enzymes"形态与更密的界面堆积。 **仍留下的代价**：**本地正文没有任何数值阈值**（无 RMSD/无位阻能量/无通过率），“两步一定比一步好”只有定性断言 + 下游 5 个命中支撑，无法判断这一步在漏斗里到底淘汰了多少。
 
-3. **Aβ 肽太疏水，常规荧光-淬灭剂短肽底物根本做不出来，动力学测不了**。现象/证据：原文"The intrinsic hydrophobicity of the Aβ target sequences posed significant challenges for synthesizing soluble peptides compatible with standard fluorophore-quencher systems, due to marked solubility and aggregation issues"。 **他们做了什么**：换底物形式——不用化学肽，改用**蛋白级 FRET 传感器**，"we engineered a FRET-based biosensor by inserting the targeted Aβ sequences directly between the fluorescent protein pair mTurquoise2 (donor) and mVenus (acceptor)"，靠裂解后 FRET 下降读数。 **仍留下的代价（这是本文最硬的内在矛盾）**：传感器把目标序列埋进两个大荧光蛋白之间，作者自己发现读数与降解曲线打架——"The discrepancy observed for DP720-S1-which showed effective substrate degradation comparable to PP507-S1 in previous assays but exhibited low catalytic efficiency in the FRET system-may be attributable to steric hindrance"。解释是推测（"may be attributable"），**没有做对照实验排除**；也就是说 DP720-S1 的 3.8 M⁻¹s⁻¹ 这个数是可疑值，而全部 kcat/Km 都建立在同一套被怀疑有位阻的体系上。本文未解决。
+3. **Aβ 肽太疏水，常规荧光-淬灭剂短肽底物根本做不出来，动力学测不了**。现象/证据：原文"The intrinsic hydrophobicity of the Aβ target"。 **他们做了什么**：换底物形式——不用化学肽，改用**蛋白级 FRET 传感器**，"we engineered a FRET-based biosensor by inserting"，靠裂解后 FRET 下降读数。 **仍留下的代价（这是本文最硬的内在矛盾）**：传感器把目标序列埋进两个大荧光蛋白之间，作者自己发现读数与降解曲线打架——"The discrepancy observed for DP720-S1-which"。解释是推测（"may be attributable"），**没有做对照实验排除**；也就是说 DP720-S1 的 3.8 M⁻¹s⁻¹ 这个数是可疑值，而全部 kcat/Km 都建立在同一套被怀疑有位阻的体系上。本文未解决。
 
-4. **oxyanion hole 的突变结果与设计意图相反，说明“过渡态稳定”没被证明**。现象/证据：设计时把 Tyr/His 当 oxyanion hole 摆进去，但"Interestingly, in the DP designs, mutation of the oxyanion hole histidine to alanine had minimal or even positive effects on protease function"，H191A 甚至增强降解；作者的解释是"These findings suggest that the oxyanion stabilization function may be partially compensated by solvent molecules in the absence of the native residue"。 **他们做了什么**：把结论从“oxyanion hole 必需”退成“第二壳层与 oxyanion hole 通过调 kcat 起作用”，并补测突变体动力学（D126A 的 kcat 三倍、Y91F 的 kcat/Km 两倍、H191A 2.7 倍）。 **仍留下的代价**：催化机制的**直接证据只剩一条**——催化 Glu→Ala 普遍失活；oxyanion hole 这个“过渡态稳定装置”在实验上等于没被证明存在，而全文没有晶体结构、没有 QM、没有 MD，作者也承认"a parameter that remains challenging to accurately model in current design protocols"。
+4. **oxyanion hole 的突变结果与设计意图相反，说明“过渡态稳定”没被证明**。现象/证据：设计时把 Tyr/His 当 oxyanion hole 摆进去，但"Interestingly, in the DP designs,"，H191A 甚至增强降解；作者的解释是"These findings suggest that the oxyanion"。 **他们做了什么**：把结论从“oxyanion hole 必需”退成“第二壳层与 oxyanion hole 通过调 kcat 起作用”，并补测突变体动力学（D126A 的 kcat 三倍、Y91F 的 kcat/Km 两倍、H191A 2.7 倍）。 **仍留下的代价**：催化机制的**直接证据只剩一条**——催化 Glu→Ala 普遍失活；oxyanion hole 这个“过渡态稳定装置”在实验上等于没被证明存在，而全文没有晶体结构、没有 QM、没有 MD，作者也承认"a parameter that remains challenging to"。
 
-5. **PP 策略在 3 个位点里有 2 个全灭，作者给了归因但没验证**。现象/证据："In contrast, the PP strategy generated active designs only for the first site"。 **他们做了什么**："We attribute the limited success of the PP designs at the remaining sites to steric constraints imposed by excessive preservation of the template backbone"，即模板骨架保得太多、容不下 S2/S3 的序列与几何；应对方式是**换策略**（DP 允许更大构象采样），不是回头修 PP。 **仍留下的代价**：位阻解释没有结构或计算证据支撑，也没有把 PP 的骨架保留比例做成变量重跑；因此“DP 比 PP 好”是**样本量各 26 条的单次比较**，不能当结论推广。
+5. **PP 策略在 3 个位点里有 2 个全灭，作者给了归因但没验证**。现象/证据："In contrast, the PP strategy generated active"。 **他们做了什么**："We attribute the limited success of the PP"，即模板骨架保得太多、容不下 S2/S3 的序列与几何；应对方式是**换策略**（DP 允许更大构象采样），不是回头修 PP。 **仍留下的代价**：位阻解释没有结构或计算证据支撑，也没有把 PP 的骨架保留比例做成变量重跑；因此“DP 比 PP 好”是**样本量各 26 条的单次比较**，不能当结论推广。
 
-6. **摘要与正文对特异性的说法不一致（本卡认定这是本文最可疑之处）**。摘要写"Experimental characterization validated five enzymes, each capable of precise cleavage at the intended sites with high specificity and minimal or undetectable activity on non-cognate substrates"；但正文的三底物交叉实验给出"PP532-S1 displayed broader substrate tolerance, efficiently processing all three substrates"，"DP622-S2 and DP221-S3 exhibited partial cross-reactivity with each other's substrates"。 **他们做了什么**：没有撤回摘要口径，而是把特异性归因转成**序列组成解释**（S1 侧翼富大块芳香/亲水残基、S2/S3 侧翼是小脂肪族与 Gly；GS linker 与序列重叠造成交叉）+ 承认要加阴性设计："We anticipate that future iterations incorporating explicit negative design strategies during the design and filtering stages will further enhance substrate specificity"。 **仍留下的代价**：5 个酶中真正单底物特异的只有 1 个；DP221-S3 的 H191A 虽"virtually abolishing cleavage activity toward non-target substrates"，代价却是"the scissile bond shifted almost entirely to the original minor cleavage site-one residue closer to the C-terminus-compared to the parent design"——特异性上去了、位点正确性丢了。本文未解决。
+6. **摘要与正文对特异性的说法不一致（本卡认定这是本文最可疑之处）**。摘要写"Experimental characterization validated five"；但正文的三底物交叉实验给出"PP532-S1 displayed broader substrate tolerance,"，"DP622-S2 and DP221-S3 exhibited partial"。 **他们做了什么**：没有撤回摘要口径，而是把特异性归因转成**序列组成解释**（S1 侧翼富大块芳香/亲水残基、S2/S3 侧翼是小脂肪族与 Gly；GS linker 与序列重叠造成交叉）+ 承认要加阴性设计："We anticipate that future"。 **仍留下的代价**：5 个酶中真正单底物特异的只有 1 个；DP221-S3 的 H191A 虽"virtually abolishing cleavage activity toward"，代价却是"the scissile bond shifted"——特异性上去了、位点正确性丢了。本文未解决。
 
-7. **金属配位本身缺少独立于活性的实验判据**。现象/证据：正文只有两点与“金属”直接相关的实验事实——反应必须在锌存在下读（"Upon overnight incubation of the designed proteases with their respective substrates in the presence of zinc"）和 Fig 3a 图注描述"coordination of the zinc ion by histidines and glutamates"；突变表里动的都是**碱（Glu）、oxyanion hole（His/Tyr）与第二壳层**，即"we mutated the newly generated second-sphere residues that form hydrogen bonds with the zinc-coordinating residues"。 **他们做了什么**：把金属配位的证据间接化——用第二壳层突变影响活性来旁证配位环境存在。 **仍留下的代价**：本地正文**没有**螯合剂（EDTA/1,10-菲啰啉）敲除-回补实验、没有 ICP-MS 锌计量、没有“三 His→Ala 直接失活”的对照、也没有 apo/holo 结构。因此“这是一个锌蛋白酶、锌是催化必需的”在设计层面仍是**推定而非实测**。本文未解决。
+7. **金属配位本身缺少独立于活性的实验判据**。现象/证据：正文只有两点与“金属”直接相关的实验事实——反应必须在锌存在下读（"Upon overnight incubation of"）和 Fig 3a 图注描述"coordination of the zinc ion by"；突变表里动的都是**碱（Glu）、oxyanion hole（His/Tyr）与第二壳层**，即"we mutated the newly generated"。 **他们做了什么**：把金属配位的证据间接化——用第二壳层突变影响活性来旁证配位环境存在。 **仍留下的代价**：本地正文**没有**螯合剂（EDTA/1,10-菲啰啉）敲除-回补实验、没有 ICP-MS 锌计量、没有“三 His→Ala 直接失活”的对照、也没有 apo/holo 结构。因此“这是一个锌蛋白酶、锌是催化必需的”在设计层面仍是**推定而非实测**。本文未解决。
 
 ## 3. 方法与工作流程（可复现顺序；每步：输入 → 操作 → 判据 → 输出规模）
 
 ### 用了哪些方法（工具箱，以及为什么选它）
 
-- **活性位点构建（本文核心，不是“骨架生成后随便挂个位点”）**：从两个天然锌内肽酶取催化基序——"To establish catalytic motifs for design, we focused on two representative zinc-dependent endopeptidases"（PPEP-1，PDB 6r4w；Fungalysin，PDB 4k90）。两酶同机制但 oxyanion hole 组成不同："Notably, their oxyanion hole compositions differ: PPEP-1 employs a tyrosine, whereas Fungalysin utilizes a histidine residue"。基序内容 = **三个锌配位残基 + 广义碱 Glu + oxyanion hole（Tyr 或 His）**。两条路线：
-  - **PP（peptide-binding pocket designed protease）**：删环留核再重建——"we developed a strategy that removes the peptide-binding loops from PPEP-1, while retaining the core protein structure"，保留的是天然钳形沟的折叠逻辑。
-  - **DP（de novo protease）**：极简基序 + 全新生成骨架——"we extracted only the minimalist catalytic motif-comprising the zinc-coordinating residues, the general base glutamate, and the oxyanion hole histidine"，代价是"This minimalist approach necessitates de novo generation of the entire surrounding protein scaffold"。
-- **底物在活性位点里的“该摆成什么形状”**：不猜，用 AlphaFold3 在模板酶里预测底物构象——「we used AlphaFold3」（此句后原文插了引文编号 43），读到的结果是"The predictions revealed that the substrate adopted a β-strand conformation in both enzymes"，随后**只截取参与 β 配对的那段骨架原子**当几何约束：Fungalysin 取 P2-P1′、PPEP-1 取 P3-P1。
-- **生成模型**：自研 **Proteus2**（flow-based），"we integrated a customized protein language model pre-trained on UniRef50"，训练任务是 dual-modality motif scaffolding；关键性质是"sequence and structure conditions are treated as independent masking tracks"，因而能吃"hybrid inputs comprising structurally defined catalytic motifs and coordinate-free substrate sequences"——**这正是“序列特异”被写进生成回路的地方**，而不是生成后再用打分挑。
+- **活性位点构建（本文核心，不是“骨架生成后随便挂个位点”）**：从两个天然锌内肽酶取催化基序——"To establish catalytic motifs"（PPEP-1，PDB 6r4w；Fungalysin，PDB 4k90）。两酶同机制但 oxyanion hole 组成不同："Notably, their oxyanion hole"。基序内容 = **三个锌配位残基 + 广义碱 Glu + oxyanion hole（Tyr 或 His）**。两条路线：
+  - **PP（peptide-binding pocket designed protease）**：删环留核再重建——"we developed a strategy that"，保留的是天然钳形沟的折叠逻辑。
+  - **DP（de novo protease）**：极简基序 + 全新生成骨架——"we extracted only the minimalist catalytic motif-comprising the zinc-coordinating residues, the general base glutamate, and the oxyanion hole histidine"，代价是"This minimalist approach"。
+- **底物在活性位点里的“该摆成什么形状”**：不猜，用 AlphaFold3 在模板酶里预测底物构象——「we used AlphaFold3」（此句后原文插了引文编号 43），读到的结果是"The predictions revealed that"，随后**只截取参与 β 配对的那段骨架原子**当几何约束：Fungalysin 取 P2-P1′、PPEP-1 取 P3-P1。
+- **生成模型**：自研 **Proteus2**（flow-based），"we integrated a customized"，训练任务是 dual-modality motif scaffolding；关键性质是"sequence and structure conditions are treated as independent masking tracks"，因而能吃"hybrid inputs comprising"——**这正是“序列特异”被写进生成回路的地方**，而不是生成后再用打分挑。
 - **两步封装扩散（two-step encapsulation）**：先围催化 Glu、再围 oxyanion hole，逐步把底物封进钳内。
-- **序列设计**：骨架定了之后"Following backbone generation, protein sequences were optimized using LigandMPNN"（配体环境条件化的 MPNN，此处后插引文 44）。
+- **序列设计**：骨架定了之后"Following backbone generation,"（配体环境条件化的 MPNN，此处后插引文 44）。
 - **计算侧复验**：把设计好的复合物重新预测一遍，"the resulting protease-substrate-zinc complex structures were validated with AlphaFold3 to ensure convergence to the intended catalytic geometry"。
 - **实验侧**：E. coli 表达 + Ni-NTA + HRV3C 切 His 标签 + SEC 纯化；**融合底物**（MBP-Aβ片段-SUMO）SDS-PAGE 读切割；裂解产物质谱定位点；时间降解曲线；蛋白级 FRET 传感器测 Michaelis-Menten；定点突变验证机制；三底物交叉测特异性；三酶 cocktail 切全长 Aβ42。
 - **本文没有用的方法**：MD（本地正文对 `molecular dynamics`、`dynamics`、GROMACS、OpenMM、AMBER、umbrella、metadynamics、explicit solvent 全部 0 命中；登记底稿 `sources/cao.md:455` 的全文关键词扫描同样确认）、QM/DFT（`quantum`、`DFT` 0 命中；作者只在讨论里引用 Radzicka & Wolfenden 的“无催化肽键水解速率/过渡态亲和力”文献作为加速倍数的分母）、无结构解析（`crystal` 的 2 次命中都在参考文献期刊名 Acta Crystallogr 里，正文无晶体/冷冻电镜数据）、无螯合敲除或金属计量、无定向进化/显示库筛选。
@@ -63,13 +63,13 @@ bioRxiv 2026.01.06.697903（Posted 2026-01-06，预印本）· DOI 10.64898/2026
 | # | 输入 | 操作 | 判据 / 阈值 | 输出与规模 |
 |---|---|---|---|---|
 | W1 | PPEP-1（6r4w）与 Fungalysin（4k90）实验结构 | 定催化基序；PP 路线删结合环保核心，DP 路线只留极简基序 | 原文未给阈值（选择依据是机制清楚 + oxyanion hole 一个是 Tyr 一个是 His，构成两套可比较的位点） | 2 套基序模板 × 2 条策略 |
-| W2 | 模板蛋白酶 + 目标底物肽 | 用 AlphaFold3 预测底物在活性位点中的构象，取与酶活性位点旁 β 链配对的一段骨架原子作几何约束 | 定性判据：底物呈 β-strand；"these segments form strand pairing interactions with the enzyme's strand adjacent to the active site" | Fungalysin 的 P2-P1′ 骨架原子、PPEP-1 的 P3-P1 骨架原子 |
+| W2 | 模板蛋白酶 + 目标底物肽 | 用 AlphaFold3 预测底物在活性位点中的构象，取与酶活性位点旁 β 链配对的一段骨架原子作几何约束 | 定性判据：底物呈 β-strand；"these segments form strand" | Fungalysin 的 P2-P1′ 骨架原子、PPEP-1 的 P3-P1 骨架原子 |
 | W3 | Aβ42 序列（中央疏水核 17-21、C 端 30-42） | 选 3 个切割位点：1 个在中央疏水核、2 个在 C 端疏水区；每个位点分别走 PP 与 DP | 原文未给选位点阈值（理由是可聚性/治疗相关性） | 3 位点 × 2 策略 = 6 个“策略-底物”组合 |
 | W4 | 基序模板 + 坐标无定义的底物序列 | Proteus2 共生成“酶-底物复合物”骨架；**两步封装**：第 1 步生成催化 Glu 周围骨架并部分包裹底物，第 2 步围绕 oxyanion hole 完成包封 | 定性判据：减少位阻、提高界面堆积密度、生成 clamp 形；**无任何数值阈值**（本地无 Methods 节） | 未披露生成库规模（正文只给“送测前平均挑选数”） |
 | W5 | 复合物骨架 | LigandMPNN 设计序列 | 原文未给阈值（本地无 Methods 节，采样数/挑选规则未披露） | 每条骨架对应的设计序列 |
-| W6 | 设计三元复合物（蛋白酶-底物-锌） | AlphaFold3 复预测，看是否收敛到设计的催化几何 | "to ensure convergence to the intended catalytic geometry"——定性；**本卡无法给出通过/不通过的数值线**（登记底稿里的 in-silico success 措辞属 C23，见 §0） | 入选实验的设计集 |
-| W7 | 6 个策略-底物组合 | 人工挑选送实验的设计并表达纯化 | 表达与可溶纯化：E. coli、Ni-NTA 磁珠、HRV3C 去 His 标签、SEC | "On average, 26 designs were selected from each strategy-substrate pair for experimental characterization"（≈156 条，正文未给总数） |
-| W8 | 设计的蛋白酶 + MBP-Aβ片段-SUMO 融合底物 | 含锌条件下过夜孵育，跑 SDS-PAGE 看是否变成两条低分子量带 | 判据：出现 MBP/SUMO 分离带来的分子量位移；"Successful proteolytic cleavage results in two lower-molecular-weight fragments, readily detectable by SDS-PAGE" | **5 个有活性酶**：DP720-S1、DP622-S2、DP221-S3、PP507-S1、PP532-S1；PP 在 S2/S3 为 0 |
+| W6 | 设计三元复合物（蛋白酶-底物-锌） | AlphaFold3 复预测，看是否收敛到设计的催化几何 | "to ensure convergence to the"——定性；**本卡无法给出通过/不通过的数值线**（登记底稿里的 in-silico success 措辞属 C23，见 §0） | 入选实验的设计集 |
+| W7 | 6 个策略-底物组合 | 人工挑选送实验的设计并表达纯化 | 表达与可溶纯化：E. coli、Ni-NTA 磁珠、HRV3C 去 His 标签、SEC | "On average, 26 designs were"（≈156 条，正文未给总数） |
+| W8 | 设计的蛋白酶 + MBP-Aβ片段-SUMO 融合底物 | 含锌条件下过夜孵育，跑 SDS-PAGE 看是否变成两条低分子量带 | 判据：出现 MBP/SUMO 分离带来的分子量位移；"Successful proteolytic cleavage" | **5 个有活性酶**：DP720-S1、DP622-S2、DP221-S3、PP507-S1、PP532-S1；PP 在 S2/S3 为 0 |
 | W9 | 命中酶的裂解产物 | 质谱测产物分子量，与理论值比对定位切割位点 | 判据：observed 匹配 theoretical；旁路峰占比（DP221-S3 的次要峰约为主峰的 10%，位点向 C 端偏一个残基） | 5 个酶的设计位点确认（含 1 个 10% 旁路） |
 | W10 | 命中酶 + 底物 | 时间进程降解曲线，1:2 酶:底物摩尔比 | 判据：完全降解所需时间 | DP622-S2 4 h；DP720-S1 与 PP507-S1 8 h；PP532-S1 近 12 h；DP221-S3 12 h 时切掉一半以上 |
 | W11 | 命中酶的定点突变体 | 广义碱 Glu→Ala、oxyanion hole（DP 的 His / PP 的 Tyr）→Ala、DP 的第二壳层（与锌配位残基成氢键者）→Ala 或 Phe，再跑 SDS-PAGE/动力学 | 判据（活性方向性）：设计位点残基换成 Ala/Phe 后，SDS-PAGE 是否仍出现切割条带；单突变 vs 双突变对比（原文未给量化阈值） | 结论：E→A 在 DP 与 PP 里普遍 abolish；oxyanion His→A 影响极小甚至为正（H191A 增强）；D128A(DP720-S1)、N111A(DP221-S3) 显著降；DP622-S2 的 D126A 或 Y91F 单突变影响小、D126A/Y91F 双突变 dramatic decrease |
@@ -84,31 +84,31 @@ bioRxiv 2026.01.06.697903（Posted 2026-01-06，预印本）· DOI 10.64898/2026
 
 | 数值 | 含义 | 出处（正文原句片段，逐字） |
 |---|---|---|
-| 3 位点 × 2 策略 = 6 组合 | 设计任务的规模 | "we selected three distinct cleavage sites within Aβ: one within the central hydrophobic core and two within the C-terminal hydrophogic region"（原文 hydrophogic 为笔误） |
+| 3 位点 × 2 策略 = 6 组合 | 设计任务的规模 | "we selected three distinct"（原文 hydrophogic 为笔误） |
 | `6r4w` / `4k90` | 催化基序来源的两株锌内肽酶（PPEP-1 / Fungalysin）的 PDB 号 | 正文两处分别给出 PDB 号；两句之间原文插了引文编号 37、38，故本卡不合并引用 |
-| 17-21 / 30-42 | Aβ42 上被认定为聚集核心的两段疏水区 | "The pathological self-assembly of Aβ is primarily driven by intermolecular interactions within two hydrophobic regions: the central hydrophobic core (residues 17-21) and the C-terminal segment (residues 30-42)" |
+| 17-21 / 30-42 | Aβ42 上被认定为聚集核心的两段疏水区 | "The pathological self-assembly" |
 | P2-P1′ / P3-P1 | 生成时被固定下来的底物骨架原子范围 | "From these predicted structures, we extracted the P2-P1′ backbone atoms of the Fungalysin substrate peptide" |
-| 平均 26 条/组合 | 每个策略-底物组合送去湿实验的设计数（推算总送测约 156 条，正文未给总数与生成库规模） | "On average, 26 designs were selected from each strategy-substrate pair for experimental characterization" |
-| 5 个酶 | 实验验证到有活性的设计（DP720-S1、DP622-S2、DP221-S3、PP507-S1、PP532-S1） | "Experimental characterization validated five enzymes, each capable of precise cleavage at the intended sites" |
-| 4 h / 8 h / 8 h / ~12 h / 12 h 切一半 | 完全降解所需时间（依次为 DP622-S2、DP720-S1、PP507-S1、PP532-S1、DP221-S3），酶:底物 = 1:2 摩尔比 | "At a 1:2 enzyme-to-substrate molar ratio, DP622-S2 exhibited the highest activity, achieving complete substrate degradation within 4 hours"；"while PP532-S1 required nearly 12 hours for complete cleavage"；"In contrast, DP221-S3 displayed slower kinetics, cleaving more than half of the substrate after 12 hours" |
-| ~10% | DP221-S3 旁路切割次要质谱峰相对主峰的占比（裂解位点向 C 端偏一个残基） | "a very minor peak-representing approximately 10% of the main product" |
-| kcat 约 10⁻⁴ s⁻¹；Km 微摩尔级 | 五个设计的全局动力学水平 | "Analysis revealed that the turnover numbers ( k cat ) for our designs were generally on the order of 10 -4 s -1 , with Michaelis constants ( K m ) in the micromolar range" |
-| 160.8 M⁻¹s⁻¹（kcat 0.0009 s⁻¹、Km 5.36 µM） | 最佳设计 DP622-S2 的催化效率 | "achieving a k cat / K m of 160.8 M -1 s -1 , driven by a favorable combination of a high k cat (0.0009 s -1 ) and a low K m (5.36 μM)" |
-| 28.4 / 24.3 / 4.2 / 3.8 M⁻¹s⁻¹ | PP507-S1 / PP532-S1 / DP221-S3 / DP720-S1 的催化效率 | "The PP507-S1 and PP532-S1 exhibited moderate efficiencies of 28.4 and 24.3 M -1 s -1 , respectively, while DP221-S3 and DP720-S1 displayed the lowest efficiencies at 4.2 and 3.8 M -1 s -1" |
-| >10⁷ 倍 | 相对无催化肽键水解的加速（分母取自文献 33，不是本文实测的同一底物） | "These k cat values represent an average > 10 7 -fold rate enhancement relative to the uncatalyzed hydrolysis of peptide bonds" |
-| 三倍 / 两倍 / 2.7 倍 | D126A 的 kcat 提升；Y91F 的 kcat/Km 提升；DP221-S3 H191A 的 kcat/Km 提升 | "notably, the DP622-S2 D126A variant exhibited a threefold increase in k cat"；"The DP221-S3 H191A mutation had a synergistic effect, increasing k cat while simultaneously decreasing K m , resulting in a 2.7-fold improvement in catalytic efficiency" |
-| 1 / 5 | 三底物交叉实验里真正单底物特异的酶数（只有 PP507-S1） | "PP507-S1 exhibited the highest degree of selectivity, catalyzing cleavage exclusively of Substrate 1, with no detectable activity against the other two substrates" |
-| 3 条片段 | 三酶 cocktail 切全长 Aβ42 的质谱预期产物 | "Mass spectrometry analysis revealed the presence of the expected cleavage fragments-DAEFRHDSGYEVHHQKL, VFFAEDVGSNKGAIIGL, and VVIA" |
+| 平均 26 条/组合 | 每个策略-底物组合送去湿实验的设计数（推算总送测约 156 条，正文未给总数与生成库规模） | "On average, 26 designs were" |
+| 5 个酶 | 实验验证到有活性的设计（DP720-S1、DP622-S2、DP221-S3、PP507-S1、PP532-S1） | "Experimental characterization" |
+| 4 h / 8 h / 8 h / ~12 h / 12 h 切一半 | 完全降解所需时间（依次为 DP622-S2、DP720-S1、PP507-S1、PP532-S1、DP221-S3），酶:底物 = 1:2 摩尔比 | "At a 1:2 enzyme-to-substrate"；"while PP532-S1 required nearly"；"In contrast, DP221-S3 displayed" |
+| ~10% | DP221-S3 旁路切割次要质谱峰相对主峰的占比（裂解位点向 C 端偏一个残基） | "a very minor peak-representing" |
+| kcat 约 10⁻⁴ s⁻¹；Km 微摩尔级 | 五个设计的全局动力学水平 | "Analysis revealed that the" |
+| 160.8 M⁻¹s⁻¹（kcat 0.0009 s⁻¹、Km 5.36 µM） | 最佳设计 DP622-S2 的催化效率 | "achieving a k cat / K m of" |
+| 28.4 / 24.3 / 4.2 / 3.8 M⁻¹s⁻¹ | PP507-S1 / PP532-S1 / DP221-S3 / DP720-S1 的催化效率 | "The PP507-S1 and PP532-S1" |
+| >10⁷ 倍 | 相对无催化肽键水解的加速（分母取自文献 33，不是本文实测的同一底物） | "These k cat values represent an" |
+| 三倍 / 两倍 / 2.7 倍 | D126A 的 kcat 提升；Y91F 的 kcat/Km 提升；DP221-S3 H191A 的 kcat/Km 提升 | "notably, the DP622-S2 D126A"；"The DP221-S3 H191A mutation had" |
+| 1 / 5 | 三底物交叉实验里真正单底物特异的酶数（只有 PP507-S1） | "PP507-S1 exhibited the highest" |
+| 3 条片段 | 三酶 cocktail 切全长 Aβ42 的质谱预期产物 | "Mass spectrometry analysis" |
 | 0 次 | 本地正文里 MD / QM / 螯合剂 / 金属计量类关键词的命中数（本卡以 `grep -i` 实测：molecular dynamics、dynamics、GROMACS、OpenMM、AMBER、umbrella、metadynamics、free energy perturbation、explicit solvent、quantum、DFT、EDTA、ICP、RMSD、threshold、pAE、pLDDT 均为 0；Rosetta 仅 2 次且都在 Code availability 一句里；crystal 仅 2 次且都在参考文献的期刊名 Acta Crystallogr 里） | 见第 3 节工具箱末条与第 7 节 |
 
 ## 5. 结论——作者说了什么
 
-1. 序列信息可以**写进生成回路**：把目标肽序列和催化基序同时作为生成条件，就能造出识别特定序列的金属蛋白酶（"By explicitly integrating target sequence information into the flow-based structure generation process, Proteus2 enables the direct design of sequence-specific metalloproteases"）。
+1. 序列信息可以**写进生成回路**：把目标肽序列和催化基序同时作为生成条件，就能造出识别特定序列的金属蛋白酶（"By explicitly integrating"）。
 2. 两步封装做出 clamp 形、把底物包住，从而同时最大化特异性与区分能力。
 3. de novo 酶设计**从“结合”跨到“功能性蛋白水解生理靶”**：三个不同 Aβ 位点都拿到活性酶，并能在**全长 Aβ42** 上按设计位点切割。
 4. 机制上：活性来自设计的活性位点（Glu→Ala 普遍失活是主要支撑），第二壳层与 oxyanion hole 残基**主要通过调 kcat 影响效率**，且这种调优是**上下文相关**的（DP622-S2 单突变升、双突变降）。
 5. 绝对性能：kcat 10⁻⁴ s⁻¹ 量级、Km 达微摩尔（与 IDE 等天然 Aβ 降解酶同量级），平均加速 >10⁷ 倍；作者明说 turnover 仍低于天然酶。
-6. 作者自限三处：（i）"Achieving strict substrate exclusivity in de novo scaffolds remains a formidable challenge, far surpassing the establishment of catalytic activity alone"；（ii）关键微环境因素（溶剂、第二壳层配位、动态催化过程）当前方法建模不准；（iii）特异性要靠**未来的显式阴性设计**才谈得上提升。
+6. 作者自限三处：（i）"Achieving strict substrate"；（ii）关键微环境因素（溶剂、第二壳层配位、动态催化过程）当前方法建模不准；（iii）特异性要靠**未来的显式阴性设计**才谈得上提升。
 7. 展望：该框架可推广到丝氨酸/半胱氨酸蛋白酶，作者定位为治疗导向的“可编程蛋白水解”。
 
 ## 6. 结论——我们读出了什么（以下为推断，非作者原文）
@@ -124,8 +124,8 @@ bioRxiv 2026.01.06.697903（Posted 2026-01-06，预印本）· DOI 10.64898/2026
 ## 7. 局限与失败（作者的 + 我们读出的）
 
 - 作者自陈：见第 5.6 条三处（严格底物排他性远难于做出活性；kcat 相关微环境当前方法建模不准；特异性待未来的显式阴性设计）。另在正文中承认"the turnover rates of our designs are lower than those of natural enzymes"。
-- 作者披露的可复现性缺口：**「Code availability」只说 Rosetta 套件公开，本文自己的"Design protocols, analysis scripts, and design models used in this paper will be made available upon final publication"**——即截至预印本，Proteus2 的生成协议与权重不公开；且已声明将申请临时专利，公开范围存在进一步收窄的风险。
-- 我们读出的：① 本地正文**没有 Methods 节**，所有关键参数（锌浓度、孵育条件、生成采样数、两步扩散的输入构造、LigandMPNN 与 AF3 复验的通过线）不可核验，本卡的工作流只能按正文描述排序，**顺序可复现、参数不可复现**；② 计算闸口是**定性的**（"convergence to the intended catalytic geometry"），因此本文无法告诉我们“哪条设计会被计算淘汰”，也就无法给出漏斗递减；③ 全部动力学来自蛋白级 FRET 融合传感器，与真正的全长 Aβ/APP 底物环境不同，作者用同一体系内的时间曲线互证时发现 DP720-S1 冲突，却未做正交读出；④ 无任何结构解析（无晶体/冷冻电镜），“设计的活性位点几何被实现”这一环没有直接观测；⑤ 无 QM/MD，所以对“10⁷ 倍加速来自哪一步的能垒下降”没有任何机理层证据；⑥ 送测集与命中集之间可能有人工挑选偏差（挑选规则未披露），“5/约156”不应作为该方法对任意位点的期望命中率引用。
+- 作者披露的可复现性缺口：**「Code availability」只说 Rosetta 套件公开，本文自己的"Design protocols, analysis"**——即截至预印本，Proteus2 的生成协议与权重不公开；且已声明将申请临时专利，公开范围存在进一步收窄的风险。
+- 我们读出的：① 本地正文**没有 Methods 节**，所有关键参数（锌浓度、孵育条件、生成采样数、两步扩散的输入构造、LigandMPNN 与 AF3 复验的通过线）不可核验，本卡的工作流只能按正文描述排序，**顺序可复现、参数不可复现**；② 计算闸口是**定性的**（"convergence to the intended"），因此本文无法告诉我们“哪条设计会被计算淘汰”，也就无法给出漏斗递减；③ 全部动力学来自蛋白级 FRET 融合传感器，与真正的全长 Aβ/APP 底物环境不同，作者用同一体系内的时间曲线互证时发现 DP720-S1 冲突，却未做正交读出；④ 无任何结构解析（无晶体/冷冻电镜），“设计的活性位点几何被实现”这一环没有直接观测；⑤ 无 QM/MD，所以对“10⁷ 倍加速来自哪一步的能垒下降”没有任何机理层证据；⑥ 送测集与命中集之间可能有人工挑选偏差（挑选规则未披露），“5/约156”不应作为该方法对任意位点的期望命中率引用。
 
 ## 8. 对 UAA 筛选的迁移判断
 
@@ -156,6 +156,8 @@ bioRxiv 2026.01.06.697903（Posted 2026-01-06，预印本）· DOI 10.64898/2026
 - CSV 字段映射：本文第 3 节 ↔ `候选生成方法/计算筛选判据/阈值数字`；第 4 节 ↔ `候选数递减/实验命中率/Kd或活性最好值`；第 8 节 ↔ `在方法演进链的位置`。CSV 现值中 `thresholds/候选数递减/实验命中率` 三格原记为“未记录”，本卡给出的 `26 条/组合 → 5 命中`属**送测口径、非全漏斗口径**，回填时须按第 8 节不可迁移第 2 条加注。
 - **本卡自检**：`PYTHONIOENCODING=utf-8 python scripts/verify_literature_cards.py --only "C22" --no-report`（不带 `--sync-map`、不落 selfcheck.txt/rollout_status.tsv，避免覆盖他人产物）把本卡所有被**直双引号**包住、不含中日韩字符且 ≥20 字符 / ≥12 字母的片段，在上面那一份 `.txt` 里逐字查找。本卡约定：**英文逐字引句只用直双引号，中文叙述里的引述一律用全角引号或直角引号**——因为门禁是按行配对直双引号的，混用会让相邻引句被当成一整段而漏检（写卡过程中实测出现过：一处跨引文编号 43 的拼接被拆成两条；一轮批量把中文引述改成全角引号的操作因配对错位把相邻引句的闭合号吃掉了，已回滚重做，改后核验从 57 条升到 **67 条、67/67 命中**）。最终结论：**PASS C22 quotes=67/67，退出码 0**。
 - **反向自测（证明"引用造假会被机器抓到"不是声明）**：在内存里把本卡一条真引句的 `160.8` 篡改成 `161.8`，用门禁自己的 `quotes_of()` + `norm()` 逐字比对本地 `.txt` ⇒ 该条变 MISS、命中率 66/67，与门禁判 FAIL 的口径一致；不落任何文件。
+
+- **引用预算截短（2026-11-08，公开仓库口径）**：本卡有 53 条逐字引句来自许可受限的第三方来源（C22；ALL_RIGHTS_RESERVED），按 `deliverables/fulltext_manifest.csv` 的逐份许可判定，已把单条引句截到 ≤100 字符、同一来源总量截到 ≤600 字符；**截短后仍逐字命中同一份底稿**（门禁 `scripts/verify_literature_cards.py` 仍是逐字核验），完整原句按 §9 的重取方式与 sha256 可复核。逐条改动账见 `deliverables/quote_budget_ledger.csv`。本卡其余内容（我们自己的分析、判断与台账）未被改动。
 
 <!--CSV回填
 work_type=预印本（bioRxiv 2026.01.06.697903，Posted 2026-01-06，未同行评审，将申请临时专利）

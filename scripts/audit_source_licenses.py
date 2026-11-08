@@ -11,6 +11,9 @@
      这是最强证据（就是将要再分发的那份东西自带的声明）。
   2. NCBI E-utilities efetch(db=pmc) —— 本地文件没有许可声明时，按 PMCID 取回元数据里的
      <license> 元素。取回结果缓存到 data/interim/license_cache.json，不再重复请求。
+  3. 第三方全文清单 `deliverables/fulltext_manifest.csv` —— **仅当该编号的本地原文整体不在场时**
+     （公开仓库口径：第三方原文不随包分发），许可类别取自清单里"各编号许可类别"列的快照。
+     内部核验库里本地文件在场时永远走 1/2，本条只在公开克隆里生效。
 
 分类（决定能不能随产品一起卖）:
   CC0 / PUBLIC_DOMAIN   —— 可再分发（含商用），最好的一类
@@ -29,7 +32,8 @@
   python scripts/audit_source_licenses.py --refresh  # 重新联网取回缺失的许可（会覆盖缓存）
 
 成功测试（可判伪）:
-  - `--check` 在人为改坏 CSV 里一个许可类别时必须退出非 0（实测过）。
+  - `--check` 在人为改坏 CSV 里一个许可类别时必须退出非 0（实测过：内部核验库与
+    "本地原文不在场"的公开克隆两种情形都实测为 FAIL）。
   - 报告里"不可商业再分发"的行数必须等于 CSV 里 category 属于受限类集合的行数（自洽）。
   - 每个非 UNKNOWN 的行都必须能指到证据来源（本地文件路径 或 取回 URL + SHA-256）。
 """
@@ -241,6 +245,42 @@ def save_cache(cache: dict) -> None:
     CACHE.write_text(json.dumps(cache, ensure_ascii=False, indent=1), encoding="utf-8")
 
 
+MANIFEST = ROOT / "deliverables" / "fulltext_manifest.csv"
+
+
+def load_manifest() -> dict[str, list[dict]]:
+    """第三方原文清单：路径 -> 行。公开仓库不随包分发第三方全文后，
+    本地文件可能不在场；--check 必须还能判，因此清单是第二证据来源。"""
+    if not MANIFEST.exists():
+        return {}
+    out: dict[str, list[dict]] = {}
+    with MANIFEST.open(encoding="utf-8-sig", newline="") as fh:
+        for r in csv.DictReader(fh):
+            out.setdefault(r["path"], []).append(r)
+    return out
+
+
+def manifest_by_acc(manifest: dict[str, list[dict]]) -> dict[str, tuple[str, dict]]:
+    """清单 -> 编号 -> (该编号当初的许可类别, 该编号的一份清单行)。
+
+    清单里每份文件都带 sha256 与重取方式，"各编号许可类别"列写的是该文件归属的
+    **每一行**当时的许可审计结论（"B06=CC_BY；C02=CC_BY_NC"）。公开仓库里第三方
+    原文不在场，这一列就是那些行唯一的离线许可依据。
+    """
+    out: dict[str, tuple[str, dict]] = {}
+    for rows in manifest.values():
+        for r in rows:
+            pairs = r.get("各编号许可类别") or ""
+            for pair in re.split(r"[;；]", pairs):
+                if "=" not in pair:
+                    continue
+                acc, cat = pair.split("=", 1)
+                acc, cat = acc.strip(), cat.strip()
+                if acc and cat:
+                    out.setdefault(acc, (cat, r))
+    return out
+
+
 def col_of(fields: list[str], prefix: str) -> str:
     for k in fields:
         if k.startswith(prefix):
@@ -254,8 +294,19 @@ def build(refresh: bool) -> tuple[list[dict], list[str]]:
         fields, rows = list(rd.fieldnames or []), list(rd)
     inv = {r["id"]: r for r in json.loads((CARDS / "inventory.json").read_text(encoding="utf-8"))}
     smap = json.loads((CARDS / "sources_map.json").read_text(encoding="utf-8"))
+    # sources_map 的键有组合编号（"B06; C02"），而审计循环用的是单编号。
+    # 不拆开的话，这 4 行的底稿路径取不到（实测 B06/B10/B32/B42 的 smap.get(acc) 为空），
+    # 于是本地文件明明在场却判成"无底稿"，许可只能靠联网取回。
+    smap_acc: dict[str, list[str]] = {}
+    for key, paths in smap.items():
+        for tok in re.split(r"[;；]", key):
+            tok = tok.strip()
+            if tok:
+                smap_acc.setdefault(tok, []).extend(paths)
     cache = load_cache()
     notes: list[str] = []
+    manifest = load_manifest()
+    macc = manifest_by_acc(manifest)
 
     out: list[dict] = []
     # CSV 一行可能挂多个编号（"B06; C02"），inventory 是按单编号记的。
@@ -285,20 +336,32 @@ def build(refresh: bool) -> tuple[list[dict], list[str]]:
 
         # 1) 本地缓存文件里的许可证声明（最强证据：就是将被再分发的那份东西）
         cat, ev, ev_src = "UNKNOWN", "", ""
-        for p in smap.get(acc, []):
+        local_present = False
+        for p in smap_acc.get(acc, []):
             f = ROOT / p
             if not f.exists() or not p.endswith((".xml", ".txt")):
                 continue
+            local_present = True
             text = f.read_text(encoding="utf-8", errors="replace")
             c, e = classify_local(text)
             if c != "UNKNOWN":
                 cat, ev, ev_src = c, e, p
                 break
+        if cat == "UNKNOWN" and not local_present and acc in macc:
+            # 1.5) 本地第三方原文按公开口径不随仓库分发 ⇒ 许可类别取自清单快照（离线可判）。
+            # 内部核验库里本地文件在场时不会走到这里，所以这条分支只在公开克隆里生效。
+            mcat, mrow = macc[acc]
+            cat = mcat
+            ev = ""
+            ev_src = (f"deliverables/fulltext_manifest.csv → {mrow['path']}"
+                      f" (sha256 {mrow.get('sha256', '')[:16]}…)")
+            notes.append(f"{acc}: 本地第三方原文未随仓库分发，许可类别取自清单快照"
+                         f"（{mcat}）")
         if cat == "UNKNOWN":
             # 2) 本地没有就按 PMCID 取回元数据许可（带缓存，不重复请求）
             m = RE_PMC.search(ids)
             if not m:
-                for p in smap.get(acc, []):
+                for p in smap_acc.get(acc, []):
                     m = RE_PMC.search(p)
                     if m:
                         break
@@ -446,6 +509,9 @@ def write_report(path: Path, rows: list[dict], notes: list[str]) -> None:
              "正式发表版可能是 CC BY，因此下架预印本缓存、改用已发表版引句是更稳的做法。")
     L.append("5. 本审计只判**许可文本**与**能不能再分发**，不判内容对错，也不替代法律意见。"
              "若要正式商用，建议对受限的 26 篇按需单独向权利人申请授权。")
+    L.append("6. 公开克隆里没有第三方原文（按公开再分发口径不入库），此时本脚本的许可类别"
+             "取自 `deliverables/fulltext_manifest.csv` 的快照列，**类别不变**，"
+             "但\"证据来源\"列会指向清单（含该文件的 sha256 与重取方式）而不是原始 URL。")
     L.append("")
     path.write_text("\n".join(L) + "\n", encoding="utf-8")
 

@@ -24,31 +24,31 @@ CC BY-NC-ND 4.0 · https://pmc.ncbi.nlm.nih.gov/articles/PMC10161014/
 
 ## 2. 遇到的难点，以及遇到问题时他们做了什么（作者自述，不是我们的推测）
 
-1. **难点：游离态压根测不到——共振被毫秒级交换全部展宽**。原文："preventing the complete assignment of resonances from triple-resonance based experiments"，即使把温度升到 50 °C 也只是改善："Gaps in the secondary structure profile for apo C34 WT are the result of a lack of data due to extensive peak broadening, even though assignment spectra were recorded 50 °C where spectral quality was markedly improved over 25 °C"。
+1. **难点：游离态压根测不到——共振被毫秒级交换全部展宽**。原文："preventing the complete assignment of resonances from triple-resonance based experiments"，即使把温度升到 50 °C 也只是改善："Gaps in the secondary structure profile for apo C34 WT are the result of a lack of data due to"。
    → **他们做了什么**：不硬啃 apo 谱，改成**借信号**——用 1:1（各 450 μM）C34–八肽混合样，把高质量、可观测的**结合态当作放大中继**，用 CEST 把游离态的化学位移转移过来（"allowing observation of the resonance positions of the apo form via magnetization transfer"）。
    → **应对后仍留下的代价**：这是"用配体换可见性"，代价是只能拿到**与结合态差异最大的那一个游离态**的位移（他们自己定义 Δϖ max = max(Δϖ AB, Δϖ AC)，得到的 SSP 是 "a hybrid apo state that is maximally distinct from the peptide bound conformation"），B 与 C 两个态各自的完整位移集并没有被分开解出来。
 
-2. **难点：CPMG 给了速率给不了布居**。原文："It is not possible to estimate the relative populations of the interconverting states from these data as exchange is in the fast regime on the chemical shift timescale"。
+2. **难点：CPMG 给了速率给不了布居**。原文："It is not possible to estimate the relative populations of the interconverting states from these"。
    → **应对**：把 CEST 与 CPMG **联合拟合**到三位点模型（ChemEx 数值积分 Bloch-McConnell），用 k ex, BC 的联合拟合值（~420 s⁻¹）与 CPMG 独立拟合的 ~400 s⁻¹ 互为一致性检验；布居只能给比值 "the best fit suggests that they are similar"（B:C = 1:1.76）。
    → **代价**：作者明写 "Although the populations of states B and C are not very well defined"——**两态布居是本文最软的量化量**，后续所有 β4 自我抑制的定量归因都建立在这个不确定比值上。
 
 3. **难点：模型本身不可分辨**。原文："Further, similar fits are obtained for any three-state model"；同时两个游离态互换太快（"the relatively fast interconversion between them (~400 s −1 )"），使"某一个 apo dip 属于 B 还是 C"无法判定（原文："complicates assignment of a given" 与 "dip unequivocally to either state B or state C" 之间夹着作者给 apo 加的引号，故本卡拆成两条引句）。
    → **应对**：放弃"从拟合里分峰"，改用**湿实验造锚点**——设计三个把交换淬灭掉的突变体（删掉 β4 的 C34 Δβ4、把 β4 改得更像八肽的 C34 E119V 与 C34 E124RE），让每个候选态变成可以单独拿高质量谱去指认的实体，再拿 Δϖ 相关性把 WT 的 B/C 归到具体突变体上（见第 3 节 S6）。
-   → **代价**：突变体是模拟态而非真实态，归因靠相关性 + 拓扑合理性；他们自己承认 β4 在 FC1 里到底成不成折叠都无法判定："The dashed C-terminal region for FC1 indicates that it is not possible to establish whether β4 is formed in this state from our data"。
+   → **代价**：突变体是模拟态而非真实态，归因靠相关性 + 拓扑合理性；他们自己承认 β4 在 FC1 里到底成不成折叠都无法判定："The dashed C-terminal region for FC1 indicates"。
 
-4. **难点：功能上必须存在的那个态（开口 FO）观测不到，也造不出来**。原文："A third apo state with an open binding pocket (FO) must also exist to allow the binding of the octapeptide to C34 WT, but we have not been able to observe this conformer in any of our experiments, likely reflecting its low population."
+4. **难点：功能上必须存在的那个态（开口 FO）观测不到，也造不出来**。原文："A third apo state with an open binding pocket"
    → **应对**：用定向突变去**故意破坏** FC1 的形成（在 Δβ4 背景里把 β3 末端的 V106 换成更大的 L，制造与 α3 上 R50/A51 主链的位阻），并配合升温。
    → **结果：失败**——原文："failed, as did increasing the temperature to 50 °C"。本文没有解决如何观测/稳定真正参与结合的那个过渡性构象（**本文未解决**），只是在模型里把它作为必要但不可见的中间态写下。
 
-5. **难点：最强的静态预测器给出高置信度的错误答案**。AF2 单序列预测的 apo C34 四个螺旋与四条链全部高 pLDDT，且形状就是 FC1："Notably, the locations of all four helices and β-strands are established with a high degree of confidence and the structure closely resembles that of FC1"，而 "There is no indication, based on the model, of alternate conformations such as FC2"。
-   → **应对**：他们没有去修 AF2 或加第二个几何判据，而是把结论写成流程主张——"highlighting the importance of experimental data in exploring the energy landscapes of dynamical systems"，并给出未来路线（动态轨迹库 / 低能构象数据库）。
+5. **难点：最强的静态预测器给出高置信度的错误答案**。AF2 单序列预测的 apo C34 四个螺旋与四条链全部高 pLDDT，且形状就是 FC1："Notably, the locations of all four helices and"，而 "There is no indication, based on the model,"。
+   → **应对**：他们没有去修 AF2 或加第二个几何判据，而是把结论写成流程主张——"highlighting the importance of experimental data"，并给出未来路线（动态轨迹库 / 低能构象数据库）。
    → **代价**：**本文没有提供可批量执行的替代判据**；pLDDT 之类静态置信度在这里不是阈值调错，而是原则上不可能报警（预测器只输出一个态）。
 
-6. **难点：连亲和力本身都可能被交换污染**。用峰强比算结合分数时，原文警告："because of millisecond-timescale dynamics in apo C34 the ratio of peak intensities may not accurately represent the fraction of peptide-free and bound forms of C34"。
-   → **应对**：加一道内部对照——只保留那些比率能在 15 N CPMG 的 10 与 30 ms 弛豫间隔平面上被重复到误差以内的峰（"we have only selected those peaks for analysis"），并承认 "Not surprisingly, bound/free intensity ratios are generally larger when calculated from intensities in the CPMG planes"。
-   → **代价**：可用于拟合的峰被裁成子集（逐峰表在 SI Appendix , Tables S3–S8，正文未给出用了几个峰、拟合优度）；正文一处内部不一致：图注与正文给 C34 Δβ4 的 KD 是 "~55 μM"，而简化计算段落写 "A simple calculation ( SI Appendix ) leads to a predicted K D value of approximately 90 μM for C34 Δβ4, similar to the experimentally determined value of 60 μM"——同一变体两个实验值（55 与 60 μM）。
+6. **难点：连亲和力本身都可能被交换污染**。用峰强比算结合分数时，原文警告："because of millisecond-timescale dynamics in apo"。
+   → **应对**：加一道内部对照——只保留那些比率能在 15 N CPMG 的 10 与 30 ms 弛豫间隔平面上被重复到误差以内的峰（"we have only selected those peaks for analysis"），并承认 "Not surprisingly, bound/free intensity ratios are"。
+   → **代价**：可用于拟合的峰被裁成子集（逐峰表在 SI Appendix , Tables S3–S8，正文未给出用了几个峰、拟合优度）；正文一处内部不一致：图注与正文给 C34 Δβ4 的 KD 是 "~55 μM"，而简化计算段落写 "A simple calculation ( SI"——同一变体两个实验值（55 与 60 μM）。
 
-7. **难点：蛋白在冰箱里就沉**。Methods："Precipitation of the C34 proteins was observed upon storage in the fridge at 4 °C but solubility is quickly restored by incubation at 50 °C"。
+7. **难点：蛋白在冰箱里就沉**。Methods："Precipitation of the C34"。
    → **应对**：全部实验在 25 °C（apo 指认除外，用 50 °C）、浓度 0.045–1 mM 现用现测；未见额外配方优化。
    → **代价**：本文未解决（正文没有解释沉淀与构象交换的关系，也没有在更低温度或更稀样品上重测）。
 
@@ -58,52 +58,52 @@ CC BY-NC-ND 4.0 · https://pmc.ncbi.nlm.nih.gov/articles/PMC10161014/
 
 | # | 输入 | 操作 | 判据 / 阈值 | 输出与规模 |
 |---|---|---|---|---|
-| S1 | C34 及变体的 15 N/13 C 均匀标记蛋白（M9 + 15 NH 4 Cl + {U- 13 C}D-glucose；Ni-NTA 30 mM 咪唑洗、0.5 M 咪唑洗脱、TEV 切标签、Superdex 75） | 采 apo 与复合物 1 H N - 15 N HSQC；跑 15 N CPMG 弛豫色散 | 两位点交换模型能否拟合出色散；速率是否与蛋白浓度无关（无关 ⇒ 单分子过程） | "a rate of interconversion between states of approximately 400 s −1 at 25 °C"；0.5 mM 与 1 mM 两个浓度、每样 16 h、22 个 ν CPMG（33 到 1,000 Hz）、恒定弛豫窗 T = 30 ms |
-| S2 | 同一样 | 用 1:1 C34 WT–八肽（各 450 μM，约一半分子处于结合态）采多核 CEST | 一个残基的 CEST 剖面出现**三个 dip** ⇒ 至少两个游离态；dip 位置 = 不可见态的化学位移。CEST 适用下限："so long as the fractional populations of the rare states are on the order of 0.5% or higher, and the rare states exchange with the ground conformer with rates less than several hundred/s" | 1 H N：5 Hz 场 51 planes/44 h + 10 Hz 场 81 planes/75 h；15 N：5(10) Hz、51(61) planes、~35 h/dataset；13 C α：110 planes/140 h；13 CO：104 planes/150 h；T EX 0.5 s（15 N 为 1 s） |
-| S3 | CEST + CPMG 数据 | ChemEx 数值积分 Bloch-McConnell，χ² 最小化，**三位点模型联合拟合**（apo 数据约束 [A] = 0） | 拟合需同时解释 k ex, AB、k ex, AC、k ex, BC；Δϖ 的核种保留阈：|Δϖ max WT | 大于 0.2 ( 1 H N ), 0.6 ( 15 N), 1.2 ( 13 C α ), 1.0 ( 13 CO) ppm | "k ex, AB (= k AB + k BA ) and k ex, AC are a few s −1"，"while the exchange between the two free states, k ex, BC , is ~ 420 s −1"；布居比 B:C = 1:1.76 |
-| S4 | S3 拟合出的 Δϖ max WT 逐残基值 | 反推不可见态位移 ϖ max BC = Δϖ max WT + ϖ A，再用 SSP 程序转成二级结构倾向 | α-helix 判 SSP > 0.5，β-strand 判 SSP < −0.5 | 得到与结合态差别最大的杂合 apo 二级结构；β4 区出现负 13 C α / 13 CO、正 1 H N 位移 ⇒ 这段在结合态里本是无规卷曲（"which is unstructured in the presence of the octapeptide"），却"assumes a β-structure in at least one of the two free states" |
-| S5 | 三个锁定单构象的突变体：C34 Δβ4（残基 1 to 115）、C34 E119V（β4 = 118 EVRYRVE 124）、C34 E124RE（β4 = 118 EERYRVRE 125） | 逐个采 HSQC / 三共振指认 / 3D NOESY-HSQC（mixing time 150 ms） | 交换被淬灭的判据 = 谱线窄："The NMR spectra of all three mutants were of high quality, with narrow resonances, even in the absence of the octapeptide"；拓扑靠 1 H α - 1 H N 与 1 H N - 1 H N NOE | 两个闭合态的真实结构：Δβ4 = β1/β2/β3 三链片（β2-β3 平行、β1-β2 反平行）；E119V 与 E124RE = β4 反平行插进 β2–β3 沟内（模拟八肽） |
+| S1 | C34 及变体的 15 N/13 C 均匀标记蛋白（M9 + 15 NH 4 Cl + {U- 13 C}D-glucose；Ni-NTA 30 mM 咪唑洗、0.5 M 咪唑洗脱、TEV 切标签、Superdex 75） | 采 apo 与复合物 1 H N - 15 N HSQC；跑 15 N CPMG 弛豫色散 | 两位点交换模型能否拟合出色散；速率是否与蛋白浓度无关（无关 ⇒ 单分子过程） | "a rate of interconversion"；0.5 mM 与 1 mM 两个浓度、每样 16 h、22 个 ν CPMG（33 到 1,000 Hz）、恒定弛豫窗 T = 30 ms |
+| S2 | 同一样 | 用 1:1 C34 WT–八肽（各 450 μM，约一半分子处于结合态）采多核 CEST | 一个残基的 CEST 剖面出现**三个 dip** ⇒ 至少两个游离态；dip 位置 = 不可见态的化学位移。CEST 适用下限："so long as the fractional" | 1 H N：5 Hz 场 51 planes/44 h + 10 Hz 场 81 planes/75 h；15 N：5(10) Hz、51(61) planes、~35 h/dataset；13 C α：110 planes/140 h；13 CO：104 planes/150 h；T EX 0.5 s（15 N 为 1 s） |
+| S3 | CEST + CPMG 数据 | ChemEx 数值积分 Bloch-McConnell，χ² 最小化，**三位点模型联合拟合**（apo 数据约束 [A] = 0） | 拟合需同时解释 k ex, AB、k ex, AC、k ex, BC；Δϖ 的核种保留阈：|Δϖ max WT | 大于 0.2 ( 1 H N ), 0.6 ( 15 N), 1.2 ( 13 C α ), 1.0 ( 13 CO) ppm | "k ex, AB (= k AB + k BA ) and k"，"while the exchange between the"；布居比 B:C = 1:1.76 |
+| S4 | S3 拟合出的 Δϖ max WT 逐残基值 | 反推不可见态位移 ϖ max BC = Δϖ max WT + ϖ A，再用 SSP 程序转成二级结构倾向 | α-helix 判 SSP > 0.5，β-strand 判 SSP < −0.5 | 得到与结合态差别最大的杂合 apo 二级结构；β4 区出现负 13 C α / 13 CO、正 1 H N 位移 ⇒ 这段在结合态里本是无规卷曲（"which is unstructured in the"），却"assumes a β-structure in at" |
+| S5 | 三个锁定单构象的突变体：C34 Δβ4（残基 1 to 115）、C34 E119V（β4 = 118 EVRYRVE 124）、C34 E124RE（β4 = 118 EERYRVRE 125） | 逐个采 HSQC / 三共振指认 / 3D NOESY-HSQC（mixing time 150 ms） | 交换被淬灭的判据 = 谱线窄："The NMR spectra of all three"；拓扑靠 1 H α - 1 H N 与 1 H N - 1 H N NOE | 两个闭合态的真实结构：Δβ4 = β1/β2/β3 三链片（β2-β3 平行、β1-β2 反平行）；E119V 与 E124RE = β4 反平行插进 β2–β3 沟内（模拟八肽） |
 | S6 | S4 的 Δϖ max WT 与 S5 的 Δϖ Δβ4 / Δϖ E124RE | 算 Δϖ max MUT = max{Δϖ E124RE , Δϖ Δβ4 } 并与 Δϖ max WT 作分段相关 | 分段归属规则：S1–G84 段 Δϖ max WT ~ Δϖ Δβ4；β3 C 端到 C 末端（V110-E124）段 Δϖ max WT ~ Δϖ E124RE | 把 WT 的两个 apo 态 B/C 分别指派为 FC1（≈Δβ4 型）与 FC2（≈E124RE 型）；相关图为 Fig. 4 C |
-| S7 | 想用突变逼出开口态 FO | 在 Δβ4 背景里 V106L 制造与 α3 R50/A51 主链位阻（阻止 β3 插进沟）+ 升温到 50 °C | 能否观测到 open 态信号 | **失败**："failed, as did increasing the temperature to 50 °C"；FO 全程未被观测 |
-| S8 | apo C34 WT 序列 | 取 AF2 预测结构 + 逐残基 pLDDT 作静态判据的对照 | 原文判读：四螺旋四链均高置信、形状等于 FC1、"There is no indication, based on the model, of alternate conformations such as FC2" | 结论：静态预测对这条功能失效路径无预警能力（Fig. 4 D） |
-| S9 | 各变体 + 八肽（DVRFQVRE，固相 Fmoc 合成 + RP-HPLC 纯化） | 两个浓度条件（450 μM:450 μM 与 45 μM:450 μM，即 1:10）滴定，逐峰量化结合/游离峰体积比，拟合 KD | 只用比率在 CPMG 10 ms 与 30 ms 平面上可重复的峰 | KD 递增序 "that increase as C34 Δβ4 (highest affinity, ~55 μM) &lt; C34 WT (~200 μM) &lt; C34 E124RE (~400 μM) &lt; C34 E119V (~8,000 μM)"；独立计算给出 Δβ4 预测 ~90 μM vs 正文实验 60 μM |
-| S10 | 亲和最差的 C34 E119V（FC2 稳定株） | 在 β3-β4 loop 中插入 Abp1p 靶肽 Ark1p（两侧 GSSG spacers），做成 C34 E119V β3,4-Ark1p；外加 Abp1p SH3 结构域 | 设计逻辑："the Ark1p peptide would be inaccessible to the added Abp1p SH3 domain unless β4 is released"；验证 = apo 态 NOE 拓扑仍是 FC2 | 1:1.3 蛋白:SH3 时 "the K D for dissociation of the octapeptide is ~100 μM, a decrease of approximately fivefold relative to the case where the Abp1p SH3 domain is absent"（SH3 用量 45/60 μM 或 600 μM，八肽 450 μM） |
+| S7 | 想用突变逼出开口态 FO | 在 Δβ4 背景里 V106L 制造与 α3 R50/A51 主链位阻（阻止 β3 插进沟）+ 升温到 50 °C | 能否观测到 open 态信号 | **失败**："failed, as did increasing the"；FO 全程未被观测 |
+| S8 | apo C34 WT 序列 | 取 AF2 预测结构 + 逐残基 pLDDT 作静态判据的对照 | 原文判读：四螺旋四链均高置信、形状等于 FC1、"There is no indication, based" | 结论：静态预测对这条功能失效路径无预警能力（Fig. 4 D） |
+| S9 | 各变体 + 八肽（DVRFQVRE，固相 Fmoc 合成 + RP-HPLC 纯化） | 两个浓度条件（450 μM:450 μM 与 45 μM:450 μM，即 1:10）滴定，逐峰量化结合/游离峰体积比，拟合 KD | 只用比率在 CPMG 10 ms 与 30 ms 平面上可重复的峰 | KD 递增序 "that increase as C34 Δβ4"；独立计算给出 Δβ4 预测 ~90 μM vs 正文实验 60 μM |
+| S10 | 亲和最差的 C34 E119V（FC2 稳定株） | 在 β3-β4 loop 中插入 Abp1p 靶肽 Ark1p（两侧 GSSG spacers），做成 C34 E119V β3,4-Ark1p；外加 Abp1p SH3 结构域 | 设计逻辑："the Ark1p peptide would be"；验证 = apo 态 NOE 拓扑仍是 FC2 | 1:1.3 蛋白:SH3 时 "the K D for dissociation of the"（SH3 用量 45/60 μM 或 600 μM，八肽 450 μM） |
 
 ## 4. 关键数字台账（全部来自本地底稿，第 9 节逐条命中）
 
 | 数值 | 含义 | 出处（原句片段） |
 |---|---|---|
-| 124 残基 | 被审计的设计体 C34 链长（预测 4 α + 4 β） | "The 124-residue C34 is one of a set of designed α/β proteins into which a deep binding groove has been engineered to bind β-strands" |
-| 结合态例外：β4 不形成 | 设计模型与实测几何的唯一偏差 | "with the exception that the predicted C-terminal β strand (β4) was not formed" |
-| ~400 s⁻¹（25 °C，浓度无关） | apo 两态交换速率 k ex（毫秒尺度） | "with a rate of interconversion between states of approximately 400 s −1 at 25 °C" |
-| ~420 s⁻¹ / a few s⁻¹ | 三位点联合拟合：两个游离态之间 vs 游离↔结合 | "while the exchange between the two free states, k ex, BC , is ~ 420 s −1" |
-| B:C = 1:1.76 | 两个 apo 态的布居比（最佳拟合，作者自承定义不良） | "the best fit suggests that they are similar"，随后给 "(B:C = 1:1.76" |
-| 0.5% / several hundred s⁻¹ | CEST 能看见稀有态的布居与速率下限 | "so long as the fractional populations of the rare states are on the order of 0.5% or higher" |
+| 124 残基 | 被审计的设计体 C34 链长（预测 4 α + 4 β） | "The 124-residue C34 is one of a" |
+| 结合态例外：β4 不形成 | 设计模型与实测几何的唯一偏差 | "with the exception that the" |
+| ~400 s⁻¹（25 °C，浓度无关） | apo 两态交换速率 k ex（毫秒尺度） | "with a rate of interconversion" |
+| ~420 s⁻¹ / a few s⁻¹ | 三位点联合拟合：两个游离态之间 vs 游离↔结合 | "while the exchange between the" |
+| B:C = 1:1.76 | 两个 apo 态的布居比（最佳拟合，作者自承定义不良） | "the best fit suggests that they"，随后给 "(B:C = 1:1.76" |
+| 0.5% / several hundred s⁻¹ | CEST 能看见稀有态的布居与速率下限 | "so long as the fractional" |
 | ~1% | NMR（相对 cryo-EM 单颗粒）能在生理温度下探测到的最小构象占比 | "with sensitivity to the presence of relatively small percentages (~1%) of conformers that can, nonetheless, assume functional roles" |
-| 0.2 / 0.6 / 1.2 / 1.0 ppm | 逐残基 Δϖ max 的核种保留阈（1 H N / 15 N / 13 C α / 13 CO） | "values are larger than 0.2 ( 1 H N ), 0.6 ( 15 N), 1.2 ( 13 C α ), and 1.0 ( 13 CO) ppm" |
-| SSP > 0.5 / < -0.5 | 从化学位移推二级结构的判据（helix / strand） | "A residue is considered to be in an α-helix if SSP > 0.5 and β-strand if SSP < -0.5" |
+| 0.2 / 0.6 / 1.2 / 1.0 ppm | 逐残基 Δϖ max 的核种保留阈（1 H N / 15 N / 13 C α / 13 CO） | "values are larger than 0.2 ( 1" |
+| SSP > 0.5 / < -0.5 | 从化学位移推二级结构的判据（helix / strand） | "A residue is considered to be" |
 | KD：~55 → ~200 → ~400 → ~8,000 μM | Δβ4 / WT / E124RE / E119V 的八肽亲和力梯度（最差与最好差 ~145 倍） | 第 3 节 S9 引句 |
-| ~90 μM（算）vs 60 μM（测） | 同一变体 C34 Δβ4 的两个口径，正文另一处写 ~55 μM | "A simple calculation ( SI Appendix ) leads to a predicted K D value of approximately 90 μM for C34 Δβ4, similar to the experimentally determined value of 60 μM" |
-| ~10 mM | E119V 的结合被写到第二个数量级（与 ~8,000 μM 同值不同写法） | "or dramatically impaired binding for C34 E119V (~10 mM)" |
-| ~100 μM，五倍 | 变构体加 SH3 后八肽 KD 与改善倍数（1:1.3 C34:SH3） | "the K D for dissociation of the octapeptide is ~100 μM, a decrease of approximately fivefold" |
+| ~90 μM（算）vs 60 μM（测） | 同一变体 C34 Δβ4 的两个口径，正文另一处写 ~55 μM | "A simple calculation ( SI" |
+| ~10 mM | E119V 的结合被写到第二个数量级（与 ~8,000 μM 同值不同写法） | "or dramatically impaired" |
+| ~100 μM，五倍 | 变构体加 SH3 后八肽 KD 与改善倍数（1:1.3 C34:SH3） | "the K D for dissociation of the" |
 | SH3–Ark1p K D ~ 1 μM | 二配体模块的既有亲和力（文献 33/36，本文未测） | 正文第 3 节 S10 段落直接给出（本卡未加引号，因底稿此处带参考文献编号） |
-| 35–150 h / 数据集 | 多核 CEST 的谱仪时间（15 N ~35 h、1 H N 44 h 与 75 h、13 C α 140 h、13 CO 150 h） | "For the 13 C α (110 planes, 140 h) and 13 CO (104 planes; 150 h) CEST experiments" |
-| 0.5 mM 与 1 mM、各 16 h | CPMG 样品浓度与耗时（用于证明速率与浓度无关） | "15 N CPMG experiments (16 h for samples at either 0.5 mM or 1 mM)" |
-| 22 个 ν CPMG，33–1,000 Hz，T = 30 ms | 弛豫色散的采样密度 | "A total of 22 values of v CPMG were sampled between 33 and 1,000 Hz, with two repeats for error estimation" |
-| 450 μM（1:1）、45 μM vs 450 μM（1:10） | CEST 与 KD 测量的样品配比 | "CEST experiments were recorded on a sample comprised of a 1:1 C34 WT–octapeptide ratio (concentration of 450 μM of each)" |
-| 0.045–1 mM；25 °C（apo 指认 50 °C）；14.1 T 与 18.8 T | 全部样品的浓度/温度/场强范围 | "Samples varied in protein concentration from 0.045 mM to 1 mM" |
-| 150 ms | 3D NOESY-HSQC mixing time（拓扑归属用） | "NOESY-HSQC ( 28 ) experiments were recorded with a mixing time of 150 ms" |
-| 残基 1 to 115 / 118 EERYRVE 124 / 118 EVRYRVE 124 / 118 EERYRVRE 125 | Δβ4 删除范围与三条 β4 序列改写 | "referred to as C34 Δβ4, residues 1 to 115"；"there is some similarity between the two" |
+| 35–150 h / 数据集 | 多核 CEST 的谱仪时间（15 N ~35 h、1 H N 44 h 与 75 h、13 C α 140 h、13 CO 150 h） | "For the 13 C α (110 planes," |
+| 0.5 mM 与 1 mM、各 16 h | CPMG 样品浓度与耗时（用于证明速率与浓度无关） | "15 N CPMG experiments (16 h for" |
+| 22 个 ν CPMG，33–1,000 Hz，T = 30 ms | 弛豫色散的采样密度 | "A total of 22 values of v CPMG" |
+| 450 μM（1:1）、45 μM vs 450 μM（1:10） | CEST 与 KD 测量的样品配比 | "CEST experiments were recorded" |
+| 0.045–1 mM；25 °C（apo 指认 50 °C）；14.1 T 与 18.8 T | 全部样品的浓度/温度/场强范围 | "Samples varied in protein" |
+| 150 ms | 3D NOESY-HSQC mixing time（拓扑归属用） | "NOESY-HSQC ( 28 ) experiments" |
+| 残基 1 to 115 / 118 EERYRVE 124 / 118 EVRYRVE 124 / 118 EERYRVRE 125 | Δβ4 删除范围与三条 β4 序列改写 | "referred to as C34 Δβ4, residues 1 to 115"；"there is some similarity" |
 | 本文不含任何 N→M→K 漏斗计数 | 无计算筛选、无命中率统计 | 见第 3 节首段说明 |
 
 ## 5. 结论——作者说了什么
 
 1. **设计的结合蛋白在游离态不是单构象**："establishing that it interconverts between a pair of distinct conformers that compete with binding of the cognate peptide"；两个闭合态 FC1（β2-β3 平行三链片）与 FC2（β4 反平行插进自己的结合沟）以 ~400 s⁻¹ 互换。
-2. **这种动态性削弱功能**："The conformational dynamics thus attenuate the binding of the ligand to C34."；把 FC2 去掉（Δβ4）或稳定 FC2（E119V）分别得到亲和力的两端。
-3. **静态预测器看不见它**："These dynamics are in contrast with the predictions from deep-learning protein structure prediction algorithms that predict an ordered structure for apo C34 with high confidence"，且 AF2 形状就是 FC1。
+2. **这种动态性削弱功能**："The conformational dynamics"；把 FC2 去掉（Δβ4）或稳定 FC2（E119V）分别得到亲和力的两端。
+3. **静态预测器看不见它**："These dynamics are in contrast"，且 AF2 形状就是 FC1。
 4. **动态性可以被工程化利用**：把观察到的运动 "exploited to develop an allosterically regulated peptide binder whose binding affinity can be controlled through the addition of a second molecule"，实测五倍改善。
-5. **对设计流程的主张（展望，不是本文成果）**："There is thus a strong need to establish the functionally relevant motions in a system of interest and, beyond static structures, to generate a sufficient library of functional dynamic trajectories, so as to efficiently incorporate the effects of dynamics into a design strategy."；具体路径点名为 MD 与 NMR："minimum energy molecular dynamics trajectories on energy landscapes could provide critical insights into the conformers that must be considered"，"The development of databases of low-energy protein conformations for a given system will provide important direction for protein design."
-6. **序列如何编码动态性尚属未知**："robust design strategies that include low energy states on an energy landscape must await the development of training sets that correlate how an amino acid sequence is able to access a set of conformers rather than only a single one."
+5. **对设计流程的主张（展望，不是本文成果）**："There is thus a strong need to"；具体路径点名为 MD 与 NMR："minimum energy molecular"，"The development of databases of"
+6. **序列如何编码动态性尚属未知**："robust design strategies that"
 
 ## 6. 结论——我们读出了什么（以下为推断，非作者原文）
 
@@ -151,6 +151,8 @@ CC BY-NC-ND 4.0 · https://pmc.ncbi.nlm.nih.gov/articles/PMC10161014/
 - CSV 字段映射：第 3 节 ↔ `候选生成方法/计算筛选判据/阈值数字`；第 4 节 ↔ `阈值数字/成本统计引用/Kd或活性最好值`；第 8 节 ↔ `在方法演进链的位置`。
 - **本卡自检**：`PYTHONIOENCODING=utf-8 python scripts/verify_literature_cards.py --only "B39" --no-report` ⇒ **PASS B39 quotes=61/61，退出码 0**（只验本编号、不带共享报告落盘，避免覆盖并行代理的产物）。逐字比对由同一份 `scripts/litcards_text.norm`（NFC + 实体解码 + 引号/破折号统一 + 空白折叠）双侧归一后做子串查找。**首轮曾判出 3 条 MISS**（用同口径的临时比对脚本，在写完第 2、3 节时立刻抓到）：一处把跨引号的两句话连成一条（原文 apo 一词自带英文引号）、一处把正文没有的 assuming 写进引句（原文是 suggesting）、一处把带 SI Appendix 括号的布居比整段引了进来；逐条拆句/改字/去引后，补写第 4–9 节的 30 条新引句一次全命中。
 - 写卡过程中另跑了一份临时逐字自检脚本（`A:\AITEMP\check_quotes_B39.py`，只读比对、不写生产产物），交付后已删除。
+
+- **引用预算截短（2026-11-08，公开仓库口径）**：本卡有 47 条逐字引句来自许可受限的第三方来源（B39；CC_BY_NC_ND），按 `deliverables/fulltext_manifest.csv` 的逐份许可判定，已把单条引句截到 ≤100 字符、同一来源总量截到 ≤600 字符；**截短后仍逐字命中同一份底稿**（门禁 `scripts/verify_literature_cards.py` 仍是逐字核验），完整原句按 §9 的重取方式与 sha256 可复核。逐条改动账见 `deliverables/quote_budget_ledger.csv`。本卡其余内容（我们自己的分析、判断与台账）未被改动。
 
 <!--CSV回填
 work_type=论文（全文级；PNAS 2023 Research Article，Biophysics and Computational Biology）

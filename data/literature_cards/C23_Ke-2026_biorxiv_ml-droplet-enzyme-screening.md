@@ -35,31 +35,31 @@ de novo 设计酶卡在的不是「折不折得起来」，而是**造出来一�
 ## 2. 遇到的难点，以及遇到问题时他们做了什么（作者自述，不是我们的推测）
 
 1. **先验判据在 de novo 酶上集体失效**（全文立论起点，也是我们最该抄的一句话）。
-   - 现象/证据：Results 里 "Collectively, deep-sequencing analysis of the sorted populations identified a weak enrichment of certain features, though it also indicates that the current scoring metrics are still unable to reliably distinguish active de novo enzymes"；Fig 3B 图注更直接 "These features show a statistically significance (FDR-adjusted P < 0.05, Mann-Whitney U test with Benjamini-Hochberg correction) between the final surviving designs (active) and discarded designs (inactive), but no feature is individually an effective discriminator."；到 Lib2 一节又复述一次 "Previous retrospective analysis of Lib1 dataset revealed that none of the conventional metrics showed a significant correlation with experimental activity, highlighting the difficulty of evaluating de novo enzymes that lack evolutionary metadata"。
-   - **他们做了什么**：不继续调权重、不换指标，直接放弃「用通用判据排序」这条路线，改成造数据 + 训本地模型："This failure of general scoring functions motivated us to develop a data-driven approach tailored to capture the complex fitness landscapes locally governing catalytic activity."
+   - 现象/证据：Results 里 "Collectively, deep-sequencing analysis of the sorted populations identified a weak enrichment of"；Fig 3B 图注更直接 "These features show a statistically significance (FDR-adjusted P < 0.05,"；到 Lib2 一节又复述一次 "Previous retrospective analysis of Lib1 dataset revealed that none of the conventional metrics"。
+   - **他们做了什么**：不继续调权重、不换指标，直接放弃「用通用判据排序」这条路线，改成造数据 + 训本地模型："This failure of general scoring functions motivated us to develop a data-driven approach tailored"
    - 应对后仍留下的代价：判据从此**只在这个体系（锌水解 + FDBz + 这一套生成器）内成立**，模型可解释性弱，且其天花板被上游液滴标签的质量锁死（见第 7 节）。
 2. **功能验证通量是硬瓶颈**：设计一次能生成几十万上百万，逐个纯化测动力学完全做不到。
-   - 现象/证据："To overcome the bottleneck of functional verification for the generated massive de novo structures, we developed an ultra-high-throughput screening method by integrating single-droplet double emulsion with fluorescence-activated cell sorting (sdDE-FACS)."，通量口径 "This approach enabled the screening of millions of droplets within a single experimental run." 与 "for functional screening at a throughput of thousands of droplets per second"。
+   - 现象/证据："To overcome the bottleneck of functional"，通量口径 "This approach enabled the screening of millions of droplets within a single experimental run." 与 "for functional screening at a throughput of thousands of droplets per second"。
    - **他们做了什么**：把 genotype 与 phenotype 绑在同一个液滴里（单细胞 + ZnSO₄ + FDBz 共包封），FACS 按荧光门分选，分选池做 NGS 计数，从而「几百万个设计各有一次有无活性的读数」。
-   - 代价：读数是**荧光是否过门**，不是 kcat/KM。本底稿没有报告液滴检出的假阳/假阴率，只用标定实验论证敏感性（"capable of detecting <1nM fluorescent probe (5 orders of magnitude)"）。
+   - 代价：读数是**荧光是否过门**，不是 kcat/KM。本底稿没有报告液滴检出的假阳/假阴率，只用标定实验论证敏感性（"capable of detecting <1nM fluorescent probe (5"）。
 3. **既有双乳液滴体系要额外加裂解剂，胞质蛋白背景会混淆活性判别**。
-   - 现象/证据 + 应对：作者明写顾虑后直接改造表达系统 —— "This strategy compartmentalizes de novo enzymes within the periplasm to minimize interference from cytoplasmic proteins, thereby enabling accurate functional assessments"（阿拉伯糖诱导 + OmpA 信号肽的周质表达通路），并用 EGFP 做定位与泄漏对照："Prolonged incubation in buffer is confirmed no detectable leakage of secreted proteins"。
+   - 现象/证据 + 应对：作者明写顾虑后直接改造表达系统 —— "This strategy compartmentalizes de novo enzymes"（阿拉伯糖诱导 + OmpA 信号肽的周质表达通路），并用 EGFP 做定位与泄漏对照："Prolonged incubation in buffer is confirmed no"。
    - 代价：筛选前提变成「这个设计必须能表达并分泌到周质」。本底稿未见把「表达/定位失败」与「折叠对但没有催化」拆开的对照数据，所以阴性标签里两类混在一起（详见第 7 节）。
 4. **双乳液滴和商用 FACS 喷嘴天生不兼容**（尺寸分散→流不稳定→堵喷嘴）。
-   - 现象/证据："Our chip-design ensures that the DE droplets remain significantly smaller than the FACS nozzle diameter to minimize deformation, while the high monodispersity effectively prevents stream instability and nozzle clogging, which are typically exacerbated by large variations in droplet size"。
+   - 现象/证据："Our chip-design ensures that the DE droplets"。
    - **他们做了什么**：设计双 flow-focusing 几何的芯片（内水相入口用两条加宽通道降低细胞引起的流扰动），系统优化油/水流速做单分散，并用 100 µm 喷嘴 + 共聚焦确认液滴在整个分选过程保持完整。
    - 代价：通量上限被喷嘴直径与单分散性钳住；正文只给 thousands of droplets per second 这个量级，未给实际运行速率与理论上限的差距。
 5. **首轮门限设严了会漏掉弱活性设计**（漏斗第一刀就砍掉 wanted 的样本）。
-   - 现象/证据："For the initial round, we applied permissive sorting gates to maximize the recovery of potential hits, followed sort rounds were performed under stringent conditions to enrich for highly active designs."
-   - **他们做了什么**：分多轮、在不同底物浓度下设门（Fig 3A 图注 "Periplasmic-expressed active designs in E." + " coli are enriched during several rounds of selection at different substrate concentrations."），第一轮保召回、后续轮做富集；判活阈值最终落在群体频率上 —— "The population fraction of each of the final surviving designs (with a population fraction larger than 0.0004 or enriched in the last round of selection) in each round of selection is shown as colored schemes."
-   - 代价：**筛了几轮、每轮削掉多少，正文没有数字**。图注只说每轮回收的唯一设计数标在图 3A 右侧："The total number of unique designs identified in the NGS results after each round of sorting is indicated by the numbers on the right."（本地底稿无图值）。文本能确认的末端分母只有 final enriched pool 343 与其中纯化的 145。
+   - 现象/证据："For the initial round, we applied permissive"
+   - **他们做了什么**：分多轮、在不同底物浓度下设门（Fig 3A 图注 "Periplasmic-expressed active designs in E." + "coli are enriched during several rounds of"），第一轮保召回、后续轮做富集；判活阈值最终落在群体频率上 —— "The population fraction of each of the final"
+   - 代价：**筛了几轮、每轮削掉多少，正文没有数字**。图注只说每轮回收的唯一设计数标在图 3A 右侧："The total number of unique designs identified in"（本地底稿无图值）。文本能确认的末端分母只有 final enriched pool 343 与其中纯化的 145。
 6. **突变体里的动力学权衡：kcat 与 KM 一起涨，效率不涨**。
-   - 现象/证据："However, these distal mutations fail to decouple these parameters due to the lack of synergistic interactions required to break intrinsic constraints; in most cases, both kcat and KM increased concurrently, thereby negating any substantial gain in catalytic efficiency ( kcat / KM ), making activity improvements inefficient."
-   - **他们做了什么**：三处同时改 —— 换输入表征（"we fine-tuned the structure-aware protein language model, SaProt, using our dense mutational datasets"，粗结构 token 由 Foldseek 从 3-4/30-3 代表性骨架抽出后与突变序列拼接）、换损失（"By complementing the default cross-entropy loss with a supervised contrastive loss, the model effectively segregates the latent embeddings of distinct functional labels while clustering similar ones, thereby enhancing its resolution of the complex sequence-structure-function landscape."）、专门去提名**高阶突变**而不是叠加单点（"and selected the top six variants for experimental validation"）。
+   - 现象/证据："However, these distal mutations"
+   - **他们做了什么**：三处同时改 —— 换输入表征（"we fine-tuned the structure-aware protein"，粗结构 token 由 Foldseek 从 3-4/30-3 代表性骨架抽出后与突变序列拼接）、换损失（"By complementing the default"）、专门去提名**高阶突变**而不是叠加单点（"and selected the top six variants for"）。
    - 代价：验证集只有 6 个变体；与 MULTI-evolve 的对比（5–7 个加成突变换 1.5–5.8 倍 kcat/KM）是跨论文口径对比，不是同库同底物的同期对照。
 7. **高通量数据里正负样本极度不平衡 + Lib1 回收率低**。
-   - 现象/证据："To counteract class imbalance within the high-throughput data and robustly distinguish highly functional variants, we employed a tailored batching strategy."；结构模型一节承认 "In consideration of the low ratio of recovered designs in the Lib1, we implemented an 80/20 training/test split for this retrospectively analysis."
-   - **他们做了什么**：定制 batching +  supervised contrastive loss；用 80/20 回顾式基准配 Precision@n%、Enrichment@n%、Recall@n% 这套与分母无关的指标；再做消融找关键特征（"Encouraged by this success in the initial library, we next asked whether the model built from the first-generation library could generalize to navigate entirely unknown structural spaces"）。
+   - 现象/证据："To counteract class imbalance"；结构模型一节承认 "In consideration of the low"
+   - **他们做了什么**：定制 batching +  supervised contrastive loss；用 80/20 回顾式基准配 Precision@n%、Enrichment@n%、Recall@n% 这套与分母无关的指标；再做消融找关键特征（"Encouraged by this success in"）。
    - 应对后仍留下的：本底稿未说明 80/20 是否按骨架/序列聚类切分，因此无法排除同族设计同时进训练与测试（我们读出，第 6.3 条）。
 
 ## 3. 方法与工作流程（可复现顺序；每步：输入 → 操作 → 判据 → 输出规模）
@@ -82,25 +82,25 @@ de novo 设计酶卡在的不是「折不折得起来」，而是**造出来一�
 | G3 | TS 几何 | RIF-based 搜索与过渡态有利相互作用的所有氨基酸 | 原文未给数值阈值 | TS 稳定残基集合 |
 | G4 | G2+G3 | 扰动 TS 与配位 His 的空间关系，thorough sampling of theozyme configurations | 原文未给阈值 | 一批 theozyme 构型 |
 | G5 | theozyme 构型 | Monte Carlo 片段装配（ProBuilder）自下而上搭骨架，同时容纳三个配位 His 与 TS 稳定残基 | 能量改进方向择优（原文未给数值阈值） | 结构多样的设计骨架（Fig 2B 的 UMAP 云） |
-| G6 | 设计骨架 | **第一道硬闸**："Structures featuring all three coordination histidines along with favorable transition state interactions were then selected for sequence optimization using Rosetta and ProteinMPNN" | 三个配位 His 必须齐全 + 存在有利 TS 作用（**二值条件，非连续阈值**） | 进入序列优化的设计子集（正文未给数量） |
-| G7 | 优化后设计 | 排序 + 结构复评："Top candidate designs were selected based on Rosetta energy metrics and further assessed for preorganization and structural stability using AlphaFold2" | Rosetta 能量指标；AF2 预组织/稳定性（原文未给数值阈值） | Top candidate 设计（正文未给规模） |
-| G8 | 设计 vs AF2/AF3 预测 | in-silico success 判据：见 Fig 2 图注 "Designs are evaluated by structure prediction (for example, using AF2 and AF3) and are considered an in-silico success if the design (purple) and prediction (gray) align to a sufficient degree." | **align to a sufficient degree —— 原文只这么写，没有 RMSD/PAE 数字** | 通过的设计进入合成清单 |
+| G6 | 设计骨架 | **第一道硬闸**："Structures featuring all three" | 三个配位 His 必须齐全 + 存在有利 TS 作用（**二值条件，非连续阈值**） | 进入序列优化的设计子集（正文未给数量） |
+| G7 | 优化后设计 | 排序 + 结构复评："Top candidate designs were" | Rosetta 能量指标；AF2 预组织/稳定性（原文未给数值阈值） | Top candidate 设计（正文未给规模） |
+| G8 | 设计 vs AF2/AF3 预测 | in-silico success 判据：见 Fig 2 图注 "Designs are evaluated by" | **align to a sufficient degree —— 原文只这么写，没有 RMSD/PAE 数字** | 通过的设计进入合成清单 |
 | G9 | 通过的设计 | 把设计片段基因合成成 oligo 库，再拼接成全长基因，转化 E. coli | 无 | 实物库（正文未给克隆数） |
-| W1 | 表达菌 + ZnSO₄ + FDBz | 双 flow-focusing 芯片生成单分散 W/O/W 双乳液滴，单细胞与底物共包封 | 液滴需明显小于喷嘴直径；单分散性（CV 在图 2D） | "This approach enabled the screening of millions of droplets within a single experimental run." |
-| W2 | 液滴群 | FACS 分选：**首轮宽门保召回，后续轮收紧做富集**，多轮在不同底物浓度下进行 | "For the initial round, we applied permissive sorting gates to maximize the recovery of potential hits, followed sort rounds were performed under stringent conditions to enrich for highly active designs." | 通量 "for functional screening at a throughput of thousands of droplets per second"；检出下限 "capable of detecting <1nM fluorescent probe (5 orders of magnitude)" |
-| W3 | 各轮分选池 | 深度测序计数 | 存活设计定义：population fraction > 0.0004 **或**在最后一轮被富集 | 每轮唯一设计数**只标在 Fig 3A 右侧，正文未复述**（"The total number of unique designs identified in the NGS results after each round of sorting is indicated by the numbers on the right."）；final enriched pool = 343 个唯一设计 |
-| W4 | 343 的富集池 | 挑 145 个唯一序列做纯化 + 动力学表征 | 判据 = 可纯化且为单体 | "To validate the screening results, we selected 145 unique sequences from the final enriched pool (343 in total) for individual purification and kinetic characterization"；"All characterized monomeric designs displayed detectable hydrolytic activity."；kcat/kuncat "ranging from 10 2 - to over 10 4 -fold relative to the uncatalyzed reaction"；最优变体 3-4 的催化效率 ~1.6×10⁸ M⁻¹，"which is comparable to a series of high active de novo designed metallohydrolases" |
-| L1 | Lib1 的回收 vs 丢弃 | 把液滴分选的群体频率直接固化成**训练标签** | 正类 = 富集/存活设计，负类 = 被丢弃设计："The positive designs and negative designs from Lib1 were assessed with enrichments for the training dataset." | "we adopted the broad genotype-phenotype data from the first-generation library (Lib1), establishing the first structural-level dataset of de novo enzyme-substrate complexes reported to date." |
-| L2 | 同一批 Lib1 数据 | 先做「筛子考卷」：比较存活与丢弃的设计在各计算指标上的分布 | "These features show a statistically significance (FDR-adjusted P < 0.05, Mann-Whitney U test with Benjamini-Hochberg correction) between the final surviving designs (active) and discarded designs (inactive), but no feature is individually an effective discriminator." | 结论：指标只能当**特征**不能当**闸口**；最强物理特征是 "the most dominant physical feature is radius of gyration (Rg) and fa_atr_per_res_noLIG, which gauges protein compactness and correlates with stable packing."，其余主导特征是 AF3 相关 |
-| M1 | 3-4 / 30-3 两个活性设计 | error prone PCR 建突变库 → 同一套 sdDE-FACS 筛 → NGS | 覆盖单点到三元突变 | "This generated comprehensive functional maps for more than 10 5 variants (ranging from single to triple mutations), providing compact yet information-rich datasets that reflect the functional preferences of the mutants and emulate the data-dense environment of natural evolution" |
-| M2 | 上述密集突变数据 | 微调 SaProt（Foldseek 结构 token + 突变序列拼接），交叉熵 + supervised contrastive loss，定制 batching | 回顾基准 80/20 切分；指标 Precision@n% / Enrichment@n% / Recall@n% | "By effectively prioritizing favorable variants, our model enriched function-enhanced enzymes in the top 50 positions at a rate more than 50-fold higher than random sampling."（且优于只用序列的 ESM-2） |
-| M3 | 训好的序列模型 | 直接提名三元突变空间 | 取模型排序 top 6 | 三元空间理论组合 > 1.9×10⁹（正文：sample the triple mutants (representing > 1.9×10 9 theoretical combinations)）；"and selected the top six variants for experimental validation"；结果 "achieving 2.6- to 4.8-fold over the wild-type enzyme and surpassing the previous best mutants by 2.1- to 4.8-fold" |
-| M4 | Lib1 结构级数据集 | 建活性预测器："we developed a geometric deep learning framework that integrates sequence embeddings from ESM2, residue-level pLDDT confidence scores from AlphaFold3, and structural representations extracted from design model" | 二分类头 True/False → 排序分；80/20 回顾基准；测试集分离显著性 P(MWU) < 0.0001、P(KS) < 0.0001（Fig 5C 图注） | "This model was able to enrich the predictions ranked in the top fifty positions with enzymes with catalytic activity >2-fold better than would be observed by randomly sampling Lib1, and also surpassed baseline enzyme prediction methods (Clipzyme)" |
-| F1 | 更新到 Lib1 全量后的预测器 | 用同一物理生成器造第二代库 Lib2，再按模型 + Lib1 关键特征挑候选 | "We then ranked the designs based on the computational metrics as Lib1 and selected them according to our activity predictor combined with key features identified in Lib1" | "This procedure nominated thousands of designs with expanded structural diversity, incorporating diverse catalytic pocket and substrate interaction beyond the first library space" |
+| W1 | 表达菌 + ZnSO₄ + FDBz | 双 flow-focusing 芯片生成单分散 W/O/W 双乳液滴，单细胞与底物共包封 | 液滴需明显小于喷嘴直径；单分散性（CV 在图 2D） | "This approach enabled the" |
+| W2 | 液滴群 | FACS 分选：**首轮宽门保召回，后续轮收紧做富集**，多轮在不同底物浓度下进行 | "For the initial round, we" | 通量 "for functional screening at a"；检出下限 "capable of detecting <1nM" |
+| W3 | 各轮分选池 | 深度测序计数 | 存活设计定义：population fraction > 0.0004 **或**在最后一轮被富集 | 每轮唯一设计数**只标在 Fig 3A 右侧，正文未复述**（"The total number of unique"）；final enriched pool = 343 个唯一设计 |
+| W4 | 343 的富集池 | 挑 145 个唯一序列做纯化 + 动力学表征 | 判据 = 可纯化且为单体 | "To validate the screening"；"All characterized monomeric"；kcat/kuncat "ranging from 10 2 - to over 10"；最优变体 3-4 的催化效率 ~1.6×10⁸ M⁻¹，"which is comparable to a series" |
+| L1 | Lib1 的回收 vs 丢弃 | 把液滴分选的群体频率直接固化成**训练标签** | 正类 = 富集/存活设计，负类 = 被丢弃设计："The positive designs and" | "we adopted the broad genotype-phenotype data from the first-generation library (Lib1), establishing the first structural-level dataset of de novo enzyme-substrate complexes reported to date." |
+| L2 | 同一批 Lib1 数据 | 先做「筛子考卷」：比较存活与丢弃的设计在各计算指标上的分布 | "These features show a statistically significance (FDR-adjusted P < 0.05, Mann-Whitney U test with Benjamini-Hochberg correction) between the final surviving designs (active) and discarded designs (inactive), but no feature is individually an effective discriminator." | 结论：指标只能当**特征**不能当**闸口**；最强物理特征是 "the most dominant physical"，其余主导特征是 AF3 相关 |
+| M1 | 3-4 / 30-3 两个活性设计 | error prone PCR 建突变库 → 同一套 sdDE-FACS 筛 → NGS | 覆盖单点到三元突变 | "This generated comprehensive" |
+| M2 | 上述密集突变数据 | 微调 SaProt（Foldseek 结构 token + 突变序列拼接），交叉熵 + supervised contrastive loss，定制 batching | 回顾基准 80/20 切分；指标 Precision@n% / Enrichment@n% / Recall@n% | "By effectively prioritizing"（且优于只用序列的 ESM-2） |
+| M3 | 训好的序列模型 | 直接提名三元突变空间 | 取模型排序 top 6 | 三元空间理论组合 > 1.9×10⁹（正文：sample the triple mutants (representing > 1.9×10 9 theoretical combinations)）；"and selected the top six"；结果 "achieving 2.6- to 4.8-fold over" |
+| M4 | Lib1 结构级数据集 | 建活性预测器："we developed a geometric deep" | 二分类头 True/False → 排序分；80/20 回顾基准；测试集分离显著性 P(MWU) < 0.0001、P(KS) < 0.0001（Fig 5C 图注） | "This model was able to enrich" |
+| F1 | 更新到 Lib1 全量后的预测器 | 用同一物理生成器造第二代库 Lib2，再按模型 + Lib1 关键特征挑候选 | "We then ranked the designs" | "This procedure nominated" |
 | F2 | 模型挑出的候选 | **实际下单**：合成 + 纯化 | 活性判定用纯化酶的荧光底物测定与动力学 | "we synthesized and purified 96 candidates from Lib2 to identify 28 active designs (29.2%)"，"4.9-fold increase in the rate of active hits compared to that of the previous Lib1" |
-| F3 | 28 个活性设计 | 逐个做结合与催化定量 | 可测 KM 与催化 | "exhibited measurable binding affinity and catalytic activity toward the substrate"，16/28（~57%）；对照句 "which stands in contrast to the 40% success rate typically observed in Lib1." |
-| F4 | 模型选中的设计 | 与 Lib1 最优、天然酶比催化效率 | -log Ktx 口径（天然酶参照取自 ref 47，CYC/CAN） | "exceeding the most active designs from the first library and even comparable to native enzyme"（两个设计达到该水平） |
-| V1 | 代表性设计 2-8、11-7 | X 射线共结晶，与设计模型叠合 | Cα RMSD 越低越好 | "The solved structures exhibited remarkable agreement with the computational models"（正文另给数值：2-8 为 0.76 Å、11-7 为 1.06 Å，均按 120 个残基计算） |
+| F3 | 28 个活性设计 | 逐个做结合与催化定量 | 可测 KM 与催化 | "exhibited measurable binding affinity and catalytic activity toward the substrate"，16/28（~57%）；对照句 "which stands in contrast to the" |
+| F4 | 模型选中的设计 | 与 Lib1 最优、天然酶比催化效率 | -log Ktx 口径（天然酶参照取自 ref 47，CYC/CAN） | "exceeding the most active"（两个设计达到该水平） |
+| V1 | 代表性设计 2-8、11-7 | X 射线共结晶，与设计模型叠合 | Cα RMSD 越低越好 | "The solved structures exhibited"（正文另给数值：2-8 为 0.76 Å、11-7 为 1.06 Å，均按 120 个残基计算） |
 
 ### 通量分母（本篇最容易写错的地方，逐条钉死）
 
@@ -114,41 +114,41 @@ de novo 设计酶卡在的不是「折不折得起来」，而是**造出来一�
 
 | 数值 | 含义 | 出处（原句片段） |
 |---|---|---|
-| millions of droplets / 单次运行；thousands 滴 / 秒 | sdDE-FACS 通量 | "This approach enabled the screening of millions of droplets within a single experimental run." |
-| <1 nM 荧光探针；10 nM–1 μM 可与背景区分；5 个数量级动态范围 | 液滴检出灵敏度标定 | "capable of detecting <1nM fluorescent probe (5 orders of magnitude)" |
-| 首轮 permissive、后续 stringent；several rounds at different substrate concentrations | 分选轮次策略（**轮数无数字**） | "For the initial round, we applied permissive sorting gates to maximize the recovery of potential hits, followed sort rounds were performed under stringent conditions to enrich for highly active designs." |
-| population fraction > 0.0004 或末轮富集 | 「存活设计」的定义阈值（也是标签正类口径） | "The population fraction of each of the final surviving designs (with a population fraction larger than 0.0004 or enriched in the last round of selection) in each round of selection is shown as colored schemes." |
-| 343 → 145 | Lib1 最终富集池唯一设计数 → 实际纯化表征数 | "To validate the screening results, we selected 145 unique sequences from the final enriched pool (343 in total) for individual purification and kinetic characterization" |
-| 145 中单体设计 100% 有可检出活性 | **选择后**的阳性率（不是全池命中率） | "All characterized monomeric designs displayed detectable hydrolytic activity." |
-| kcat/kuncat = 10² 至 >10⁴ | Lib1 酶的加速倍数区间 | "ranging from 10 2 - to over 10 4 -fold relative to the uncatalyzed reaction" |
-| ~1.6×10⁸ M⁻¹（变体 3-4） | Lib1 最优催化效率 | 正文："the top-performing variant, 3-4, displayed a catalytic proficiency of ∼1.6×10 8 M -1 for FDBz" |
+| millions of droplets / 单次运行；thousands 滴 / 秒 | sdDE-FACS 通量 | "This approach enabled the" |
+| <1 nM 荧光探针；10 nM–1 μM 可与背景区分；5 个数量级动态范围 | 液滴检出灵敏度标定 | "capable of detecting <1nM" |
+| 首轮 permissive、后续 stringent；several rounds at different substrate concentrations | 分选轮次策略（**轮数无数字**） | "For the initial round, we" |
+| population fraction > 0.0004 或末轮富集 | 「存活设计」的定义阈值（也是标签正类口径） | "The population fraction of each" |
+| 343 → 145 | Lib1 最终富集池唯一设计数 → 实际纯化表征数 | "To validate the screening" |
+| 145 中单体设计 100% 有可检出活性 | **选择后**的阳性率（不是全池命中率） | "All characterized monomeric" |
+| kcat/kuncat = 10² 至 >10⁴ | Lib1 酶的加速倍数区间 | "ranging from 10 2 - to over 10" |
+| ~1.6×10⁸ M⁻¹（变体 3-4） | Lib1 最优催化效率 | 正文："the top-performing variant," |
 | N = 145；只有 2 个代表性 Zn-His₃ 天然折叠 | qTM 结构分布比对的两端 | "There are only two representative Zn-His 3 coordination folds in native protein." |
-| Cα RMSD 0.76 Å（2-8）/ 1.06 Å（11-7），按 120 残基 | 结晶结构对设计模型的验证 | "The solved structures exhibited remarkable agreement with the computational models" |
-| >10⁵ 个变体 | 3-4 与 30-3 两个家族的合成适应度景观规模（单→三突变） | "This generated comprehensive functional maps for more than 10 5 variants (ranging from single to triple mutations), providing compact yet information-rich datasets that reflect the functional preferences of the mutants and emulate the data-dense environment of natural evolution" |
-| >1.9×10⁹ | 三元突变理论组合空间 | 正文："sample the triple mutants (representing > 1.9×10 9 theoretical combinations)" |
-| top 6 | 序列模型实际下单验证的三元变体数 | "and selected the top six variants for experimental validation" |
-| 2.6–4.8 倍（vs 野生型）；2.1–4.8 倍（vs 此前最佳突变体） | 三元突变体 kcat/KM 提升 | "achieving 2.6- to 4.8-fold over the wild-type enzyme and surpassing the previous best mutants by 2.1- to 4.8-fold" |
-| >50 倍 | 序列模型在 top-50 相对随机抽样的富集 | "By effectively prioritizing favorable variants, our model enriched function-enhanced enzymes in the top 50 positions at a rate more than 50-fold higher than random sampling." |
-| 80/20 | 两处回顾式基准的训练/测试切分（序列模型、结构活性预测器） | "In consideration of the low ratio of recovered designs in the Lib1, we implemented an 80/20 training/test split for this retrospectively analysis." |
-| >2 倍 | 结构活性预测器 top-50 相对随机抽 Lib1 的富集；并优于 Clipzyme | "This model was able to enrich the predictions ranked in the top fifty positions with enzymes with catalytic activity >2-fold better than would be observed by randomly sampling Lib1, and also surpassed baseline enzyme prediction methods (Clipzyme)" |
+| Cα RMSD 0.76 Å（2-8）/ 1.06 Å（11-7），按 120 残基 | 结晶结构对设计模型的验证 | "The solved structures exhibited" |
+| >10⁵ 个变体 | 3-4 与 30-3 两个家族的合成适应度景观规模（单→三突变） | "This generated comprehensive" |
+| >1.9×10⁹ | 三元突变理论组合空间 | 正文："sample the triple mutants" |
+| top 6 | 序列模型实际下单验证的三元变体数 | "and selected the top six" |
+| 2.6–4.8 倍（vs 野生型）；2.1–4.8 倍（vs 此前最佳突变体） | 三元突变体 kcat/KM 提升 | "achieving 2.6- to 4.8-fold over" |
+| >50 倍 | 序列模型在 top-50 相对随机抽样的富集 | "By effectively prioritizing" |
+| 80/20 | 两处回顾式基准的训练/测试切分（序列模型、结构活性预测器） | "In consideration of the low" |
+| >2 倍 | 结构活性预测器 top-50 相对随机抽 Lib1 的富集；并优于 Clipzyme | "This model was able to enrich" |
 | P < 0.05（FDR 校正，Mann-Whitney + Benjamini-Hochberg）；但无单特征可有效判别 | 「先验指标失效」的统计口径 | "These features show a statistically significance (FDR-adjusted P < 0.05, Mann-Whitney U test with Benjamini-Hochberg correction) between the final surviving designs (active) and discarded designs (inactive), but no feature is individually an effective discriminator." |
-| P(MWU) < 0.0001；P(KS) < 0.0001 | 活性预测器在测试集上分开「液滴回收」与「其他」设计 | Fig 5C 图注（正文句："The generalizability of IMUSE strategy was ultimately confirmed by the increased success rate"） |
-| thousands | 模型为 Lib2 提名的设计量级 | "This procedure nominated thousands of designs with expanded structural diversity, incorporating diverse catalytic pocket and substrate interaction beyond the first library space" |
+| P(MWU) < 0.0001；P(KS) < 0.0001 | 活性预测器在测试集上分开「液滴回收」与「其他」设计 | Fig 5C 图注（正文句："The generalizability of IMUSE"） |
+| thousands | 模型为 Lib2 提名的设计量级 | "This procedure nominated" |
 | **96 → 28 → 16** | Lib2 合成并纯化的候选数 → 活性设计数（29.2%）→ 其中可测结合与催化数（~57%） | "we synthesized and purified 96 candidates from Lib2 to identify 28 active designs (29.2%)" |
 | ~4.9 倍 | Lib2 相对 Lib1 活性命中率提升（**Lib1 侧的绝对率正文未给**，只能由 29.2%/4.9≈6% 反推） | "4.9-fold increase in the rate of active hits compared to that of the previous Lib1" |
-| 40% | 作者口中 Lib1 的「可测动力学」比例基线（分母未在正文定义） | "which stands in contrast to the 40% success rate typically observed in Lib1." |
-| 5–7 个加成突变 → 1.5–5.8 倍 kcat/KM | 对照方法 MULTI-evolve 的口径（跨论文对比，非同库对照） | 正文："Notably, IMUSE achieved higher sampling efficiency than a recent protein language model framework, MULTI-evolve, which requires 5- to 7- additive mutations to achieve comparable 1.5- to 5.8-fold improvement in k cat / K M" |
-| ~5 倍 / ~30% | 摘要给的两个 headline（三元突变活性提升、第二代设计成功率） | "IMUSE identified synergistic triple mutations yielding ∼5-fold activity improvements and discovered active second-generation designs with novel catalytic pockets, boosting the experimental success rate >4.9-fold (∼30%)." |
+| 40% | 作者口中 Lib1 的「可测动力学」比例基线（分母未在正文定义） | "which stands in contrast to the" |
+| 5–7 个加成突变 → 1.5–5.8 倍 kcat/KM | 对照方法 MULTI-evolve 的口径（跨论文对比，非同库对照） | 正文："Notably, IMUSE achieved higher" |
+| ~5 倍 / ~30% | 摘要给的两个 headline（三元突变活性提升、第二代设计成功率） | "IMUSE identified synergistic" |
 
 ## 5. 结论——作者说了什么
 
-1. **通量可以替代进化史**："By screening millions of droplet-encapsulated de novo enzymes, we generated massive synthetic sequence-structure datasets to train models that capture their complex fitness landscapes and biophysical principles."；并把这套数据定义为对自然进化数据密度的模拟："This strategy emulates the data-dense environment of natural evolution by producing massive, substrate-specific functional datasets, effectively creating a roadmap for de novo enzyme space analogous to natural sequence databases."
-2. **模型能有效指导序列与结构两个空间的探索**："These models effectively guide functional exploration across both sequence and novel structure spaces."（摘要句），落地证据是 top-50 富集 >50 倍（序列）与 >2 倍（结构）、以及 Lib2 的 28/96。
-3. **成功率被抬高约 4.9 倍到 ~30%**：摘要口径 "IMUSE identified synergistic triple mutations yielding ∼5-fold activity improvements and discovered active second-generation designs with novel catalytic pockets, boosting the experimental success rate >4.9-fold (∼30%)."
+1. **通量可以替代进化史**："By screening millions of"；并把这套数据定义为对自然进化数据密度的模拟："This strategy emulates the"
+2. **模型能有效指导序列与结构两个空间的探索**："These models effectively guide"（摘要句），落地证据是 top-50 富集 >50 倍（序列）与 >2 倍（结构）、以及 Lib2 的 28/96。
+3. **成功率被抬高约 4.9 倍到 ~30%**：摘要口径 "IMUSE identified synergistic"
 4. **三元突变能打破 kcat/KM 的耦合约束**（作者称 synergistic / long-range epistasis），并声称采样效率优于 MULTI-evolve。
-5. **平台可外推到别的反应类型**："The combination of de novo enzyme design and sdDE-FACS enabled the implementation of effective design-test-learn cycles, yielding a deeper understanding of the design principles for de novo enzymes as previously validated in de novo -designed miniproteins"。
-6. **作者自己承认先验指标不行**："Collectively, deep-sequencing analysis of the sorted populations identified a weak enrichment of certain features, though it also indicates that the current scoring metrics are still unable to reliably distinguish active de novo enzymes"；并承认 de novo 酶「结构稳定、机理上讲得通」这一优点恰恰让基于天然数据的模型无法判别："Furthermore, these de novo enzymes feature stable folds and mechanistically reasonable active sites, which would make their activities indistinguishable by data-driven approaches utilizing native datasets."
-7. 作者对通量成果的定性："Ultimately, this platform yielded millions of droplets containing active de novo enzymes with diverse backbones, providing a foundational dataset to train a machine learning model for nominating active designs based on structural and sequence features."
+5. **平台可外推到别的反应类型**："The combination of de novo"。
+6. **作者自己承认先验指标不行**："Collectively, deep-sequencing"；并承认 de novo 酶「结构稳定、机理上讲得通」这一优点恰恰让基于天然数据的模型无法判别："Furthermore, these de novo"
+7. 作者对通量成果的定性："Ultimately, this platform"
 
 ## 6. 结论——我们读出了什么（以下为推断，非作者原文）
 
@@ -166,11 +166,11 @@ de novo 设计酶卡在的不是「折不折得起来」，而是**造出来一�
 **我们读出的（每条给证据位置）**：
 
 1. **「全文级」但底稿没有 Methods**：芯片几何与流速、DE 配方、NGS 深度、QM 泛函、SaProt/GVP-GNN 的架构与超参全部缺失 → 本篇**不可复现**，我们只能借用它的口径纪律，不能声称复算。
-2. **通量分母链断在图里**：每轮唯一设计数只在 Fig 3A（"The total number of unique designs identified in the NGS results after each round of sorting is indicated by the numbers on the right."），轮数也只有定性描述。因此「筛几轮、每轮削掉多少」在文本层面不可台账化 —— 这不是我们的疏漏，是底稿的物理边界。
+2. **通量分母链断在图里**：每轮唯一设计数只在 Fig 3A（"The total number of unique"），轮数也只有定性描述。因此「筛几轮、每轮削掉多少」在文本层面不可台账化 —— 这不是我们的疏漏，是底稿的物理边界。
 3. **末端小分母极易被误读为全池命中率**：145 个表征的单体设计 100% 有活性，是「先按荧光富集、再按群体频率选 145」之后的结果；Lib1 的库容量与全池阳性率在正文里没有数字。任何把这句转述成「设计出来 100% 有活性」的写法都是错的。
 4. **液滴阳性 ≠ 纯化活性，缺口未被量化**：28 个活性设计里只有 16 个能给出可测 KM 与催化，即**约 43% 的阳性在复验阶段掉队**；正文把解释放在 fig S24–S27（本地缺失），没有对这一缺口做机制分析。由于训练标签正是液滴读数，这个缺口会直接进模型。
 5. **阴性标签里混着「表达/分泌失败」**：周质分泌是筛选前提（第 2.3 条），本底稿未见把不表达、不分泌与「折叠对但无催化」分开的对照；模型很可能先学会了「会不会分泌到周质」。
-6. **单一化学体系**：一个金属（Zn）、一个反应（酯水解）、一个底物（FDBz）。「平台可扩展到其他反应」是作者的展望而非结果（"it could be extended to either natural or engineered enzymes catalyzing other reaction types"）。
+6. **单一化学体系**：一个金属（Zn）、一个反应（酯水解）、一个底物（FDBz）。「平台可扩展到其他反应」是作者的展望而非结果（"it could be extended to either"）。
 7. **对照方法口径不齐**：与 MULTI-evolve 的优劣比较用的是对方论文的倍数区间，不是同一库同一底物重测。
 8. **预印本，未经同行评议**；所有数字待正式版核对。
 9. **40% 这个 Lib1 基线的分母在正文里未定义**（只写 typically observed），与 16/28 的对比口径不清 —— 与 `sources/cao.md:477` 的未核实条目一致，本卡沿用该保留意见。
@@ -202,6 +202,8 @@ de novo 设计酶卡在的不是「折不折得起来」，而是**造出来一�
 - CSV 字段映射：本文第 3 节 ↔ 计算筛选判据/阈值数字/候选生成方法；第 4 节 ↔ 候选数递减/实验命中率/成本统计引用；第 8 节 ↔ 在方法演进链的位置。
 - **本卡自检**：由门禁脚本以 --only C23 --no-report 执行（编号里含空格或分号时参数需加引号；本编号不需要）。（该脚本把卡内所有不含中日韩字符、被直双引号包住、≥20 字符且 ≥12 个字母的片段，在声明的底稿里逐字查找；任一条不命中即 FAIL）。引句只取自本底稿，跨参考文献编号与图注断句处一律拆成两条；术语与状态名不加英文引号；底稿中 ∼、µ、α 等特殊字符若落在引句边界则改在引号外转述，避免抄写差异造成假红。
 - **本底稿的边界（复核时请注意）**：正文只到 Discussion 与 References，无 Methods 段；Fig 内数值（尤其 Fig 3A 每轮唯一设计数、Fig 2F/G 标定曲线）与全部 Supplementary/table 不在本地。凡本卡写「正文未给出」处，复核者不应在正文里找到它。
+
+- **引用预算截短（2026-11-08，公开仓库口径）**：本卡有 76 条逐字引句来自许可受限的第三方来源（C23；CC_BY_ND），按 `deliverables/fulltext_manifest.csv` 的逐份许可判定，已把单条引句截到 ≤100 字符、同一来源总量截到 ≤600 字符；**截短后仍逐字命中同一份底稿**（门禁 `scripts/verify_literature_cards.py` 仍是逐字核验），完整原句按 §9 的重取方式与 sha256 可复核。逐条改动账见 `deliverables/quote_budget_ledger.csv`。本卡其余内容（我们自己的分析、判断与台账）未被改动。
 
 <!--CSV回填
 work_type=论文（bioRxiv 预印本，2026-06-23，DOI 10.64898/2026.06.23.733994，未经同行评议）

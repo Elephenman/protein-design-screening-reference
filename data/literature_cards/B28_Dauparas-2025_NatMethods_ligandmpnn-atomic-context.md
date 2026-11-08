@@ -104,7 +104,7 @@ Nature Methods 2025, 22:717–723 · DOI 10.1038/s41592-025-02626-1 · PMID 4015
 1. LigandMPNN 显式建模非蛋白原子，**在近配体残基的序列回收率上系统性超过 Rosetta 与 ProteinMPNN**，三个化学域各自给数（见第 4 节）。
 2. 它顺带输出侧链构象分布，"LigandMPNN generates not only sequences but also sidechain conformations to allow detailed evaluation of binding interactions."，因此可以在计算阶段直接检查「设计出来的接触是不是真能成」。
 3. 工程收益："The deep-learning-based LigandMPNN is superior to the physically based Rosetta for designing amino acids to interact with nonprotein molecules." 且 "It is about 250 times faster (because the expensive Monte Carlo optimization over sidechain identities and compositions is completely bypassed)"，加上新配体不需要写参数。
-4. 外部验证的口径：已被用于设计 >100 个实验验证的小分子/DNA 结合界面、5 个共晶结构、把 Rosetta 小分子结合体重设计后亲和力最多提高 100 倍（摘要口径："redesign of Rosetta small-molecule binder designs has increased binding affinity by as much as 100-fold"）。
+4. 外部验证的口径：已被用于设计 >100 个实验验证的小分子/DNA 结合界面、5 个共晶结构、把 Rosetta 小分子结合体重设计后亲和力最多提高 100 倍（摘要口径："redesign of Rosetta small-molecule binder designs has increased binding affinity by as much as"）。
 5. 作者自留的边界：①稀有/未见元素要谨慎或映射到最接近元素；②低数据区建议与物理法混合；③chi3/chi4 仍然预测不好；④本文没有前瞻设计漏斗，验证主要靠组内其他工作。
 
 ## 6. 结论——我们读出了什么（以下为推断，非作者原文）
@@ -146,6 +146,8 @@ Nature Methods 2025, 22:717–723 · DOI 10.1038/s41592-025-02626-1 · PMID 4015
 - CSV 字段映射：本文第 3 节 ↔ `候选生成方法/计算筛选判据/阈值数字`；第 4 节 ↔ `候选数递减/成本统计/Kd或活性最好值`；第 8 节 ↔ `在方法演进链的位置`。
 - **本卡自检**：`PYTHONIOENCODING=utf-8 python scripts/verify_literature_cards.py --only B28 --no-report`（输入：本卡 + `sources_map.json` 中 B28 登记的可读底稿，并按 §9 声明的 `引句底稿` 逐字比对）。本卡结果 **PASS B28 quotes=91/91，退出码 0**。首轮有 1 条 MISS：我把原文里那句展望按英文句首大写的习惯抄成了 We anticipate 开头，但归一化全文中它前面紧跟 As with ProteinMPNN, 这个连接短语，所以真正可逐字命中的形态是带前缀的整句；把前缀补回引句后转绿；此后又红过一次——原因是 §9 自检段里用直双引号举了这个抄错的片段作例子，那一行本身被门禁当引句比对，改成中文述句后转绿。本行只有一份全文通路（Europe PMC），无第二份独立抽取互证，已在第 0 节标明。
 
+- **引用预算截短（2026-11-08，公开仓库口径）**：本卡有 2 条逐字引句来自许可受限的第三方来源（B01；PUBLISHER_TERMS），按 `deliverables/fulltext_manifest.csv` 的逐份许可判定，已把单条引句截到 ≤100 字符、同一来源总量截到 ≤600 字符；**截短后仍逐字命中同一份底稿**（门禁 `scripts/verify_literature_cards.py` 仍是逐字核验），完整原句按 §9 的重取方式与 sha256 可复核。逐条改动账见 `deliverables/quote_budget_ledger.csv`。本卡其余内容（我们自己的分析、判断与台账）未被改动。
+
 <!--CSV回填
 work_type=方法（深度学习序列设计器）
 target=任何含非蛋白原子的界面：小分子结合/传感蛋白、DNA/RNA 结合蛋白、金属配位位；本文自有湿实验对象是此前 Rosetta 做的不结合（rocuronium）与极弱结合（cholic acid）设计
@@ -157,7 +159,7 @@ qm_used=否
 experimental_methods=本文自有：酵母表面展示 + 流式（1 μM 生物素化 rocuronium + SAPE）与荧光偏振（cholic acid-FITC）重设计前后对比；结构证据与其余功能证据来自组内引用工作（[B27] DBP 共晶 8TAC、Lee/An/Krishna 的小分子结合体系），非本文测量
 pipeline_counts=无前瞻漏斗：训练/留出集为 PDB 复合物（小分子 317、核酸 74、金属 83 个留出结构），每蛋白设计 10 条序列 / 生成 10 个侧链打包样本；实验侧只有 rocuronium 与 cholic acid 两组重设计（图注给 3 个 LigandMPNN 与 2 个 Rosetta 测量）；组内累计 >100 个小分子/蛋白-DNA 结合界面被实验证明结合、5 个共晶结构（引用口径）
 hit_rate=本文未给自有命中率（没有「设计 N 条→命中 M 条」的前瞻实验）；可引用的是留出集回收率：小分子附近 63.3% vs Rosetta 50.4% / ProteinMPNN 50.4%（摘要口径把 ProteinMPNN 写为 50.5%），核酸 50.5% vs 35.2% / 34.0%，金属 77.5% vs 36.0% / 40.6%
-best_metric=本文 Fig 4 未给 Kd；摘要与讨论给出的最强功能改善是 "redesign of Rosetta small-molecule binder designs has increased binding affinity by as much as 100-fold"，正文注明该 100 倍来自从已解析复合物出发重设计的另一篇工作（ref 4）；引用工作中的小分子结合体为 nM（胆酸/甲氨蝶呤/甲状腺素）至 nM–μM（17α-羟孕酮/apixaban/SN-38）
+best_metric=本文 Fig 4 未给 Kd；摘要与讨论给出的最强功能改善是 "redesign of Rosetta small-molecule binder designs has increased binding affinity by as much as"，正文注明该 100 倍来自从已解析复合物出发重设计的另一篇工作（ref 4）；引用工作中的小分子结合体为 nM（胆酸/甲氨蝶呤/甲状腺素）至 nM–μM（17α-羟孕酮/apixaban/SN-38）
 cost_or_stat_note=推理 0.9 s（100 残基、单 CPU）对 ProteinMPNN 0.6 s、Rosetta 约慢 250 倍；参数量 2.62M 对 ProteinMPNN 1.66M；单张 A100 训 300,000 步、batch 6,000 tokens；消融增益多为 2–3%（砍蛋白-配体/配体图 −3%、只用侧链 context −3.3%、去元素类型在金属处 −8%），噪声旋钮自身影响 ±~2%
 role_in_timeline=序列端的「全原子化」：承接 [B05] ProteinMPNN（纯骨架条件化）与 [B13]/[B20] 的全原子 motif scaffolding（生成端全原子化），把非蛋白原子正式变成序列设计器的输入，并附带输出侧链构象与置信度；[B27] 在真实 DNA 设计项目里把它作为 Rosetta LayerDesign/FastDesign 的替代分支（暴露两者优劣不对称）；对 2026 年的原子级生成路线（RFdiffusion2/3、RFAA）而言它是「几何定下来之后如何廉价填序列」的默认件
 source_pointer=data/literature_cards/fulltext/B28_PMC11978504_text.txt（归一化后 56,924 字符）+ 同名 _fullTextXML.xml（SHA 7e33fb90a1f61701…）；sources/baker.md:368-379（旧摘要级卡）、:604（序列设计换代行）、:644（LigandMPNN 原子环境条件化条目）

@@ -23,7 +23,7 @@
 
 > 本文未获正文；作者自述部分无法核验，以下只写底稿（摘要转录）达到的粒度。
 
-1. **AF2-refold 是全原子漏斗里最贵的闸口。** 现象/证据：底稿 `:469` 记这篇的目标形态——把生成与筛选合并进同一个全原子模型（10× 算力下降），「目标是取消 AF2-refold 这一最贵的闸口」。→ 他们做了什么：训单一模型同时出骨架+序列+非蛋白组分（`:463`），摘要声称相对先前方法在一系列 in silico 基准上更优—— "RFdiffusion3 achieves improved performance compared to prior approaches on a range in silico benchmarks"，其后续句 "with one tenth the computational cost"（底稿 `:467` 转录；原底稿中这两片段之间隔着粗体标记，故拆成两条引句、不跨句拼接）。→ 应对后仍留下的代价：这是 **in silico 基准上的论断**，不是湿实验命中率；底稿 `:474`（缺口 3，`:674`）写明「当前只核到 one tenth the computational cost 这一 in silico 论断……判定全原子 one-shot 是否真的取消 AF2-refold 闸口并提升实验命中率需要其正式发表版的实验表格」→ **本文未解决（在同行评审层）**。
+1. **AF2-refold 是全原子漏斗里最贵的闸口。** 现象/证据：底稿 `:469` 记这篇的目标形态——把生成与筛选合并进同一个全原子模型（10× 算力下降），「目标是取消 AF2-refold 这一最贵的闸口」。→ 他们做了什么：训单一模型同时出骨架+序列+非蛋白组分（`:463`），摘要声称相对先前方法在一系列 in silico 基准上更优—— "RFdiffusion3 achieves improved performance compared to prior approaches on a range in silico"，其后续句 "with one tenth the computational cost"（底稿 `:467` 转录；原底稿中这两片段之间隔着粗体标记，故拆成两条引句、不跨句拼接）。→ 应对后仍留下的代价：这是 **in silico 基准上的论断**，不是湿实验命中率；底稿 `:474`（缺口 3，`:674`）写明「当前只核到 one tenth the computational cost 这一 in silico 论断……判定全原子 one-shot 是否真的取消 AF2-refold 闸口并提升实验命中率需要其正式发表版的实验表格」→ **本文未解决（在同行评审层）**。
 
 2. **实验验证的可核粒度只有『做了』，没有『成了多少』。** 现象/证据：bioRxiv 摘要页未给下单数/命中率，实验声明只到 designing and experimentally characterizing DNA binding proteins and cysteine hydrolases 这一句（`:466`；逐字引句见第 2.4 条格式，命中 `:466`、`:467` 两处）。→ 他们做了什么：摘要层面把两类难对象（序列特异性 DNA 结合、共价催化的半胱氨酸水解酶）作为实验展示载体；底稿记计算筛选器「预印本摘要未列阈值（仅摘要级）」（`:464`）。→ 代价：**原文未给阈值（本次未取正文）**，本卡的方法节只有操作序列、没有任何可复算门槛。
 
@@ -96,6 +96,8 @@
 - **无隔离事件**：与 B13、B36 不同，B35 从未下载到过全文文件，因此不存在挂错行/隔离问题；`inventory.json` B35 项 local=[]、has_fulltext=false，与本卡证据级别一致。
 - **登记底稿核对**：`sources_map.json` B35 项只登记 `sources/baker.md`（实存）。对照行号：`:457–469`（[B35] 卡段）、`:674`（缺口 3）。CSV 行：`data/protein_design_literature.csv:36`（证据级别列=摘要级）。
 - **门禁自检**：命令 `cd A:\Data\MD\projects\protein-design-screening-20261016 && PYTHONIOENCODING=utf-8 python scripts/verify_literature_cards.py --only "B35" --no-report`。本卡未改 CSV、`sources/*.md`、样板卡、`scripts/`，未做网络抓取。
+
+- **引用预算截短（2026-11-08，公开仓库口径）**：本卡有 1 条逐字引句来自许可受限的第三方来源（B01；PUBLISHER_TERMS），按 `deliverables/fulltext_manifest.csv` 的逐份许可判定，已把单条引句截到 ≤100 字符、同一来源总量截到 ≤600 字符；**截短后仍逐字命中同一份底稿**（门禁 `scripts/verify_literature_cards.py` 仍是逐字核验），完整原句按 §9 的重取方式与 sha256 可复核。逐条改动账见 `deliverables/quote_budget_ledger.csv`。本卡其余内容（我们自己的分析、判断与台账）未被改动。
 
 <!--CSV回填
 work_type=预印本（降级卡：摘要级，未获正文）

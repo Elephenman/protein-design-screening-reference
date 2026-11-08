@@ -70,7 +70,7 @@
 | Lib2 | 模型提名→合成纯化验证 | 96 条模型选出的合成候选（不是数千提名库） | 28 活性（29.2%）；较 Lib1 4.9 倍 | 28 条里仅 16 条测得动力学：约 43% 液滴阳性在纯化后掉队 | 三突变体组合空间 >1.9×10⁹，取 top 6 验证 |
 | 成熟 | 三突变体 top-6 | 6 条（模型挑选子集） | kcat/KM 2.6–4.8× | — | — |
 
-- 原句："For the initial round, we applied permissive sorting gates to maximize the recovery of potential hits, followed sort rounds were performed under stringent conditions to enrich for highly active designs."；"no feature is individually an effective discriminator"；"we synthesized and purified 96 candidates from Lib2 to identify 28 active designs (29.2%)"；"4.9-fold increase in the rate of active hits compared to that of the previous Lib1"
+- 原句："For the initial round, we applied permissive sorting gates to maximize the recovery of potential"；"no feature is individually an effective discriminator"；"we synthesized and purified 96 candidates from Lib2 to identify 28 active designs (29.2%)"；"4.9-fold increase in the rate of active hits compared to that of the previous Lib1"
 - 不能这么用：①29.2% 分母=96 条模型选中并合成的候选，不是提名全库；Lib1 绝对命中率正文从未给 n/n（~6% 只能由 4.9× 反推，属推算）；②无前瞻平行对照（Lib2 模型选 vs 随机选未同场比）；③液滴标签混入表达/分泌失败，16/28 动力学掉队说明标签≠纯化后活性，缺口未量化；④80/20 拆分未声明按簇隔离；⑤预印本+缺 Methods，引用须降级声明。
 
 ### B26 — Haddox et al. 2026 PLoS Comp Biol：DMS 失败模式→基准加权→能量函数重训
@@ -195,7 +195,7 @@
 
 ### B16 — Baryshev et al. 2024 Nat Chem Biol：MP3-seq——边界分类，**不算迭代证据**
 - 证据级别 / 底稿：全文级 FULLTEXT；卡 `B16_Baryshev-2024_NatChemBio_mp3seq.md`；引句底稿: `data/interim/baker_lit/ft/mp3seq2024.txt`
-- 原句："Initially, we chose 100 designs for testing (DHD1; Fig. 4a ), adding 52 more designs in a second round"
+- 原句："Initially, we chose 100 designs for testing (DHD1; Fig."
 - 不能这么用：正文只说第二批加测 52 条扩大测量规模，未说第二轮设计依据第一轮结果改变了方法或判据——这是"加批次"不是" informed 迭代"，按任务要求明写排除。其价值在测量平台（113,569 PPI 一锅测）与 20% 设计集成功率的口径互认，不在轮次链。
 
 ## 二、可复用的迭代模式（从上面台账归纳）
@@ -251,3 +251,5 @@
 - 同轮多改无法归因：B10-C08 三处同改、B18 两处同改、B33 四约束齐上——提升真实但归因是推测。
 - 只加批次不改方法：B16 第二轮 52 条，明写不算迭代证据。
 - 回顾性升级不前瞻验证：B22 ipTM；且新筛子会错杀真命中（wrong-dock 案例）。
+
+> **引用预算截短（2026-11-08，公开仓库口径）**：本底稿有 2 条逐字引句被截短（来源编号：B16、C23；许可类别：CC_BY_NC_ND、CC_BY_ND），按 `deliverables/protein_design_license_audit.csv` 的逐份许可判定，单条引句截到 ≤100 字符；**全部截短后仍逐字命中同一份来源全文**。逐条改动账见 `deliverables/quote_budget_notes_ledger.csv`。

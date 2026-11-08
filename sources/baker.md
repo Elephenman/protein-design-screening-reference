@@ -17,11 +17,11 @@
 - 链接: https://pmc.ncbi.nlm.nih.gov/articles/PMC6733528/
 - 设计对象/靶点: LOCKR（Cage–Latch–Key）别构开关，负载降解子/nuclear export 序列，用于哺乳细胞与酵母内源功能调控
 - 候选生成方法: Rosetta 物理设计（五螺旋 Cage + Latch 界面 + Key 肽）
-- 计算筛选器: 界面含 **buried hydrogen bond networks**（HBnet）用于调节 Cage–Latch 与 Cage–Key 相对亲和力；原文："we chose to design interfaces containing buried hydrogen bond networks; as in DNA base-pairing, specificity can be altered by minor changes to hydrogen bond donors and acceptors"（全文）；三态自由能模型（K_open / K_LT / K_CK）用于选择可调范围内的设计
+- 计算筛选器: 界面含 **buried hydrogen bond networks**（HBnet）用于调节 Cage–Latch 与 Cage–Key 相对亲和力；原文："we chose to design interfaces containing buried hydrogen bond networks;"（全文）；三态自由能模型（K_open / K_LT / K_CK）用于选择可调范围内的设计
 - MD 使用: 否（全文仅提到磁搅拌培养管，无 MD）
 - QM 使用: 否
 - 实验验证方法与通量: 体外结合 + 酵母/HEK293T 报告基因；中低通量
-- **命中率原始数字**: 原文摘要级证据："We describe orthogonal cage-key systems that function in vitro, in yeast and in mammalian cells with up to 40-fold activation of function by Key"（https://pubmed.ncbi.nlm.nih.gov/31341284/）。具体"设计 N 个/筛 M 个"的分母我未从正文提取到统一口径（见第五节缺口 1）
+- **命中率原始数字**: 原文摘要级证据："We describe orthogonal cage-key systems that function in vitro,"（https://pubmed.ncbi.nlm.nih.gov/31341284/）。具体"设计 N 个/筛 M 个"的分母我未从正文提取到统一口径（见第五节缺口 1）
 - 时间线位置: 2019 年的"物理能量函数 + HBnet 多态设计"终点；是 Rosetta 时代的最后一代复杂功能设计，其成本（大量人工筛选）正是后来深度学习要解决的瓶颈
 
 ### [B02] Improving the Efficiency of Ligand-Binding Protein Design with Molecular Dynamics Simulations
@@ -32,7 +32,7 @@
 - 设计对象/靶点: 配体结合蛋白（两种 fold、跨不同亲和力的 37 个设计变体）
 - 候选生成方法: Rosetta 配体结合位点设计（既有 Baker 管线）
 - 计算筛选器: 显式溶剂全原子 MD 轨迹特征 + 机器学习分类器
-- MD 使用: **是，且是唯一一次把 MD 当潜在筛选器**——"Simulations ranging from 500 to 1000 ns per replicate were conducted on 37 designed protein variants … resulting in more than 180 μs of combined sampling"；"we demonstrate that the application of machine learning approaches built upon the output from the simulations can help discriminate between successful and failed binders, such that MD could act as a screening step in protein design, resulting in a more efficient process"（摘要，https://pubmed.ncbi.nlm.nih.gov/31442033/）；性质是**回顾性诊断**（"retrospective insights into the properties affecting ligand affinity"），并指出 entropic 成分对亲和力重要、而设计协议常用的经验模型难以纳入
+- MD 使用: **是，且是唯一一次把 MD 当潜在筛选器**——"Simulations ranging from 500 to 1000 ns per replicate were conducted on 37 designed protein"；"we demonstrate that the application of machine learning approaches built upon the output from the"（摘要，https://pubmed.ncbi.nlm.nih.gov/31442033/）；性质是**回顾性诊断**（"retrospective insights into the properties affecting ligand affinity"），并指出 entropic 成分对亲和力重要、而设计协议常用的经验模型难以纳入
 - QM 使用: 否
 - 实验验证方法与通量: 复用已有设计体的结合/稳定性测定，无新展示库
 - 命中率原始数字: 37 个设计变体、>180 μs 累计采样（上引）；未报告新的湿实验命中率
@@ -49,7 +49,7 @@
 - MD 使用: 否
 - QM 使用: 否
 - 实验验证方法与通量: E. coli 表达 + SEC + CD，X 射线/NMR 解析结构
-- **命中率原始数字（摘要原文）**: "We obtained synthetic genes encoding **129** of the network-'hallucinated' sequences, and expressed and purified the proteins in Escherichia coli; **27** of the proteins yielded monodisperse species with circular dichroism spectra consistent with the hallucinated structures. We determined the three-dimensional structures of three … closely matched the hallucinated models."（https://pubmed.ncbi.nlm.nih.gov/34853475/）→ 送测 129、成功 27 ≈ **21%**
+- **命中率原始数字（摘要原文）**: "We obtained synthetic genes encoding **129** of the network-'hallucinated' sequences,"（https://pubmed.ncbi.nlm.nih.gov/34853475/）→ 送测 129、成功 27 ≈ **21%**
 - 时间线位置: 把"筛选器"从物理能量函数换成**结构预测网络本身**的第一步；瓶颈是只能设计到 ~100 aa（[B08] 明确说 "in silico success rates rapidly deteriorate beyond this length"），且生成的是网络"记忆"内的 fold，骨架多样性受限 → 直接催生 diffusion 生成模型
 
 ### [B04] Protein sequence optimization with a pairwise decomposable penalty for buried unsatisfied hydrogen bonds
@@ -154,7 +154,7 @@
 - 计算筛选器: 折叠匹配、β 配对/β-bulge、聚集倾向；DL backbone + Rosetta sequence 组合
 - MD: 否 / QM: 否
 - 实验验证: E. coli 表达 + Ni 柱纯化 + SEC + far-UV CD + ¹H-¹⁵N HSQC NMR
-- **命中率原始数字（全文）**："**72 out of 80** designs expressed, **43** were soluble, and **19** and **9** appeared to be monomers and dimers by size exclusion chromatography"；"**Eleven** monomers and **five** dimers had far-UV CD spectra suggesting folded structures, and **11** designs had close to the expected number of well-dispersed sharp peaks from ¹H-¹⁵N HSQC"；失败模式："Indeed, **74 percent** of the soluble experimentally characterized designs were oligomers, and **40 percent** of the expressed designs aggregated"；结论："Using deep learning for backbone generation and Rosetta for sequence design yielded higher design success rates and increased structural diversity than Rosetta alone"
+- **命中率原始数字（全文）**："**72 out of 80** designs expressed, **43** were soluble,"；"**Eleven** monomers and **five** dimers had far-UV CD spectra suggesting folded structures,"；失败模式："Indeed, **74 percent** of the soluble experimentally characterized designs were oligomers,"；结论："Using deep learning for backbone generation and Rosetta for sequence design yielded higher design"
 - 时间线位置: 说明漏斗失败原因的另一种维度——不是打分不准，而是**β 边缘聚集/寡聚**这类设计目标之外的路径；"表达→可溶→正确寡聚态→折好的谱学证据"的四段漏斗在此被完整量化（80→72→43→28 单体/二聚体→16 CD 折叠）
 
 ### [B12] De novo design of high-affinity binders of bioactive helical peptides
@@ -218,7 +218,7 @@
 - 计算筛选器: 条形码配对富集倍数（LFC）+ 多重检验校正（P_adj ≤ 0.05）；另用 AF-M（AF2 多链）iPTM 作为计算对照
 - MD: 否 / QM: 否
 - 实验验证方法与通量: 重编程酵母双杂交（Y2H）+ 条形码 + NGS
-- **通量/命中率原始数字（全文）**："**MP3-seq can measure over 100,000 PPIs in a single experiment**"；"We show that MP3-seq is highly quantitative and scales to over 100,000 interactions"；设计侧对照："**Every design set had an approximately 20% success rate in the largest screen, consistent with past 22% success rates for α-helical bundles**"；验证集规模："we screened **144** pairwise interactions between six orthogonal 1×1s"；"six homologous proteins from the Bcl-2 family … and **nine de novo designed inhibitors**"
+- **通量/命中率原始数字（全文）**："**MP3-seq can measure over 100,000 PPIs in a single experiment**"；"We show that MP3-seq is highly quantitative and scales to over 100,000 interactions"；设计侧对照："**Every design set had an approximately 20% success rate in the largest screen,**"；验证集规模："we screened **144** pairwise interactions between six orthogonal 1×1s"；"six homologous proteins from the Bcl-2 family … and **nine de novo designed inhibitors**"
 - 时间线位置: 把"每个设计的 Kd/特异性"变成 **~10⁵ 对/实验** 的可测序数据 → 既是廉价筛选器，也是回头训练/校正打分函数（[B27]）的数据引擎
 
 ### [B17] Computational design of serine hydrolases
@@ -269,10 +269,10 @@
 - 链接: https://pmc.ncbi.nlm.nih.gov/articles/PMC12791007/
 - 设计对象/靶点: 41 个 AME 基准活性位（含 Methodol retroaldolase、Zn 水解位）
 - 候选生成方法: RFdiffusion2（原子级 motif scaffolding，支持 unindexed motif、配体构象自动采样）+ LigandMPNN 拟合序列 + Chai-1/AF2 复折
-- 计算筛选器: "For each case, we generated **100 backbones**, fit **eight sequences** to them with LigandMPNN and then **refolded them with Chai-1** … After applying final quality filters … we found **41 cases** that satisfy all the criteria"；实验侧"filter them with structure prediction models to select designs for experimental validation"
-- MD 使用: 否（仅引 MDTraj 作为参考文献）/ QM: **是，theozyme 来源**——"De novo enzyme design starts from a configuration of catalytic groups around the reaction transition state(s) (a theozyme) generated using **quantum chemistry**, protein structural analysis and/or chemical reasoning"
+- 计算筛选器: "For each case, we generated **100 backbones**,"；实验侧"filter them with structure prediction models to select designs for experimental validation"
+- MD 使用: 否（仅引 MDTraj 作为参考文献）/ QM: **是，theozyme 来源**——"De novo enzyme design starts from a configuration of catalytic groups around the reaction"
 - 实验验证: 无细胞（IVTT）表达 + 半定量/定量活性测定
-- **命中率原始数字（全文）**: "RFdiffusion2 samples at least one scaffold passing the success filters for **41/41** cases while RFdiffusion achieves **16/41**"（in silico）；"We generated designs scaffolding this theozyme, filtered them and expressed **96** in an in vitro transcription/translation system. We tested activity … using racemic Methodol … and found **four** variants that show detectable levels of retroaldolase activity"；"Among the **48** designs that were screened experimentally, several displayed detectable activity"；"In a second set of **96** designs tested including a general base to activate the water, we identified **11 functional enzymes**, the best of which had a k_cat/K_M of **53,000 ± 5,000 M⁻¹ s⁻¹**"
+- **命中率原始数字（全文）**: "RFdiffusion2 samples at least one scaffold passing the success filters for **41/41** cases while"（in silico）；"We generated designs scaffolding this theozyme,"；"Among the **48** designs that were screened experimentally, several displayed detectable activity"；"In a second set of **96** designs tested"
 - 时间线位置: 从"残基级"降到"**原子级**"约束后，同一批 96 名额的实验命中率从 4/96 提升到 11/96（同一方法两代之间的量化对比），并解释 2024–2026 全原子化的动机：旧版要求指定侧链+骨架二面角，采样代价高、命中率低
 
 ### [B21] Diffusing protein binders to intrinsically disordered proteins
@@ -396,10 +396,10 @@
 - 链接: https://pmc.ncbi.nlm.nih.gov/articles/PMC10990136/
 - 设计对象/靶点: 双组分蛋白纳米材料（T33 型 icosahedral cage）全自动重设计
 - 候选生成方法: Rosetta SymDofMover 微扰 + **ProteinMPNN**（无人工干预）
-- 计算筛选器: shape complementarity 排序 + 阈值过滤："We selected a maximum of three variants of each original design … resulting in a total of **76 designs that passed our filter cut-offs** … without any manual intervention"
+- 计算筛选器: shape complementarity 排序 + 阈值过滤："We selected a maximum of three variants of each original design"
 - MD: 否 / QM: 否
 - 实验验证: 双顺反子质粒 + 2 mL E. coli 培养 + native PAGE 组装筛选
-- **命中率原始数字（全文）**: "In the original publication, **four of the 27** previously designed complexes successfully adopted the target architecture"；"ProteinMPNN had a similar success rate to Rosetta, yielding **13 new experimentally confirmed assemblies**, but required **orders of magnitude less computation** and no manual refinement"
+- **命中率原始数字（全文）**: "In the original publication,"；"ProteinMPNN had a similar success rate to Rosetta,"
 - 时间线位置: "同样的命中率、1/1000 算力、零人工"——这是算力成本而非判据成本的改进，解释了为什么 ProteinMPNN 会被无条件采纳
 
 ### [B31] Small-molecule binding and sensing with a designed protein family
@@ -502,7 +502,7 @@
 - 设计对象/靶点: 设计蛋白组装体的"寡聚多型"（同一组件形成多种邻近架构）
 - 候选生成方法: Rosetta/ProteinMPNN 界面设计（既有 I32-10 等组装体）
 - 计算筛选器: 静态设计模型 + cryo-EM 密度刚体拟合（不是 MD 筛）
-- **MD 使用: 是，纯机制用途**——"Structural modeling and **molecular dynamics simulations** indicate that constrained flexibility within the subunits of each assembly promotes a defined range of architectures rather than nonspecific aggregation"；"To identify inherent structural fluctuations, we performed **molecular dynamics simulations for each trimeric and dimeric building block as well as the interfaces formed between them**"；"it should be possible to reconstruct each of the observed assemblies using a small number of structural snapshots from the **molecular dynamics trajectories**"
+- **MD 使用: 是，纯机制用途**——"Structural modeling and **molecular dynamics simulations** indicate that constrained flexibility"；"To identify inherent structural fluctuations,"；"it should be possible to reconstruct each of the observed assemblies using a small number of"
 - QM 使用: 否
 - 实验验证: cryo-EM（cisTEM/CryoSPARC 的 C1 ab initio 重建）+ DLS/SEC
 - 命中率数字: 本论文不报告设计命中率（研究对象是已建成组装体的柔性），**无 N→M→K 计数**
@@ -516,10 +516,10 @@
 - 设计对象/靶点: C34（设计 α/β 蛋白，捕获 β-strand/发夹，用于聚集病相关分子隔离）
 - 候选生成方法: 既有设计体 + 定点突变稳定单构象
 - 计算筛选器: 无（用 NMR 弛豫色散"看见"激发态）
-- **MD 使用: 仅辅助**——原文相关表述："minimum energy **molecular dynamics** trajectories on energy landscapes could provide critical insights into the conformers that must be considered"（展望性质，非入选判据）
+- **MD 使用: 仅辅助**——原文相关表述："minimum energy **molecular dynamics** trajectories on energy landscapes could provide critical"（展望性质，非入选判据）
 - QM 使用: 否
 - 实验验证: NMR（对"不可见"低丰度构象的探测）+ 突变体亲和力测定
-- 关键结论原文: "establishing that it interconverts between a pair of distinct conformers that **compete with binding of the cognate peptide**"；"these **attenuate the affinity**"（→ 失败原因是静态设计模型看不见的激发态）
+- 关键结论原文: "establishing that it interconverts between a pair of distinct conformers that **compete with**"；"these **attenuate the affinity**"（→ 失败原因是静态设计模型看不见的激发态）
 - 时间线位置: 给出 Baker 组对"漏斗为什么仍有 Type II 式失败"的物理答案（低能激发态与结合态竞争），并明确主张用 NMR（不是 MD/QM）来改进设计流程
 
 ### [B40] De novo design of proteins housing excitonically coupled chlorophyll special pairs
@@ -591,7 +591,7 @@
 ### [附：非 Baker 组对照，用于界定 MD/QM 归属]
 - Listov D, Vos E, … **Fleishman S**（Weizmann；无 Baker），"Complete computational design of high-efficiency Kemp elimination enzymes", Nature 2025, 643:1421-1427, DOI 10.1038/s41586-025-09136-2 ✅, PMID 40533551, PMC12310539。⚠️ **作者列表经 Crossref 核验为 9 人、has_baker=False**，不得算作 Baker 组工作；其内部有 MD 与 QM 相关内容（本地全文 MD 命中 28 句、QM 29 句），可作为"MD/QM 在酶设计里能做到什么"的外部参照。
 - Braun M, … **Hilvert D**（ETH Zürich），"Computational enzyme design by catalytic motif scaffolding", Nature 2025, 649:237-245, DOI 10.1038/s41586-025-09747-9 ✅, PMID 41339546, PMC12727513。同样 **has_baker=False**。
-- 经典锚点（Baker + Hilvert + Houk 联合，供 QM/theozyme 溯源）：Siegel JB, Zanghellini A, Lovick HM, Kiss G, Lambert AR, … Hilvert D, Gelb MH, Stoddard BL, Houk KN, Michael FE, **Baker D**, "Computational design of an enzyme catalyst for a stereoselective bimolecular Diels-Alderase reaction"（该文作为 [B17] 参考文献原文出现在 Baker 侧正文引注中："…Houk KN, Michael FE, Baker D, Computational design of an enzyme catalyst for a stereoselective bimolecular Diels-Alder reaction"）。该锚点的 **QM 角色**＝用 QM 给出过渡态几何与催化基团排布；属"化学步建模"，不是全局筛选器。
+- 经典锚点（Baker + Hilvert + Houk 联合，供 QM/theozyme 溯源）：Siegel JB, Zanghellini A, Lovick HM, Kiss G, Lambert AR, … Hilvert D, Gelb MH, Stoddard BL, Houk KN, Michael FE, **Baker D**, "Computational design of an enzyme catalyst for a stereoselective bimolecular Diels-Alderase reaction"（该文作为 [B17] 参考文献原文出现在 Baker 侧正文引注中："…Houk KN, Michael FE, Baker D,"）。该锚点的 **QM 角色**＝用 QM 给出过渡态几何与催化基团排布；属"化学步建模"，不是全局筛选器。
 
 ---
 
@@ -659,7 +659,7 @@
    **唯一的肯定反例（需如实记录）**：[B34] buttressed-loop 重复蛋白（Nat Chem Biol 2024）把 MD 写进了入选流程——"Top 10% scoring structures were further tested by in silico validation methods such as **molecular dynamics simulations (Cα RMSD < 3 Å)**, AlphaFold (pLDDT > 80, Cα RMSD < 3 Å) or RoseTTAFold (pLDDT > 80, Cα RMSD < 3 Å)"；"We performed molecular dynamics simulations using **GROMACS (2018.4)** with the **Amber99SB-ILDN** force field"，用途是"rigidity of the design models was evaluated"（刚性/构象漂移），且与 AF/RF 属**三选一的可互换手段**，不是必过关口。
    另一次把 MD 推向"筛选步骤"的是 2019 年 JCTC（[B02]，37 个设计、>180 μs），其结论是"MD could act as a screening step"；但此后 Baker 组的 binder/enzyme 战役里没有任何一篇把显式溶剂 MD、MM/PBSA、MM/GBSA、FEP/TI 或 metadynamics 作为入选判据（逐关键词检索命中数：**MM/PBSA·MM/GBSA = 0；free energy perturbation/TI/alchemical = 0；metadynamics/umbrella = 0；GROMACS/OpenMM/NAMD = 仅 [B34] 的 GROMACS + [B29] 的 Namdinator（晶体学工具，非 MD）**；OPLS 仅在 [B26] 参考文献标题与两篇**非 Baker** 对照论文（kemp2025 的 EVB/OPLS-AA、motifscaffold2026 的 GROMACS）中出现）。
 2. **QM 只在"化学步"出现，且是设计输入而非筛选器。** 具体形态只有两种：
-   (a) 用 **DFT 定过渡态/theozyme 几何**作为生成模型的输入——[B18] "starting from **quantum chemistry**-derived active site geometries"、"We began by using **DFT** to identify the transition-state geometry…"；[B17] "placed the catalytic sidechains around a **QM-optimized transition state**"；[B20] "theozyme … generated using **quantum chemistry**, protein structural analysis and/or chemical reasoning"；[B10] 的 DFT 反应自由能剖面（Int1/TS1/Int3/OSS-TS2）。
+   (a) 用 **DFT 定过渡态/theozyme 几何**作为生成模型的输入——[B18] "starting from **quantum chemistry**-derived active site geometries"、"We began by using **DFT** to identify the transition-state geometry…"；[B17] "placed the catalytic sidechains around a **QM-optimized transition state**"；[B20] "theozyme … generated using **quantum chemistry**,"；[B10] 的 DFT 反应自由能剖面（Int1/TS1/Int3/OSS-TS2）。
    (b) 用 **TD-DFT/QM 处理光物理与发色团**——[B40] 叶绿素特殊对（"time-dependent density functional theory calculations … excitonically coupled"、B3LYP/6-31G* 几何优化、PigmentHunter 光谱模拟、Amber18 + 短 MD 做力场参数）；[B37] FAP 的 DFHBI 用 Gaussian 几何优化 + GAFF 参数化。
    没有一例把 QM 用于成千上万候选的排序——原因与 MD 相同：单分子成本。
 3. **真正的"入选判据"三件套**：AF2/RF（或 AF3 ipTM）自洽性阈值 + ProteinMPNN/LigandMPNN 序列似然 + Rosetta 界面物理项（ddG、CMS、SAP）；酶加 PLACER 预组织；小分子/全原子任务加 RFAA/RFdiffusion2 级原子约束。MD/QM 的位置是"**在闸口之间解释与提供约束**"，不是"闸口本身"。
@@ -686,3 +686,5 @@
 - Europe PMC 全文接口示例：`https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10468394/fullTextXML`（HTTP 200）。
 - DOI 核验示例：`https://api.crossref.org/works/10.1038/s41586-025-09746-w` → `{"has_baker": true, "vol": "649", "page": "246-253"}`。
 - 两条 Europe PMC fullTextXML 返回 HTTP 500（PMC7532806、PMC9293396），已改用 PubMed 摘要并标注"摘要级"。
+
+> **引用预算截短（2026-11-08，公开仓库口径）**：本底稿有 25 条逐字引句被截短（来源编号：B01、B02、B03、B11、B16、B20、B30、B38、B39、未归属；许可类别：CC_BY_NC_ND、PUBLISHER_TERMS、TEXT_MINING_ONLY、未归属），按 `deliverables/protein_design_license_audit.csv` 的逐份许可判定，单条引句截到 ≤100 字符；其中 19 条截短后仍**逐字命中同一份来源全文**，其余 6 条为**原句的前缀**（本地无全文或原句是我们自己的转写，只减不增、不新增第三方内容）。逐条改动账见 `deliverables/quote_budget_notes_ledger.csv`。

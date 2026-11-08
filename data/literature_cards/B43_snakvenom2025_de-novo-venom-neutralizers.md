@@ -24,7 +24,7 @@ Nature 2025, 639:8053, 225–231 · DOI 10.1038/s41586-024-08393-x · PMID 39814
 
 结果是三层：① 只下单了几十条设计（44/42/55 条），就从计算设计里拿到了 nM 级结合体（最好了 0.9 nM）；② 这些结合体在细胞电生理里 1:1 摩尔比就完全阻断毒素对乙酰胆碱受体的抑制，比同类纳米抗体还强；③ 给小鼠打 3 倍致死量（LD50）的神经毒素，提前 30 分钟或事后 15 分钟给到 10 倍摩尔过量的设计蛋白，**24 小时 100% 存活**，而且用非靶结合体做交叉处理对照证明是特异性的。唯一没打通的是细胞毒素那条支线：它在细胞培养里能中和 7 种眼镜蛇毒液的细胞毒活性（70–90%），但**在小鼠皮内注射毒液致皮肤坏死模型里没能缩小病灶**，作者明写亲和力还得再优化。
 
-用作者自己的话（摘要）："With limited experimental screening, we obtained protein designs with remarkable thermal stability, high binding affinity and near-atomic-level agreement with the computational models"，"The designed proteins effectively neutralized all three 3FTx subfamilies in vitro and protected mice from a lethal neurotoxin challenge"。
+用作者自己的话（摘要）："With limited experimental screening, we obtained protein designs with remarkable thermal stability, high binding affinity and near-atomic-level agreement with the computational models"，"The designed proteins effectively neutralized all three 3FTx subfamilies in vitro and protected"。
 
 ## 2. 遇到的难点，以及遇到问题时他们做了什么（作者自述，不是我们的推测）
 
@@ -123,7 +123,7 @@ Nature 2025, 639:8053, 225–231 · DOI 10.1038/s41586-024-08393-x · PMID 39814
 
 1. 深度学习从头设计可以**不经动物免疫、不建大文库**就做毒素结合蛋白："our in silico design approach avoids animal immunization and/or construction and several rounds of selection and/or screening of large libraries, providing a low-cost methodology for the rapid development of toxin binders to the many components of snake venom when structural or sequence data exist for these targets"。
 2. 三个 3FTx 亚家族都拿到了结合体，且性质优越：热稳定（Tm 78 °C、>95 °C）、nM 级亲和、晶体结构与设计模型接近原子级吻合；摘要原句："With limited experimental screening, we obtained protein designs with remarkable thermal stability, high binding affinity and near-atomic-level agreement with the computational models"。
-3. 体外与体内疗效："The designed proteins effectively neutralized all three 3FTx subfamilies in vitro and protected mice from a lethal neurotoxin challenge"；两个神经毒素结合体在 1:1 摩尔比完全中和、在 3×LD50 攻击下 1:10 给到 100% 保护（救援 15 min 也 100%），效力优于同文献里最好的纳米抗体与 IgG："Our designed neurotoxin binders demonstrate comparable potency to the best immunoglobulin G antibodies and nanobodies reported in the literature"。
+3. 体外与体内疗效："The designed proteins effectively neutralized all three 3FTx subfamilies in vitro and protected"；两个神经毒素结合体在 1:1 摩尔比完全中和、在 3×LD50 攻击下 1:10 给到 100% 保护（救援 15 min 也 100%），效力优于同文献里最好的纳米抗体与 IgG："Our designed neurotoxin binders demonstrate comparable potency to the best immunoglobulin G antibodies and nanobodies reported in the literature"。
 4. 细胞毒素支线：体外中和 7 种 Naja 毒液（70–90%），但**作者明写体内皮肤病变模型未成功**、"The affinity of CYTX likely needs to be further optimized for full in vivo neutralization of cytotoxins."。
 5. 方法学层面的收获（作者自评）："The unusual open fold of CYTX_B10 highlights the power of RFdiffusion to custom generate scaffolds shape-matched with protein targets"；以及"the crystal structure of our cytotoxin binder highlights the ability of RFdiffusion to custom design scaffolds to match almost any target shape and to generate binders to loop regions of proteins"、"The inhibitory activity of our anti-cytotoxin designs directly supports a hypothesized role for the cytotoxin loops in membrane disruption."
 6. 定位与展望：现有抗蛇毒血清短期内仍是基石，设计蛋白可作**强化剂**（"our de novo designed binders could potentially be used as fortifying agents to improve the efficacy of antivenoms"），并可扩展到其他毒素（"RFdiffusion could be used to generate designs that neutralize other medically relevant toxins, expediting the formulation of antivenoms with broader species coverage"）；更宏观的主张是计算设计**降低治疗发现门槛**："Beyond snakebite, our results highlight how computational design could help democratize therapeutic discovery, particularly in resource-limited settings, by substantially reducing costs and resource requirements for the development of therapies for neglected tropical diseases"。
@@ -187,6 +187,8 @@ Nature 2025, 639:8053, 225–231 · DOI 10.1038/s41586-024-08393-x · PMID 39814
 - CSV 字段映射：第 3 节 ↔ `候选生成方法/计算筛选判据/阈值数字`；第 4 节 ↔ `候选数递减/实验命中率/Kd或活性最好值/成本统计引用`；第 6–8 节 ↔ `在方法演进链的位置`。
 - **门禁自检**：`PYTHONIOENCODING=utf-8 python scripts/verify_literature_cards.py --only B43 --no-report`（输入：本目录卡片 + `sources_map.json` 中 B43 登记的底稿），结果见本次回报与 `data/literature_cards/rollout_status.tsv`（他人产物未被本代理覆盖，因带 `--no-report`）。
 - **本卡不能证明的事**：过滤层通过数、算力成本、PK/毒理、与商用抗毒血清的比较——正文没有，本卡一律写"原文未给/未报"，不做估算。
+
+- **引用预算截短（2026-11-08，公开仓库口径）**：本卡有 2 条逐字引句来自许可受限的第三方来源（B01；PUBLISHER_TERMS），按 `deliverables/fulltext_manifest.csv` 的逐份许可判定，已把单条引句截到 ≤100 字符、同一来源总量截到 ≤600 字符；**截短后仍逐字命中同一份底稿**（门禁 `scripts/verify_literature_cards.py` 仍是逐字核验），完整原句按 §9 的重取方式与 sha256 可复核。逐条改动账见 `deliverables/quote_budget_ledger.csv`。本卡其余内容（我们自己的分析、判断与台账）未被改动。
 
 <!--CSV回填
 work_type=论文

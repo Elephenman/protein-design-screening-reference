@@ -92,7 +92,7 @@ de novo 酶设计的老办法是：先给活性位点里每个催化残基**定�
 ## 5. 结论——作者说了什么
 
 1. RFdiffusion2 只需侧链官能团坐标（不必指定序列位置/骨架），从 DFT theozyme 直接造出了"orders of magnitude higher than previously designed metallohydrolases"的锌酯酶（摘要句 "From an initial set of 96 designs tested experimentally, the most active has a catalytic efficiency"）。
-2. 零实验优化：ZETA_1 是 96 个中计算排名第一的设计——"the top-ranked in silico design out of a total of 96 tested straight from the computer, with no experimental optimization"；第二轮又从新 96 个零 shot 得到 3 个高活性酶。
+2. 零实验优化：ZETA_1 是 96 个中计算排名第一的设计——"the top-ranked in silico design out of a total of 96 tested straight from the computer,"；第二轮又从新 96 个零 shot 得到 3 个高活性酶。
 3. ZETA_1–4 结构互相不同、也与已知结构不同（TM 0.41/0.49），ZETA_2 晶体结构与设计模型高度一致；"The catalytic efficiencies of ZETA_1–3 are within the range typically observed for native metallohydrolases with similar substrates"。
 4. 机理证据：锌绝对必需（螯合全灭、回补恢复）；活性位组装方式与 theozyme 假设一致（三 His 配 Zn、Zn 兼作氧阴离子洞，"there are no nearby side-chain hydrogen bond donors"——此句在 Extended Data Fig. 5 描述语境，正文对应表述为锌离子充当氧阴离子洞）。
 5. 展望：把"RFdiffusion2–PLACER"当成通用范式推向更多键断裂/键形成反应（"we have found the RFdiffusion2–PLACER design approach described here to yield biocatalysts for a variety of bond-breaking and bond-making chemical reactions"）。
@@ -134,6 +134,8 @@ de novo 酶设计的老办法是：先给活性位点里每个催化残基**定�
 - 关联卡：方法本体 [B20]（RFdiffusion2 的训练与基准在那篇；B20 正文也把金属水解酶案例细节指回这篇），打分器本体 [B19]。
 - CSV 字段映射：本文第 3 节 ↔ `候选生成方法/计算筛选判据/阈值数字`；第 4 节 ↔ `候选数递减/实验命中率/Kd或活性最好值/成本统计`；第 8 节 ↔ `在方法演进链的位置`。
 - **本卡自检**：`PYTHONIOENCODING=utf-8 python scripts/verify_literature_cards.py --only B18 --no-report` 输出 `PASS B18 quotes=N/N`（引句全部逐字命中登记全文；门禁不判内容对错，正文口径仍需按上表指针复核）。补充信息未取回，凡"原文未给阈值"处不可当作原文沉默的阈值使用。
+
+- **引用预算截短（2026-11-08，公开仓库口径）**：本卡有 1 条逐字引句来自许可受限的第三方来源（B01；PUBLISHER_TERMS），按 `deliverables/fulltext_manifest.csv` 的逐份许可判定，已把单条引句截到 ≤100 字符、同一来源总量截到 ≤600 字符；**截短后仍逐字命中同一份底稿**（门禁 `scripts/verify_literature_cards.py` 仍是逐字核验），完整原句按 §9 的重取方式与 sha256 可复核。逐条改动账见 `deliverables/quote_budget_ledger.csv`。本卡其余内容（我们自己的分析、判断与台账）未被改动。
 
 <!--CSV回填
 work_type=论文

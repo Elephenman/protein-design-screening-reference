@@ -1,13 +1,13 @@
 {
- "date": "2026-11-07",
+ "date": "2026-11-08",
  "csv_rows": 152,
  "cards_filled": 152,
- "field_corrections_this_run": 0,
+ "field_corrections_this_run": 2,
  "field_corrections_ledger_total": 2000,
  "csv_columns_before": 27,
  "csv_columns_after": 27,
- "backup": "data/interim/protein_design_literature_backup_2026-11-07.csv",
+ "backup": "data/interim/protein_design_literature_backup_2026-11-08.csv",
  "backup_sha256": "6f2aebeb65ae2c28a75fdcecdc1b0ca3e0b1d4aa4f1f38aea758307b285161ec",
  "previous_csv_kept_as": "data/interim/protein_design_literature_pre_embed.csv",
- "new_csv_sha256": "6f2aebeb65ae2c28a75fdcecdc1b0ca3e0b1d4aa4f1f38aea758307b285161ec"
+ "new_csv_sha256": "45dbc594beca0a6306efb446607c7bc4372ed035e5c353ea71f0b84132b60a47"
 }

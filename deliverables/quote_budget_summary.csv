@@ -1,0 +1,228 @@
+﻿卡片,来源编号,许可类别,引句条数,被截短条数,截前字符,截后字符
+B06-C02_Cao-2022_Nature_broad-search-focused-resampling.md,B06; C02,CC_BY,203,0,29499,29499
+K33_dms-functional-score-correspondence.md,K33,CC_BY,138,0,21211,21211
+B33_Wu-2023_Nature_superhelical-matching.md,B33,CC_BY,140,0,21189,21189
+B10-C08_Yeh-2023_Nature_luciferase-dl.md,B10; C08,CC_BY,163,0,19705,19705
+B27_Glasscock-2025_NSMB_sequence-specific-dbp.md,B27,CC_BY,141,0,19693,19693
+B12_VazquezTorres-2024_Nature_helical-peptide-binders.md,B12,CC_BY,178,0,19605,19605
+B02_Barros-2019_JCTC_md-screening-ligand-binders.md,B02,TEXT_MINING_ONLY,125,103,16761,5581
+K64_Braun-2025_Nature_riff-diff-motif-scaffolding.md,K64,CC_BY,124,0,16262,16262
+K38_Wenran-2026_IJMS_diffusion-review.md,K38,CC_BY,117,0,15642,15642
+K47_CamSol-2023_BriefBioinform_pH-solubility.md,K47,CC_BY_NC,113,99,14717,4750
+B03_Anishchenko-2021_Nature_hallucination.md,B03,TEXT_MINING_ONLY,117,102,14435,4963
+C19_HalluDesign-iterative-hallucination.md,C19,CC_BY_NC,101,85,14123,4533
+B11_Kim-2023_PNAS_small-beta-barrel.md,B11,CC_BY_NC_ND,114,107,13830,4052
+B07_Linsky-2022_NatComms_smallfolds-foldarchitect.md,B07,CC_BY,117,0,13808,13808
+K40_Mischley-2026_eLife_ppiscreenml-af-screening.md,K40,CC_BY,117,0,13622,13622
+B05_Dauparas-2022_Science_ProteinMPNN.md,B05,CC_BY,106,0,13421,13421
+K65_Maguire-2018_JCTC_mc-hbnet.md,K65,TEXT_MINING_ONLY,88,77,13336,4192
+K42_scaffold-lab-backbone-generation-benchmark.md,K42,CC_BY,125,0,13303,13303
+C23_Ke-2026_biorxiv_ml-droplet-enzyme-screening.md,C23,CC_BY_ND,84,76,13095,3602
+B44_Roy-2023_NatComms_integrin-miniprotein.md,B44,CC_BY,115,0,12891,12891
+C16_Proteus-2024_biorxiv_structure-generation.md,C16,CC_BY_ND,149,122,12829,5496
+C03_QuijanoRubio-2021_Nature_biosensor-function-geometry-first.md,C03,TEXT_MINING_ONLY,134,108,12705,5368
+B26_Haddox-2026_PLoSCompBiol_energy-retrain.md,B26,CC_BY,91,0,12674,12674
+B08_Watson-2023_Nature_rfdiffusion.md,B08,CC_BY,103,0,12667,12667
+K34_LastMile-2026_JCIM_screening-critique.md,K34,CC_BY,96,0,12623,12623
+B28_Dauparas-2025_NatMethods_ligandmpnn-atomic-context.md,B28,CC_BY,88,0,12555,12555
+B42-C11_endycyte-degron-2025.md,B42; C11,CC_BY,105,0,12156,12156
+K41_complementarity-binder-design-2025.md,K41,CC_BY,97,0,11534,11534
+K28_Mirdita-2022_NatMethods_colabfold.md,K28,CC_BY,108,0,11420,11420
+Z08_Autiero-2025_JCTC_affinity-scorer-benchmark.md,Z08,CC_BY,76,0,11198,11198
+B30_deHaas-2024_PNAS_mpnn-auto-t33.md,B30,CC_BY_NC_ND,74,67,11140,3303
+B43_snakvenom2025_de-novo-venom-neutralizers.md,B43,CC_BY,84,0,11028,11028
+K56_Schauperl-2020_CommChem_resp2-nonbonded-ff.md,K56,CC_BY,72,0,10671,10671
+B20_Ahern-2026_NatMethods_rfdiffusion2-ame.md,B20,CC_BY_NC_ND,81,71,10477,3282
+B24_Qian-2026_NatComms_SAPP-DMX.md,B24,CC_BY,86,0,10401,10401
+K63_Listov-2025_Nature_kemp-complete-design.md,K63,CC_BY_NC_ND,91,79,10003,3574
+B04_Coventry-2021_PLoSCompBiol_3bop-buried-hbond-penalty.md,B04,CC_BY,81,0,9878,9878
+B31_smallmol-family-binding-sensing.md,B31,CC_BY,90,0,9782,9782
+C20_HalluDesign-NA-2026_biorxiv_nucleic-acid-design.md,C20,CC_BY_NC,76,68,9779,3404
+K32_Yin-2024_ProteinSci_af-ab-ag-benchmark.md,K32,CC_BY,66,0,9443,9443
+Z04_Song-2023_PNAS_dq8-autoantigen-fep.md,Z04,CC_BY_NC_ND,74,62,9395,3410
+K31_Yin-2022_ProteinScience_af-complex-benchmark.md,K31,CC_BY,71,0,8595,8595
+B25_Dowling-2025_Nature_pseudosymmetric-nanocages.md,B25,CC_BY,58,0,8579,8579
+K43_AF3-benchmark.md,K43,CC_BY_NC,68,60,8536,2885
+B19_Anishchenko-2025_PNAS_placer-ensemble.md,B19,CC_BY,66,0,8534,8534
+B01_Langan-2019_Nature_LOCKR-switch.md,B01,PUBLISHER_TERMS,82,69,8453,3390
+C21_Cao-2026_biorxiv_physics-ligand-binding-design.md,C21,CC_BY_ND,90,72,8386,3454
+B17_Lauko-2025_Science_serine-hydrolase-placer.md,B17,CC_BY,75,0,8364,8364
+C05_Singer-2022_PLoSONE_sequence-only-stability.md,C05,CC_BY,65,0,8261,8261
+B34_buttressed-loops-2024.md,B34,CC_BY,91,0,8260,8260
+K67b_Dieckhaus-2026_bioRxiv_hbdesigner.md,K67b,CC_BY_NC_ND,66,56,8199,2945
+C06_Hunt-2022_SciTranslMed_multivalent-minibinders.md,C06,CC_BY,60,0,8105,8105
+K48_Aggrescan4D-2024_ProteinSci_pH-aggregation-engineering.md,K48,CC_BY_NC_ND,65,58,7957,2706
+B37_Klima-2021_NatComms_mFAP-sensing.md,B37,CC_BY,69,0,7545,7545
+C22_Cao-2026_biorxiv_metalloprotease-abeta-cleavage.md,C22,ALL_RIGHTS_RESERVED,65,53,7433,2771
+K01_Jann-2026_PLoSBiol_barcoded-dms-opool.md,K01,CC_BY,51,0,7005,7005
+B41_symmetry-breaking-fourcomp-nanocages-2025.md,B41,CC_BY,57,0,6989,6989
+B38_Oligomorph-2025_NatStructMolBiol_local-flexibility-oligomorphism.md,B38,CC_BY_NC_ND,71,60,6881,3017
+B29_Goverde-2024_Nature_af2seq-membrane-analogue.md,B29,CC_BY,73,0,6558,6558
+B40_Ennist-2024_NatChemBio_exciton-coupled-chlorophyll.md,B40,CC_BY,53,0,6440,6440
+B39_confdyn2023_PNAS_conformational-dynamics-function.md,B39,CC_BY_NC_ND,61,47,6384,2601
+B14_Glugl-2024_Science_tnfr-free-and-partial-diffusion.md,B14,CC_BY,70,0,5857,5857
+B23_Sappington-2026_NatComms_beta-pairing.md,B23,CC_BY,39,0,5718,5718
+B28_Dauparas-2023_NatComputSci_ligandmpnn.md,B28,CC_BY,40,0,5344,5344
+K44_Behera-2025_JCIM_structure-quality-rbfe.md,K44,CC_BY,40,0,5300,5300
+K49_AGGRESCAN-2026_BiophysRev_two-decade-perspective.md,K49,CC_BY,34,0,5227,5227
+K35_Niazi-2026_ComIB_qm-drug-design-review.md,K35,CC_BY,43,0,4959,4959
+B15_Rettie-2025_NatChemBio_rfpeptides-macrocycles.md,B15,CC_BY,45,0,4934,4934
+B16_Baryshev-2024_NatChemBio_mp3seq.md,B16,CC_BY_NC_ND,46,43,4922,1892
+B18_Kim-2026_Nature_metallohydrolase-zeta.md,B18,CC_BY,54,0,4843,4843
+C01_Cao-2020_Science_de-novo-picomolar-miniproteins.md,C01,CC_BY,45,0,4728,4728
+C04_Case-2021_CellHostMicrobe_LCB1-invivo.md,C04,RESEARCH_REUSE_ONLY,29,25,4392,1462
+B22_Bennett-2025_Nature_rfantibody.md,B22,CC_BY,36,0,3811,3811
+B21_Liu-2025_Nature_idp-binders.md,B21,CC_BY,36,0,3414,3414
+M-K34_nirFAP-2026_JACS_de-novo-near-infrared-fluorescent-protein.md,M-K34,CC_BY,22,0,3217,3217
+B32-C14_immune-receptor-binders2025.md,B32; C14,CC_BY,34,0,3132,3132
+C18_Cao-2026_NatCommun_C9-MAC-inhibitor.md,B06; C02,CC_BY,43,0,2930,2930
+B09_Bennett-2023_NatComms_af2-filter.md,B09,CC_BY,31,0,2126,2126
+K06_Pinheiro-2025_ProteinSci_fida-lysate-screen.md,K06,CC_BY,20,0,1723,1723
+Z11_Ye-2025_JPCB_gp100-mimotope-md-fep.md,Z11,未归属,23,0,1684,1684
+C13_Cao-2024_CellRes_heterochiral-ppi.md,B06; C02,CC_BY,24,0,1612,1612
+K29_Kutzner-2022_JCIM_gromacs-cloud-abfe.md,K29,CC_BY,12,0,1392,1392
+C10_Edman-2024_Cell_dhr-oligomer-assemblies.md,B06; C02,CC_BY,16,0,1368,1368
+K39_AI-de-novo-binder-review.md,K39,CC_BY,16,0,1244,1244
+Z05_Ye-2025_CSBJ_psk-phytosulfokine-fep-degraded.md,Z01,CC_BY,15,0,970,970
+Z03_Chan-2026_SciRep_neoantigen-vaccine-mcmc-fep-degraded.md,Z01,CC_BY,22,0,964,964
+Z01_Yang-2026_eLife_rna-aptamer-fep-degraded.md,Z01,CC_BY,14,0,908,908
+K30_Rocklin-2017_Science_massively-parallel-design-synthesis-testing.md,K01,CC_BY,10,0,884,884
+Z02_Bell-2020_PNAS_epcam-rna-aptamer-degraded.md,Z01,CC_BY,17,0,865,865
+Z13_Xie-2025_biorxiv_tcr-mimic-electrostatic-filter.md,Z01,CC_BY,17,0,843,843
+Z09_Zhong-2025_BIB_fepaml-mimotope-degraded.md,Z01,CC_BY,12,0,650,650
+B10-C08_Yeh-2023_Nature_luciferase-dl.md,B01,PUBLISHER_TERMS,4,4,643,363
+C25_cao-application-and-background-merged.md,B06; C02,CC_BY,7,0,595,595
+C07_FGFR4-mb7TH-isoform-2022.md,B06; C02,CC_BY,7,0,545,545
+B13_Krishna-2024_Science_rosettafold-allatom.md,B01,PUBLISHER_TERMS,3,2,521,256
+C15_Cao-2025_NatChem_light-responsive-ppi-azof.md,B06; C02,CC_BY,4,0,518,518
+C21_Cao-2026_biorxiv_physics-ligand-binding-design.md,B06; C02,CC_BY,5,0,514,514
+K52_qmmm-methods-review-senn-thiel.md,K01,CC_BY,8,0,512,512
+K15_dls-price-per-sample.md,K01,CC_BY,7,0,506,506
+K38_Wenran-2026_IJMS_diffusion-review.md,K01,CC_BY,5,0,497,497
+C19_HalluDesign-iterative-hallucination.md,B06; C02,CC_BY,4,0,480,480
+B06-C02_Cao-2022_Nature_broad-search-focused-resampling.md,B01,PUBLISHER_TERMS,4,3,479,227
+B16_Baryshev-2024_NatChemBio_mp3seq.md,B01,PUBLISHER_TERMS,6,1,462,401
+K39_AI-de-novo-binder-review.md,K01,CC_BY,5,0,453,453
+K66_Boyken-2016_Science_hbnet-oligomers.md,B01,PUBLISHER_TERMS,4,2,452,240
+Z15_CASTELO-cvae-peptide-mhc-2021.md,Z01,CC_BY,11,0,441,441
+B36_Yang-2026_Nature_design-perspective.md,B01,PUBLISHER_TERMS,6,1,437,394
+C23_Ke-2026_biorxiv_ml-droplet-enzyme-screening.md,B06; C02,CC_BY,5,0,423,423
+K16_nanodsf-prometheus-hourly-price.md,K01,CC_BY,4,0,395,395
+C12_Cao-2024_NatBionEng_CAR-T-designed-binders.md,B06; C02,CC_BY,3,0,387,387
+Z06_Zhang-2025_IJBM_ctx-egfr-electrostatic-degraded.md,Z01,CC_BY,7,0,385,385
+B09_Bennett-2023_NatComms_af2-filter.md,B01,PUBLISHER_TERMS,5,2,377,269
+B18_Kim-2026_Nature_metallohydrolase-zeta.md,B01,PUBLISHER_TERMS,5,1,377,343
+K14_itc-machine-time-and-service-price.md,K01,CC_BY,4,0,374,374
+K50_Siegel-2010_Science_diels-alderase-theozyme.md,B01,PUBLISHER_TERMS,3,2,365,218
+B24_Qian-2026_NatComms_SAPP-DMX.md,B01,PUBLISHER_TERMS,5,2,351,291
+M-K27_mmdesign-zenodo-2026-10_target-level-94.7.md,M-K27,未归属,8,0,350,350
+M-K28_mmdesign-zenodo-2026-06_target-level-90.9.md,M-K27,未归属,7,0,344,344
+K55_transition-metal-ff-parameterization.md,K01,CC_BY,4,0,338,338
+K58_xaira-dbtl-loop-selfreport.md,K01,CC_BY,5,0,333,333
+Z16_QM-usage-forensics-summary.md,Z01,CC_BY,6,0,333,333
+K59_generate-biomedicines-flagship-funding.md,K01,CC_BY,9,0,329,329
+B12_VazquezTorres-2024_Nature_helical-peptide-binders.md,B01,PUBLISHER_TERMS,3,3,321,252
+B42-C11_endycyte-degron-2025.md,B06; C02,CC_BY,5,0,311,311
+C06_Hunt-2022_SciTranslMed_multivalent-minibinders.md,B06; C02,CC_BY,3,0,309,309
+B32-C14_immune-receptor-binders2025.md,B06; C02,CC_BY,4,0,301,301
+B10-C08_Yeh-2023_Nature_luciferase-dl.md,B06; C02,CC_BY,5,0,287,287
+K37_2026_JCIM_openfe-collaborative-binding-free-energy-benchmark.md,K01,CC_BY,3,0,284,284
+Z07_ANUBI-2026_JCTC_mc-mmpbsa-platform-degraded.md,Z01,CC_BY,5,0,273,273
+B40_Ennist-2024_NatChemBio_exciton-coupled-chlorophyll.md,B01,PUBLISHER_TERMS,1,1,270,96
+B43_snakvenom2025_de-novo-venom-neutralizers.md,B01,PUBLISHER_TERMS,2,2,270,190
+K13_spr-single-chip-throughput-vendor-page.md,K01,CC_BY,6,0,268,268
+B35_Butcher-2025_biorxiv_rfdiffusion3.md,B01,PUBLISHER_TERMS,4,1,265,254
+M-K29_multiepitope-scaffold-2026-degraded.md,M-K27,未归属,6,0,264,264
+K54_pyp-chromophore-excited-state-qmmm.md,K01,CC_BY,3,0,257,257
+K17_mass-spec-confirmation-prices.md,K01,CC_BY,5,0,238,238
+B28_Dauparas-2025_NatMethods_ligandmpnn-atomic-context.md,B01,PUBLISHER_TERMS,3,2,235,217
+Z12_Feng-2024_IJB_hla-b44-peptide-fep.md,Z01,CC_BY,4,0,233,233
+C17_Cao-2026_Science_small-molecule-oligomer-switch.md,B06; C02,CC_BY,4,0,230,230
+Z10_Yang-2025_JCIM_deep-covboost-mpro-degraded.md,Z01,CC_BY,3,0,225,225
+B08_Watson-2023_Nature_rfdiffusion.md,B01,PUBLISHER_TERMS,2,1,224,174
+K23_facsaria-iii-nominal-sorting-speed.md,K01,CC_BY,7,0,200,200
+K08_display-throughput-per-hit-cost-unverified.md,K01,CC_BY,4,0,196,196
+K51_qmmm-retro-aldolase-posthoc-mechanism.md,K01,CC_BY,3,0,196,196
+K22_facs-sorting-hourly-price-snapshot.md,K01,CC_BY,5,0,192,192
+B15_Rettie-2025_NatChemBio_rfpeptides-macrocycles.md,B01,PUBLISHER_TERMS,3,0,186,186
+B19_Anishchenko-2025_PNAS_placer-ensemble.md,B01,PUBLISHER_TERMS,4,0,184,184
+B02_Barros-2019_JCTC_md-screening-ligand-binders.md,B01,PUBLISHER_TERMS,2,0,178,178
+B25_Dowling-2025_Nature_pseudosymmetric-nanocages.md,B01,PUBLISHER_TERMS,2,1,177,125
+K45_Hanes-Plueckthun-2000_NatBiotech_ribosome-display-picomolar-antibodies.md,K01,CC_BY,6,0,173,173
+B17_Lauko-2025_Science_serine-hydrolase-placer.md,B01,PUBLISHER_TERMS,1,1,171,93
+K24_per-candidate-marginal-cost-estimate.md,K01,CC_BY,3,0,167,167
+B11_Kim-2023_PNAS_small-beta-barrel.md,B01,PUBLISHER_TERMS,1,1,165,97
+B34_buttressed-loops-2024.md,B01,PUBLISHER_TERMS,3,0,164,164
+C24_IDP-binder-review-2026.md,B06; C02,CC_BY,3,0,164,164
+B31_smallmol-family-binding-sensing.md,B01,PUBLISHER_TERMS,2,0,162,162
+K36_2025_JPCB_prospective-kinase-mutation-simulations.md,K01,CC_BY,2,0,160,160
+K53_gpu4pyscf-periodic-qmmm-md.md,K01,CC_BY,2,0,159,159
+C22_Cao-2026_biorxiv_metalloprotease-abeta-cleavage.md,B06; C02,CC_BY,2,0,155,155
+B14_Glugl-2024_Science_tnfr-free-and-partial-diffusion.md,B01,PUBLISHER_TERMS,1,1,154,93
+B04_Coventry-2021_PLoSCompBiol_3bop-buried-hbond-penalty.md,B01,PUBLISHER_TERMS,1,1,146,99
+Z14_Tang-2023_SmallMethods_dna-framework-aptamer.md,Z01,CC_BY,3,0,139,139
+K25_yeast-display-facs-throughput-cost.md,K01,CC_BY,3,0,130,130
+K61_nabla-morphic-throughput-not-retrieved.md,K01,CC_BY,4,0,129,129
+C09_Lutz-2023_Science_rl-topdown.md,B06; C02,CC_BY,3,0,126,126
+K26_single-point-bli-spr-screen.md,K01,CC_BY,4,0,126,126
+B44_Roy-2023_NatComms_integrin-miniprotein.md,B01,PUBLISHER_TERMS,2,0,122,122
+C20_HalluDesign-NA-2026_biorxiv_nucleic-acid-design.md,B06; C02,CC_BY,2,0,116,116
+K62_industry-anchor-100k-per-structure.md,K01,CC_BY,4,0,116,116
+K27_md-prescreen-vs-synthesize-cost.md,K01,CC_BY,3,0,106,106
+K27_md-prescreen-vs-synthesize-cost.md,B09,CC_BY,1,0,103,103
+B22_Bennett-2025_Nature_rfantibody.md,B01,PUBLISHER_TERMS,1,0,98,98
+B37_Klima-2021_NatComms_mFAP-sensing.md,B01,PUBLISHER_TERMS,1,0,96,96
+B38_Oligomorph-2025_NatStructMolBiol_local-flexibility-oligomorphism.md,B01,PUBLISHER_TERMS,1,0,96,96
+M-K29_multiepitope-scaffold-2026-degraded.md,B01,PUBLISHER_TERMS,2,0,90,90
+K21_synchrotron-beamtime-fee-snapshot.md,K01,CC_BY,3,0,85,85
+Z08_Autiero-2025_JCTC_affinity-scorer-benchmark.md,Z01,CC_BY,1,0,84,84
+K57_profluent-ai-editor-selfreport.md,K01,CC_BY,2,0,82,82
+K31_Yin-2022_ProteinScience_af-complex-benchmark.md,K01,CC_BY,1,0,81,81
+B43_snakvenom2025_de-novo-venom-neutralizers.md,B12,CC_BY,1,0,78,78
+C16_Proteus-2024_biorxiv_structure-generation.md,B08,CC_BY,1,0,76,76
+K46_2020_MethodsEnzymol_droplet-ultrahigh-throughput-enzyme-screening.md,K01,CC_BY,3,0,76,76
+K57_profluent-ai-editor-selfreport.md,B01,PUBLISHER_TERMS,1,0,76,76
+B29_Goverde-2024_Nature_af2seq-membrane-analogue.md,B01,PUBLISHER_TERMS,1,0,75,75
+K07_protein-production-purification-2008-review.md,K01,CC_BY,2,0,74,74
+K49_AGGRESCAN-2026_BiophysRev_two-decade-perspective.md,K47,CC_BY_NC,1,0,73,73
+B27_Glasscock-2025_NSMB_sequence-specific-dbp.md,B09,CC_BY,2,0,72,72
+K08_display-throughput-per-hit-cost-unverified.md,B11,CC_BY_NC_ND,3,0,72,72
+K07_protein-production-purification-2008-review.md,B42; C11,CC_BY,2,0,70,70
+K19_em-consumables-grid-preparation.md,B42; C11,CC_BY,2,0,70,70
+K20_xray-crystallography-lab-prices.md,K01,CC_BY,3,0,70,70
+K11_spr-machine-time-multi-facility.md,K01,CC_BY,3,0,68,68
+B30_deHaas-2024_PNAS_mpnn-auto-t33.md,B01,PUBLISHER_TERMS,2,0,67,67
+K08_display-throughput-per-hit-cost-unverified.md,B01,PUBLISHER_TERMS,1,0,65,65
+K25_yeast-display-facs-throughput-cost.md,B01,PUBLISHER_TERMS,1,0,65,65
+M-K29_multiepitope-scaffold-2026-degraded.md,B23,CC_BY,1,0,65,65
+K18_cryo-em-300kv-machine-time.md,K01,CC_BY,3,0,64,64
+C20_HalluDesign-NA-2026_biorxiv_nucleic-acid-design.md,C16,CC_BY_ND,2,0,62,62
+K60_iambic-insulin-receptor-abstract-pdb-record.md,K01,CC_BY,2,0,62,62
+K02_twist-gene-synthesis-price.md,K01,CC_BY,2,0,61,61
+K05_gene-synthesis-cost-breakdown-error-rate.md,K01,CC_BY,2,0,61,61
+K46_2020_MethodsEnzymol_droplet-ultrahigh-throughput-enzyme-screening.md,C23,CC_BY_ND,3,0,60,60
+B28_Dauparas-2023_NatComputSci_ligandmpnn.md,B01,PUBLISHER_TERMS,2,0,58,58
+K04_genscript-opools-price.md,K01,CC_BY,1,0,57,57
+K19_em-consumables-grid-preparation.md,K01,CC_BY,1,0,56,56
+C01_Cao-2020_Science_de-novo-picomolar-miniproteins.md,B06; C02,CC_BY,1,0,55,55
+K03_gene-synthesis-2023-historical-price.md,K01,CC_BY,2,0,50,50
+K09_octet-red96-bli-machine-time-price.md,K01,CC_BY,2,0,48,48
+K59_generate-biomedicines-flagship-funding.md,B01,PUBLISHER_TERMS,2,0,44,44
+M-K34_nirFAP-2026_JACS_de-novo-near-infrared-fluorescent-protein.md,B30,CC_BY_NC_ND,2,0,44,44
+C05_Singer-2022_PLoSONE_sequence-only-stability.md,B06; C02,CC_BY,1,0,42,42
+K10_octet-r2-r4-bli-throughput.md,K01,CC_BY,2,0,42,42
+K12_spr-sensor-chip-2010-price.md,K01,CC_BY,2,0,42,42
+M-K29_multiepitope-scaffold-2026-degraded.md,B22,CC_BY,1,0,37,37
+B21_Liu-2025_Nature_idp-binders.md,B01,PUBLISHER_TERMS,1,0,32,32
+C03_QuijanoRubio-2021_Nature_biosensor-function-geometry-first.md,B06; C02,CC_BY,1,0,28,28
+B41_symmetry-breaking-fourcomp-nanocages-2025.md,B01,PUBLISHER_TERMS,1,0,27,27
+C16_Proteus-2024_biorxiv_structure-generation.md,B01,PUBLISHER_TERMS,1,0,26,26
+M-K29_multiepitope-scaffold-2026-degraded.md,Z01,CC_BY,1,0,26,26
+M-K34_nirFAP-2026_JACS_de-novo-near-infrared-fluorescent-protein.md,K34,CC_BY,1,0,26,26
+K04_genscript-opools-price.md,B11,CC_BY_NC_ND,1,0,24,24
+K22_facs-sorting-hourly-price-snapshot.md,B11,CC_BY_NC_ND,1,0,24,24
+K25_yeast-display-facs-throughput-cost.md,B11,CC_BY_NC_ND,1,0,24,24
+Z06_Zhang-2025_IJBM_ctx-egfr-electrostatic-degraded.md,B06; C02,CC_BY,1,0,24,24
+Z06_Zhang-2025_IJBM_ctx-egfr-electrostatic-degraded.md,B01,PUBLISHER_TERMS,1,0,24,24
+K08_display-throughput-per-hit-cost-unverified.md,C23,CC_BY_ND,1,0,20,20
+K40_Mischley-2026_eLife_ppiscreenml-af-screening.md,B05,CC_BY,1,0,20,20

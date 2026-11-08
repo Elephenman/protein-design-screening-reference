@@ -21,17 +21,17 @@ Protein Science 2024, 33(10):e5180 · DOI 10.1002/pro.5180 · PMID 39324697 · P
 
 ## 1. 这篇到底解决什么（一句话）
 
-Aggrescan 系列的结构版（A3D）加了一个新变量：**pH**。它把每个残基的聚集倾向分数改成随 pH 走（借 SolupHred 的 pH 依赖亲脂度标度 + pKa-ANI 的三维 pKa 估算），再套上 FoldX 稳定性、CABS-flex 柔性采样、两种自动突变建议（带电荷替换 / PAM250 进化保守替换）和一个 12 个物种约 16 万条蛋白的预计算库——目的是让人**在下单做突变之前，就用手上的结构预测出这个蛋白在某个 pH 下哪里会聚、改哪几个残基能变可溶**，作者自己的定位是："Building upon its predecessor, Aggrescan3D (A3D), A4D has undergone numerous enhancements aimed at assisting the improvement of protein solubility."
+Aggrescan 系列的结构版（A3D）加了一个新变量：**pH**。它把每个残基的聚集倾向分数改成随 pH 走（借 SolupHred 的 pH 依赖亲脂度标度 + pKa-ANI 的三维 pKa 估算），再套上 FoldX 稳定性、CABS-flex 柔性采样、两种自动突变建议（带电荷替换 / PAM250 进化保守替换）和一个 12 个物种约 16 万条蛋白的预计算库——目的是让人**在下单做突变之前，就用手上的结构预测出这个蛋白在某个 pH 下哪里会聚、改哪几个残基能变可溶**，作者自己的定位是："Building upon its predecessor, Aggrescan3D (A3D),"
 
 ## 2. 遇到的难点，以及遇到问题时他们做了什么（作者自述）
 
-1. **纯序列工具在折叠蛋白上会指错地方**（这是整条 Aggrescan 线的立足点）。作者说序列级工具快而便宜、适合伸展态与无序蛋白："These tools are particularly useful for proteins in extended conformations or intrinsically disordered proteins (IDPs), where exposed aggregation prone regions (APRs) are directly related to the sequence (Belli et al., 2011 )." 但对已折叠蛋白，埋在里面或参与相互作用的疏水片段并不致聚。 **应对**：走结构路线——A3D/A4D 只看溶剂可及的残基，并把球内（默认半径 10 Å）邻居按 Cα 距离衰减累加成 STAP（结构聚集倾向区），"Agg i represents the aggregation propensity of the central residue i , and RSA i denotes its relative surface area exposed to solvent." **仍留下的代价**：必须有三维结构才能算，于是把风险转嫁到结构质量上（见第 2.2 条）。
-2. **AlphaFold 结构反而带来新型假信号**。AlphaFold 库里的模型常带一长段实验结构里不存在的伸展无序区："Structures obtained from the AlphaFold database (Jumper et al., 2021 ) often present elongated, disordered regions that are not typically observed in experimentally resolved structures." 这些尾巴会缠在球状核周围造出假表面，"These regions tend to congregate around the globular core, introducing potential surface features that could mislead the interpretation of STAPs (Ruff & Pappu, 2021 ) and undermine the accuracy of A4D predictions"。 **应对**：内置 AlphaCutter 选项，"AlphaCutter employs DSSP to pinpoint long loops and helices, followed by the calculation of a contact map."，"Additionally, it applies an AlphaFold pLDDT threshold to refine the domains further."，并对 AlphaFold 来源结构推荐开启。 **代价**：pLDDT 具体阈值本文未给数字；且默认是关的（"By default, this option is deactivated."）；切掉 IDR 之后，真正靠无序区聚集的体系就失去了这条信息——本文未讨论这个矛盾。
-3. **pH 依赖需要逐个残基的 pKa，但精氨酸算不准**。作者明写："Due to limitations on satisfactory 3D pKa estimation for Arginine, its score is considered constant"。 **应对**：只让 Asp/Glu/Lys/His/Tyr 五种残基的分数随 pH 变——"Regarding pH calculations, A4D considers the pH score variation of aspartic and glutamic acids, lysine, histidine and tyrosine (see Figure 2b ), while the score of other amino acids remains unchanged."，精氨酸与其余残基冻结。 **代价**：精氨酸恰恰是抗体 CDR 与蛋白表面聚集热点上常见的高电荷残基，它的 pH 响应在 A4D 里等于不存在；本文没有量化这一近似带来的误差。
-4. **极端 pH 下静态结构假设本身崩掉**。溶菌酶的实测数据显示："When analyzing the lysozyme data, we observe that A4D accurately models most of the pH range (pH 3.5-9.5) but fails for moderately basic pH values (10 and above)." 原因是碱催生的部分展开："This discrepancy is attributed to the partial unfolding of lysozyme at such pH values (Petersen et al., 2004 ), which is why the A4D server limits pH prediction range to values between 4.0 and 9.0." **应对**：**放弃该类体系**——直接把服务器可算的 pH 域砍到 4.0–9.0（共 11 个点，步长 0.5），而不是去补展开态建模。 **代价**：内体/溶酶体（pH<5）与碱性制剂（pH>9）这两个我们关心的区间正好在门外；作者也没说 4.0 那端为什么没出问题。
-5. **方向对了、幅度不对，作者承认是已知缺陷**。RNase Sa 上："Finally, in the case of RNase Sa, the predicted and experimental values agree, showing a decrease in aggregation with an increase in pH."，紧接着 "However, the rate of change differs."，作者把它归为："This is a known limitation in the algorithm for some protein case studies and may result from the limitations in A4D's aggregation modeling capabilities or differences in the sensitivity of the experimental value reported."——这是二选一的解释，没有实验把它们分开。**本文未解决**。
-6. **强功能之间互斥，一次跑不出全套**。选项表里 pH 计算那一行写着 "Yes /No Cannot be used alongside Dynamic mode and Improve/Enhance protein stability options."，动态模式 "It's important to note that the Dynamic mode does not support pH calculations or automatic mutations (see Figure 1 )."，自动突变 "It's noteworthy that automated mutations are not compatible with pH calculations and Dynamic mode (see Figure 1 )." **应对**：把三者做成互斥开关，让用户自己串。 **代价**：本文没有给出串联协议（先算 pH 再算突变要怎么对齐分数刻度），而且 pH 模式与 classical 模式的分数本来就不同轨——"A4D reports different numerical values for the aggregation score at neutral pH compared to the"（原句此后紧接一个带引号的 classical 一词，故本卡不整句引用）——跨模式比大小没有意义，这条限制只在这里出现一次，正文没有给出换算办法。
-7. **突变效应的验证集只有十几条**。作者用的是 Brockwell 实验室在体进化 MEDI1912 的旧数据："The authors developed 18 different variants"，二值化口径是："We categorized the mutants based on their aggregation propensity considered positives (9 variants) or negatives (8 variants) those that increased or decreased the retention time with respect to the midpoint."（HP-SEC 保留时间相对中点）。 **应对**：不报单一命中率，改报六个混淆矩阵指标（§4）。 **代价（本文未解决）**：正文说 18 个变体、表 2 的表头写 19 mutants，正负类相加只有 17，三个数对不上，本文未解释；n≈17–19 时 specificity 0.25 与 0.75 的差距谈不上稳健；而且这批数据是随机突变产生的（作者承认 "the lack of control over the mutation sites caused these less aggregating variants to impact protein functionality"），拿它评测 只改面不改功能 的工具，方向性偏置没有量化。
+1. **纯序列工具在折叠蛋白上会指错地方**（这是整条 Aggrescan 线的立足点）。作者说序列级工具快而便宜、适合伸展态与无序蛋白："These tools are particularly useful for proteins in extended conformations or intrinsically" 但对已折叠蛋白，埋在里面或参与相互作用的疏水片段并不致聚。 **应对**：走结构路线——A3D/A4D 只看溶剂可及的残基，并把球内（默认半径 10 Å）邻居按 Cα 距离衰减累加成 STAP（结构聚集倾向区），"Agg i represents the aggregation propensity of the central residue i ," **仍留下的代价**：必须有三维结构才能算，于是把风险转嫁到结构质量上（见第 2.2 条）。
+2. **AlphaFold 结构反而带来新型假信号**。AlphaFold 库里的模型常带一长段实验结构里不存在的伸展无序区："Structures obtained from the AlphaFold database (Jumper et al., 2021 ) often present elongated," 这些尾巴会缠在球状核周围造出假表面，"These regions tend to congregate around the globular core,"。 **应对**：内置 AlphaCutter 选项，"AlphaCutter employs DSSP to pinpoint long loops and helices,"，"Additionally, it applies an AlphaFold pLDDT threshold to refine the domains further."，并对 AlphaFold 来源结构推荐开启。 **代价**：pLDDT 具体阈值本文未给数字；且默认是关的（"By default, this option is deactivated."）；切掉 IDR 之后，真正靠无序区聚集的体系就失去了这条信息——本文未讨论这个矛盾。
+3. **pH 依赖需要逐个残基的 pKa，但精氨酸算不准**。作者明写："Due to limitations on satisfactory 3D pKa"。 **应对**：只让 Asp/Glu/Lys/His/Tyr 五种残基的分数随 pH 变——"Regarding pH calculations,"，精氨酸与其余残基冻结。 **代价**：精氨酸恰恰是抗体 CDR 与蛋白表面聚集热点上常见的高电荷残基，它的 pH 响应在 A4D 里等于不存在；本文没有量化这一近似带来的误差。
+4. **极端 pH 下静态结构假设本身崩掉**。溶菌酶的实测数据显示："When analyzing the lysozyme data," 原因是碱催生的部分展开："This discrepancy is attributed to the partial" **应对**：**放弃该类体系**——直接把服务器可算的 pH 域砍到 4.0–9.0（共 11 个点，步长 0.5），而不是去补展开态建模。 **代价**：内体/溶酶体（pH<5）与碱性制剂（pH>9）这两个我们关心的区间正好在门外；作者也没说 4.0 那端为什么没出问题。
+5. **方向对了、幅度不对，作者承认是已知缺陷**。RNase Sa 上："Finally, in the case of RNase Sa,"，紧接着 "However, the rate of change differs."，作者把它归为："This is a known limitation in the algorithm for"——这是二选一的解释，没有实验把它们分开。**本文未解决**。
+6. **强功能之间互斥，一次跑不出全套**。选项表里 pH 计算那一行写着 "Yes /No Cannot be used alongside Dynamic mode and"，动态模式 "It's important to note that the Dynamic mode does"，自动突变 "It's noteworthy that automated mutations are not" **应对**：把三者做成互斥开关，让用户自己串。 **代价**：本文没有给出串联协议（先算 pH 再算突变要怎么对齐分数刻度），而且 pH 模式与 classical 模式的分数本来就不同轨——"A4D reports different numerical values for the"（原句此后紧接一个带引号的 classical 一词，故本卡不整句引用）——跨模式比大小没有意义，这条限制只在这里出现一次，正文没有给出换算办法。
+7. **突变效应的验证集只有十几条**。作者用的是 Brockwell 实验室在体进化 MEDI1912 的旧数据："The authors developed 18 different variants"，二值化口径是："We categorized the mutants"（HP-SEC 保留时间相对中点）。 **应对**：不报单一命中率，改报六个混淆矩阵指标（§4）。 **代价（本文未解决）**：正文说 18 个变体、表 2 的表头写 19 mutants，正负类相加只有 17，三个数对不上，本文未解释；n≈17–19 时 specificity 0.25 与 0.75 的差距谈不上稳健；而且这批数据是随机突变产生的（作者承认 "the lack of control over the mutation sites"），拿它评测 只改面不改功能 的工具，方向性偏置没有量化。
 
 ## 3. 方法与工作流程（照 A4D 的实际流水线；输入 → 操作 → 判据/阈值 → 输出规模）
 
@@ -51,23 +51,23 @@ Aggrescan 系列的结构版（A3D）加了一个新变量：**pH**。它把每�
 | # | 输入 | 操作 | 判据 / 阈值 | 输出与规模 |
 |---|---|---|---|---|
 | 1 | PDB/CIF 上传，或直接给 PDB / UniProt ID（自动取 AlphaFold 结构）；RESTful 亦可提交 | 结构入库；若来源是 AlphaFold，作者推荐开 'Analysis of the globular regions' | AlphaCutter：DSSP 判长环/螺旋 + 接触图 + AlphaFold pLDDT 阈值（**具体 pLDDT 数值：原文未给阈值**；该选项默认关闭） | 一份去掉非球状尾巴的 PDB |
-| 2 | 上一步结构 | FoldX 优化（'Stability calculations'，默认 Yes） | 无阈值；但 "To perform any mutation, or dynamic mode analysis, this feature has to be enabled." | 能量弛豫后的结构（突变与动态模式的前置件） |
-| 3 | 优化后结构 | 对每个残基 i：取以 Cα 为中心、半径 R（默认 10 Å，可 5 Å）的球，按公式 (1) 累加自身项与邻居项 | "For most applications, the A4D score above 0 indicates potential aggregation, but scores higher than 0.5 are more likely to indicate residues that are critical to aggregation processes." | 每残基 A4D 分数表 + 结构上色（蓝=可溶、红=聚集、白=中性）；R=10 Å 看整体、R=5 Å 看单个残基 |
-| 4 | 同上（可选 pH 模式） | 用 pKa-ANI 的 3D pKa + SolupHred pH 依赖亲脂度标度替换 Agg_i，逐 pH 重算 | 扫 11 个 pH（4→9，步长 0.5）；只有 Asp/Glu/Lys/His/Tyr 分数变化，Arg 与其余 15 种视为常数；服务器 pH 上限因溶菌酶失败被截到 4.0–9.0 | "If the 'pH calculations' option is enabled, A4D facilitates aggregation predictions across a range of 11 pH values from 4 to 9 with increments of 0.5." 输出每个 pH 的平均分与最大值 |
-| 5 | 上一步结果 | 选汇总指标 | "Through performance analysis, we determined that for globular proteins, the maximum value, and for IDPs, the average value, better aligns with experimental observations" ——**球状用 max、无序用 avg**；服务器会自动识别并推荐 | 一条 聚集倾向 vs pH 的曲线（供与实验比斜率） |
-| 6 | 可选：柔性 | CABS-flex 采样，FoldX 优化后的结构当起点，产出全原子模型集 | "For each of these models, the A4D score is calculated using the same method as in the static mode, and models are ranked from highest to lowest aggregation score, including the original structure." 无阈值，只排序；与 pH/自动突变互斥 | 模型集 + 每模型分数 + RMSF 图（高 RMSF 区提示埋着的疏水面被打出来）；bevacizumab Fab（PDB 1BJ1）为示例 |
-| 7 | 可选：手动突变 | 'Mutate residues'（需先开 FoldX），可在结果页逐残基改后再算 | 无判据，用户自定 | 一个变体的重算分数；"Importantly, unlike automated mutation methods, the Mutate residues option seamlessly integrates with pH calculations and Dynamic mode." |
-| 8 | 可选：自动突变建议 | 两种模式：charged（把高分残基换成 Lys/Arg 或 Asp/Glu）/ evolutionary conserved（按 PAM250 选单步替换 A→B 而非 A→C→B） | "In the automated mutations mode, A4D identifies residues with the highest A4D score, subsequently mutating them into positively charged residues (Lysine and Arginine) or negatively charged residues (Aspartic and Glutamic acids)."；进化模式的替换来自保守矩阵，"These matrices store the sum of accepted substitutions in closely related sequences, with an identity threshold of 0.85 or higher." | "Upon analysis completion, A4D generates a ranked list of suggested point mutations, accompanied by an evaluation of their solubilizing effects and energetic implications."；排序规则："Mutations that do not negatively impact stability are prioritized, appearing at the top of the list, while those that affect stability are highlighted in orange (energetic effect >0.5 kcal/mol) and red (energetic effect >1.0 kcal/mol)."（0.5/1.0 kcal/mol 是**颜色分级**，不是淘汰门槛）；用户可指定残基黑名单保护功能片段 |
-| 9 | 算力/时间口径 | 按蛋白大小与选项计费时长 | 无阈值 | "For most settings, smaller proteins (around 100 amino acids) typically require only a few minutes, while larger proteins (around 300 amino acids) usually take between 10 and 15 min."；动态模式 "taking about 20 min for smaller proteins and over an hour for larger ones" |
+| 2 | 上一步结构 | FoldX 优化（'Stability calculations'，默认 Yes） | 无阈值；但 "To perform any mutation, or dynamic mode" | 能量弛豫后的结构（突变与动态模式的前置件） |
+| 3 | 优化后结构 | 对每个残基 i：取以 Cα 为中心、半径 R（默认 10 Å，可 5 Å）的球，按公式 (1) 累加自身项与邻居项 | "For most applications, the A4D" | 每残基 A4D 分数表 + 结构上色（蓝=可溶、红=聚集、白=中性）；R=10 Å 看整体、R=5 Å 看单个残基 |
+| 4 | 同上（可选 pH 模式） | 用 pKa-ANI 的 3D pKa + SolupHred pH 依赖亲脂度标度替换 Agg_i，逐 pH 重算 | 扫 11 个 pH（4→9，步长 0.5）；只有 Asp/Glu/Lys/His/Tyr 分数变化，Arg 与其余 15 种视为常数；服务器 pH 上限因溶菌酶失败被截到 4.0–9.0 | "If the 'pH calculations' option" 输出每个 pH 的平均分与最大值 |
+| 5 | 上一步结果 | 选汇总指标 | "Through performance analysis," ——**球状用 max、无序用 avg**；服务器会自动识别并推荐 | 一条 聚集倾向 vs pH 的曲线（供与实验比斜率） |
+| 6 | 可选：柔性 | CABS-flex 采样，FoldX 优化后的结构当起点，产出全原子模型集 | "For each of these models," 无阈值，只排序；与 pH/自动突变互斥 | 模型集 + 每模型分数 + RMSF 图（高 RMSF 区提示埋着的疏水面被打出来）；bevacizumab Fab（PDB 1BJ1）为示例 |
+| 7 | 可选：手动突变 | 'Mutate residues'（需先开 FoldX），可在结果页逐残基改后再算 | 无判据，用户自定 | 一个变体的重算分数；"Importantly, unlike automated" |
+| 8 | 可选：自动突变建议 | 两种模式：charged（把高分残基换成 Lys/Arg 或 Asp/Glu）/ evolutionary conserved（按 PAM250 选单步替换 A→B 而非 A→C→B） | "In the automated mutations"；进化模式的替换来自保守矩阵，"These matrices store the sum of" | "Upon analysis completion,"；排序规则："Mutations that do not negatively impact stability are prioritized, appearing at the top of the list, while those that affect stability are highlighted in orange (energetic effect >0.5 kcal/mol) and red (energetic effect >1.0 kcal/mol)."（0.5/1.0 kcal/mol 是**颜色分级**，不是淘汰门槛）；用户可指定残基黑名单保护功能片段 |
+| 9 | 算力/时间口径 | 按蛋白大小与选项计费时长 | 无阈值 | "For most settings, smaller"；动态模式 "taking about 20 min for smaller" |
 
 ### B. 标定与验证（作者用什么数据证明它行）
 
 | # | 输入 | 操作 | 判据 / 阈值 | 输出与规模 |
 |---|---|---|---|---|
-| B1 | 18 个蛋白（11 球状 + 7 IDP）的 pH 依赖聚集实测 | 比实验值与预测值的线性回归斜率 | 一致率（斜率方向一致即算 agreement） | "including 11 globular proteins and 7 IDPs."；A4D 两类均 "achieving 100% agreement between the predictions and experimental results for both categories"；对照 "In comparison, CamSol had an overall agreement of 78% (64% for globular proteins and 100% for disordered proteins)." |
-| B2 | HSA（PDB 6YG9）pH 7→5 | 用 pH 模式预测，再对实验 | 原文报 R²=0.88（图 3a；含 U+2010 的句子不引用） | "Utilizing the pH calculations feature of A4D, it was found that at pH 5, HSA shows a heightened propensity for aggregation compared to pH 7." |
+| B1 | 18 个蛋白（11 球状 + 7 IDP）的 pH 依赖聚集实测 | 比实验值与预测值的线性回归斜率 | 一致率（斜率方向一致即算 agreement） | "including 11 globular proteins"；A4D 两类均 "achieving 100% agreement"；对照 "In comparison, CamSol had an" |
+| B2 | HSA（PDB 6YG9）pH 7→5 | 用 pH 模式预测，再对实验 | 原文报 R²=0.88（图 3a；含 U+2010 的句子不引用） | "Utilizing the pH calculations" |
 | B3 | BSA 4F5S / 溶菌酶 1LYZ A 链 / RNase Sa 1C54 A 链 | 三种 典型失败模式 | 见 §2.4、§2.5；实验量分别为 聚集蛋白百分比、ThT 595 nm 吸光（溶菌酶与 RNase Sa），全部归一化 | 一张行为分型表：拟合好 / 极端 pH 崩 / 幅度不符（图 4） |
-| B4 | MEDI1912 抗体变体集（Ebo 2020，Brockwell 实验室提供结构） | 按 HP-SEC 保留时间中点把变体二值化，再用 A4D 最大分、SolubiS 的 TANGO 分、CamSol 的结构校正值分别判 | "Mutational impact for A4D was assessed by the maximum score (the best reporter for experimental properties of folded proteins), for SolubiS the Tango score and for CamSol the structurally corrected score." | "TABLE 2 Performance of A4D, SolubiS and CamSol for a dataset of 19 mutants of the MEDI1912 monoclonal antibody as reported in ref (Ebo et al., 2020 )." 六个指标见 §4；结论句 "As reported in Table 2 , A4D displays the highest sensitivity, accuracy, and specificity" |
+| B4 | MEDI1912 抗体变体集（Ebo 2020，Brockwell 实验室提供结构） | 按 HP-SEC 保留时间中点把变体二值化，再用 A4D 最大分、SolubiS 的 TANGO 分、CamSol 的结构校正值分别判 | "Mutational impact for A4D was" | "TABLE 2 Performance of A4D," 六个指标见 §4；结论句 "As reported in Table 2 , A4D" |
 
 **这套流程值得单独记住的骨架**：一个便宜的序列/结构打分器 + 一个环境维度（pH）+ 一个能量项（FoldX）+ 一个柔性项（CABS-flex）+ 一套 改哪几个残基 的建议，且各功能之间被**互斥开关**切干净。它不是漏斗，是**一台闸口机**：所有判断都在下单之前、只用别人已有的实验数据标定。
 
@@ -75,34 +75,34 @@ Aggrescan 系列的结构版（A3D）加了一个新变量：**pH**。它把每�
 
 | 数值 | 含义 | 出处 |
 |---|---|---|
-| >0 / >0.5 | 残基 A4D 分：>0 提示潜在聚集，>0.5 更可能是关键聚集残基 | "For most applications, the A4D score above 0 indicates potential aggregation" |
+| >0 / >0.5 | 残基 A4D 分：>0 提示潜在聚集，>0.5 更可能是关键聚集残基 | "For most applications, the A4D" |
 | 10 Å（可选 5 Å） | 聚集分析球半径（默认 10 Å） | §3.6；默认值见 Table 1 |
-| 11 个 pH 点，4→9，步长 0.5 | pH 模式的采样密度 | "across a range of 11 pH values from 4 to 9 with increments of 0.5." |
-| 4.0–9.0 | 服务器允许的 pH 区间（因溶菌酶碱性端失败而截断） | "which is why the A4D server limits pH prediction range to values between 4.0 and 9.0." |
-| 5 种（Asp/Glu/Lys/His/Tyr） | 分数随 pH 变化的残基；其余（含 Arg）不变 | "lysine, histidine and tyrosine (see Figure 2b ), while the score of other amino acids remains unchanged." |
-| 18 个蛋白 = 11 球状 + 7 IDP | pH 依赖预测精度验证集（数据取自 A4D 原始论文） | "including 11 globular proteins and 7 IDPs." |
-| 100% vs 78%（球状 64% / 无序 100%） | A4D 与 CamSol 的实验-预测斜率一致率 | "achieving 100% agreement between the predictions and experimental results for both categories" |
+| 11 个 pH 点，4→9，步长 0.5 | pH 模式的采样密度 | "across a range of 11 pH values" |
+| 4.0–9.0 | 服务器允许的 pH 区间（因溶菌酶碱性端失败而截断） | "which is why the A4D server" |
+| 5 种（Asp/Glu/Lys/His/Tyr） | 分数随 pH 变化的残基；其余（含 Arg）不变 | "lysine, histidine and tyrosine" |
+| 18 个蛋白 = 11 球状 + 7 IDP | pH 依赖预测精度验证集（数据取自 A4D 原始论文） | "including 11 globular proteins" |
+| 100% vs 78%（球状 64% / 无序 100%） | A4D 与 CamSol 的实验-预测斜率一致率 | "achieving 100% agreement" |
 | R² = 0.88 | HSA 预测分与实验聚集值的相关（图 3a，正文数字，句子含非 ASCII 故不整句引用） | §3.1 末段 |
 | 0.89 / 0.75 / 0.80 / 0.82 / 0.65 / 0.20 | A4D 在 MEDI1912 集上的 Sensitivity / Specificity / Precision / Accuracy / MCC / FDR | "A4D 0.89 0.75 0.80 0.82 0.65 0.20"（Table 2 行，底稿为连排文本） |
 | 0.78 / 0.25 / 0.54 / 0.53 / 0.03 / 0.46 | CamSol 同集同六指标 | "CamSol 0.78 0.25 0.54 0.53 0.03 0.46" |
 | 0.89 / 0.38 / 0.62 / 0.65 / 0.31 / 0.39 | SolubiS 同集同六指标 | "SolubiS 0.89 0.38 0.62 0.65 0.31 0.39" |
-| 18（正文）/ 19（表 2）/ 9+8=17（分类） | 被评测的 MEDI1912 变体数——三处口径不一致，本文未解释 | "The authors developed 18 different variants" |
-| 0.85 | PAM 矩阵构建所用的近缘序列一致性阈值 | "with an identity threshold of 0.85 or higher." |
+| 18（正文）/ 19（表 2）/ 9+8=17（分类） | 被评测的 MEDI1912 变体数——三处口径不一致，本文未解释 | "The authors developed 18" |
+| 0.85 | PAM 矩阵构建所用的近缘序列一致性阈值 | "with an identity threshold of" |
 | >0.5 / >1.0 kcal/mol | 突变建议里稳定性代价的橙/红高亮分界（不是淘汰阈值） | "highlighted in orange (energetic effect >0.5 kcal/mol) and red (energetic effect >1.0 kcal/mol)." |
-| 几分钟 / 10–15 min / 约 20 min / 逾 1 h | 单条任务的机时（100 aa 静态 / 300 aa 静态 / 100 aa 动态 / 300 aa 动态） | "usually take between 10 and 15 min." |
-| 160,000 条蛋白 / 12 个物种 | A3D-MODB 预计算库规模 | "This resource contains a vast collection of over 160,000 proteins from the proteomes of 12 commonly studied organisms" |
-| ~500,000 | A4D 服务器可直接调用的预计算任务数 | "providing easy access to nearly 500,000 precalculated jobs." |
-| >2 亿 | AlphaFold 结构库条目数（本工具的结构来源） | "which includes over 200 million protein structures, has made a significant impact on structural biology." |
-| Python 2.7 | A3D 独立版本（本地批量部署能跑到的那一版）的运行环境；A4D standalone 仍在开发 | "It is important to note that the current standalone version of A3D operates on Python 2.7." |
+| 几分钟 / 10–15 min / 约 20 min / 逾 1 h | 单条任务的机时（100 aa 静态 / 300 aa 静态 / 100 aa 动态 / 300 aa 动态） | "usually take between 10 and 15" |
+| 160,000 条蛋白 / 12 个物种 | A3D-MODB 预计算库规模 | "This resource contains a vast" |
+| ~500,000 | A4D 服务器可直接调用的预计算任务数 | "providing easy access to nearly" |
+| >2 亿 | AlphaFold 结构库条目数（本工具的结构来源） | "which includes over 200 million" |
+| Python 2.7 | A3D 独立版本（本地批量部署能跑到的那一版）的运行环境；A4D standalone 仍在开发 | "It is important to note that" |
 
 ## 5. 结论——作者说了什么
 
-1. A4D = A3D 全部功能 + **环境 pH 作为第四个维度**："A4D not only incorporates all the features of A3D but also introduces environmental pH as a variable in its calculations"；并加了自动突变协议与易用性改进："Additionally, new automated mutation modes and expanded file compatibility have further enhanced A4D's utility in protein solubility and aggregation studies"。
+1. A4D = A3D 全部功能 + **环境 pH 作为第四个维度**："A4D not only incorporates all"；并加了自动突变协议与易用性改进："Additionally, new automated"。
 2. pH 依赖精度：在 18 个蛋白（11 球状 + 7 无序）上与实验斜率 **100% 一致**，CamSol 总体 78%；汇总指标要按体系选（球状 max / 无序 avg）。
-3. 折叠蛋白上的突变效应判别：在 MEDI1912 变体集上，"As reported in Table 2 , A4D displays the highest sensitivity, accuracy, and specificity"（表 2 六个指标里，A4D 的 Sensitivity 0.89 与 SolubiS 并列最高，其余五项 Specificity 0.75、Precision 0.80、Accuracy 0.82、MCC 0.65、FDR 0.20 均为三者中最好，表注称最优项加粗）。
-4. 柔性会造出新热点：bevacizumab Fab（PDB 1BJ1）的静态分析给出的聚集面在动态模式里扩大——图注原句 "(b) Bevacizumab Fab fragment (PDB ID: 1BJ1) aggregation propensity predictions using A4D Static mode (left side) and Dynamic mode (right side)."，正文补一句 "The Fab domain of bevacizumab is known for its high aggregation propensity, necessitating reduced concentrations in its therapeutic applications."（Dynamic mode reveals 那句含 U+2010 连字符，本卡不引用，此处为转述）。
-5. 工具生态定位：可隐私（不把任务公开）、可脚本化（RESTful）、可零成本查预计算库；但**本地可跑的只有 A3D 独立版**，"While this is not the latest version of Python, the next iteration of the standalone A4D, is currently under development."
-6. 展望（作者自陈待办）："One key advancement would involve the integration of machine learning algorithms to perform mutational analysis."，"Furthermore, the incorporation of empirical aggregation data into these models could refine the predictive capabilities"——也就是说，作者自己承认现版**不含机器学习突变分析**、且经验聚集数据尚未并入。
+3. 折叠蛋白上的突变效应判别：在 MEDI1912 变体集上，"As reported in Table 2 , A4D"（表 2 六个指标里，A4D 的 Sensitivity 0.89 与 SolubiS 并列最高，其余五项 Specificity 0.75、Precision 0.80、Accuracy 0.82、MCC 0.65、FDR 0.20 均为三者中最好，表注称最优项加粗）。
+4. 柔性会造出新热点：bevacizumab Fab（PDB 1BJ1）的静态分析给出的聚集面在动态模式里扩大——图注原句 "(b) Bevacizumab Fab fragment"，正文补一句 "The Fab domain of bevacizumab"（Dynamic mode reveals 那句含 U+2010 连字符，本卡不引用，此处为转述）。
+5. 工具生态定位：可隐私（不把任务公开）、可脚本化（RESTful）、可零成本查预计算库；但**本地可跑的只有 A3D 独立版**，"While this is not the latest"
+6. 展望（作者自陈待办）："One key advancement would"，"Furthermore, the incorporation"——也就是说，作者自己承认现版**不含机器学习突变分析**、且经验聚集数据尚未并入。
 7. 作者的用途口径始终是可溶/抗聚集，不是活性：把自动突变定位成湿实验的替代品——"A4D offers an Automated mutation feature aimed at identifying more soluble variants of functional therapeutic proteins."，其目标是用计算替代耗时耗钱的展示筛选（该句后接 phage display，本卡转述）。
 
 ## 6. 结论——我们读出了什么（以下为推断，非作者原文）
@@ -112,7 +112,7 @@ Aggrescan 系列的结构版（A3D）加了一个新变量：**pH**。它把每�
 3. **他们对失败做了三分类**（拟合好 / 极端 pH 崩 / 方向对幅度错），并把崩溃点直接变成产品边界（pH 4.0–9.0）。→ 这是 判据适用范围要写死在工具里 的示范：我们的廉价预筛也应给 超出适用范围 状态，而不是硬给分数。
 4. **能量代价只做颜色、不做门槛**（0.5/1.0 kcal/mol），把最终取舍交回人。→ 对我们：任何 抗聚集 vs 保功能 的打分器都只能排序、不能单独淘汰，因为 FoldX 类 ΔΔG 的预测力在别处已被证明偏弱（`sources/cost-benchmarks.md` §六 热稳定性行记：与 DMS 功能分平均 Spearman 仅 0.26–0.28）。
 5. **验证集全部是别人的数据**（Ebo 2020 / Oeller 2023 / Li 2016 等），且样本极小（17–19）。作者没有为 A4D 生成任何新湿实验。→ 所以本文能证明的是 在它挑出来的这几个案例上排序最好，不能证明 进了设计漏斗会提高命中率；这与 `cost-benchmarks.md` §六 当时的批注（未见前瞻对照）完全一致。
-6. **His 被明确纳入 pH 敏感残基**这一点值得单独记：组氨酸的 pKa 在生理附近，所以 胞内 pH / 内体 pH 之间真正会变的往往是 His。若我们的候选里有依赖 His 的催化 triad（或 UAA 激活位点里负责金属配位的 His），A4D 的 分数变化 与 催化必需 会打架——自动突变模式恰恰会把高分残基换成带电残基，可能直接改掉 His。→ 推断：任何把 A4D 建议接入我们漏斗的做法，都必须带 残基黑名单（他们提供了这个功能，"Furthermore, users can exclude specific residues"）。
+6. **His 被明确纳入 pH 敏感残基**这一点值得单独记：组氨酸的 pKa 在生理附近，所以 胞内 pH / 内体 pH 之间真正会变的往往是 His。若我们的候选里有依赖 His 的催化 triad（或 UAA 激活位点里负责金属配位的 His），A4D 的 分数变化 与 催化必需 会打架——自动突变模式恰恰会把高分残基换成带电残基，可能直接改掉 His。→ 推断：任何把 A4D 建议接入我们漏斗的做法，都必须带 残基黑名单（他们提供了这个功能，"Furthermore, users can exclude"）。
 
 ## 7. 局限与失败（作者的 + 我们读出的）
 
@@ -153,6 +153,8 @@ Aggrescan 系列的结构版（A3D）加了一个新变量：**pH**。它把每�
 - CSV 字段映射：本卡 §3 ↔ 计算筛选判据 / 阈值数字 / 候选生成方法；§4 ↔ 候选数递减 / 成本统计；§8 ↔ 在方法演进链的位置。14 键值均按全文实填，非全文可得的写 未记录（原因）。
 - 本卡自检：`python scripts/verify_literature_cards.py --only K48 --no-report`（参数：--only K48 --no-report；输入：本卡 + 登记底稿），把卡内所有被直双引号包住、不含中日韩字符、≥20 字符、≥12 个字母的片段在底稿里逐字查找；本轮结果 **PASS K48 quotes=65/65，退出码 0**（65 段为门禁按相邻双引号切出的片段计数，去重 61 段；对应人工写入的约 40 条原文引句，其中同一句在 §3 表格与 §4 台账各引一次）。写卡时已剔除含 U+2010、Å、α、求和号、R² 的句子（改为中文叙述），跨参考文献编号的两句拆成两条，未使用省略号，未给术语/状态名加英文引号；首轮曾因把打散的公式排版当引句写入而 FAIL（1 段 MISS），改为中文描述后复跑转绿。
 - 与并行工作的边界：本卡只新增 `K48_Aggrescan4D-2024_ProteinSci_pH-aggregation-engineering.md` 一个文件（2026-11-07 按全文题录把文件名里的 2025 更正为 2024，内容未变）；未跑 --sync-map、未跑不带 --no-report 的全量门禁、未改 CSV/sources/B09 样板卡/scripts/fulltext/_quarantine。
+
+- **引用预算截短（2026-11-08，公开仓库口径）**：本卡有 58 条逐字引句来自许可受限的第三方来源（K48；CC_BY_NC_ND），按 `deliverables/fulltext_manifest.csv` 的逐份许可判定，已把单条引句截到 ≤100 字符、同一来源总量截到 ≤600 字符；**截短后仍逐字命中同一份底稿**（门禁 `scripts/verify_literature_cards.py` 仍是逐字核验），完整原句按 §9 的重取方式与 sha256 可复核。逐条改动账见 `deliverables/quote_budget_ledger.csv`。本卡其余内容（我们自己的分析、判断与台账）未被改动。
 
 <!--CSV回填
 work_type=方法（Protein Science 的 Tools for Protein Science 栏目：A4D 网络服务器的说明书/综述，非原始算法论文；原始算法见 NAR 2024 DOI 10.1093/nar/gkae382）

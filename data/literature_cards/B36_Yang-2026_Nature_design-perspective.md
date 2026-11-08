@@ -48,7 +48,7 @@
 |---|---|---|
 | "the long-standing challenges of designing new protein structures, assemblies and protein binders are" | 摘要判断前半句（注意原文此处之后接粗体强调，片段止于强调前） | `sources/baker.md:480` |
 | "close to being solved" | 摘要判断的落点短语 | `sources/baker.md:480` |
-| "The key current questions in these areas are not how to design, but what to design, and open-source design methodology such as" | 问题转移声明（片段止于强调前） | `sources/baker.md:480` |
+| "The key current questions in these areas are not how to design, but what to design," | 问题转移声明（片段止于强调前） | `sources/baker.md:480` |
 | "enable biochemists and molecular biologists to broadly explore possible applications" | 开源工具链主张的后半句 | `sources/baker.md:480` |
 | "Current challenges for methods development include" | 未解清单引导句 | `sources/baker.md:480` |
 | "and, more generally, design of switches and nanomachines" | 未解清单第二项 | `sources/baker.md:480` |
@@ -91,6 +91,8 @@
 - **本卡是降级卡**：B36 无开放获取正文（`fetch_log.tsv:4`、`:62` 记 `NO_OA_FULLTEXT`，PMID 42056544 无 PMCID、isOpenAccess=N）。**曾下载到的 OA 文件（PMC13660641）经身份体检挂错行（文件内 DOI 10.1016/j.mrl.2026.200309 与本行期望 DOI 冲突），已隔离至 `fulltext/_quarantine/`，故本卡为降级卡**：其句子一律未用作引句。降级卡引句规则（≥2 条、逐字命中登记底稿）；本卡共 6 条逐字引句，全部命中 `sources/baker.md:480`。
 - **登记底稿核对**：`sources_map.json` B36 项只登记 `sources/baker.md`（实存）。对照行号：`:471–481`（[B36] 卡段）。CSV 行：`data/protein_design_literature.csv:37`（文献类型=综述、证据级别=摘要级）。
 - **门禁自检**：命令 `cd A:\Data\MD\projects\protein-design-screening-20261016 && PYTHONIOENCODING=utf-8 python scripts/verify_literature_cards.py --only "B36" --no-report`。本卡未改 CSV、`sources/*.md`、样板卡、`scripts/`、`batches.tsv`、隔离目录，未做网络抓取。
+
+- **引用预算截短（2026-11-08，公开仓库口径）**：本卡有 1 条逐字引句来自许可受限的第三方来源（B01；PUBLISHER_TERMS），按 `deliverables/fulltext_manifest.csv` 的逐份许可判定，已把单条引句截到 ≤100 字符、同一来源总量截到 ≤600 字符；**截短后仍逐字命中同一份底稿**（门禁 `scripts/verify_literature_cards.py` 仍是逐字核验），完整原句按 §9 的重取方式与 sha256 可复核。逐条改动账见 `deliverables/quote_budget_ledger.csv`。本卡其余内容（我们自己的分析、判断与台账）未被改动。
 
 <!--CSV回填
 work_type=综述（降级卡：摘要级，正文未抓取）
