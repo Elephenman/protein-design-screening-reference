@@ -7,7 +7,7 @@
 
 配套机器生成的两份台账（别手改，重跑脚本即可）：
 
-- [蛋白设计工作流证据台账（152 行 × 22 列）](protein_design_workflow_evidence.csv) — 一行一篇，含判据、阈值、候选递减、命中率、成本，另列 `底稿形态` 与 `卡证据级别` 两个口径。
+- [蛋白设计工作流证据台账（152 行 × 23 列）](protein_design_workflow_evidence.csv) — 一行一篇，含判据、阈值、候选递减、命中率、成本，另列 `底稿形态` 与 `卡证据级别` 两个口径。
 - [判据拆分台账（679 行）](protein_design_workflow_criteria_ledger.csv) — 一行一个判据，挂着它的阈值原句、命中率与卡路径。
 - [口径统计](protein_design_workflow_summary.txt) — 底稿形态 FULLTEXT 87 / DEGRADED 65；卡证据级别 FULLTEXT 79 / DEGRADED 73（两口径差 8 行：`Z01 Z02 Z03 Z05 Z09 C13 C18 M-K29`，本地有全文但卡按降级写，本轮不升级）；声明用过 MD 的 36 行、用过 QM 的 18 行；给出可用命中率口径的 76 行。
 

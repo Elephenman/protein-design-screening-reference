@@ -60,6 +60,10 @@ PER_QUOTE_CAP_FLOOR = 32
 MIN_QUOTE_CHARS = 24
 MIN_ALPHA = 12  # 与 verify_literature_cards.py 的引句过滤条件一致（字母数 <12 不算引句）
 NOTE_MARK = "引用预算截短"
+LEDGER_FIELDS = ["卡片", "引句序号", "来源编号", "许可类别",
+                 "截前字符", "截后字符", "是否截短", "截后片段"]
+# 归属查不到时用的占位编号（与底稿脚本一致）
+PSEUDO_ACC = "未归属"
 
 
 def clean(q: str) -> str:
@@ -193,6 +197,46 @@ def owner_of(q: str, srcs: dict[str, str]) -> str | None:
     return None
 
 
+def merge_ledger(old_rows: list[dict], new_rows: list[dict]) -> list[dict]:
+    """按 (卡片, 引句序号) 合并新旧改动账。
+
+    口径与底稿脚本 `apply_note_quote_budget.py` 一致，理由同上：
+      · "截前字符"是**原始会计口径**（截短之前的原句长度），只存在于旧账里，
+        重算不出 → 取旧账与新算的较大值；
+      · **历史归属不许被重算覆盖**：新算出来是"未归属"而旧账有真实来源编号时，
+        沿用旧账的来源编号与许可类别；
+      · "截后片段"是历史事实，新算为空时沿用旧账；
+      · 账目条数不许变少（调用方负责拒写）。
+    """
+    merged = [dict(r) for r in old_rows]
+    idx = {(r["卡片"], str(r["引句序号"])): i for i, r in enumerate(merged)}
+    for r in new_rows:
+        k = (r["卡片"], str(r["引句序号"]))
+        if k in idx:
+            old = merged[idx[k]]
+            new = dict(r)
+            before = max(int(old.get("截前字符") or 0), int(r["截前字符"]))
+            new["截前字符"] = before
+            after = int(r["截后字符"])
+            # 是否截短 = 现状比原始短；引句被还原回原句就不算截短
+            new["是否截短"] = "是" if after < before else "否"
+            new["截后片段"] = ((new.get("截后片段") or old.get("截后片段", ""))
+                               if new["是否截短"] == "是" else "")
+            old_acc = (old.get("来源编号") or "").strip()
+            new_acc = (new.get("来源编号") or "").strip()
+            if old_acc and old_acc != PSEUDO_ACC:
+                # 旧账有真实来源编号 → 历史归属保留，不许被重算结果覆盖
+                new["来源编号"] = old_acc
+                new["许可类别"] = old.get("许可类别") or new.get("许可类别", "")
+            if (new.get("许可类别") or "").strip() in ("", PSEUDO_ACC):
+                new["许可类别"] = old.get("许可类别") or new.get("许可类别", PSEUDO_ACC)
+            merged[idx[k]] = new
+        else:
+            merged.append(dict(r))
+            idx[k] = len(merged) - 1
+    return merged
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--dry-run", action="store_true")
@@ -208,14 +252,34 @@ def main() -> int:
     before_total = after_total = 0
     before_r = after_r = 0
 
+    # 旧账：用于**幂等**。已处理过的卡不再重复截短，历史行与历史归属原样沿用。
+    # （实测踩过：脚本在 apply 模式下被重跑，旧行没有补回，卡账 7126 行 → 3635 行，
+    #   且每行的"是否截短"都被重算成"否"——账面先于实测的又一次。）
+    old_rows: list[dict] = []
+    if LEDGER.exists():
+        old_rows = list(csv.DictReader(LEDGER.open(encoding="utf-8-sig", newline="")))
+    prior: dict[str, list[dict]] = {}
+    for r in old_rows:
+        prior.setdefault(r["卡片"], []).append(r)
+
     for cf in card_files:
         raw = cf.read_text(encoding="utf-8")
-        if NOTE_MARK in raw:
-            # 已经处理过：不再重复截短（否则改动账会记成"从已截短版本再截一次"）
-            continue
         qs = quotes_of(raw)
         if not qs:
             continue
+        if NOTE_MARK in raw:
+            # 已经处理过：不再重复截短（否则改动账会记成"从已截短版本再截一次"）。
+            # 账实相符时**直接沿用旧账的行**：截短后的引句不再逐字命中来源全文是
+            # 截短的必然结果，重算归属会把历史归属降级成"未归属"，把账压扁。
+            old = prior.get(cf.name, [])
+            if len(old) == len(qs) and all(
+                    int(o.get("截后字符") or 0) == len(q) for o, (_s, _e, q) in zip(old, qs)):
+                for o in old:
+                    ledger.append({k: o.get(k, "") for k in LEDGER_FIELDS})
+                continue
+            # 账实不符（卡在上一轮之后被改过，或旧账里没有这张卡）：
+            # 按现状重算，历史行仍由合并步骤保住。
+            print(f"  警告: {cf.name} 已带『{NOTE_MARK}』标记但账实不符，按现状重算")
         used: dict[str, int] = {}
         edits: list[tuple[int, int, str]] = []
         rows: list[dict] = []
@@ -259,11 +323,6 @@ def main() -> int:
         if any(r["changed"] for r in rows):
             plan.append((cf, rows, raw))
         for row in rows:
-            if row["cat"] in RESTRICTED and row["acc"]:
-                before_r += len(row["q"])
-                after_r += len(row["new"])
-            before_total += len(row["q"])
-            after_total += len(row["new"])
             ledger.append({
                 "卡片": cf.name,
                 "引句序号": row["idx"],
@@ -274,6 +333,14 @@ def main() -> int:
                 "是否截短": "是" if row["changed"] else "否",
                 "截后片段": row["new"][:120] if row["changed"] else "",
             })
+
+    # 前后字符数一律从改动账的行上取（而不是从卡片现文上算）：
+    # 已处理过的卡在磁盘上就是截短后的样子，从现文算会把"截前"也算成截后，
+    # 降幅就永远是 0——账面先于实测的又一种形态。
+    before_total = sum(int(r["截前字符"]) for r in ledger)
+    after_total = sum(int(r["截后字符"]) for r in ledger)
+    before_r = sum(int(r["截前字符"]) for r in ledger if r["许可类别"] in RESTRICTED)
+    after_r = sum(int(r["截后字符"]) for r in ledger if r["许可类别"] in RESTRICTED)
 
     if args.dry_run:
         print(f"卡片 {len(card_files)} 张 · 引句 {len(ledger)} 处")
@@ -348,6 +415,19 @@ def main() -> int:
         print(f"判定结果: {'PASS 0 处不符' if bad == 0 else f'FAIL {bad} 处不符'}")
         return 0 if bad == 0 else 1
 
+    if not ledger and old_rows:
+        # 没有任何卡带引句：不重写改动账，否则会把已有的逐条记录清成空表。
+        print("没有卡引句：未改动任何卡，改动账保持原样")
+        print("下一步：跑 scripts/verify_literature_cards.py 与本脚本 --check 复核")
+        return 0
+
+    # 合并旧账与新算：历史行、历史归属不许丢（见 merge_ledger）。
+    # 合并必须在写卡之前做完——否则"卡已改、账被拒写"会留下半套状态。
+    merged = merge_ledger(old_rows, ledger)
+    if len(merged) < len(old_rows):
+        print(f"拒绝写入：改动账条数变少（{len(old_rows)} → {len(merged)}），账目不许被覆盖")
+        return 1
+
     # 写卡
     print(f"卡片 {len(card_files)} 张 · 引句 {len(ledger)} 处")
     print(f"全部引句：{before_total} → {after_total} 字符（-{before_total - after_total}）")
@@ -380,12 +460,12 @@ def main() -> int:
         cf.write_text(new_raw, encoding="utf-8")
 
     with LEDGER.open("w", encoding="utf-8-sig", newline="") as fh:
-        w = csv.DictWriter(fh, fieldnames=list(ledger[0].keys()), lineterminator="\n")
+        w = csv.DictWriter(fh, fieldnames=LEDGER_FIELDS, lineterminator="\n", restval="")
         w.writeheader()
-        w.writerows(ledger)
+        w.writerows([{k: r.get(k, "") for k in LEDGER_FIELDS} for r in merged])
     # 汇总表：逐 (卡, 来源编号) 的前后对照，便于审计"还剩多少被复制的原文"
     summary: dict[tuple[str, str, str], dict] = {}
-    for r in ledger:
+    for r in merged:
         k = (r["卡片"], r["来源编号"], r["许可类别"])
         s = summary.setdefault(k, {"前": 0, "后": 0, "n": 0, "截": 0})
         s["前"] += int(r["截前字符"])
@@ -397,7 +477,8 @@ def main() -> int:
         w.writerow(["卡片", "来源编号", "许可类别", "引句条数", "被截短条数", "截前字符", "截后字符"])
         for (card, acc, cat), s in sorted(summary.items(), key=lambda x: -x[1]["前"]):
             w.writerow([card, acc, cat, s["n"], s["截"], s["前"], s["后"]])
-    print(f"已改写 {len(plan)} 张卡；改动账 → {LEDGER.relative_to(ROOT)} / {SUMMARY.relative_to(ROOT)}")
+    print(f"已改写 {len(plan)} 张卡；改动账 → {LEDGER.relative_to(ROOT)} / {SUMMARY.relative_to(ROOT)}"
+          f"（累计 {len(merged)} 行）")
     print("下一步：跑 scripts/verify_literature_cards.py 复核 152 行是否仍全部 PASS")
     return 0
 

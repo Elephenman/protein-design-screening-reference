@@ -715,6 +715,20 @@ def main() -> int:
             # "保留原因"也是历史事实（为护住卡片核验链而没截），不许被重算覆盖
             if old.get("保留原因"):
                 new["保留原因"] = old["保留原因"]
+            # **历史归属不许被重算降级**：截短后的引句不再逐字命中来源全文是截短的
+            # 必然结果，重跑时按现文重算归属会把 C23 这类真实来源降级成"未归属"，
+            # 连带把"截后自检"从"原句前缀"降成"本地无全文·原句前缀"（实测踩过：
+            # 底稿账里 sources/cao.md 的第 189 条归属被冲成未归属）。
+            # 旧账有真实来源编号 ⇒ 以旧账为准；旧账是"未归属"而新算有真实来源
+            # ⇒ 采纳新算（那是重跑带来的改进，不是降级）。
+            old_acc = (old.get("来源编号") or "").strip()
+            new_acc = (new.get("来源编号") or "").strip()
+            if old_acc and old_acc != PSEUDO_ACC:
+                new["来源编号"] = old_acc
+                new["许可类别"] = old.get("许可类别") or new.get("许可类别", "")
+                new["归属方式"] = old.get("归属方式") or new.get("归属方式", "")
+            elif (new.get("许可类别") or "").strip() in ("", PSEUDO_ACC):
+                new["许可类别"] = old.get("许可类别") or new.get("许可类别", PSEUDO_ACC)
             merged[idx[k]] = new
         else:
             merged.append(r)
