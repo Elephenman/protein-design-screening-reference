@@ -5,6 +5,9 @@ __pycache__/
 Thumbs.db
 .DS_Store
 
+# 改写历史前的备份包（git bundle，含改写前的第三方全文，仅本机留存，不随仓库分发）
+archive/
+
 # 迁移包由 scripts/build_bundles.py 随时可重建，且是大二进制；发布走 GitHub Release 资产，不进 git。
 deliverables/bundles/
 
