@@ -99,7 +99,8 @@ L1/L2 已由 `scripts/build_bundles.py` 生成可发布包；L3 是服务。
    （Windows 检出会把 LF 转成 CRLF，那是平台产物不是内容差异）。
    同一处故意改坏一条引句后 `verify_literature_cards.py` 立刻报 `FAIL 1`——门禁没有因此放宽。
 8. **公开前改写了 git 历史**：仓库在私有阶段推送过含第三方全文的提交。转为公开前用
-   `git filter-branch --index-filter` 把 220 份第三方原文从全部 18 个历史提交的索引里移除，
+   `git filter-branch --index-filter` 把 220 份第三方原文从改写前 main 的全部 17 个历史提交
+   （实测其中 16 个提交的索引里含有第三方原文）的索引里移除，
    再删 `refs/original/*`、清 reflog、`gc --prune=now`（实测：全历史 `rev-list --objects --all`
    已无第三方原文路径，旧提交对象在本仓库不可达；改写前的完整历史另存本机
    `archive/prepublic-history-2026-11-08.bundle`，已被 gitignore 排除、不随仓库分发）。

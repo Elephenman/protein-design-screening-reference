@@ -541,3 +541,60 @@ GitHub Release 资产替换。仓库可见性（私有转公开）与最终定�
 3. 回读：`Accept: application/octet-stream` + `-L` 下载，逐字节比 sha256
 4. 资产哈希同时落在 `deliverables/bundles/SHA256SUMS.txt`（该目录被 gitignore，不进仓库；
    避免"记录发布哈希"这件事反过来改变被发布物的字节）与 GitHub API 的 `digest` 字段里。
+
+## 14. 2026-11-08 仓库转公开（用户："开源仓库"）
+
+### 14.1 动手前先抓出来的两处幂等缺陷（本轮最硬的一条）
+
+上一轮的门禁套件被误用成 apply 模式跑过一次，把四个账本改坏了；恢复之后顺手把根因修掉，
+免得下一个照着文档跑脚本的人再踩：
+
+| 缺陷 | 现象 | 根因 | 改法 |
+|---|---|---|---|
+| `apply_quote_budget.py` 重跑丢行 | 卡账 7126 行 → 3635 行，每行"是否截短"被重算成"否" | 已带『引用预算截短』标记的卡被 `continue` 跳过，而账本行是在循环末尾追加的 | 已处理的卡**沿用旧账的历史行**；加"账目条数不许变少"的拒写闸 |
+| `apply_note_quote_budget.py` 重跑丢归属 | 底稿账里 `sources/cao.md` 第 189 条由 `全文匹配,C23,CC_BY_ND` 降级成 `未归属,未归属,未归属`，"截后自检"从"原句前缀"降成"本地无全文·原句前缀" | 截短后的引句不再逐字命中来源全文是**截短的必然结果**，按现文重算归属等于拿截短后的文本去认领来源 | 合并时**历史归属不许被重算覆盖**（旧账有真实来源编号就以旧账为准） |
+
+修完实测：两个脚本各在 apply 模式重跑一次，卡账 7125 行、底稿账 618 行，与提交版本**逐行一致**
+（只差 Windows 检出的 LF/CRLF 行尾，内容逐字节同）；13 道门禁全部退出码 0，且门禁运行前后
+270 个 tracked 文件的 sha256 全部不变。
+
+顺带修掉一处账面数字：`deliverables/protein_design_workflow.md` 里证据台账写"152 行 × 22 列"，
+而 CSV 自 2026-11-07 起多了"卡证据级别"一列，实测 **23 列**（`底稿形态` FULLTEXT 87 / `卡证据级别` FULLTEXT 79，
+差集仍是 8 行）。可视化页面同源，一并重编译。
+
+### 14.2 历史改写 → 强制推送 → 换资产 → 转公开
+
+| 步骤 | 动作 | 核对读数 |
+|---|---|---|
+| 改写前 | 改写前的 main 共 **17** 个提交，其中 **16** 个的索引里含第三方原文 | 220 份第三方原文全在清单 `随仓库分发=否` |
+| 改写后 | `git filter-branch --index-filter` + 删 `refs/original/*` + 清 reflog + `gc --prune=now` | `git rev-list --objects --all` 命中清单 **0** 条；被跟踪的不分发路径 **0** |
+| 推送 | `git push --force origin main`（`9d4cb08 → 86e6e15`）＋ `git tag -f` 后强制推 tag | `git ls-remote`：main 与 tag 都指向 `86e6e15` |
+| 换资产 | 删旧资产 id `720067050`（ai 2026-11-07）与 `720067295`（full 2026-11-07，**含 192 份第三方原文**） | 旧资产已不在服务端 |
+| 传新资产 | 完整包 `5,879,955 B` / sha256 `0f830e48…`；AI 包 `9,082,888 B` / sha256 `3686f866…` | 上传后**重新下载逐字节比对**，2/2 PASS；服务端 `digest` 字段一致 |
+| 转公开 | `gh repo edit --visibility public --accept-visibility-change-consequences` | `gh repo view` → `visibility: PUBLIC` |
+
+**旧资产必须先删再转公开**：完整包 2026-11-07 里含 192 份第三方论文原文，公开后即公开再分发。
+新包实测命中清单 **0** 条、`data/literature_cards/fulltext/` 条目 **0** 条。
+
+### 14.3 公开克隆里的实测（匿名 clone，不带任何凭据）
+
+`git clone https://github.com/Elephenman/protein-design-screening-reference.git` 之后：
+
+- 跟踪集里不分发路径 **0**；全历史里出现的不分发路径 **0**；工作树里在场的第三方原文 **0** 份；
+- 13 道门禁**退出码全部为 0**；`verify_literature_cards.py` 判 `PASS_LOCAL 72/152 · WITHHELD 80 · FAIL 0`
+  （80 行因底稿按公开口径未随仓库分发而不可复核，记 WITHHELD 不记 FAIL）；
+- `audit_public_tree.py` 判 `220 份第三方原文 0 处被跟踪`、`受限引句 0 条超过 400 字符`。
+
+一条要记住的坑：维护者本机工作树有第三方底稿，逐字核验是 `PASS_LOCAL 152/152`；
+公开克隆里同一道门禁是 `72/152 + WITHHELD 80`。两个读数都对，**口径不同**，不要互相引用当证据。
+
+### 14.4 仍然要明说的坑
+
+- **GitHub 对已推送过的对象通常仍按 SHA 保留一段时间**：改写前的 commit（`9d4cb08` 等）在远端
+  已不可达，但仍可能按旧 SHA 或旧路径取到内容，直到 GitHub 后台清理完成。所以第三方内容的
+  唯一合法入口指向 `deliverables/fulltext_manifest.csv` 的重取方式与 sha256，不指向任何 GitHub URL。
+  改写前的完整历史另存维护者本机 `archive/prepublic-history-2026-11-08.bundle`（已 gitignore）。
+- 本轮修的两个幂等缺陷说明：**跑门禁必须显式带 `--check`**。`apply_quote_budget.py`、
+  `apply_note_quote_budget.py`、`audit_quote_budget_exceptions.py` 这三个脚本**不带 `--check`
+  就会真的改写账本**（本轮就是这么把四个账本跑坏的）。PUBLISH_NOTE 的"怎么验"清单里这三条都带了
+  `--check`；本地复跑请照抄那份清单，别省参数。
