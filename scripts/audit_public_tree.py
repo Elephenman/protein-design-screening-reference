@@ -92,6 +92,43 @@ def quotes_in(text: str) -> list[str]:
     return out
 
 
+def collect_stats() -> dict:
+    """口径统计的单一出处：返回可直接写进文档的数字（脚本自己打印的也是它）。
+
+    文档里的数字必须由本函数现算，不许人工转录——2026-11-08 实测过终端回显会丢字符
+    （64 位 sha256 被截成 62 位），所以凡是"文档 = 台账"的数字都走这条通道。
+    """
+    tracked = git_tracked()
+    sources = withheld_sources()
+    over: list[tuple[str, str, int, str]] = []
+    n_third = n_restricted = 0
+    chars_third = chars_restricted = 0
+    max_restricted = 0
+    for rel in sorted(tracked):
+        for text in file_texts(rel):
+            for q in quotes_in(text):
+                for src, cat, stext in sources:
+                    if q[:200] in stext:
+                        n_third += 1
+                        chars_third += len(q)
+                        if cat in RESTRICTED:
+                            n_restricted += 1
+                            chars_restricted += len(q)
+                            max_restricted = max(max_restricted, len(q))
+                            if len(q) > HARD_CAP:
+                                over.append((rel, cat, len(q), q[:120]))
+                        break
+    return {
+        "tracked": len(tracked),
+        "total_quotes": n_third, "total_chars": chars_third,
+        "restricted_quotes": n_restricted, "restricted_chars": chars_restricted,
+        "max_restricted": max_restricted,
+        "redistributable_quotes": n_third - n_restricted,
+        "over": over,
+        "sources_present": len(sources),
+    }
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--selftest", action="store_true")
@@ -147,25 +184,14 @@ def main() -> int:
     leaked = [r["path"] for r in manifest_rows
               if r.get("随仓库分发", "").strip() == "否" and r["path"] in tracked]
 
-    # 判据 2/3：逐条引句归属与长度
-    over: list[tuple[str, str, int, str]] = []
-    n_third = n_restricted = 0
-    chars_third = chars_restricted = 0
-    max_restricted = 0
-    for rel in sorted(tracked):
-        for text in file_texts(rel):
-            for q in quotes_in(text):
-                for src, cat, stext in sources:
-                    if q[:200] in stext:
-                        n_third += 1
-                        chars_third += len(q)
-                        if cat in RESTRICTED:
-                            n_restricted += 1
-                            chars_restricted += len(q)
-                            max_restricted = max(max_restricted, len(q))
-                            if len(q) > HARD_CAP:
-                                over.append((rel, cat, len(q), q[:120]))
-                        break
+    # 判据 2/3：逐条引句归属与长度（统计口径见 collect_stats）
+    st = collect_stats()
+    over = st["over"]
+    n_third = st["total_quotes"]
+    chars_third = st["total_chars"]
+    n_restricted = st["restricted_quotes"]
+    chars_restricted = st["restricted_chars"]
+    max_restricted = st["max_restricted"]
 
     print("判定标准: (1) 清单里标『不随仓库分发』的第三方原文 0 处在跟踪集里；"
           f"(2) 许可受限来源的单条逐字引句 ≤ {HARD_CAP} 字符")
@@ -182,6 +208,16 @@ def main() -> int:
     print(f"口径统计: 第三方引句 {n_third} 处 / {chars_third} 字符；其中许可受限 {n_restricted} 处 / "
           f"{chars_restricted} 字符，最长单条 {max_restricted} 字符（上限 {HARD_CAP}）；"
           f"可再分发来源 {n_third - n_restricted} 处未设限")
+    n_withheld = sum(1 for r in manifest_rows if r.get("随仓库分发", "").strip() == "否")
+    if st["sources_present"] == 0:
+        # 公开克隆口径：第三方底稿按公开口径不随包分发 → 本机一份都不在场，
+        # 上面的引句数是"无法归属"的空读数，不是"库里没有引句"。必须说清楚，否则误读。
+        print(f"注意: 本机在场的第三方底稿 0 份（清单里『不随仓库分发』共 {n_withheld} 份，"
+              f"按公开口径不随仓库分发）→ 上面的引句数**不可复核**，不代表库里没有引句；"
+              f"需按 deliverables/fulltext_manifest.csv 重取原文后再跑本脚本才有归属统计")
+    else:
+        print(f"本机在场的第三方底稿 {st['sources_present']} 份（清单里『不随仓库分发』共 {n_withheld} 份）"
+              f"→ 归属统计只覆盖在场底稿")
     bad = bool(leaked or over)
     print(f"判定结果: {'FAIL' if bad else 'PASS 0 处不符'}")
     if args.selftest:

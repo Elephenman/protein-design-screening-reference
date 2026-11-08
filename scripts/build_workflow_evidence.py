@@ -192,11 +192,14 @@ def main() -> int:
                     got = fh.read()
             else:
                 got = p.read_text(encoding="utf-8")
-            if got != want:
-                bad.append(f"{p.name} 内容与重算结果不一致（逐字节比对）")
+            # 行尾归一后再比：Windows 上 git 检出会把 LF 转成 CRLF（core.autocrlf），
+            # 那是平台产物不是内容差异，不该让公开克隆里的门禁假红。内容仍逐字节比。
+            if got.replace("\r\n", "\n") != want.replace("\r\n", "\n"):
+                bad.append(f"{p.name} 内容与重算结果不一致（逐字节比对，行尾 CRLF/LF 归一后）")
         if notes:
             bad.append(f"解析告警 {len(notes)} 条: " + "; ".join(notes[:5]))
-        print("判定标准: 三个产物必须与从 CSV+卡重算的结果逐字节一致（不只是行数对），且无解析告警")
+        print("判定标准: 三个产物必须与从 CSV+卡重算的结果逐字节一致（行尾 CRLF/LF 归一后比），"
+              "且无解析告警")
         print(f"判定结果: {'PASS' if not bad else 'FAIL — ' + ' | '.join(bad)}（退出码 {0 if not bad else 1}）")
         return 0 if not bad else 1
 

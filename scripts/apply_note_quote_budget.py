@@ -62,6 +62,7 @@ AUDITCSV = ROOT / "deliverables" / "protein_design_license_audit.csv"
 LITCSV = ROOT / "data" / "protein_design_literature.csv"
 NOTES = ROOT / "sources"
 LEDGER = ROOT / "deliverables" / "quote_budget_notes_ledger.csv"
+MANIFEST = ROOT / "deliverables" / "fulltext_manifest.csv"
 
 # 除了六份调研底稿，还要管住一份**随迁移包发布**的证据台账：
 # data/interim/iteration_evidence_2026-11-07.md（AI 投喂包的白名单文件之一）。
@@ -160,6 +161,27 @@ def load_fulltexts() -> dict[str, str]:
                 parts.append(norm(f.read_text(encoding="utf-8", errors="replace")))
         if parts:
             out[rec["id"]] = "\n".join(parts)
+    return out
+
+
+def withheld_absent_ids() -> set[str]:
+    """按公开口径不随仓库分发、且本机缺失的第三方全文所对应的编号。
+
+    公开克隆里没有这些底稿，"截后自检"（逐字命中 / 原句前缀 / 本地无全文）就**无法重算**，
+    只能记 WITHHELD，不能判 FAIL。本机维护者工作树里底稿齐备，照常重算。
+    """
+    if not MANIFEST.exists():
+        return set()
+    man: dict[str, dict] = {}
+    with MANIFEST.open(encoding="utf-8-sig", newline="") as fh:
+        for r in csv.DictReader(fh):
+            man[r["path"]] = r
+    inv = json.loads(INVENTORY.read_text(encoding="utf-8"))
+    out: set[str] = set()
+    for rec in inv:
+        for p in list(rec.get("local") or []) + list(rec.get("records") or []):
+            if man.get(p, {}).get("随仓库分发") == "否" and not (ROOT / p).exists():
+                out.add(rec["id"])
     return out
 
 
@@ -549,6 +571,8 @@ def main() -> int:
             print("判定结果: FAIL — 改动账不存在")
             return 1
         bad = 0
+        withheld_n = 0
+        unverifiable_ids = withheld_absent_ids()
         rows = list(csv.DictReader(LEDGER.open(encoding="utf-8-sig", newline="")))
         by_note: dict[str, list[dict]] = {}
         for r in rows:
@@ -583,17 +607,24 @@ def main() -> int:
             # "截后自检"必须与现状重算一致（说明块的分账就是靠它）
             for r in rs:
                 want = ""
+                unverifiable_row = False
                 if r.get("是否截短") == "是":
                     ft = fulltexts.get(str(r["来源编号"]))
                     if ft is None:
-                        want = V_NOFT
+                        if (str(r["来源编号"]) in unverifiable_ids
+                                and str(r.get("截后自检", "")) != V_NOFT):
+                            # 底稿按公开口径未随仓库分发 → 本机无法重算，记 WITHHELD
+                            unverifiable_row = True
+                            withheld_n += 1
+                        else:
+                            want = V_NOFT
                     else:
                         i = int(r["引句序号"]) - 1
                         if 0 <= i < len(cur) and clean(cur[i][2]) in ft:
                             want = V_VERBATIM
                         else:
                             want = V_PREFIX
-                if str(r.get("截后自检", "")) != want:
+                if not unverifiable_row and str(r.get("截后自检", "")) != want:
                     bad += 1
                     print("  ", rel, f"第 {r['引句序号']} 条截后自检 {r.get('截后自检', '')!r} != 重算 {want!r}")
             # 末尾说明块必须与账一致（条数、来源编号、许可类别、逐字/前缀分账）

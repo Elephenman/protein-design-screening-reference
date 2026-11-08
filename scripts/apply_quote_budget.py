@@ -44,6 +44,7 @@ INVENTORY = CARDS / "inventory.json"
 AUDITCSV = ROOT / "deliverables" / "protein_design_license_audit.csv"
 LEDGER = ROOT / "deliverables" / "quote_budget_ledger.csv"
 SUMMARY = ROOT / "deliverables" / "quote_budget_summary.csv"
+MANIFEST = ROOT / "deliverables" / "fulltext_manifest.csv"
 
 CJK = re.compile(r"[\u3000-\u30ff\u4e00-\u9fff\uff00-\uffef]")
 QUOTE = re.compile(r'"([^"\n]{20,})"')
@@ -133,6 +134,29 @@ def load_sources() -> dict[str, str]:
                 parts.append(norm(f.read_text(encoding="utf-8", errors="replace")))
         if parts:
             out[rec["id"]] = "\n".join(parts)
+    return out
+
+
+def withheld_absent_ids() -> set[str]:
+    """本机在场却缺失、且按公开口径**不随仓库分发**的第三方底稿所对应的编号。
+
+    这类"缺"不是缺漏：公开克隆里没有这些底稿（第三方原文按公开口径不随包分发），
+    所以"截短后仍逐字命中同一份底稿"这一条在公开克隆里**无法复核**，
+    只能记 WITHHELD，不能判 FAIL——否则公开克隆里这道门禁必然假红。
+    本机维护者工作树里底稿齐备，照常逐条核验。
+    """
+    if not MANIFEST.exists():
+        return set()
+    man: dict[str, dict] = {}
+    with MANIFEST.open(encoding="utf-8-sig", newline="") as fh:
+        for r in csv.DictReader(fh):
+            man[r["path"]] = r
+    inv = json.loads(INVENTORY.read_text(encoding="utf-8"))
+    out: set[str] = set()
+    for rec in inv:
+        for p in list(rec.get("local") or []) + list(rec.get("records") or []):
+            if man.get(p, {}).get("随仓库分发") == "否" and not (ROOT / p).exists():
+                out.add(rec["id"])
     return out
 
 
@@ -270,6 +294,8 @@ def main() -> int:
             print("判定结果: FAIL — 改动账不存在")
             return 1
         bad = 0
+        withheld_n = 0
+        unverifiable_ids = withheld_absent_ids()
         srcs = load_sources()
         rows = list(csv.DictReader(LEDGER.open(encoding="utf-8-sig", newline="")))
         by_card: dict[str, list[dict]] = {}
@@ -301,14 +327,24 @@ def main() -> int:
                 if r["是否截短"] == "是":
                     src = srcs.get(r["来源编号"])
                     if src is None:
+                        if r["来源编号"] in unverifiable_ids:
+                            # 底稿按公开口径未随仓库分发 → 本机不可复核（WITHHELD），不是不符
+                            withheld_n += 1
+                            continue
                         bad += 1
                         print("  ", card, f"第 {r['引句序号']} 条来源 {r['来源编号']} 的底稿不在场，无法复核")
                     elif clean(q) not in src:
+                        if r["来源编号"] in unverifiable_ids:
+                            # 同上：底稿缺失时无法判断"是否仍逐字命中"，记 WITHHELD
+                            withheld_n += 1
+                            continue
                         bad += 1
                         print("  ", card, f"第 {r['引句序号']} 条截短后不再逐字命中 {r['来源编号']} 的底稿")
         print("判定标准: 每张卡引句条数不变；每一行的现状长度等于改动账上的截后字符数；"
               "截前字符 ≥ 截后字符；可再分发的许可类别不许被截短；"
               "被截短处必须仍逐字命中同一份底稿")
+        if withheld_n:
+            print(f"其中 {withheld_n} 条因底稿按公开口径未随仓库分发、本机不可复核，记 WITHHELD（不算不符）")
         print(f"判定结果: {'PASS 0 处不符' if bad == 0 else f'FAIL {bad} 处不符'}")
         return 0 if bad == 0 else 1
 

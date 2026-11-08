@@ -7,8 +7,13 @@
 |---|---|---|---|
 | `RFD4-Proteina_README.md` | 14,915 B | `e3327fb127c36d9ff3d464caf14afbbd76ded521158a6be1abf860c11169fa64` | https://github.com/RosettaCommons/RFD4-Proteina （默认分支 raw） |
 | `HF_RFD4-Proteina_README.md` | 21,173 B | `38479d8e4c6e46ed7e1ec4ece0dd02c358ae46d73d56790c44be813201fd9b98` | https://huggingface.co/nvidia/RFD4-Proteina （model card） |
+| `LICENSE-BSD-3-Clause.txt` | 1,533 B | `0927a01536709c20efa64834482fd4d50c9bb954353dbcf35c95a98675545470` | https://github.com/RosettaCommons/RFD4-Proteina/blob/main/LICENSE （上游许可证原文，随 README 一并再分发） |
 | `RFD4_paper_text.txt` | 282,879 B / 272,125 字符 | `16107aa0850c7e7dfdd10d0251d5ec6a0c1f6f9b2ac838d45ab3a7c7f4773141` | 由下列 PDF 抽取，见下方命令 |
 | `RFD4-Proteina_paper.pdf` | 54,797,449 B | `33f4efb4833763a76b84b6989b1e56c01cec0dd697ea83d056387feb821b8bcd` | https://rfd4-proteina.org/assets/paper/RFD4-Proteina.pdf |
+
+**两份 README 是随仓库分发的第三方文件**（BSD 3-Clause，允许再分发），条件是保留版权声明与
+许可证全文——因此把上游 LICENSE 原文一并取回存为 `LICENSE-BSD-3-Clause.txt`（见上表）。
+本库的署名位置见根目录 NOTICE 第 3 节。
 
 **PDF 不入 git**（见仓库 `.gitignore` 注释）：单文件 54.8 MB，是仓库其余内容的数倍；
 下游只用它的纯文本，而纯文本已入库并逐字节可复现。需要原 PDF 时按上表 URL 重取，

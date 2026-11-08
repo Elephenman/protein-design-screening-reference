@@ -59,12 +59,12 @@ L1/L2 已由 `scripts/build_bundles.py` 生成可发布包；L3 是服务。
   可再分发的行（CC BY / CC0）保持原样并履行署名。
   截短有两种口径，账上逐条标明：**逐字命中**（截短结果仍能在来源全文里逐字找到）——
   卡片侧 1,804 条截短**全部**是这一类，逐字核验门禁没有放宽；**原句前缀**
-  （本地无全文，或原句是我们自己的转写）——底稿侧 85 条截短里 66 条逐字命中、
-  13 条原句前缀、6 条本地无全文。两种口径都只减不增，不新增第三方内容。
+  （本地无全文，或原句是我们自己的转写）——底稿侧 90 条截短里 66 条逐字命中、
+  13 条原句前缀、11 条本地无全文·原句前缀。两种口径都只减不增，不新增第三方内容。
   实测：卡 7,125 条引句里受限来源 257,368 → 93,663 字符（−63.6%，1,804 条被截短，涉及 43 张卡）；
   底稿与迭代台账 618 条引句里受限来源 160 条 21,328 → 13,466 字符（−36.9%），
   另有 46 条查不到具体来源行的未归属引句 4,082 → 3,679 字符（合计 25,410 → 17,145，−32.5%，
-  85 条被截短，22 条为保住卡片核验链保留原句）。
+  90 条被截短，22 条为保住卡片核验链保留原句）。
   未截短的受限引句 106 条逐条登记了原因（`deliverables/quote_budget_exceptions.csv`）。
   逐条账见 `deliverables/quote_budget_ledger.csv`、`quote_budget_summary.csv`、
   `quote_budget_notes_ledger.csv`。
@@ -92,6 +92,25 @@ L1/L2 已由 `scripts/build_bundles.py` 生成可发布包；L3 是服务。
    所以别人克隆仓库后跑 `verify_literature_cards.py` 会看到每行"底稿不在场、无法复核"。
    这不是失败，是口径；本地工作树（有第三方底稿）才是 `PASS_LOCAL 152/152`。
    复核路径写在 `deliverables/fulltext_manifest.csv`（224 份，含 sha256 与重取方式）。
+   实测（把本仓库克隆到一处干净目录后逐条跑 13 道门禁）：**退出码全部为 0**，
+   `verify_literature_cards.py` 判 `PASS_LOCAL 72/152 · WITHHELD 80 · FAIL 0`；
+   两道引用预算门禁把"底稿按公开口径未随仓库分发"记 `WITHHELD` 而不是 `FAIL`；
+   `build_workflow_evidence.py --check` 的逐字节比对在行尾 CRLF/LF 归一后进行
+   （Windows 检出会把 LF 转成 CRLF，那是平台产物不是内容差异）。
+   同一处故意改坏一条引句后 `verify_literature_cards.py` 立刻报 `FAIL 1`——门禁没有因此放宽。
+8. **公开前改写了 git 历史**：仓库在私有阶段推送过含第三方全文的提交。转为公开前用
+   `git filter-branch --index-filter` 把 220 份第三方原文从全部 18 个历史提交的索引里移除，
+   再删 `refs/original/*`、清 reflog、`gc --prune=now`（实测：全历史 `rev-list --objects --all`
+   已无第三方原文路径，旧提交对象在本仓库不可达；改写前的完整历史另存本机
+   `archive/prepublic-history-2026-11-08.bundle`，已被 gitignore 排除、不随仓库分发）。
+   **但 GitHub 对已推送过的对象通常仍按 SHA 保留一段时间**，直接按旧 SHA 或旧路径访问
+   仍可能取到内容，直到 GitHub 后台清理完成。所以本库把第三方内容的唯一合法入口指向
+   `deliverables/fulltext_manifest.csv` 的重取方式与 sha256，而不是指向任何 GitHub URL。
+9. **两件第三方文件是随包分发的**：RFD4-Proteina 的官方 README 与 HuggingFace model card
+   （BSD 3-Clause，允许再分发）。上游许可证原文已一并取回放在
+   `data/interim/rfd4_2026-11-07/LICENSE-BSD-3-Clause.txt`，署名见 `NOTICE` 第 3 节。
+   完整迁移包随这两件走，AI 投喂包不含（它只带 LICENSE 原文与 PROVENANCE），两边都不构成
+   第三方全文再分发。
 
 ---
 
@@ -103,7 +122,7 @@ L1/L2 已由 `scripts/build_bundles.py` 生成可发布包；L3 是服务。
 python scripts/verify_literature_cards.py        # 152/152 PASS；每条引句在底稿里逐字命中
 python scripts/verify_workflow_template.py       # 引用可查 + 87 条阈值都带 P0–P5 与出处
 python scripts/verify_workflow_template.py --selftest   # 四种破坏各红一条
-python scripts/build_workflow_evidence.py --check # 三个产物与重算结果逐字节一致
+python scripts/build_workflow_evidence.py --check # 三个产物与重算结果一致（行尾 CRLF/LF 归一后逐字节比）
 python scripts/build_workflow_visual.py --check   # 页面无手打数字，期望值从门禁现算
 python scripts/audit_source_licenses.py --check   # 许可审计逐行与重算一致
 python scripts/fix_table_fields.py --check       # 表级改动账：账里新值==当前表，受管列每处改动都有账
@@ -124,7 +143,10 @@ python scripts/build_bundles.py --check           # 包内清单与磁盘 sha256
 ## 发布形态
 
 - 仓库：`Elephenman/protein-design-screening-reference`（**2026-11-08 起公开**；仓库只含作者原创部分）
-- Release 资产（tag `v1-template-and-bundles`）：完整迁移包 + AI 投喂包（`ai_ingest/` 分层 digest，按编号取单张卡，约 130 万 token）。
+- Release 资产（tag `v1-template-and-bundles`）：完整迁移包 `protein_design_reference_full_2026-11-08.zip`
+  （270 文件 / 5.60 MiB）与 AI 投喂包 `protein_design_reference_ai_2026-11-08.zip`
+  （253 个包内条目 = 242 个内容文件 + 11 个 `ai_ingest/` digest 文件 / 8.66 MiB，
+  按编号取单张卡，约 130 万 token）。
   两个资产在上传后都已**从服务端重新下载并逐字节比对 sha256**，与本地一致；哈希值见 Release 资产页
   （GitHub API 的 `digest` 字段）与本地 `deliverables/bundles/SHA256SUMS.txt`（该目录被 gitignore，
   **不进仓库也不进包**——把发布物的哈希写进被发布物本身会自指）。

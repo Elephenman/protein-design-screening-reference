@@ -62,22 +62,31 @@
    单条 ≤100 字符、同一来源行在同卡内合计 ≤600 字符；截短后仍逐字命中同一份底稿，门禁不放宽。
    可再分发的行（CC BY / CC0）保持原样，并在卡里履行署名。
    实测：卡片 7,125 条引句里受限来源的 2,180 条、257,368 字符压到 93,663 字符（−63.6%，截短 1,804 条，涉及 43 张卡）；
-   调研底稿与迭代台账 618 条引句里受限来源的 157 条、21,026 字符压到 13,334 字符（−36.6%，截短 86 条，
-   另有 22 条为保住卡片核验链而保留原句）；未归属引句 54 条、4,746 → 4,397 字符。
+   调研底稿与迭代台账 618 条引句里受限来源的 160 条、21,328 字符压到 13,466 字符（−36.9%，截短 90 条，
+   另有 22 条为保住卡片核验链而保留原句）；未归属引句 46 条、4,082 → 3,679 字符。
    截不短的两类例外都已登记原因：**截断点会落在 markdown 强调段/长词中间**（脚本宁可不截也不产生半截引句），
    以及**底稿引句是我们自己的转写**（大小写或连字符与原文不一致，逐字自检无法通过）——这类只保证"仍是原句前缀"。
    逐条改动账：`deliverables/quote_budget_ledger.csv`（卡）、`deliverables/quote_budget_summary.csv`、
    `deliverables/quote_budget_notes_ledger.csv`（底稿）。
 4. **门禁三态**：`verify_literature_cards.py` 在有本地底稿时判 `PASS_LOCAL`，
    在公开克隆（底稿不在场）时判 `WITHHELD`（不是失败，是"按公开口径不随包分发所以本机无法复核"），
-   真正的错误才判 `FAIL`。本地工作树当前是 `PASS_LOCAL 152/152 · WITHHELD 0 · FAIL 0`。
+   真正的错误才判 `FAIL`。本地工作树当前是 `PASS_LOCAL 152/152 · WITHHELD 0 · FAIL 0`；
+   公开克隆实测 `PASS_LOCAL 72/152 · WITHHELD 80 · FAIL 0`（缺的是第三方底稿，不是缺漏）。
+   同口径的两道引用预算门禁（`apply_quote_budget.py --check`、`apply_note_quote_budget.py --check`）
+   在公开克隆里把"底稿按公开口径未随仓库分发"记 `WITHHELD` 而不是 `FAIL`；
+   `build_workflow_evidence.py --check` 的逐字节比对在行尾 CRLF/LF 归一后进行
+   （Windows 检出会把 LF 转成 CRLF，那是平台产物不是内容差异）。
+   这几处口径都在**公开克隆**里实测过：13 条门禁全部退出码 0，
+   且故意改坏一条引句后 `verify_literature_cards.py` 立刻报 `FAIL 1`（门禁仍能红）。
 5. **第三方论文全文再分发一律不做**（商业版同样不做）：理由是义务履行成本与客户侧一致性，
    不是许可允许与否的问题。
 6. **公开树再体检**：`scripts/audit_public_tree.py` 判两件事——
    ① 清单里标"不随仓库分发"的 220 份第三方原文，**0 份**出现在 git 跟踪集里；
    ② 许可受限来源的逐字引句，单条不得超过 400 字符（实测最长 344）。
-   同时打印可写进本节的口径统计：第三方引句 13,553 处 / 1,250,761 字符，
-   其中许可受限 4,428 处 / 197,368 字符，可再分发来源 9,125 处未设限（署名前提下可再分发）。
+   同时打印可写进本节的口径统计：第三方引句 13,565 处 / 1,251,012 字符，
+   其中许可受限 4,430 处 / 197,459 字符，可再分发来源 9,135 处未设限（署名前提下可再分发）。
+   这是**本机维护者工作树**的口径；公开克隆里第三方底稿一份都不在场，
+   脚本会明说"引句数不可复核"（不是"库里没有引句"）。
    `--selftest` 注入三种破坏各红一条。
 
 ## 目录
@@ -109,7 +118,7 @@ python scripts/verify_workflow_doc.py         # 证据工作流文档的引用�
 python scripts/verify_workflow_template.py    # 模板：引用可查 + 每条默认阈值带证据级别 + 链接可达
 python scripts/verify_workflow_template.py --selftest   # 四种破坏必须各红一条
 python scripts/build_bundles.py --check       # 包内清单与磁盘哈希一致
-python scripts/build_workflow_evidence.py --check   # 台账三个产物必须与从 CSV+卡重算的结果逐字节一致
+python scripts/build_workflow_evidence.py --check   # 台账三个产物必须与从 CSV+卡重算的结果一致（行尾 CRLF/LF 归一后逐字节比）
 python scripts/build_workflow_visual.py --check     # 页面无手打数字：阈值/引用/S 条目数从门禁现算
 python scripts/fix_table_fields.py --check        # 表级改动账：账里新值==当前表，受管列每处改动都有账
 python scripts/audit_source_licenses.py --check    # 第三方全文缓存的许可分类：行数与逐行类别与重算一致
@@ -188,7 +197,7 @@ python scripts/audit_public_tree.py --selftest  # 三种破坏必须各红一条
   （单条 ≤100 字符、同一来源行合计 ≤600 字符），截短后仍逐字命中同一份底稿，门禁不放宽；
   可再分发行（CC BY / CC0）保持原样并履行署名。改动账见
   `deliverables/quote_budget_ledger.csv` 与 `deliverables/quote_budget_notes_ledger.csv`。
-  底稿里有 21 条引句为保住卡片核验链而保留原句，账上逐条写明原因。
+  底稿里有 22 条引句为保住卡片核验链而保留原句，账上逐条写明原因。
 
 ## 与"天然 UAA 合成酶发现"那条主线的关系
 

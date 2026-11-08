@@ -79,10 +79,13 @@ AI_EXCLUDE = (
     re.compile(r"^data/interim/"),
     re.compile(r"^tmp/"),
 )
-# 例外：这两份是模板/迭代协议正文直接链接的**归纳件**（不是出版商原文、不含全文缓存），
+# 例外：这三份是模板/迭代协议正文直接链接的**归纳件**（不是出版商原文、不含全文缓存），
 # 剔掉会让包内链接断掉。RFD4 原 PDF 与抽出的全文文本仍然不进 AI 包（许可与体积）。
+# LICENSE-BSD-3-Clause.txt 是上游许可证原文：NOTICE §3 引用了它，包内链接不能断，
+# 且它是许可证文本（再分发许可明确允许），不是受版权保护的第三方内容。
 AI_INCLUDE = (
     re.compile(r"^data/interim/rfd4_2026-11-07/(rfd4_paper_findings|PROVENANCE)\.md$"),
+    re.compile(r"^data/interim/rfd4_2026-11-07/LICENSE-BSD-3-Clause\.txt$"),
     re.compile(r"^data/interim/iteration_evidence_2026-11-07\.md$"),
 )
 # 许可与署名文件必须随每个包走：没有 LICENSE 的包等于无授权地再分发。

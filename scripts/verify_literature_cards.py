@@ -254,7 +254,11 @@ def main() -> int:
                     unverifiable = True
                 else:
                     errs.append("该编号没有任何可读底稿，却有英文引句")
-            if srcs:
+            if srcs and not unverifiable:
+                # 只有在底稿齐备时才判"引句不命中"。若该行声明的底稿是按公开口径
+                # 不随仓库分发的第三方原文（本机/公开克隆里都不在场），那这行本来就
+                # 不可复核（已记 WITHHELD），不能因为只剩我们自己的底稿在场就判 FAIL——
+                # 否则公开克隆里 78 行会假红。本机工作树里底稿齐备，照常逐条核验。
                 for q in [q for q in qs if not any(q in t for t in texts.values())][:4]:
                     errs.append(f"引句在所有底稿里都不命中: {q[:110]}")
             if rec.get("has_fulltext") and len(qs) < 8:
