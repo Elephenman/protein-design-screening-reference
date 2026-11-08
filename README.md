@@ -36,8 +36,8 @@
 **两个包都不含第三方论文全文**：这是公开仓库口径（见下面"公开仓库口径"）。需要某一份原文时，
 按 `deliverables/fulltext_manifest.csv` 里的路径与"重取方式"取回，并用表里的 sha256 校验。
 
-`ai_ingest/` 的分层：`tier0_index.md`（是什么+三条禁令）→ `tier1_core.md`（README+两份工作流+模板+前沿核验+发布说明，≈5.5 万 token）
-→ `tier2_cards.md`（153 个卡文件 / 152 行，≈130 万 token，**按编号取单张**，别整份喂）→ `tier3_ledgers/`（CSV，结构化问题走这里）。
+`ai_ingest/` 的分层：`tier0_index.md`（是什么+三条禁令）→ `tier1_core.md`（README+两份工作流+模板+前沿核验+发布说明，≈59,311 token）
+→ `tier2_cards.md`（153 个卡文件 / 152 行，≈1,265,274 token，**按编号取单张**，别整份喂）→ `tier3_ledgers/`（CSV，结构化问题走这里）。
 喂法与 token 估算方法写在 `ai_ingest/HOW_TO_FEED.md`。包内不含论文原文，所以卡里的引句在该包内不可复核，
 只能查到声明的底稿路径与哈希——需要原文复核时按 `fulltext_manifest.csv` 重取，或用本仓库的本地工作树。
 

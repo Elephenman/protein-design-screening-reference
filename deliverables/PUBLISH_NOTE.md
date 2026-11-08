@@ -144,9 +144,9 @@ python scripts/build_bundles.py --check           # 包内清单与磁盘 sha256
 
 - 仓库：`Elephenman/protein-design-screening-reference`（**2026-11-08 起公开**；仓库只含作者原创部分）
 - Release 资产（tag `v1-template-and-bundles`）：完整迁移包 `protein_design_reference_full_2026-11-08.zip`
-  （270 文件 / 5.60 MiB）与 AI 投喂包 `protein_design_reference_ai_2026-11-08.zip`
+  （270 文件 / 5.61 MiB）与 AI 投喂包 `protein_design_reference_ai_2026-11-08.zip`
   （253 个包内条目 = 242 个内容文件 + 11 个 `ai_ingest/` digest 文件 / 8.66 MiB，
-  按编号取单张卡，约 130 万 token）。
+  按编号取单张卡，约 1,265,274 token）。
   两个资产在上传后都已**从服务端重新下载并逐字节比对 sha256**，与本地一致；哈希值见 Release 资产页
   （GitHub API 的 `digest` 字段）与本地 `deliverables/bundles/SHA256SUMS.txt`（该目录被 gitignore，
   **不进仓库也不进包**——把发布物的哈希写进被发布物本身会自指）。
