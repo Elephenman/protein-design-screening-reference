@@ -134,20 +134,20 @@ Nature Communications 2026, 17:9945 · DOI 10.1038/s41467-026-76740-9 · PMID 42
 - 作者承认：偶发假阴性，仅供筛选（"While highly efficient, our protocol may still occasionally yield false negative results, and thus is primarily intended for screening purposes"）；多克隆性随长度上升（"the small levels of polyclonality resulting from synthesis error are length-dependent, which can complicate using the protocol for longer proteins"）；产线定位——"The protocol was developed and optimized for wetlab validation of high-yielding proteins such as engineered and designed sequences, and may be less well suited for proteins that require complex expression and purification protocols"；DMX 只加 5 天但小库不经济（"while the polyclonal approach from SAPP is better suited for smaller campaigns (~100–200 designs) where faster turnaround time is desired"）。
 - 我们读出：① 克隆纯度/MS 统计建立在"插入 <314 bp、E. coli 可溶表达"的样本空间上，对大蛋白、真膜蛋白、需要翻译后修饰的体系外推未验证；② RSV 漏斗的 19/58、33/58 是两个结合域的个案，不构成"寡聚化成功率"的通用数字；③ 本文所有功能判据（IC50、SEC 区间、煮沸后单体）都是"静态结合/组装"性质，与催化周转无对应；④ 全文无 MD/QM，不能作为任何物理法判据的命中率证据。
 
-## 8. 对 UAA 筛选的迁移判断
+## 8. 迁移判断：哪些能搬、哪些不能搬
 
 **可迁移（怎么用）**
 
 1. **"每候选边际成本 + 仪器日容量"的台账写法**直接搬进我们漏斗预算：把 LC-MS 梯度（样/天）、基因合成（$0.07/bp 类口径）、表达纯化 bench 时间逐项登记，任何判据先过"通过率÷单价"再上产线（与 B09 的效率公式互补：B09 算计算侧，这篇算湿侧）。
-2. **板式标准化 + 开放数据框**：我们每个构建体无论成败都应输出同一组数据（表达量、产物峰面积、S0/S1/S2 归类、失活对照信号），存成单一机器可读表——没有这个，未来任何"筛子考卷"都无从训练。
+2. **板式标准化 + 开放数据框**：我们每个构建体无论成败都应输出同一组数据（表达量、产物峰面积、分步化学事件归类、失活对照信号），存成单一机器可读表——没有这个，未来任何"筛子考卷"都无从训练。
 3. **"事后第二方法复核"代替"事前逐一 QC"**：候选数超出确证能力时，可仿其结构——主通道用便宜判据筛选、按统计抽样用正交法（我们是 LC-MS/MS 碎片 + 煮沸/酶失活对照）估假阳/假阴率，并公开该比率。
 4. **"瓶颈迁移"检查点**：每轮实验结束记"本轮最大成本项是什么、被消灭后下一个是什么"，防止把上一轮瓶颈当永恒瓶颈。
 
 **不可迁移（为什么不能照搬）**
 
-1. **读出性质不同**：SAPP 的判据（产量、分散度、SEC 寡聚态、荧光、IC50）全部是静态理化/结合性质；UAA 合成酶的成败是三步化学事件的周转数与副产物比，LC-MS 产物定量无法用"SEC 99% CI"式的表观判据替代。不得把本文任何判据阈值当 UAA 酶活闸口。
-2. **通量口径不可挪用**："hundreds of designs per day"是表达纯化表征的容量，不是功能确证的容量；我们单轮 LC-MS 确证上限远低（一轮、至多数个构建体），不能拿 19/58、33/58、40 pM、78% 回收等数字为 UAA 项目估算任何成功概率。
-3. **E. coli 自诱导 + Ni-NTA 管线**不覆盖膜蛋白/需要伴侣或多亚基真核修饰的体系，作者自己限定适用域；我们的 UAA 酶若涉及膜锚定或辅因子装载，不能默认适用。
+1. **读出性质不同**：SAPP 的判据（产量、分散度、SEC 寡聚态、荧光、IC50）全部是静态理化/结合性质；目标酶的成败是三步化学事件的周转数与副产物比，LC-MS 产物定量无法用"SEC 99% CI"式的表观判据替代。不得把本文任何判据阈值当酶活闸口。
+2. **通量口径不可挪用**："hundreds of designs per day"是表达纯化表征的容量，不是功能确证的容量；我们单轮 LC-MS 确证上限远低（一轮、至多数个构建体），不能拿 19/58、33/58、40 pM、78% 回收等数字为酶设计项目估算任何成功概率。
+3. **E. coli 自诱导 + Ni-NTA 管线**不覆盖膜蛋白/需要伴侣或多亚基真核修饰的体系，作者自己限定适用域；我们的目标酶若涉及膜锚定或辅因子装载，不能默认适用。
 4. **无计算筛选贡献**：本文的 AF2 六判据只是 FP 案例的入场券，其阈值不来自系统评估实验，不能引它论证我们的闸口选择。
 
 ## 9. 溯源与自检

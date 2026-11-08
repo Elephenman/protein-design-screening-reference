@@ -74,44 +74,52 @@ L1/L2 已由 `scripts/build_bundles.py` 生成可发布包；L3 是服务。
   0 份被 git 跟踪。**残余的长引句是公开披露的，不是隐藏的**：106 条超单条上限的受限引句
   逐条写着没截的原因（多数是截断点会落在 markdown 强调段或长单词中间，宁可保留原句）。
 
-### 与"天然 UAA 合成酶发现"主线的关系
+### 与具体项目的关系
 
-本库是**跨实验室判据有效性与成本的参考库**，**不是**那条主线的判定输入。结合体的 `pAE_interaction` / `ipTM` 阈值、适配体 FEP 命中率、展示库通量，都**不得**当成酶活判据或成功概率。那条主线由 `A:\Data\DP2R\方案` 的判定标准管辖，与本库无关。
+本库是**跨实验室判据有效性与成本的参考库**，不隶属于任何具体项目，也不为任何项目背书。结合体的 `pAE_interaction` / `ipTM` 阈值、适配体 FEP 命中率、展示库通量，都**不得**当成酶活判据或成功概率。
 
 ---
 
-## 已知的坑（诚实清单）
+## 版本、口径与合规事实（使用前请读）
 
-1. **B28 一行有两张卡**（同一篇 Nature Methods 2025 的早期登记版与后续版）。卡文件 153 个 / 行 152。引用一律以台账 `精读卡文件` 列指向的那张为准。
-2. **8 行证据口径差集**（上文已述），卡内逐字命中率不足，本轮不升级。
-3. **表格字段曾有 58/152 行与卡片相反**（其中 8 行把"未获正文"写成"全文级"）。2026-11-07 已整列重刷成机器标签，并加了表↔卡一致性门禁；改表走 `scripts/fix_table_fields.py`，改动留账。
-4. **RFD4 模型卡的效率表是上一代权重对测的**，当前版本未重测；不能当 RFD4 的效率证据。
-5. **许可审计只判"能不能再分发"，不判内容对错**，也不替代法律意见。26 篇受限内容若要商用，需向权利人单独申请。
-6. **表级改动账被同日第二次运行覆盖过一次**：早期脚本把账写成按日期命名的固定文件，第二次运行（只改 1 处）把第一次的 152 条记录冲掉。现已由 git HEAD 重放复原 157 条（脚本改为同日合并账目、备份不覆盖），并新增 `scripts/fix_table_fields.py --check` 兜底。
-7. **公开克隆里逐字核验判 `WITHHELD` 而不是 `PASS`**：第三方底稿按公开口径不随包分发，
-   所以别人克隆仓库后跑 `verify_literature_cards.py` 会看到每行"底稿不在场、无法复核"。
-   这不是失败，是口径；本地工作树（有第三方底稿）才是 `PASS_LOCAL 152/152`。
-   复核路径写在 `deliverables/fulltext_manifest.csv`（224 份，含 sha256 与重取方式）。
-   实测（把本仓库克隆到一处干净目录后逐条跑 13 道门禁）：**退出码全部为 0**，
-   `verify_literature_cards.py` 判 `PASS_LOCAL 72/152 · WITHHELD 80 · FAIL 0`；
-   两道引用预算门禁把"底稿按公开口径未随仓库分发"记 `WITHHELD` 而不是 `FAIL`；
-   `build_workflow_evidence.py --check` 的逐字节比对在行尾 CRLF/LF 归一后进行
-   （Windows 检出会把 LF 转成 CRLF，那是平台产物不是内容差异）。
-   同一处故意改坏一条引句后 `verify_literature_cards.py` 立刻报 `FAIL 1`——门禁没有因此放宽。
-8. **公开前改写了 git 历史**：仓库在私有阶段推送过含第三方全文的提交。转为公开前用
-   `git filter-branch --index-filter` 把 220 份第三方原文从改写前 main 的全部 17 个历史提交
-   （实测其中 16 个提交的索引里含有第三方原文）的索引里移除，
-   再删 `refs/original/*`、清 reflog、`gc --prune=now`（实测：全历史 `rev-list --objects --all`
-   已无第三方原文路径，旧提交对象在本仓库不可达；改写前的完整历史另存本机
-   `archive/prepublic-history-2026-11-08.bundle`，已被 gitignore 排除、不随仓库分发）。
-   **但 GitHub 对已推送过的对象通常仍按 SHA 保留一段时间**，直接按旧 SHA 或旧路径访问
-   仍可能取到内容，直到 GitHub 后台清理完成。所以本库把第三方内容的唯一合法入口指向
-   `deliverables/fulltext_manifest.csv` 的重取方式与 sha256，而不是指向任何 GitHub URL。
-9. **两件第三方文件是随包分发的**：RFD4-Proteina 的官方 README 与 HuggingFace model card
-   （BSD 3-Clause，允许再分发）。上游许可证原文已一并取回放在
+**版本与口径**
+
+1. 卡文件 153 个 / 行 152：`B28` 一行保留早期登记版与后续版两张同篇卡。引用一律以台账
+   `精读卡文件` 列指向的那张为准。
+2. 台账同时保留两个证据口径（`底稿形态` / `卡证据级别`），因为它们回答两个不同问题：
+   "本地有没有一份登记在册的全文" vs "卡里的每句引文是否在它声明的那份底稿里逐字命中"。
+   后者更严，产品口径以后者为准；两个数字都印在 `protein_design_workflow_summary.txt` 里。
+3. 表↔卡一致性由机器强制：`证据级别` 整列是机器生成的标签（2026-11-07 起），
+   `verify_literature_cards.py` 逐行比对表与卡，写反即失败；改表只能走
+   `scripts/fix_table_fields.py`，每次改动自动留账，`--check` 兜底。
+4. RFD4 的选型依据只采用官方说明与预印本正文；HuggingFace 模型卡上的效率表是上一代权重对测的，
+   我们不把它当 RFD4 的效率证据（`data/interim/rfd4_2026-11-07/rfd4_paper_findings.md` 有逐条判定）。
+
+**许可与合规**
+
+5. 许可审计只判"能不能再分发"，不判内容对错，也不替代法律意见。26 篇受限内容若要商用，
+   需向权利人单独申请——本库的产品决策是一律不分发，所以客户侧不受这一条影响。
+6. 随包分发的第三方文件只有两件：RFD4-Proteina 的官方 README 与 HuggingFace model card
+   （BSD 3-Clause，允许再分发）。上游许可证原文在
    `data/interim/rfd4_2026-11-07/LICENSE-BSD-3-Clause.txt`，署名见 `NOTICE` 第 3 节。
-   完整迁移包随这两件走，AI 投喂包不含（它只带 LICENSE 原文与 PROVENANCE），两边都不构成
-   第三方全文再分发。
+   完整迁移包随这两件走，AI 投喂包不含（只带许可证原文与 PROVENANCE），两边都不构成全文再分发。
+7. 公开树的合规状态是**实时判定**的：`scripts/audit_public_tree.py` 每次运行都重新数引句
+   与受限字符数，并与 224 份清单比对；三项自测破坏各红一条。
+
+**公开仓库的操作事实**
+
+8. 转为公开前，仓库的私有历史里曾推送过第三方全文。公开前已用
+   `git filter-branch --index-filter` 把 220 份第三方原文从全部历史提交的索引中移除，
+   并清理 `refs/original/*`、reflog 与不可达对象（全历史 `rev-list --objects --all` 已无第三方路径；
+   改写前历史另存本机 `archive/prepublic-history-2026-11-08.bundle`，被 gitignore 排除、不随仓库分发）。
+   GitHub 对已推送对象通常按 SHA 保留一段时间，因此本库把第三方内容的唯一入口指向
+   `deliverables/fulltext_manifest.csv` 的重取方式与 sha256，不指向任何 GitHub URL。
+9. 公开克隆（第三方底稿按口径不在场）跑门禁时，逐字核验判 `WITHHELD` 而不是 `PASS` 或 `FAIL`：
+   缺的是"按公开口径不随包分发的底稿"，不是缺漏。实测（干净目录克隆后逐条跑 13 道门禁）：
+   **退出码全部为 0**，`verify_literature_cards.py` 判 `PASS_LOCAL 72/152 · WITHHELD 80 · FAIL 0`；
+   两道引用预算门禁同样记 `WITHHELD`。同一处故意改坏一条引句后立刻 `FAIL 1`——门禁没有放宽。
+   `build_workflow_evidence.py --check` 的逐字节比对在行尾 CRLF/LF 归一后进行
+   （Windows 检出把 LF 转成 CRLF 是平台产物，不是内容差异）。
 
 ---
 
@@ -146,8 +154,8 @@ python scripts/build_bundles.py --check           # 包内清单与磁盘 sha256
 - 仓库：`Elephenman/protein-design-screening-reference`（**2026-11-08 起公开**；仓库只含作者原创部分）
 - Release 资产（tag `v1-template-and-bundles`）：完整迁移包 `protein_design_reference_full_2026-11-08.zip`
   （270 文件 / 5.61 MiB）与 AI 投喂包 `protein_design_reference_ai_2026-11-08.zip`
-  （253 个包内条目 = 242 个内容文件 + 11 个 `ai_ingest/` digest 文件 / 8.66 MiB，
-  按编号取单张卡，约 1,265,274 token）。
+  （253 个包内条目 = 242 个内容文件 + 11 个 `ai_ingest/` digest 文件 / 8.67 MiB，
+  按编号取单张卡，约 1,266,413 token）。
   两个资产在上传后都已**从服务端重新下载并逐字节比对 sha256**，与本地一致；哈希值见 Release 资产页
   （GitHub API 的 `digest` 字段）与本地 `deliverables/bundles/SHA256SUMS.txt`（该目录被 gitignore，
   **不进仓库也不进包**——把发布物的哈希写进被发布物本身会自指）。

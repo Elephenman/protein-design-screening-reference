@@ -22,7 +22,7 @@
 ## 2. 这条来源的难点，以及取证时做了什么应对（本行相关）
 
 1. **只有二手转引句，没有正文可核。** 底稿第 115 行给的是带省略号开头的转引片段（其中三处数字在底稿里用 markdown 强调符号包住，逐字比对会失配，本卡因此改用**不跨强调符号的连续片段**作引句："with a success rate at tenfold binding enrichment of"、"for ProteinMPNN and charge adjustment"、"multiepitope scaffolding"）。**应对**：引句全部落在底稿的纯文本连续段上，并在 §9 明写"引句底稿 = sources/claim-90pct.md"；凡需要正文级细节（建库规模、送测数、表位身份）一律写"未记录（未取正文）"，不猜。 **仍留下的代价**：`success rate` 的分子/分母定义只能靠字面（"tenfold binding enrichment"），无法确认是"送测候选数"还是"表位数"，因此 33.7% 这个数**不许当命中率基准引用**。
-2. **同一篇论文在底稿里只出现在"对照段"，容易被当成 90% 主张的支持证据。** 底稿把它列在 §四"曹龙兴（西湖大学）与 Baker 组：查无 ≥90% 端到端成功率论文"之下，与 RFdiffusion 抗体的原句并列："success rates against each target, which range from 0% to 2%"、"of our ordered VHH designs have an ipTM > 0.6"、"experimental success rates remain low"。**应对**：本卡在 §5 只写"底稿陈述了什么"，把"该文的 33.7% 是全项目里少见的判据横向对照"与"该文的 33.7% 不是端到端概率"分开写，并在 §8 明写禁止把它借作 UAA 的成功概率。
+2. **同一篇论文在底稿里只出现在"对照段"，容易被当成 90% 主张的支持证据。** 底稿把它列在 §四"曹龙兴（西湖大学）与 Baker 组：查无 ≥90% 端到端成功率论文"之下，与 RFdiffusion 抗体的原句并列："success rates against each target, which range from 0% to 2%"、"of our ordered VHH designs have an ipTM > 0.6"、"experimental success rates remain low"。**应对**：本卡在 §5 只写"底稿陈述了什么"，把"该文的 33.7% 是全项目里少见的判据横向对照"与"该文的 33.7% 不是端到端概率"分开写，并在 §8 明写禁止把它借作酶设计的成功概率。
 3. **分母口径不可核验（无法排除"末端小分母"）**。**应对**：在同一条底稿里找**同团队**（Baker 系）其它工作的完整漏斗数字做量级参照，逐条摘录并保留原文口径——RFpeptides 大环肽的纯度语境（"and tested them for binding to GABARAP using SPR"）、NIR 荧光蛋白的表达口径（"12 designs, out of which 10 exhibited successful expression in E. coli and bound retinal"）、β-pairing 那一句里的对照读数（"success rates by RFdiffusion conditioned on target hotspots alone"，底稿同段给出的 0.98% 与 9.2% 之比）。这些只是"同一时代同一实验室的真实量级"，不是本文数据。**仍留下的代价**：参照不是同一实验，只能定"量级可疑/量级合理"，不能定量换算。
 4. **本文与"90% 主张"的关系是**反证**，但反证本身依赖检索范围。** 底稿自述的检索范围（"PubMed / Europe PMC / Crossref / bioRxiv / Research Square / Zenodo API"）与逐条命中数都在 §一 表内，另有一条专门确认某题目在 PubMed 零命中："TCR-mimicking binders for pHLA high potency"。**应对**：本卡把"查无 ≥90%"写成**有范围的否定**（限定在 2024–2026、限定在 success rate / hit rate 两类串、限定在已取回的 OA 全文），不写成"不存在"。 **底稿未解决**：非 OA 全文（gp100、GAD65、anti-EGFR）正文中的命中率表未取到，底稿自己承认"目前只能证明摘要无 ≥90%"。
 
@@ -82,8 +82,8 @@
 
 **不可用（为什么不能照搬）**
 
-1. **禁止把 33.7%/21.7%/3.3% 当成 UAA 合成酶筛选的成功概率或预期收益**。它们量的是"多表位支架是否把表位富集起来"，与 UAA 激活/tRNA 氨酰化的催化事件无关，且分母口径未核。
-2. **禁止把"十倍结合富集"这类展示/富集判据搬成酶活阈值**，也禁止把同段出现的 ipTM > 0.6 借来当结构闸口——那是 binder 设计的折叠自洽判据（DP2R 判定标准 §2 明令禁止）。
+1. **禁止把 33.7%/21.7%/3.3% 当成酶设计筛选的成功概率或预期收益**。它们量的是"多表位支架是否把表位富集起来"，与底物激活/tRNA 氨酰化的催化事件无关，且分母口径未核。
+2. **禁止把"十倍结合富集"这类展示/富集判据搬成酶活阈值**，也禁止把同段出现的 ipTM > 0.6 借来当结构闸口——那是 binder 设计的折叠自洽判据（本库判定标准 §2 明令禁止）。
 3. 本行是降级卡：任何"本文怎么做的工作流"若写得比 §3 更细，就是编造；需要细节时必须先取正文（本项目当前无此授权动作）。
 
 ## 9. 溯源与自检

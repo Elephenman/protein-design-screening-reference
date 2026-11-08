@@ -69,7 +69,7 @@
 
 - **可用**：末级确证的预算锚，用来决定“几个候选值得走到 Kd”；给 K24 类的每候选总成本提供确证项。
 - **不可用**：不得当判定门槛或精度证据（本条不提供任何测量质量参数）；不得与按小时档互相换算；不得跨快照年份裸引美元值。
-- **层级提醒**：底稿综述的筛选层级只写到 "Feasibility gate: Drop low-expression, insoluble designs early → L1: high-throughput binding screen (phage or yeast display) → expression/SEC/Tm → SPR/BLI"——ITC 甚至不在那条链上，属于链外确证；本项目不得把本条价格写进任何判定标准，与 UAA 催化能力判据无关。
+- **层级提醒**：底稿综述的筛选层级只写到 "Feasibility gate: Drop low-expression, insoluble designs early → L1: high-throughput binding screen (phage or yeast display) → expression/SEC/Tm → SPR/BLI"——ITC 甚至不在那条链上，属于链外确证；本项目不得把本条价格写进任何判定标准，与目标催化能力判据无关。
 
 ## 9. 溯源
 

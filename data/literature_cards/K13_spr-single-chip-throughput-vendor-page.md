@@ -71,7 +71,7 @@
 
 - **可用**：排期可行性判断（下单量 ≤10^3 时一台 SPR 足够）；给“SPR 机时”这一分母与 K14（元/对）、K15（元/样）、K16（元/小时）之间的口径对照。
 - **不可用**：不得当命中率/成功概率；不得与 BLI 的“96 样/板/小时”跨分母排名次；底稿未记抓取日期，超过一个预算周期不得裸引。
-- **层级提醒**：底稿综述把流程写作 "Feasibility gate: Drop low-expression, insoluble designs early → L1: high-throughput binding screen (phage or yeast display) → expression/SEC/Tm → SPR/BLI"，SPR 处在链条末端；本条通量不得写进任何判定标准，更不得与 UAA 酶活/催化判据发生关系。
+- **层级提醒**：底稿综述把流程写作 "Feasibility gate: Drop low-expression, insoluble designs early → L1: high-throughput binding screen (phage or yeast display) → expression/SEC/Tm → SPR/BLI"，SPR 处在链条末端；本条通量不得写进任何判定标准，更不得与酶活/催化判据发生关系。
 
 ## 9. 溯源
 

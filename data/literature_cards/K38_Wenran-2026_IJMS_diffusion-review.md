@@ -104,7 +104,7 @@ International Journal of Molecular Sciences 2026, 27(16):7151 · DOI 10.3390/ijm
 2. **"三个分布不等价"可以直接平移到我们的证据链**：数据经验分布 ≠ 模型学习分布 ≠ 热力学平衡分布。我们的类比是：底物筛选面板里的**富集/命中分布** ≠ 该酶在生理条件下的**通量分布**——把前者的排序当成后者的定量预测，正是作者点名的同一类越权。结论：任何"候选更可能干活"的表述只允许写成条件相关的推断，不许写成"其周转数为 X"；而"跑了 MD 就得到平衡系综"在本文口径下也不成立——"the resulting samples should be interpreted as learned conformational distributions rather than as equilibrium ensembles with physically calibrated populations or kinetic connectivity"。
 3. **作者给的补救路径是"三选一独立验证"（分子模拟 / 实验观测量 / 独立自由能景观），但没有给任何一条的命中率**→ 这篇只能用来**限制**其它卡的结论强度，不能用来支撑"跑 MD 就能确认稳定性"的成本收益估算；那类估算仍需 B09 式"通过率 ÷ 单价"，而本文连单价都没有。
 4. **它转述的 PDB-Struct 稳定性口径里藏着我们最容易犯的错**：底稿原句是 "For the stability metric, PDB-Struct reports the Spearman correlation between model pseudo-log-likelihood and experimentally measured stability"——即"稳定性"这一格给的是**数据集级相关系数**，不是"这一个候选稳不稳"的判定；本文自己的 Table 3 也写了 PDB-Struct 那一行不确立 "Direct stability or foldability of an individual newly generated protein"。→ 我们的判定器若只报面板级相关（AUC/Spearman），同样不能写成逐条候选的把握度——除非像第 17 轮那样把逐条后验单独做出来。（注意：这两句是转述他人基准，本文没给相关系数的具体数值。）
-5. **综述承认"these statistics are currently reported inconsistently across studies"却没有失败台账**——这与 DP2R 缺"能同时给阳性和阴性打分的考卷"（B09 第 A 段）是同一个缺口的两个视角：他们的社区层面缺失败数据，我们在项目层面也缺带产物标签的阴性集。本篇可作为"标准 G0（真值面板）为什么必要"的**旁证**，不是证据。
+5. **综述承认"these statistics are currently reported inconsistently across studies"却没有失败台账**——这与本库缺"能同时给阳性和阴性打分的考卷"（B09 第 A 段）是同一个缺口的两个视角：他们的社区层面缺失败数据，我们在项目层面也缺带产物标签的阴性集。本篇可作为"标准 G0（真值面板）为什么必要"的**旁证**，不是证据。
 6. **它的引文编号错位提醒了一件事**：综述级文献里的"某模型用了多少数据/被谁验证过"属于二手转录（本卡第 4 节所有 Table A1 数字都是这个性质）。凡要从这些数字推论（例如选型、估成本），必须回到原论文；本卡因此**不**据此做任何选型建议。
 
 ## 7. 局限与失败（作者的 + 我们读出的 + 与登记底稿的差异）
@@ -137,11 +137,11 @@ International Journal of Molecular Sciences 2026, 27(16):7151 · DOI 10.3390/ijm
 | 底稿未收的两句（本篇更硬的限制） | 未记录 | "A collection of structurally diverse samples should not be automatically interpreted as an equilibrium ensemble, since the generated conformations may lack physically meaningful populations, kinetic connectivity, or transition pathways" 与 "Thermodynamic favourability, therefore, does not in itself establish that a molecular state is kinetically accessible or that a designed protein will fold, bind or function on biologically relevant timescales" | 本行直接补录两句原文；其中第一句另见第 2 节第 4 条，第二句（热力学有利 ≠ 动力学可达）此前未在任何底稿登记过 |
 | 数值层面 | 底稿没从本篇引任何数字 | 本篇确实也没有可引的阈值/命中率 | 无冲突，但要防下游把 §3.7 相邻行的其它文献数字错挂到本篇 |
 
-## 8. 对 UAA 筛选的迁移判断
+## 8. 迁移判断：哪些能搬、哪些不能搬
 
 **可迁移（怎么用）**
 
-1. **把"pLDDT 高 ≠ 可表达/可折叠/有功能"当作我们漏斗的否证边界写进标准**：DP2R 里 Foldseek 命中、结构预测 pLDDT、催化残基几何对齐这类指标，一律只能作为**召回与排除**用途，不许写成"该候选具备尿嘧啶/ATP 激活能力的证据"。落地做法＝照 Table 3 的做法给每条判据并排写满 "What It Measures" 与 "What It Does Not Establish" 两栏（该表实为 4 栏 × 13 行），缺后一栏的判据不许进漏斗。
+1. **把"pLDDT 高 ≠ 可表达/可折叠/有功能"当作我们漏斗的否证边界写进标准**：本库里 Foldseek 命中、结构预测 pLDDT、催化残基几何对齐这类指标，一律只能作为**召回与排除**用途，不许写成"该候选具备底物碱基/ATP 激活能力的证据"。落地做法＝照 Table 3 的做法给每条判据并排写满 "What It Measures" 与 "What It Does Not Establish" 两栏（该表实为 4 栏 × 13 行），缺后一栏的判据不许进漏斗。
 2. **"分层报告清单"直接抄成我们的 run.md / manifest 字段**：本文要求 benchmark 公开 structure-level redundancy filters、temporal splits、evaluator independence、sampling budgets、过滤后候选数、失败实验，以及 computational cost、software versions、random seeds、candidate-selection procedures。我们的真值面板与判定器目前缺三项：**评测器独立性声明、随机种子、失败候选逐条留档**——这三项加进 `--check` 类门禁成本极低，正是它点名的失效来源（幸存者偏差）。
 3. **"学习分布 ≠ 平衡系综"→ 我们结论的表述规范**：任何来自 MD 采样/构象聚类的结果，在写成热力学或动力学结论之前，必须像本文那样绑定条件（温度、溶剂、质子化态、配体、寡聚状态），或明确标为"仅构象多样性"。这条能防住我们在第 10 轮之后最容易犯的错：把轨迹多样性当"该位点更稳定"。
 4. **实验三层顺序（表达/溶解性/单分散 → 结构验证 → 功能验证）可作为我们湿实验排期的外部对齐**，特别是"先可行性、后结构、最后功能"这一层级；我们的 LC-MS/MS 产物身份属于第三层（功能/化学事件），不能替代前两层，因此**可表达性失败会让功能检测无从解释**——这是本文分层逻辑对我们唯一的实操提醒。
@@ -149,9 +149,9 @@ International Journal of Molecular Sciences 2026, 27(16):7151 · DOI 10.3390/ijm
 
 **不可迁移（为什么不能照搬）**
 
-1. **本文没有任何 UAA/酶活判据**。它谈"催化"只到 "catalytic activity" 需要 task-specific assay 这一层："Function-guided generation necessitates task-specific experimental measurements, precluding validation solely through predicted structural compatibility"，没有给出任何催化活性阈值、也没有把催化几何作为验证对象——不能当作"结构自洽即可推酶活"的背书，恰恰相反它是这句话的反证来源。
+1. **本文没有任何酶设计/酶活判据**。它谈"催化"只到 "catalytic activity" 需要 task-specific assay 这一层："Function-guided generation necessitates task-specific experimental measurements, precluding validation solely through predicted structural compatibility"，没有给出任何催化活性阈值、也没有把催化几何作为验证对象——不能当作"结构自洽即可推酶活"的背书，恰恰相反它是这句话的反证来源。
 2. **不能引用它做任何命中率/成功概率校准**：全篇零命中率、零样本量、零成本数字（见第 4 节的两行 0 条）。同样，**不许**把 binder 类论文的 pAE/ipTM 阈值或适配体 FEP 命中率借到这张卡的名下——这张卡连阈值都没有。
-3. **不能把"MD/自由能可作独立验证层"当成 MD 对 UAA 酶活有效性的证据**：本文给的是**义务**（不作独立验证就不许写热力学结论），不是**效果**（验证了就更准）；它自己并列了"力场近似、溶剂不确定、自由能计算昂贵"三条折扣。
+3. **不能把"MD/自由能可作独立验证层"当成 MD 对酶活有效性的证据**：本文给的是**义务**（不作独立验证就不许写热力学结论），不是**效果**（验证了就更准）；它自己并列了"力场近似、溶剂不确定、自由能计算昂贵"三条折扣。
 4. **Table A1 的模型清单/数据量不能当选型依据**：那是二手转录（代码链接只在 2026-07-27 核过，且引文编号有错），选型必须回原论文与仓库实测。
 5. **本文的"分层判据表"不等于"面板上的判别力排序"**：它没有在任何真值集上量化过哪条判据更准（这一点 B09 做了）。所以它能约束我们"别越权解释"，不能替我们做判据取舍的量化排序。
 
@@ -181,6 +181,6 @@ pipeline_counts=本文无自建流水线；登记二手规模（Table A1）：RF
 hit_rate=未记录（综述无实验，全文未给出任何实验命中率或成功率数字）
 best_metric=未记录（综述无该字段；全篇最接近的定量结论只是转述 PDB-Struct 用 Spearman 相关衡量模型伪对数似然与实验测得的稳定性，未给具体相关系数）
 cost_or_stat_note=只有定性成本：sampling can be computationally expensive；free-energy calculations are computationally demanding；代码/权重/许可/硬件/采样参数与未公开过滤流程可阻碍独立复现；全文无 GPU/CPU 秒、无金额、无吞吐数字
-role_in_timeline=给"生成器 + 预测器自洽性"这条漏斗提供判据上限声明：把 pLDDT/RMSD/TM-score/designability/novelty/diversity 与热力学稳定性、动力学可达性、生物功能明确切开，并要求基准公开成本/版本/随机种子/筛选流程；在 DP2R 中作"否证边界卡"与报告规范来源，不作数据点
+role_in_timeline=给"生成器 + 预测器自洽性"这条漏斗提供判据上限声明：把 pLDDT/RMSD/TM-score/designability/novelty/diversity 与热力学稳定性、动力学可达性、生物功能明确切开，并要求基准公开成本/版本/随机种子/筛选流程；在本库中作"否证边界卡"与报告规范来源，不作数据点
 source_pointer=data/literature_cards/fulltext/K38_PMC13513569_text.txt（同编号另登记 fullTextXML.xml）；sources/cost-benchmarks.md §3.7（135-138 行）与 §六（202、205 行）；data/protein_design_literature.csv 第 120 行
 CSV回填-->
