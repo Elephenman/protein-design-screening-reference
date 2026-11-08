@@ -568,9 +568,9 @@ GitHub Release 资产替换。仓库可见性（私有转公开）与最终定�
 |---|---|---|
 | 改写前 | 改写前的 main 共 **17** 个提交，其中 **16** 个的索引里含第三方原文 | 220 份第三方原文全在清单 `随仓库分发=否` |
 | 改写后 | `git filter-branch --index-filter` + 删 `refs/original/*` + 清 reflog + `gc --prune=now` | `git rev-list --objects --all` 命中清单 **0** 条；被跟踪的不分发路径 **0** |
-| 推送 | `git push --force origin main`（`9d4cb08 → 86e6e15`）＋ `git tag -f` 后强制推 tag | `git ls-remote`：main 与 tag 都指向 `86e6e15` |
+| 推送 | `git push --force origin main`（改写前 main → 改写后 main）＋ `git tag -f` 后强制推 tag | `git ls-remote`：main 与 tag 指向同一个改写后的提交。**这里不写提交号**：本文件本身随完整包分发，写死哈希会让包一重建就自指失配 |
 | 换资产 | 删旧资产 id `720067050`（ai 2026-11-07）与 `720067295`（full 2026-11-07，**含 192 份第三方原文**） | 旧资产已不在服务端 |
-| 传新资产 | 完整包 `5,879,955 B` / sha256 `0f830e48…`；AI 包 `9,082,888 B` / sha256 `3686f866…` | 上传后**重新下载逐字节比对**，2/2 PASS；服务端 `digest` 字段一致 |
+| 传新资产 | 删旧资产后上传 2026-11-08 的两个新包 | 上传后**重新下载逐字节比对**，2/2 PASS；服务端 `digest` 字段一致。具体字节数与 sha256 见 Release 资产页与本地 `deliverables/bundles/SHA256SUMS.txt`（该目录 gitignore，**不进仓库也不进包**） |
 | 转公开 | `gh repo edit --visibility public --accept-visibility-change-consequences` | `gh repo view` → `visibility: PUBLIC` |
 
 **旧资产必须先删再转公开**：完整包 2026-11-07 里含 192 份第三方论文原文，公开后即公开再分发。
@@ -594,6 +594,11 @@ GitHub Release 资产替换。仓库可见性（私有转公开）与最终定�
   已不可达，但仍可能按旧 SHA 或旧路径取到内容，直到 GitHub 后台清理完成。所以第三方内容的
   唯一合法入口指向 `deliverables/fulltext_manifest.csv` 的重取方式与 sha256，不指向任何 GitHub URL。
   改写前的完整历史另存维护者本机 `archive/prepublic-history-2026-11-08.bundle`（已 gitignore）。
+- **包内的文档不许写本包自己的哈希或本包的提交号**：改一处 `run.md`／`PUBLISH_NOTE.md` 就会改变
+  完整包的字节数与 sha256，写死就自指失配，改一次就得再重建一次、再传一次。做法是把包自己的
+  哈希只放在**包外**的地方——Release 资产页（GitHub API 的 `digest` 字段）与本地
+  `deliverables/bundles/SHA256SUMS.txt`（该目录 gitignore，不进仓库也不进包）；包内文档一律写
+  "见 Release 资产页"。同理，包内文档不写自己的提交号，只写 tag。
 - 本轮修的两个幂等缺陷说明：**跑门禁必须显式带 `--check`**。`apply_quote_budget.py`、
   `apply_note_quote_budget.py`、`audit_quote_budget_exceptions.py` 这三个脚本**不带 `--check`
   就会真的改写账本**（本轮就是这么把四个账本跑坏的）。PUBLISH_NOTE 的"怎么验"清单里这三条都带了
